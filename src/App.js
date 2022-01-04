@@ -7,7 +7,12 @@ import {
   Assets,
   Pentests,
   Inbox,
-  Home,
+  Customer,
+  Users,
+  Wallet,
+  Invoices,
+  Profile,
+  Settings,
 } from "./Pages/Index";
 function App() {
   return (
@@ -15,11 +20,16 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/" element={<Layout />}>
-        <Route path="home" element={<Home />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="assets" element={<Assets />} />
         <Route path="pentests" element={<Pentests />} />
         <Route path="inbox" element={<Inbox />} />
+        <Route path="customer" element={<Customer />} />
+        <Route path="users" element={<Users />} />
+        <Route path="wallet" element={<Wallet />} />
+        <Route path="invoices" element={<Invoices />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="settings" element={<Settings />} />
       </Route>
     </Routes>
   );

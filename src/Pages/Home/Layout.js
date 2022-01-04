@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -15,12 +15,15 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import SearchIcon from "@mui/icons-material/Search";
 import { Outlet } from "react-router-dom";
-import Home from "./Home";
-const drawerWidth = 240;
-const PathName = window.location.pathname;
+
+import { sidebarData } from "../../constantData/sidebarData";
+import { NavLink } from "react-router-dom";
+const drawerWidth = 270;
+
+let PathName = window.location.pathname;
+console.log(PathName);
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -45,12 +48,22 @@ const closedMixin = (theme) => ({
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-end",
+  justifyContent: "flex-start",
+  background: "#F67A32",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
+const BelowAppBar = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
+
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -99,63 +112,93 @@ export default function MiniDrawer() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", background: "white" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: "36px",
-              ...(open && { display: "none" }),
-            }}
+        <Toolbar
+          sx={{
+            background: "white",
+            color: "black",
+            paddingLeft: "0 !important",
+          }}
+        >
+          <div
+            className={
+              open
+                ? "bg-white"
+                : "h-16 md:w-16.6  w-15 bg-orange-500 flex justify-center items-center"
+            }
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                // marginRight: "36px",
+                ...(open && { display: "none" }),
+                paddingLeft: "1rem",
+                color: "white",
+              }}
+              disableRipple
+            >
+              <MenuIcon sx={{ fontSize: "2rem" }} />
+            </IconButton>
+          </div>
+          <div className="ml-auto">hello</div>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
+          <button onClick={handleDrawerClose}>
+            <MenuIcon sx={{ color: "white", fontSize: "2rem" }} />
+          </button>
+          <div className="pl-16">
+            <h2 className="text-white capitalize tracking-widest">
+              Secure <br />
+              State.IC
+            </h2>
+          </div>
         </DrawerHeader>
         <Divider />
+        <div className="flex px-4  justify-center items-center pt-4">
+          {open ? (
+            <div className="border py-2 flex border-black">
+              <span>
+                <SearchIcon sx={{ color: "#F67A32" }} />
+              </span>
+              <input
+                type="text"
+                className=" focus:outline-none  placeholder:text-orange-cus-1"
+                placeholder="Search..."
+              />
+            </div>
+          ) : (
+            <h2 className="md:mr-2" onClick={handleDrawerOpen}>
+              <SearchIcon className=" text-2xl text-orange-cus-1" />
+            </h2>
+          )}
+        </div>
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+          {sidebarData.map((item) => (
+            <ListItem button key={item.path} className="bg-red-300">
+              <NavLink to={item.path}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+              </NavLink>
+
+              <NavLink to={item.path}>
+                <ListItemText
+                  primary={item.linkName}
+                  sx={{ color: "#F67A32" }}
+                />
+              </NavLink>
             </ListItem>
           ))}
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        {PathName === "/" ? <Home /> : <Outlet />}
+        <BelowAppBar />
+        <Outlet />
       </Box>
     </Box>
   );

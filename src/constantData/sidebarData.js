@@ -7,22 +7,55 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import ImageIcon from "@mui/icons-material/Image";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
-const sidebarData = [
+export const sidebarData = [
   {
-    path: "/dashboard",
+    path: "dashboard",
     linkName: "DASHBOARD",
-    icon: <HomeIcon />,
+    icon: <HomeIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
   },
   {
+    path: "assets",
     linkName: "ASSETS",
-    icon: <HomeIcon />,
+    icon: <FileCopyIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
   },
   {
+    path: "pentests",
     linkName: "PENTEST",
-    icon: <HomeIcon />,
+    icon: <AnalyticsIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
   },
   {
-    linkName: "PENTEST",
-    icon: <HomeIcon />,
+    path: "inbox",
+    linkName: "INBOX",
+    icon: <InboxIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
+  },
+  {
+    path: "customer",
+    linkName: "CUSTOMER",
+    icon: <ImageIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
+  },
+  {
+    path: "users",
+    linkName: "USERS",
+    icon: <ContactPageIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
+  },
+  {
+    path: "wallet",
+    linkName: "WALLET",
+    icon: <MonetizationOnIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
+  },
+  {
+    path: "invoices",
+    linkName: "INVOICES",
+    icon: <MonetizationOnIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
+  },
+  {
+    path: "profile",
+    linkName: "PROFILE",
+    icon: <GroupIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
+  },
+  {
+    path: "settings",
+    linkName: "SETTINGS",
+    icon: <SettingsIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
   },
 ];
