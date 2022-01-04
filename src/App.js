@@ -1,8 +1,27 @@
+import { Routes, Route } from "react-router-dom";
+import {
+  Layout,
+  Login,
+  SignUp,
+  Dashboard,
+  Assets,
+  Pentests,
+  Inbox,
+  Home,
+} from "./Pages/Index";
 function App() {
   return (
-    <div>
-      <h2>App</h2>
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/" element={<Layout />}>
+        <Route path="home" element={<Home />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="assets" element={<Assets />} />
+        <Route path="pentests" element={<Pentests />} />
+        <Route path="inbox" element={<Inbox />} />
+      </Route>
+    </Routes>
   );
 }
 
