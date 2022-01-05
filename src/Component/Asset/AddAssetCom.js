@@ -26,7 +26,7 @@ const AddAsset = () => {
       <div className="xl:mx-56 md:mx-44 sm:mx-36 mx-12">
         <FilterOption />
       </div>
-      <section className="mt-8 mb-4 flex flex-col border border-emerald-500 w-95.5 mx-auto">
+      <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
         <div className="ml-auto">
           <button className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm">
             {changeButtonName(currentPage)}
@@ -50,7 +50,7 @@ const AddAsset = () => {
             );
           })}
         </div>
-        <div className="mt-12 border-2">
+        <div className="mt-12 ">
           {currentPage === "Details" && <Details />}
           {currentPage === "History" && <HistoryTab />}
           {currentPage === "Files" && <FilesTab />}

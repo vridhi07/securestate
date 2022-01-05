@@ -6,6 +6,7 @@ module.exports = {
         15: "3.56rem",
         16.6: "4.6rem",
         95.5: "95%",
+        69.5: "69%",
       },
       colors: {
         "orange-cus-1": "#F67A32",
