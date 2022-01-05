@@ -14,6 +14,7 @@ import Profile from "./SidePages/Profile";
 import Settings from "./SidePages/Settings";
 import AddAsset from "./SidePages/Assets/AddAsset";
 import Assets from "./SidePages/Assets/Assets";
+import ErrorPage from "./ErrorPage";
 export {
   Layout,
   Login,
@@ -31,4 +32,5 @@ export {
   Settings,
   AddAsset,
   AssetsIndex,
+  ErrorPage,
 };

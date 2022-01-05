@@ -15,6 +15,7 @@ import {
   Settings,
   AddAsset,
   AssetsIndex,
+  ErrorPage,
 } from "./Pages/Index";
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="invoices" element={<Invoices />} />
         <Route path="profile" element={<Profile />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
   );

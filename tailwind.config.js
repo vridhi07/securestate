@@ -5,6 +5,7 @@ module.exports = {
       width: {
         15: "3.56rem",
         16.6: "4.6rem",
+        95.5: "95%",
       },
       colors: {
         "orange-cus-1": "#F67A32",
@@ -12,9 +13,6 @@ module.exports = {
       },
       screens: {
         xs: "370px",
-      },
-      width: {
-        95.5: "95%",
       },
     },
   },
