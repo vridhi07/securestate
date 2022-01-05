@@ -5,3 +5,18 @@
 .page-height {
   height: calc(100vh - 6rem);
 }
+
+/* asset commponent */
+.add-Asest-Btn {
+  @apply px-4 py-3 bg-gray-300 text-orange-cus-1 transition-all tracking-wide;
+}
+.activesBTn {
+  @apply text-white bg-orange-cus-1;
+}
+#navButton:last-child {
+  @apply rounded-tr-lg rounded-br-lg;
+}
+
+#navButton:first-child {
+  @apply rounded-tl-lg rounded-bl-lg;
+}
