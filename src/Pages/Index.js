@@ -1,8 +1,8 @@
 import Layout from "./Home/Layout";
-import Login from "./auth /Login";
-import SignUp from "./Home/SignUp";
+import Login from "./Auth/Login";
+import SignUp from "./Auth/SignUp";
 import Dashboard from "./SidePages/Dashboard";
-import Assets from "./SidePages/Assets";
+import AssetsIndex from "./SidePages/Assets/AssetsIndex";
 import Pentests from "./SidePages/Pentests";
 import Inbox from "./SidePages/Inbox";
 import Home from "./Home/Home";
@@ -12,6 +12,8 @@ import Wallet from "./SidePages/Wallet";
 import Invoices from "./SidePages/Invoices";
 import Profile from "./SidePages/Profile";
 import Settings from "./SidePages/Settings";
+import AddAsset from "./SidePages/Assets/AddAsset";
+import Assets from "./SidePages/Assets/Assets";
 export {
   Layout,
   Login,
@@ -27,4 +29,6 @@ export {
   Invoices,
   Profile,
   Settings,
+  AddAsset,
+  AssetsIndex,
 };

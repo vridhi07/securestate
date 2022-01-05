@@ -8,9 +8,13 @@ module.exports = {
       },
       colors: {
         "orange-cus-1": "#F67A32",
+        "gray-cus": "#606060",
       },
-      colors: {
-        "orange-cus-1": "#F67A32",
+      screens: {
+        xs: "370px",
+      },
+      width: {
+        95.5: "95%",
       },
     },
   },

@@ -13,6 +13,8 @@ import {
   Invoices,
   Profile,
   Settings,
+  AddAsset,
+  AssetsIndex,
 } from "./Pages/Index";
 function App() {
   return (
@@ -21,7 +23,10 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/" element={<Layout />}>
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="assets" element={<Assets />} />
+        <Route path="assets" element={<Assets />}>
+          <Route index element={<AssetsIndex />} />
+          <Route path="addasset" element={<AddAsset />} />
+        </Route>
         <Route path="pentests" element={<Pentests />} />
         <Route path="inbox" element={<Inbox />} />
         <Route path="customer" element={<Customer />} />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -6,24 +6,21 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
+
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import PersonIcon from "@mui/icons-material/Person";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import SearchIcon from "@mui/icons-material/Search";
 import { Outlet } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { sidebarData } from "../../constantData/sidebarData";
 import { NavLink } from "react-router-dom";
 const drawerWidth = 270;
 
-let PathName = window.location.pathname;
-console.log(PathName);
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -55,15 +52,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const BelowAppBar = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-start",
-
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -99,9 +87,17 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+let PathName = window.location.pathname;
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (PathName === "/") {
+      navigate("dashboard");
+    }
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -126,7 +122,7 @@ export default function MiniDrawer() {
             className={
               open
                 ? "bg-white"
-                : "h-16 md:w-16.6  w-15 bg-orange-500 flex justify-center items-center"
+                : "h-16 sm:w-16.6  w-15 bg-orange-500 flex justify-center items-center"
             }
           >
             <IconButton
@@ -145,7 +141,21 @@ export default function MiniDrawer() {
               <MenuIcon sx={{ fontSize: "2rem" }} />
             </IconButton>
           </div>
-          <div className="ml-auto">hello</div>
+          <div className="ml-auto">
+            <div className="flex justify-center items">
+              <header className="max-h-12 overflow-hidden">
+                <h2 className="text-orange-cus-1 text-left tracking-widest">
+                  AARON PARKER
+                </h2>
+                <p className="text-right text-orange-cus-1 capitalize">
+                  account settings
+                </p>
+              </header>
+              <div className="h-11 mx-4 w-11 overflow-x-hidden rounded-full border border-gray-600 grid place-content-center">
+                <PersonIcon />
+              </div>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -197,7 +207,7 @@ export default function MiniDrawer() {
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <BelowAppBar />
+        <Toolbar />
         <Outlet />
       </Box>
     </Box>

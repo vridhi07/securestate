@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.name {
-  display: flex;
-  justify-content: space-between;
+.page-height {
+  height: calc(100vh - 6rem);
 }

@@ -1,7 +1,9 @@
+import AssetsCom from "../../../Component/Asset/index";
+
 const Assets = () => {
   return (
     <div>
-      <h2>Assets</h2>
+      <AssetsCom />
     </div>
   );
 };

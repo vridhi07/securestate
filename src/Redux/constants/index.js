@@ -1,0 +1,1 @@
+export const FORM_AUTH_INPUT = "FORM_AUTH_INPUT";

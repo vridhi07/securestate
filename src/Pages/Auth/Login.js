@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-const SignUp = () => {
+import { useSelector, useDispatch } from "react-redux";
+import * as authAction from "../../Redux/actions/authACtions";
+
+const Login = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
+  const { formInputs } = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
   return (
     <main className="bg-gradient-to-tr h-screen from-orange-200 to-orange-500">
       <section
         id="login"
-        className="pt-32 w-11/12 flex flex-col justify-center page-height max-w-md mx-auto"
+        className="pt-32 flex flex-col justify-center page-height max-w-md mx-auto"
       >
         <div className="p-6 bg-sky-100 rounded shadow-md">
           <div className="flex items-center justify-center text-4xl font-black text-sky-900 m-3">
-            <h1 className="tracking-wide">Sign Up</h1>
+            <h1 className="tracking-wide">Log In</h1>
           </div>
           <form id="login_form" className="flex flex-col justify-center">
             <section>
@@ -28,6 +33,8 @@ const SignUp = () => {
                 name="email"
                 placeholder="@email.com"
                 required
+                value={formInputs.email}
+                onChange={(e) => dispatch(authAction.HandleFormInput(e))}
               />
             </section>
             <section className="relative">
@@ -59,6 +66,8 @@ const SignUp = () => {
                   name="password"
                   placeholder="password"
                   required
+                  value={formInputs.password}
+                  onChange={(e) => dispatch(authAction.HandleFormInput(e))}
                 />
               )}
               <button
@@ -76,8 +85,8 @@ const SignUp = () => {
               Login
             </button>
             <section className="mt-3">
-              <Link to="/login" className="text-gray-500">
-                Login / Sign In
+              <Link to="/signup" className="text-gray-500">
+                SingUp / register
               </Link>
             </section>
           </form>
@@ -87,4 +96,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
