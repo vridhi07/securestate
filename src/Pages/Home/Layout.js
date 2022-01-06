@@ -191,15 +191,15 @@ export default function MiniDrawer() {
         </div>
         <List>
           {sidebarData.map((item) => (
-            <ListItem button key={item.path}>
-              <NavLink className="flex" to={item.path}>
+            <NavLink className="flex" key={item.path} to={item.path}>
+              <ListItem button>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText
                   primary={item.linkName}
                   sx={{ color: "#F67A32" }}
                 />
-              </NavLink>
-            </ListItem>
+              </ListItem>
+            </NavLink>
           ))}
         </List>
       </Drawer>

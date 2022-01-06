@@ -20,3 +20,8 @@
 #navButton:first-child {
   @apply rounded-tl-lg rounded-bl-lg;
 }
+
+/* asset History */
+.tableAsset {
+  @apply grid grid-cols-10 justify-center items-center text-center border-gray-400;
+}

@@ -15,6 +15,7 @@ import Settings from "./SidePages/Settings";
 import AddAsset from "./SidePages/Assets/AddAsset";
 import Assets from "./SidePages/Assets/Assets";
 import ErrorPage from "./ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 export {
   Layout,
   Login,
@@ -33,4 +34,5 @@ export {
   AddAsset,
   AssetsIndex,
   ErrorPage,
+  PrivateRoute,
 };

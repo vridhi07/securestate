@@ -16,13 +16,21 @@ import {
   AddAsset,
   AssetsIndex,
   ErrorPage,
+  PrivateRoute,
 } from "./Pages/Index";
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/" element={<Layout />}>
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <Layout />
+          </PrivateRoute>
+        }
+      >
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="assets" element={<Assets />}>
           <Route index element={<AssetsIndex />} />

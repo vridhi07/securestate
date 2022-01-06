@@ -15,6 +15,8 @@ const Details = () => {
              focus:text-gray-700 focus:bg-white focus:border-gray-500 focus:outline-none"
               placeholder="Asset Name"
               required
+              name="assetName"
+              id="assestName"
             />
           </div>
           <div className=" w-full">
@@ -35,6 +37,8 @@ const Details = () => {
       m-0
       focus:text-gray-700 focus:bg-white focus:border-gray-500 focus:outline-none"
               aria-label="search select "
+              id="assetPriority"
+              name="assetPriority"
             >
               <option hidden value="default">
                 Priority
@@ -67,6 +71,8 @@ const Details = () => {
       m-0
       focus:text-gray-700 focus:bg-white focus:border-gray-500 focus:outline-none"
               aria-label="search select "
+              name="assetType"
+              id="assetType"
             >
               <option hidden value="default">
                 Asset Type
@@ -97,6 +103,8 @@ const Details = () => {
       m-0
       focus:text-gray-700 focus:bg-white focus:border-gray-500 focus:outline-none"
               aria-label="search select "
+              id="assetStatus"
+              name="assetStatus"
             >
               <option hidden value="default">
                 Status

@@ -50,7 +50,7 @@ const AddAsset = () => {
             );
           })}
         </div>
-        <div className="mt-12 ">
+        <div className="mt-12">
           {currentPage === "Details" && <Details />}
           {currentPage === "History" && <HistoryTab />}
           {currentPage === "Files" && <FilesTab />}

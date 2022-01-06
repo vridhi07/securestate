@@ -3,11 +3,19 @@ import { Link } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import * as authAction from "../../Redux/actions/authACtions";
-
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
   const { formInputs } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (formInputs.email && formInputs.password) {
+      localStorage.setItem("Auth Token", "hello");
+      navigate("/dashboard");
+    }
+  };
   return (
     <main className="bg-gradient-to-tr h-screen from-orange-200 to-orange-500">
       <section
@@ -18,7 +26,11 @@ const Login = () => {
           <div className="flex items-center justify-center text-4xl font-black text-sky-900 m-3">
             <h1 className="tracking-wide">Log In</h1>
           </div>
-          <form id="login_form" className="flex flex-col justify-center">
+          <form
+            id="login_form"
+            className="flex flex-col justify-center"
+            onSubmit={onSubmit}
+          >
             <section>
               <label className="text-sm font-medium">Email</label>
               <input
