@@ -171,7 +171,13 @@ export default function MiniDrawer() {
           </div>
         </DrawerHeader>
         <Divider />
-        <div className="flex px-4  justify-center items-center pt-4">
+        <div
+          className={`${
+            open
+              ? "flex px-4 bg-gray-cus-2 justify-center items-center pt-4"
+              : "flex px-4  bg-orange-cus-2 justify-center items-center pt-4"
+          }`}
+        >
           {open ? (
             <div className="border py-2 flex border-black">
               <span>
@@ -179,7 +185,7 @@ export default function MiniDrawer() {
               </span>
               <input
                 type="text"
-                className=" focus:outline-none  placeholder:text-orange-cus-1"
+                className=" focus:outline-none bg-gray-cus-2  placeholder:text-orange-cus-1"
                 placeholder="Search..."
               />
             </div>
@@ -189,7 +195,12 @@ export default function MiniDrawer() {
             </h2>
           )}
         </div>
-        <List>
+        <List
+          sx={{
+            ...(open === true && { background: "#F9F9F9" }),
+            ...(open === false && { background: "#FEF8F5" }),
+          }}
+        >
           {sidebarData.map((item) => (
             <NavLink className="flex" key={item.path} to={item.path}>
               <ListItem button>
