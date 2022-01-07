@@ -46,7 +46,7 @@ const closedMixin = (theme) => ({
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-start",
+  justifyContent: "space-between",
   background: "#F67A32",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
@@ -164,8 +164,8 @@ export default function MiniDrawer() {
           <button onClick={handleDrawerClose}>
             <MenuIcon sx={{ color: "white", fontSize: "2rem" }} />
           </button>
-          <div className="pl-16">
-            <img src={logoImage} className="w-20" />
+          <div className="pr-12 object-fill">
+            <img src={logoImage} className="h-12 w-32" />
           </div>
         </DrawerHeader>
         <Divider />
@@ -173,7 +173,7 @@ export default function MiniDrawer() {
           className={`${
             open
               ? "flex px-4 bg-gray-cus-2 justify-center items-center pt-4"
-              : "flex px-4  bg-orange-cus-2 justify-center items-center pt-4"
+              : "flex px-4 pb-3 transition-all hover:bg-gray-hover hover:cursor-pointer bg-orange-cus-2 justify-center items-center pt-4"
           }`}
         >
           {open ? (
@@ -188,7 +188,7 @@ export default function MiniDrawer() {
               />
             </div>
           ) : (
-            <h2 className="md:mr-2" onClick={handleDrawerOpen}>
+            <h2 className="md:mr-3 mr-3" onClick={handleDrawerOpen}>
               <SearchIcon className=" text-2xl text-orange-cus-1" />
             </h2>
           )}
@@ -197,6 +197,7 @@ export default function MiniDrawer() {
           sx={{
             ...(open === true && { background: "#F9F9F9" }),
             ...(open === false && { background: "#FEF8F5" }),
+            paddingTop: 0,
           }}
         >
           {sidebarData.map((item) => (
