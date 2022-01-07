@@ -22,6 +22,9 @@ module.exports = {
       maxWidth: {
         5.5: "66rem",
       },
+      padding: {
+        0.56: "3px",
+      },
     },
   },
   plugins: [],

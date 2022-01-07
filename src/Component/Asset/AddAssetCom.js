@@ -32,23 +32,25 @@ const AddAsset = () => {
             {changeButtonName(currentPage)}
           </button>
         </div>
-        <div className="mt-4 flex  w-80 mx-auto ">
-          {navDetails.map((item, index) => {
-            return (
-              <button
-                id="navButton"
-                key={index}
-                className={`${
-                  currentPage === item
-                    ? "add-Asest-Btn activesBTn "
-                    : "add-Asest-Btn"
-                }`}
-                onClick={() => setCurrentPage(item)}
-              >
-                {item}
-              </button>
-            );
-          })}
+        <div className="mt-4 flex  flex-col w-full mx-auto ">
+          <div className="flex mx-auto">
+            {navDetails.map((item, index) => {
+              return (
+                <button
+                  id="navButton"
+                  key={index}
+                  className={`${
+                    currentPage === item
+                      ? "nav-Asest-Btn activesBTn "
+                      : "nav-Asest-Btn"
+                  }`}
+                  onClick={() => setCurrentPage(item)}
+                >
+                  {item}
+                </button>
+              );
+            })}
+          </div>
         </div>
         <div className="mt-12">
           {currentPage === "Details" && <Details />}

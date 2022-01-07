@@ -11,7 +11,7 @@ const Details = () => {
           <div className="w-full mr-4">
             <input
               type="text"
-              className="w-full py-1 px-3 text-gray-700 text-base  border border-solid border-gray-400
+              className="w-full py-0.56 px-3 text-gray-700 text-base  border border-solid border-gray-400
              focus:text-gray-700 focus:bg-white focus:border-gray-500 focus:outline-none"
               placeholder="Asset Name"
               required
