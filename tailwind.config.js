@@ -13,6 +13,8 @@ module.exports = {
         "orange-cus-2": "#FEF8F5",
         "gray-cus": "#606060",
         "gray-cus-2": "#F9F9F9",
+        "gray-text-3": "#646464",
+        "gray-text-4": "#4B525C",
       },
       screens: {
         xs: "370px",

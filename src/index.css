@@ -6,7 +6,7 @@
   height: calc(100vh - 6rem);
 }
 
-/* asset commponent */
+/** Asset commponent */
 .add-Asest-Btn {
   @apply px-4 py-3 bg-gray-300 text-orange-cus-1 transition-all tracking-wide;
 }
@@ -20,8 +20,11 @@
 #navButton:first-child {
   @apply rounded-tl-lg rounded-bl-lg;
 }
+#navButton:nth-child(2) {
+  @apply mr-3;
+}
 
-/* asset History */
+/** Asset History */
 .tableAsset {
-  @apply grid grid-cols-10 justify-center items-center text-center border-gray-400;
+  @apply grid grid-cols-10 justify-center items-center text-center border-gray-400 py-3;
 }
