@@ -3,7 +3,7 @@ import Login from "./Auth/Login";
 import SignUp from "./Auth/SignUp";
 import Dashboard from "./SidePages/Dashboard";
 import AssetsIndex from "./SidePages/Assets/AssetsIndex";
-import Pentests from "./SidePages/Pentests";
+import Pentests from "./SidePages/Pentest/Pentests";
 import Inbox from "./SidePages/Inbox";
 import Home from "./Home/Home";
 import Customer from "./SidePages/Customer";
@@ -16,6 +16,8 @@ import AddAsset from "./SidePages/Assets/AddAsset";
 import Assets from "./SidePages/Assets/Assets";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import PentestIndex from "./SidePages/Pentest/PentestIndex";
+
 export {
   Layout,
   Login,
@@ -35,4 +37,5 @@ export {
   AssetsIndex,
   ErrorPage,
   PrivateRoute,
+  PentestIndex,
 };
