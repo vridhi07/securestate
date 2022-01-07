@@ -1,1 +1,2 @@
 export const FORM_AUTH_INPUT = "FORM_AUTH_INPUT";
+export const GET_ASSET_DATA = "GET_ASSET_DATA";

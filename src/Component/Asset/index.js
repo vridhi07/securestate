@@ -1,6 +1,9 @@
 import FilterOption from "../Common/FilterOption";
 import { Link, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import * as assestAction from "../../Redux/actions/getAssetData";
 const AssetsCom = () => {
+  const dispatch = useDispatch();
   return (
     <div className="mt-8 ">
       <div className="xl:mx-56 md:mx-44 sm:mx-36 mx-12">
@@ -17,11 +20,14 @@ const AssetsCom = () => {
           </Link>
         </div>
         <div className="mt-4 flex-col justify-between items-center w-full border-2 h-3/5 ">
-          {[1, 2, 3].map((item, index) => {
+          {["name", "cat", "roger"].map((item, index) => {
+            console.log(item);
             return (
-              <article
+              <Link
+                to="editassest"
                 key={index}
                 className="flex justify-between  items-center px-8 md:pr-24 border-b-2 py-3 text-gray-500"
+                onClick={() => dispatch(assestAction.getAssetData(item))}
               >
                 <div>
                   <h2>Asset Name</h2>
@@ -30,7 +36,7 @@ const AssetsCom = () => {
                 <div>
                   <h2>Status</h2>
                 </div>
-              </article>
+              </Link>
             );
           })}
         </div>

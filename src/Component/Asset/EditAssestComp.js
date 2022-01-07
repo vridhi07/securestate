@@ -5,13 +5,17 @@ import HistoryTab from "./barComponent/HistoryTab";
 import SBOMTab from "./barComponent/SBOMTab";
 import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 const getTabData = () => {
   let tabData = localStorage.getItem("tabData");
   return tabData ? localStorage.getItem("tabData") : [];
 };
-const AddAsset = () => {
+const EditAssetComp = () => {
+  const { assetData } = useSelector((state) => state.assetReducer);
+
   const navDetails = ["Details", "History", "Files", "SBOM"];
   const [currentPage, setCurrentPage] = useState(getTabData());
+
   useEffect(() => {
     localStorage.setItem("tabData", currentPage);
   });
@@ -71,4 +75,4 @@ const AddAsset = () => {
   );
 };
 
-export default AddAsset;
+export default EditAssetComp;

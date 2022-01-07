@@ -1,10 +1,5 @@
-import AddAssetCom from "../../../Component/Asset/AddAssetCom";
 const AddAsset = () => {
-  return (
-    <div>
-      <AddAssetCom />
-    </div>
-  );
+  return <div>add aaset</div>;
 };
 
 export default AddAsset;

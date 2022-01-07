@@ -12,12 +12,12 @@ import Wallet from "./SidePages/Wallet";
 import Invoices from "./SidePages/Invoices";
 import Profile from "./SidePages/Profile";
 import Settings from "./SidePages/Settings";
-import AddAsset from "./SidePages/Assets/AddAsset";
+import EditAssest from "./SidePages/Assets/EditAssest";
 import Assets from "./SidePages/Assets/Assets";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import PentestIndex from "./SidePages/Pentest/PentestIndex";
-
+import AddAsset from "./SidePages/Assets/AddAsset";
 export {
   Layout,
   Login,
@@ -33,9 +33,10 @@ export {
   Invoices,
   Profile,
   Settings,
-  AddAsset,
+  EditAssest,
   AssetsIndex,
   ErrorPage,
   PrivateRoute,
   PentestIndex,
+  AddAsset,
 };

@@ -13,11 +13,12 @@ import {
   Invoices,
   Profile,
   Settings,
-  AddAsset,
+  EditAssest,
   AssetsIndex,
   ErrorPage,
   PrivateRoute,
   PentestIndex,
+  AddAsset,
 } from "./Pages/Index";
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="assets" element={<Assets />}>
           <Route index element={<AssetsIndex />} />
+          <Route path="editassest" element={<EditAssest />} />
           <Route path="addasset" element={<AddAsset />} />
         </Route>
         <Route path="pentests" element={<Pentests />}>
