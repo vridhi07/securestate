@@ -19,6 +19,7 @@ import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { sidebarData } from "../../constantData/sidebarData";
 import { NavLink } from "react-router-dom";
+import logoImage from "../../constantData/images/White_logo_No_background.png";
 const drawerWidth = 270;
 
 const openedMixin = (theme) => ({
@@ -164,10 +165,7 @@ export default function MiniDrawer() {
             <MenuIcon sx={{ color: "white", fontSize: "2rem" }} />
           </button>
           <div className="pl-16">
-            <h2 className="text-white capitalize tracking-widest">
-              Secure <br />
-              State.IC
-            </h2>
+            <img src={logoImage} className="w-20" />
           </div>
         </DrawerHeader>
         <Divider />
