@@ -3,10 +3,18 @@ import Details from "./barComponent/DetailsTab";
 import FilesTab from "./barComponent/FilesTab";
 import HistoryTab from "./barComponent/HistoryTab";
 import SBOMTab from "./barComponent/SBOMTab";
-import { useState } from "react";
+import Container from "@mui/material/Container";
+import { useEffect, useState } from "react";
+const getTabData = () => {
+  let tabData = localStorage.getItem("tabData");
+  return tabData ? localStorage.getItem("tabData") : [];
+};
 const AddAsset = () => {
   const navDetails = ["Details", "History", "Files", "SBOM"];
-  const [currentPage, setCurrentPage] = useState("Details");
+  const [currentPage, setCurrentPage] = useState(getTabData());
+  useEffect(() => {
+    localStorage.setItem("tabData", currentPage);
+  });
   const changeButtonName = (name) => {
     if (name === "Details") {
       return "edit asset";
@@ -22,7 +30,7 @@ const AddAsset = () => {
     }
   };
   return (
-    <div className="mt-8 ">
+    <Container sx={{ mt: 4 }}>
       <div className="xl:mx-56 md:mx-44 sm:mx-36 mx-12">
         <FilterOption />
       </div>
@@ -59,7 +67,7 @@ const AddAsset = () => {
           {currentPage === "SBOM" && <SBOMTab />}
         </div>
       </section>
-    </div>
+    </Container>
   );
 };
 
