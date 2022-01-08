@@ -175,6 +175,7 @@ export default function MiniDrawer() {
               ? "flex px-4 bg-gray-cus-2 justify-center items-center pt-4"
               : "flex px-4 pb-3 transition-all hover:bg-gray-hover hover:cursor-pointer bg-orange-cus-2 justify-center items-center pt-4"
           }`}
+          onClick={handleDrawerOpen}
         >
           {open ? (
             <div className="border py-2 flex border-black">
@@ -188,7 +189,7 @@ export default function MiniDrawer() {
               />
             </div>
           ) : (
-            <h2 className="md:mr-3 mr-3" onClick={handleDrawerOpen}>
+            <h2 className="md:mr-3 mr-3">
               <SearchIcon className=" text-2xl text-orange-cus-1" />
             </h2>
           )}

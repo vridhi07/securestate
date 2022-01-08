@@ -12,12 +12,9 @@ const AssetsCom = () => {
       <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
         <div className="flex justify-between items-center w-full ">
           <h2 className="text-orange-cus-1 tracking-wide  text-6xl">Assets</h2>
-          <Link
-            to="addasset"
-            className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm"
-          >
+          <button className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm">
             add asset
-          </Link>
+          </button>
         </div>
         <div className="mt-4 flex-col justify-between items-center w-full border-2 h-3/5 ">
           {["name", "cat", "roger"].map((item, index) => {

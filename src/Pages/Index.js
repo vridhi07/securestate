@@ -17,7 +17,7 @@ import Assets from "./SidePages/Assets/Assets";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import PentestIndex from "./SidePages/Pentest/PentestIndex";
-import AddAsset from "./SidePages/Assets/AddAsset";
+
 export {
   Layout,
   Login,
@@ -38,5 +38,4 @@ export {
   ErrorPage,
   PrivateRoute,
   PentestIndex,
-  AddAsset,
 };
