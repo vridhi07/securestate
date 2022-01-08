@@ -1,9 +1,30 @@
 import FilterOption from "../Common/FilterOption";
-import { Link, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import * as assestAction from "../../Redux/actions/getAssetData";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import * as assestAction from "../../Redux/actions/AssetActions";
+
+import Box from "@mui/material/Box";
+
+import Modal from "@mui/material/Modal";
+import AssetModal from "./AssestModalForm";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  maxWidth: 500,
+  width: "90%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 const AssetsCom = () => {
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const { open } = state.assetReducer;
+
   return (
     <div className="mt-8 ">
       <div className="xl:mx-56 md:mx-44 sm:mx-36 mx-12">
@@ -12,7 +33,10 @@ const AssetsCom = () => {
       <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
         <div className="flex justify-between items-center w-full ">
           <h2 className="text-orange-cus-1 tracking-wide  text-6xl">Assets</h2>
-          <button className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm">
+          <button
+            onClick={() => dispatch(assestAction.assetModalOPen())}
+            className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm"
+          >
             add asset
           </button>
         </div>
@@ -38,6 +62,16 @@ const AssetsCom = () => {
           })}
         </div>
       </section>
+      <Modal
+        open={open}
+        // onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <AssetModal />
+        </Box>
+      </Modal>
     </div>
   );
 };

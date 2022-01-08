@@ -16,6 +16,7 @@ module.exports = {
         "gray-text-3": "#646464",
         "gray-text-4": "#4B525C",
         "gray-hover": "rgba(0, 0, 0, 0.04)",
+        "gray-cus-5": "#606060",
       },
       screens: {
         xs: "370px",
@@ -25,6 +26,7 @@ module.exports = {
       },
       padding: {
         0.56: "3px",
+        2.56: "0.66rem",
       },
     },
   },

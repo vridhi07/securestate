@@ -1,2 +1,4 @@
 export const FORM_AUTH_INPUT = "FORM_AUTH_INPUT";
 export const GET_ASSET_DATA = "GET_ASSET_DATA";
+export const ASSET_MODAL_OPEN = "ASSET_MODAL_OPEN";
+export const ASSET_MODAL_CLOSE = "ASSET_MODAL_CLOSE";
