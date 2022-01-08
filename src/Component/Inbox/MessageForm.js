@@ -1,7 +1,7 @@
 import GrayButton from "../Common/GrayButton";
 const MessageForm = () => {
   return (
-    <form className="absolute bottom-0 left-0 w-full bg-white rounded-lg py-2">
+    <form className="absolute bottom-0 left-0 w-full bg-white rounded-bl-lg rounded-br-lg py-2">
       <textarea
         name="inboxMessage"
         id="inboxMessage"

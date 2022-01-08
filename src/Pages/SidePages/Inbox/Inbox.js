@@ -24,7 +24,7 @@ const Inbox = () => {
       </div>
       <div className="grid grid-cols-6 mt-3">
         <div className="col-span-3 "></div>
-        <div className="col-span-3 border w-full relative  shadow-lg h-screen rounded-md bg-blue-cus-1">
+        <div className="col-span-3 border w-full relative  shadow-xl h-screen rounded-md bg-blue-cus-1">
           <MessageContainer />
           <MessageForm />
         </div>

@@ -37,3 +37,6 @@
 .messageContainerHeight {
   height: calc(100vh - 160px);
 }
+.messageWrapper {
+  min-height: 100%;
+}
