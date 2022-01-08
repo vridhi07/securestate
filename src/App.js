@@ -21,6 +21,9 @@ import {
   PentestTabs,
   PentestOverview,
 } from "./Pages/Index";
+import PentestChat from "./Pages/SidePages/Pentest/PentestChat";
+import PentestFinding from "./Pages/SidePages/Pentest/PentestFinding";
+import PentestScope from "./Pages/SidePages/Pentest/PentestScope";
 function App() {
   return (
     <Routes>
@@ -43,6 +46,9 @@ function App() {
           <Route index element={<PentestIndex />} />
           <Route path=":id" element={<PentestTabs />}>
             <Route path="overview" element={<PentestOverview />} />
+            <Route path="scope" element={<PentestScope />} />
+            <Route path="finding" element={<PentestFinding />} />
+            <Route path="chat" element={<PentestChat />} />
           </Route>
         </Route>
         <Route path="inbox" element={<Inbox />} />
