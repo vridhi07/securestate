@@ -1,7 +1,7 @@
 const FilterOption = () => {
   return (
     <div className="flex justify-center">
-      <div className="mb-3 w-full">
+      <div className="w-full">
         <select
           className="form-select
       block
