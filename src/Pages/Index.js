@@ -17,7 +17,8 @@ import Assets from "./SidePages/Assets/Assets";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import PentestIndex from "./SidePages/Pentest/PentestIndex";
-
+import PentestTabs from "./SidePages/Pentest/PentestTabs";
+import PentestOverview from "./SidePages/Pentest/PentestOverview";
 export {
   Layout,
   Login,
@@ -38,4 +39,6 @@ export {
   ErrorPage,
   PrivateRoute,
   PentestIndex,
+  PentestTabs,
+  PentestOverview,
 };

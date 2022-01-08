@@ -18,6 +18,8 @@ import {
   ErrorPage,
   PrivateRoute,
   PentestIndex,
+  PentestTabs,
+  PentestOverview,
 } from "./Pages/Index";
 function App() {
   return (
@@ -39,6 +41,9 @@ function App() {
         </Route>
         <Route path="pentests" element={<Pentests />}>
           <Route index element={<PentestIndex />} />
+          <Route path=":id" element={<PentestTabs />}>
+            <Route path="overview" element={<PentestOverview />} />
+          </Route>
         </Route>
         <Route path="inbox" element={<Inbox />} />
         <Route path="customer" element={<Customer />} />
