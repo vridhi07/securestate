@@ -149,7 +149,7 @@ export default function AssetModal() {
             id="AssetName"
             className="w-full py-2 px-2 focus:outline-none border-2 border-gray-400 resize-none h-20"
             maxLength={600}
-            placeholder="Third Party Components"
+            placeholder="Additional Details"
           ></textarea>
         </section>
         <div className="flex justify-between items-center mt-3">

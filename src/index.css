@@ -28,3 +28,8 @@
 .tableAsset {
   @apply grid grid-cols-10 justify-center items-center text-center border-gray-400 py-3;
 }
+
+/****** INBOX   *******/
+.messageHeight {
+  height: calc(100vh - 5rem);
+}

@@ -4,7 +4,7 @@ import SignUp from "./Auth/SignUp";
 import Dashboard from "./SidePages/Dashboard";
 import AssetsIndex from "./SidePages/Assets/AssetsIndex";
 import Pentests from "./SidePages/Pentest/Pentests";
-import Inbox from "./SidePages/Inbox";
+import Inbox from "./SidePages/Inbox/Inbox";
 import Home from "./Home/Home";
 import Customer from "./SidePages/Customer";
 import Users from "./SidePages/Users";
