@@ -2,7 +2,7 @@ import FilterOption from "../Common/FilterOption";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as assestAction from "../../Redux/actions/AssetActions";
-
+import Dialog from "@mui/material/Dialog";
 import Box from "@mui/material/Box";
 
 import Modal from "@mui/material/Modal";
@@ -62,16 +62,14 @@ const AssetsCom = () => {
           })}
         </div>
       </section>
-      <Modal
+      <Dialog
         open={open}
         // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <AssetModal />
-        </Box>
-      </Modal>
+        <AssetModal />
+      </Dialog>
     </div>
   );
 };

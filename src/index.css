@@ -30,6 +30,10 @@
 }
 
 /****** INBOX   *******/
-.messageHeight {
-  height: calc(100vh - 5rem);
+.messageHeights {
+  height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+.messageContainerHeight {
+  height: calc(100vh - 160px);
 }
