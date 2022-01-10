@@ -1,10 +1,10 @@
 import FilterOption from "../../../Component/Common/FilterOption";
-
+import { changeButtonName } from "../../../constantData/AssestTabInfo";
 import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const AssetTabs = () => {
   const { assetData } = useSelector((state) => state.assetReducer);
   const navigate = useNavigate();
@@ -12,6 +12,7 @@ const AssetTabs = () => {
     pathname,
     state: { id },
   } = useLocation();
+
   const [path, setPath] = useState(pathname);
 
   useEffect(() => {
@@ -34,19 +35,8 @@ const AssetTabs = () => {
     { name: "SBOM", handlePath: () => navigate("sbom", { state: { id } }) },
   ];
 
-  const changeButtonName = (name) => {
-    if (name === "details") {
-      return "edit asset";
-    }
-    if (name === "history") {
-      return "add event";
-    }
-    if (name === "files") {
-      return "upload file";
-    }
-    if (name === "sbom") {
-      return "add component";
-    }
+  const handleTabClick = (name) => {
+    console.log(name);
   };
   return (
     <Container sx={{ mt: 4 }}>
@@ -55,9 +45,7 @@ const AssetTabs = () => {
       </div>
       <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
         <div className="ml-auto">
-          <button className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm">
-            {changeButtonName(path)}
-          </button>
+          {changeButtonName(path, () => handleTabClick(path))}
         </div>
         <div className="mt-4 flex  flex-col w-full mx-auto ">
           <div className="flex mx-auto">

@@ -21,7 +21,7 @@ const DoubleCircle = () => {
 };
 const Text =
   "Lorem ipsum dolor sit amet consectetur adipisicing ipsam saepe eligendi asperiores elit. Omnis laboriosam asperiores elit. Omnis laboriosam";
-console.log(Text.length);
+
 const EmailContainer = () => {
   const array = Array.from({ length: 10 }, (_, index) => index);
   const email = [

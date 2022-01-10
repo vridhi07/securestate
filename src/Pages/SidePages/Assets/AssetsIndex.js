@@ -31,7 +31,7 @@ const AssetsIndex = () => {
             return (
               <div
                 key={index}
-                className="flex justify-between  items-center px-8 md:pr-24 border-b-2 py-3 text-gray-500"
+                className="flex justify-between  hover:cursor-pointer items-center px-8 md:pr-24 border-b-2 py-3 text-gray-500"
                 onClick={() =>
                   navigate(`${index}/details`, { state: { id: index } })
                 }

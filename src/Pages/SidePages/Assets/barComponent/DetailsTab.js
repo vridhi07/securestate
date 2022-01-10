@@ -5,8 +5,10 @@ import {
 } from "../../../../constantData/AssestTabInfo";
 import { useLocation } from "react-router-dom";
 const Details = () => {
-  const location = useLocation();
-  console.log(location);
+  const {
+    state: { id },
+  } = useLocation();
+  console.log(id);
   return (
     <div className="mt-4  flex flex-col  w-full  text-center  ">
       <form className="flex flex-col">

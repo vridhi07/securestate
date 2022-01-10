@@ -10,6 +10,12 @@ import FilesTab from "./SidePages/Assets/barComponent/FilesTab";
 import HistoryTab from "./SidePages/Assets/barComponent/HistoryTab";
 import SBOMTab from "./SidePages/Assets/barComponent/SBOMTab";
 import Pentests from "./SidePages/Pentest/Pentests";
+import PentestIndex from "./SidePages/Pentest/PentestIndex";
+import PentestTabs from "./SidePages/Pentest/PentestTabs";
+import PentestOverview from "./SidePages/Pentest/PentestOverview";
+import PentestScope from "./SidePages/Pentest/PentestScope";
+import PentestFinding from "./SidePages/Pentest/PentestFinding";
+import PentestChat from "./SidePages/Pentest/PentestChat";
 import Inbox from "./SidePages/Inbox/Inbox";
 import Home from "./Home/Home";
 import Customer from "./SidePages/Customer";
@@ -20,9 +26,6 @@ import Profile from "./SidePages/Profile";
 import Settings from "./SidePages/Settings";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
-import PentestIndex from "./SidePages/Pentest/PentestIndex";
-import PentestTabs from "./SidePages/Pentest/PentestTabs";
-import PentestOverview from "./SidePages/Pentest/PentestOverview";
 export {
   Layout,
   Login,
@@ -36,6 +39,11 @@ export {
   HistoryTab,
   SBOMTab,
   Pentests,
+  PentestIndex,
+  PentestOverview,
+  PentestScope,
+  PentestFinding,
+  PentestChat,
   Inbox,
   Home,
   Customer,
@@ -46,7 +54,5 @@ export {
   Settings,
   ErrorPage,
   PrivateRoute,
-  PentestIndex,
   PentestTabs,
-  PentestOverview,
 };

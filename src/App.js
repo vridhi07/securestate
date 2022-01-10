@@ -12,6 +12,12 @@ import {
   HistoryTab,
   SBOMTab,
   Pentests,
+  PentestIndex,
+  PentestTabs,
+  PentestOverview,
+  PentestScope,
+  PentestFinding,
+  PentestChat,
   Inbox,
   Customer,
   Users,
@@ -21,13 +27,8 @@ import {
   Settings,
   ErrorPage,
   PrivateRoute,
-  PentestIndex,
-  PentestTabs,
-  PentestOverview,
 } from "./Pages/Index";
-import PentestChat from "./Pages/SidePages/Pentest/PentestChat";
-import PentestFinding from "./Pages/SidePages/Pentest/PentestFinding";
-import PentestScope from "./Pages/SidePages/Pentest/PentestScope";
+
 function App() {
   return (
     <Routes>
