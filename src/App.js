@@ -47,7 +47,7 @@ function App() {
           <Route path=":id" element={<PentestTabs />}>
             <Route path="overview" element={<PentestOverview />} />
             <Route path="scope" element={<PentestScope />} />
-            <Route path="finding" element={<PentestFinding />} />
+            <Route path="findings" element={<PentestFinding />} />
             <Route path="chat" element={<PentestChat />} />
           </Route>
         </Route>
