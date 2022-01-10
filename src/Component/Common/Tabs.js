@@ -56,6 +56,7 @@ const CustomTabs = () => {
           Chat
         </div>
       </div>
+      <div className="h-0.5 w-96 mx-auto bg-gray-cus-6 mt-6"></div>
     </div>
   );
 };

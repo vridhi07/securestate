@@ -18,7 +18,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { sidebarData } from "../../constantData/sidebarData";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../constantData/images/White_logo_No_background.png";
 const drawerWidth = 270;
 
@@ -88,17 +88,17 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-let PathName = window.location.pathname;
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
-
+  const { pathname } = useLocation();
+  // console.log(pathname);
   useEffect(() => {
-    if (PathName === "/") {
+    if (pathname === "/") {
       navigate("dashboard");
     }
-  }, []);
+  }, [pathname]);
 
   const handleDrawerOpen = () => {
     setOpen(true);

@@ -18,6 +18,7 @@ module.exports = {
         "gray-hover": "rgba(0, 0, 0, 0.04)",
         "gray-cus-5": "#606060",
         "gray-cus-6": "#9C8E96",
+        "gay-cus-7": "#C8C7CC",
         "blue-cus-1": "#E3F2FD",
       },
       screens: {
