@@ -5,6 +5,12 @@ import {
   SignUp,
   Dashboard,
   Assets,
+  AssetsIndex,
+  AssetTabs,
+  DetailsTab,
+  FilesTab,
+  HistoryTab,
+  SBOMTab,
   Pentests,
   Inbox,
   Customer,
@@ -13,8 +19,6 @@ import {
   Invoices,
   Profile,
   Settings,
-  EditAssest,
-  AssetsIndex,
   ErrorPage,
   PrivateRoute,
   PentestIndex,
@@ -40,7 +44,12 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="assets" element={<Assets />}>
           <Route index element={<AssetsIndex />} />
-          <Route path="editassest" element={<EditAssest />} />
+          <Route path=":assetId" element={<AssetTabs />}>
+            <Route path="details" element={<DetailsTab />} />
+            <Route path="files" element={<FilesTab />} />
+            <Route path="history" element={<HistoryTab />} />
+            <Route path="sbom" element={<SBOMTab />} />
+          </Route>
         </Route>
         <Route path="pentests" element={<Pentests />}>
           <Route index element={<PentestIndex />} />

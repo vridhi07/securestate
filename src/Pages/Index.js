@@ -2,7 +2,13 @@ import Layout from "./Home/Layout";
 import Login from "./Auth/Login";
 import SignUp from "./Auth/SignUp";
 import Dashboard from "./SidePages/Dashboard";
+import Assets from "./SidePages/Assets/Assets";
 import AssetsIndex from "./SidePages/Assets/AssetsIndex";
+import AssetTabs from "./SidePages/Assets/AssetTabs";
+import DetailsTab from "./SidePages/Assets/barComponent/DetailsTab";
+import FilesTab from "./SidePages/Assets/barComponent/FilesTab";
+import HistoryTab from "./SidePages/Assets/barComponent/HistoryTab";
+import SBOMTab from "./SidePages/Assets/barComponent/SBOMTab";
 import Pentests from "./SidePages/Pentest/Pentests";
 import Inbox from "./SidePages/Inbox/Inbox";
 import Home from "./Home/Home";
@@ -12,8 +18,6 @@ import Wallet from "./SidePages/Wallet";
 import Invoices from "./SidePages/Invoices";
 import Profile from "./SidePages/Profile";
 import Settings from "./SidePages/Settings";
-import EditAssest from "./SidePages/Assets/EditAssest";
-import Assets from "./SidePages/Assets/Assets";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import PentestIndex from "./SidePages/Pentest/PentestIndex";
@@ -25,6 +29,12 @@ export {
   SignUp,
   Dashboard,
   Assets,
+  AssetsIndex,
+  AssetTabs,
+  DetailsTab,
+  FilesTab,
+  HistoryTab,
+  SBOMTab,
   Pentests,
   Inbox,
   Home,
@@ -34,8 +44,6 @@ export {
   Invoices,
   Profile,
   Settings,
-  EditAssest,
-  AssetsIndex,
   ErrorPage,
   PrivateRoute,
   PentestIndex,

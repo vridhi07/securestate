@@ -2,8 +2,11 @@ import {
   Priority,
   AssetType,
   Status,
-} from "../../../constantData/AssestTabInfo";
+} from "../../../../constantData/AssestTabInfo";
+import { useLocation } from "react-router-dom";
 const Details = () => {
+  const location = useLocation();
+  console.log(location);
   return (
     <div className="mt-4  flex flex-col  w-full  text-center  ">
       <form className="flex flex-col">
