@@ -2,6 +2,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import MessageForm from "../../../Component/Inbox/MessageForm";
 import MessageContainer from "../../../Component/Inbox/MessageContainer";
+import EmailContainer from "../../../Component/Inbox/EmailContainer";
 const Inbox = () => {
   return (
     <div className="flex flex-col">
@@ -23,7 +24,9 @@ const Inbox = () => {
         </div>
       </div>
       <div className="grid grid-cols-6 mt-3">
-        <div className="col-span-3 "></div>
+        <div className="col-span-3 ">
+          <EmailContainer />
+        </div>
         <div className="col-span-3 border w-full relative  shadow-xl h-screen rounded-md bg-blue-cus-1">
           <MessageContainer />
           <MessageForm />

@@ -17,6 +17,7 @@ module.exports = {
         "gray-text-4": "#4B525C",
         "gray-hover": "rgba(0, 0, 0, 0.04)",
         "gray-cus-5": "#606060",
+        "gray-cus-6": "#9C8E96",
         "blue-cus-1": "#E3F2FD",
       },
       screens: {
@@ -28,6 +29,10 @@ module.exports = {
       padding: {
         0.56: "3px",
         2.56: "0.66rem",
+      },
+      fontSize: {
+        "xs-cus": "0.938rem",
+        "lg-cus": "1.063rem",
       },
     },
   },

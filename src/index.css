@@ -8,7 +8,7 @@
 
 /** Asset commponent */
 .nav-Asest-Btn {
-  @apply px-5 py-3 bg-gray-300 text-orange-cus-1 transition-all tracking-wider;
+  @apply px-4 py-2 bg-gray-300 text-orange-cus-1 transition-all tracking-wider;
 }
 .activesBTn {
   @apply text-white bg-orange-cus-1;

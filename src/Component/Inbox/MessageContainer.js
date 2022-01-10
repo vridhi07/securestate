@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 const MessageContainer = () => {
-  const array = Array.from({ length: 6 }, (_, index) => index);
+  const array = Array.from({ length: 50 }, (_, index) => index);
   const scrollRef = useRef();
 
   useEffect(() => {

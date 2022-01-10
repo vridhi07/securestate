@@ -17,7 +17,7 @@ const CustomTabs = () => {
       <div className="flex flex-row cursor-pointer rounded-lg">
         <div
           onClick={() => navigate(`overview`, { state: { id } })}
-          className={`px-4 py-2 text-sm ${
+          className={`px-4 py-2 text-sm  rounded-tl-lg rounded-bl-lg  ${
             path === "overview"
               ? "bg-orange-cus-1 text-white"
               : "bg-gray-100 text-orange-cus-1"
@@ -47,7 +47,7 @@ const CustomTabs = () => {
         </div>
         <div
           onClick={() => navigate(`chat`)}
-          className={`px-4 py-2 text-sm ${
+          className={`px-4 py-2 text-sm rounded-tr-lg rounded-br-lg  ${
             path === "chat"
               ? "bg-orange-cus-1 text-white"
               : "bg-gray-100 text-orange-cus-1"
