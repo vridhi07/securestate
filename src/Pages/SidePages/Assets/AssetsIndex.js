@@ -18,7 +18,7 @@ const AssetsIndex = () => {
       </div>
       <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
         <div className="flex justify-between items-center w-full ">
-          <h2 className="text-orange-cus-1 tracking-wide  text-6xl">Assets</h2>
+          <h4 className="text-orange-cus-1 tracking-wide  text-6xl">Assets</h4>
           <button
             onClick={() => dispatch(assestAction.assetModalOPen())}
             className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm"
@@ -37,11 +37,11 @@ const AssetsIndex = () => {
                 }
               >
                 <div>
-                  <h2>Asset Name</h2>
+                  <h4>Asset Name</h4>
                   <p>Asset Type</p>
                 </div>
                 <div>
-                  <h2>Status</h2>
+                  <h4>Status</h4>
                 </div>
               </div>
             );

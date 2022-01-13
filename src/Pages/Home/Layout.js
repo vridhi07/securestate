@@ -145,9 +145,9 @@ export default function MiniDrawer() {
           <div className="ml-auto">
             <div className="flex justify-center items">
               <header className="max-h-12 overflow-hidden">
-                <h2 className="text-orange-cus-1 text-left tracking-widest">
+                <h4 className="text-orange-cus-1 text-left tracking-widest mb-0 text-xl">
                   AARON PARKER
-                </h2>
+                </h4>
                 <p className="text-right text-orange-cus-1 capitalize">
                   account settings
                 </p>

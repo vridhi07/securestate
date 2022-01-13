@@ -10,7 +10,15 @@ const Details = () => {
   } = useLocation();
   console.log(id);
   return (
-    <div className="mt-4  flex flex-col  w-full  text-center  ">
+    <div className="mt-2   flex flex-col  w-full  text-center  ">
+      <section className="flex items-center  mb-3 justify-end">
+        <button
+          className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm
+          "
+        >
+          edit asset
+        </button>
+      </section>
       <form className="flex flex-col">
         <section className="flex  lg:w-2/4  lg:mx-auto sm:w-2/3 sm:mx-auto items-center">
           <div className="w-full mr-4">

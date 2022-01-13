@@ -44,9 +44,6 @@ const AssetTabs = () => {
         <FilterOption />
       </div>
       <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
-        <div className="ml-auto">
-          {changeButtonName(path, () => handleTabClick(path))}
-        </div>
         <div className="mt-4 flex  flex-col w-full mx-auto ">
           <div className="flex mx-auto">
             {navDetails.map((item, index) => {

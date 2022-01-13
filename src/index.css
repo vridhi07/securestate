@@ -42,3 +42,7 @@
 .messageWrapper {
   min-height: 100%;
 }
+
+.test {
+  @apply border border-red-500;
+}
