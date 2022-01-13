@@ -3,6 +3,8 @@ const initialState = {
   formInputs: {
     email: "",
     password: "",
+    userName: "",
+    role: "",
   },
 };
 

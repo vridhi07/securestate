@@ -5,7 +5,9 @@
 .page-height {
   height: calc(100vh - 6rem);
 }
-
+.authPageHeigth {
+  height: calc(100vh +1rem);
+}
 /** Asset commponent */
 .nav-Asest-Btn {
   @apply px-4 py-2 bg-gray-300 text-orange-cus-1 transition-all tracking-wider;

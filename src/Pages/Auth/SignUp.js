@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { HandleFormInput } from "../../Redux/actions/authACtions";
 const SignUp = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
-  const { formInputs } = useSelector((state) => state.authReducer);
+  const { formInputs } = useSelector((state) => state?.authReducer);
+  console.log(formInputs);
   const dispatch = useDispatch();
   return (
-    <main className="bg-gradient-to-tr h-screen from-orange-200 to-orange-500">
-      <div className="w-95.5 grid grid-cols-10 mx-auto ">
+    <main className="bg-gradient-to-tr authPageHeigth from-orange-200 to-orange-500 px-3 py-2">
+      <div className="w-95.5 grid grid-cols-10 mx-auto md:mb-12 ">
         <div className="col-span-10 md:col-span-6">
           <div className="grid justify-center items-center">
             <h1 className="text-white md:pt-44 md:text-8xl text-6xl pt-4">
@@ -29,6 +34,24 @@ const SignUp = () => {
               </div>
               <form id="login_form" className="flex flex-col justify-center">
                 <section>
+                  <label className="text-sm font-medium">User Name</label>
+                  <input
+                    className="mb-3  py-1.5
+          mt-1 block w-full px-2  border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
+          focus:outline-none
+          focus:border-sky-500
+          focus:ring-1
+          focus:ring-sky-500
+          focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
+                    type="userName"
+                    name="userName"
+                    placeholder="User Name"
+                    required
+                    value={formInputs.userName}
+                    onChange={(e) => dispatch(HandleFormInput(e))}
+                  />
+                </section>
+                <section>
                   <label className="text-sm font-medium">Email</label>
                   <input
                     className="mb-3  py-1.5
@@ -37,7 +60,7 @@ const SignUp = () => {
           focus:border-sky-500
           focus:ring-1
           focus:ring-sky-500
-          focus:invalid:border-red-500 focus:invalid:ring-red-500"
+          focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
                     type="email"
                     name="email"
                     placeholder="@email.com"
@@ -56,7 +79,7 @@ const SignUp = () => {
           focus:border-sky-500
           focus:ring-1
           focus:ring-sky-500
-          focus:invalid:border-red-500 focus:invalid:ring-red-500"
+          focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
                       type="text"
                       name="password"
                       placeholder="password"
@@ -70,7 +93,7 @@ const SignUp = () => {
           focus:border-sky-500
           focus:ring-1
           focus:ring-sky-500
-          focus:invalid:border-red-500 focus:invalid:ring-red-500"
+          focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
                       type="password"
                       name="password"
                       placeholder="password"
@@ -91,11 +114,32 @@ const SignUp = () => {
                     )}
                   </button>
                 </section>
+                <div className="py-6 ">
+                  <FormControl
+                    fullWidth
+                    size="small"
+                    sx={{ background: "white" }}
+                  >
+                    <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                    <Select
+                      labelId="Role"
+                      id="Role"
+                      value={formInputs.role}
+                      name="role"
+                      label="Role"
+                      onChange={(e) => dispatch(HandleFormInput(e))}
+                    >
+                      <MenuItem value={"admin"}>Admin</MenuItem>
+                      <MenuItem value={"client"}>Client</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+
                 <button
                   className="px-4 py-1.5 rounded-md shadow-lg bg-sky-600 font-medium text-gray-100 block hover:bg-sky-700 transition duration-300"
                   type="submit"
                 >
-                  Login
+                  Sign Up
                 </button>
                 <section className="mt-3">
                   <p>Account Already exist</p>
