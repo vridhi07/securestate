@@ -1,7 +1,7 @@
 import FilterOption from "../../../Component/Common/FilterOption";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as assestAction from "../../../Redux/actions/AssetActions";
+// import * as assestAction from "../../../Redux/actions/AssetActions";
 import Dialog from "@mui/material/Dialog";
 
 import AssetModal from "../../../Component/Asset/AssestModalForm";
@@ -20,7 +20,7 @@ const AssetsIndex = () => {
         <div className="flex justify-between items-center w-full ">
           <h2 className="text-orange-cus-1 tracking-wide  text-6xl">Assets</h2>
           <button
-            onClick={() => dispatch(assestAction.assetModalOPen())}
+            // onClick={() => dispatch(assestAction.assetModalOPen())}
             className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm"
           >
             add asset
