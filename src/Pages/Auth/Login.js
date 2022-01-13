@@ -7,15 +7,21 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
-  const { formInputs } = useSelector((state) => state.authReducer);
-  const dispatch = useDispatch();
+  const [formInputs, setFormInputs] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (formInputs.email && formInputs.password) {
       localStorage.setItem("Auth Token", "hello");
       navigate("/dashboard");
     }
+  };
+
+  const handleFormInput = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setFormInputs({ ...formInputs, [name]: value });
   };
 
   return (
@@ -58,7 +64,7 @@ const Login = () => {
                     placeholder="@email.com"
                     required
                     value={formInputs.email}
-                    // onChange={(e) => dispatch(authAction.HandleFormInput(e))}
+                    onChange={handleFormInput}
                   />
                 </section>
                 <section className="relative">
@@ -76,6 +82,8 @@ const Login = () => {
                       name="password"
                       placeholder="password"
                       required
+                      value={formInputs.password}
+                      onChange={handleFormInput}
                     />
                   ) : (
                     <input
@@ -91,7 +99,7 @@ const Login = () => {
                       placeholder="password"
                       required
                       value={formInputs.password}
-                      // onChange={(e) => dispatch(authAction.HandleFormInput(e))}
+                      onChange={handleFormInput}
                     />
                   )}
                   <button

@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 const AssetTabs = () => {
-  const { assetData } = useSelector((state) => state.assetReducer);
   const navigate = useNavigate();
   const {
     pathname,
@@ -35,9 +34,6 @@ const AssetTabs = () => {
     { name: "SBOM", handlePath: () => navigate("sbom", { state: { id } }) },
   ];
 
-  const handleTabClick = (name) => {
-    console.log(name);
-  };
   return (
     <Container sx={{ mt: 4 }}>
       <div className="xl:mx-56 md:mx-44 sm:mx-36 mx-12">

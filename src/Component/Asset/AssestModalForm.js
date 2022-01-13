@@ -1,7 +1,6 @@
 import { AssetType } from "../../constantData/addAssetInfo";
 import { useDispatch } from "react-redux";
-export default function AssetModal() {
-  const dispatch = useDispatch();
+export default function AssetModal({ handleClose }) {
   return (
     <form className="px-3 py-4">
       <header className="mb-3">
@@ -160,7 +159,7 @@ export default function AssetModal() {
         <button
           type="button"
           className="px-4 py-2 text-gray-500 bg-slate-200 rounded-md"
-          // onClick={() => dispatch(AssetAction.assetModalClose())}
+          onClick={handleClose}
         >
           Cancel
         </button>

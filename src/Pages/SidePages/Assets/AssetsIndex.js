@@ -1,16 +1,21 @@
 import FilterOption from "../../../Component/Common/FilterOption";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 // import * as assestAction from "../../../Redux/actions/AssetActions";
 import Dialog from "@mui/material/Dialog";
 
 import AssetModal from "../../../Component/Asset/AssestModalForm";
 
 const AssetsIndex = () => {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const { open } = state.assetReducer;
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="mt-8 ">
       <div className="xl:mx-56 md:mx-44 sm:mx-36 mx-12">
@@ -20,7 +25,7 @@ const AssetsIndex = () => {
         <div className="flex justify-between items-center w-full ">
           <h4 className="text-orange-cus-1 tracking-wide  text-6xl">Assets</h4>
           <button
-            // onClick={() => dispatch(assestAction.assetModalOPen())}
+            onClick={handleClickOpen}
             className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm"
           >
             add asset
@@ -54,7 +59,7 @@ const AssetsIndex = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <AssetModal />
+        <AssetModal handleClose={handleClose} />
       </Dialog>
     </div>
   );

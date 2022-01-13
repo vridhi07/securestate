@@ -9,9 +9,18 @@ import { useSelector, useDispatch } from "react-redux";
 // import { HandleFormInput } from "../../Redux/actions/authACtions";
 const SignUp = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
-  const { formInputs } = useSelector((state) => state?.authReducer);
-  console.log(formInputs);
-  const dispatch = useDispatch();
+
+  const [formInputs, setformInputs] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    role: "",
+  });
+  const handleChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setformInputs({ ...formInputs, [name]: value });
+  };
   return (
     <main className="bg-gradient-to-tr authPageHeigth from-orange-200 to-orange-500 px-3 py-2">
       <div className="w-95.5 grid grid-cols-10 mx-auto md:mb-12 ">
@@ -48,7 +57,7 @@ const SignUp = () => {
                     placeholder="User Name"
                     required
                     value={formInputs.userName}
-                    // onChange={(e) => dispatch(HandleFormInput(e))}
+                    onChange={handleChange}
                   />
                 </section>
                 <section>
@@ -66,7 +75,7 @@ const SignUp = () => {
                     placeholder="@email.com"
                     required
                     value={formInputs.email}
-                    // onChange={(e) => dispatch(HandleFormInput(e))}
+                    onChange={handleChange}
                   />
                 </section>
                 <section className="relative">
@@ -83,6 +92,8 @@ const SignUp = () => {
                       type="text"
                       name="password"
                       placeholder="password"
+                      value={formInputs.password}
+                      onChange={handleChange}
                       required
                     />
                   ) : (
@@ -99,7 +110,7 @@ const SignUp = () => {
                       placeholder="password"
                       required
                       value={formInputs.password}
-                      // onChange={(e) => dispatch(HandleFormInput(e))}
+                      onChange={handleChange}
                     />
                   )}
                   <button
@@ -127,7 +138,7 @@ const SignUp = () => {
                       value={formInputs.role}
                       name="role"
                       label="Role"
-                      // onChange={(e) => dispatch(HandleFormInput(e))}
+                      onChange={handleChange}
                     >
                       <MenuItem value={"admin"}>Admin</MenuItem>
                       <MenuItem value={"client"}>Client</MenuItem>
