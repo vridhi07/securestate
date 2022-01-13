@@ -4,6 +4,7 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import * as authAction from "../../Redux/actions/authACtions";
 import { useNavigate } from "react-router-dom";
+
 const Login = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
   const { formInputs } = useSelector((state) => state.authReducer);
@@ -16,8 +17,9 @@ const Login = () => {
       navigate("/dashboard");
     }
   };
+
   return (
-    <main className="bg-gradient-to-tr h-screen from-orange-200 to-orange-500">
+    <main className="bg-gradient-to-tr authPageHeigth h-screen from-orange-200 to-orange-500">
       <div className="w-95.5 grid grid-cols-10 mx-auto ">
         <div className="col-span-10 md:col-span-6">
           <div className="grid justify-center items-center">
@@ -50,7 +52,7 @@ const Login = () => {
           focus:border-sky-500
           focus:ring-1
           focus:ring-sky-500
-          focus:invalid:border-red-500 focus:invalid:ring-red-500"
+          focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
                     type="email"
                     name="email"
                     placeholder="@email.com"
@@ -69,7 +71,7 @@ const Login = () => {
           focus:border-sky-500
           focus:ring-1
           focus:ring-sky-500
-          focus:invalid:border-red-500 focus:invalid:ring-red-500"
+          focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
                       type="text"
                       name="password"
                       placeholder="password"
@@ -83,7 +85,7 @@ const Login = () => {
           focus:border-sky-500
           focus:ring-1
           focus:ring-sky-500
-          focus:invalid:border-red-500 focus:invalid:ring-red-500"
+          focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
                       type="password"
                       name="password"
                       placeholder="password"
