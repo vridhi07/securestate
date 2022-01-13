@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import * as authAction from "../../Redux/actions/authACtions";
+// import * as authAction from "../../Redux/actions/authACtions";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -58,7 +58,7 @@ const Login = () => {
                     placeholder="@email.com"
                     required
                     value={formInputs.email}
-                    onChange={(e) => dispatch(authAction.HandleFormInput(e))}
+                    // onChange={(e) => dispatch(authAction.HandleFormInput(e))}
                   />
                 </section>
                 <section className="relative">
@@ -91,7 +91,7 @@ const Login = () => {
                       placeholder="password"
                       required
                       value={formInputs.password}
-                      onChange={(e) => dispatch(authAction.HandleFormInput(e))}
+                      // onChange={(e) => dispatch(authAction.HandleFormInput(e))}
                     />
                   )}
                   <button

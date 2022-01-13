@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { HandleFormInput } from "../../Redux/actions/authACtions";
+// import { HandleFormInput } from "../../Redux/actions/authACtions";
 const SignUp = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
   const { formInputs } = useSelector((state) => state?.authReducer);
@@ -48,7 +48,7 @@ const SignUp = () => {
                     placeholder="User Name"
                     required
                     value={formInputs.userName}
-                    onChange={(e) => dispatch(HandleFormInput(e))}
+                    // onChange={(e) => dispatch(HandleFormInput(e))}
                   />
                 </section>
                 <section>
@@ -66,7 +66,7 @@ const SignUp = () => {
                     placeholder="@email.com"
                     required
                     value={formInputs.email}
-                    onChange={(e) => dispatch(HandleFormInput(e))}
+                    // onChange={(e) => dispatch(HandleFormInput(e))}
                   />
                 </section>
                 <section className="relative">
@@ -99,7 +99,7 @@ const SignUp = () => {
                       placeholder="password"
                       required
                       value={formInputs.password}
-                      onChange={(e) => dispatch(HandleFormInput(e))}
+                      // onChange={(e) => dispatch(HandleFormInput(e))}
                     />
                   )}
                   <button
@@ -127,7 +127,7 @@ const SignUp = () => {
                       value={formInputs.role}
                       name="role"
                       label="Role"
-                      onChange={(e) => dispatch(HandleFormInput(e))}
+                      // onChange={(e) => dispatch(HandleFormInput(e))}
                     >
                       <MenuItem value={"admin"}>Admin</MenuItem>
                       <MenuItem value={"client"}>Client</MenuItem>
