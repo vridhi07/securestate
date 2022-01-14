@@ -26,6 +26,7 @@ import Profile from "./SidePages/Profile/Profile";
 import Settings from "./SidePages/Settings";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import AdminPrivateRoute from "./AdminPrivateRoute";
 export {
   Layout,
   Login,
@@ -55,4 +56,5 @@ export {
   ErrorPage,
   PrivateRoute,
   PentestTabs,
+  AdminPrivateRoute,
 };

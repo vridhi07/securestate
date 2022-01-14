@@ -17,7 +17,7 @@ import ListItemText from "@mui/material/ListItemText";
 import SearchIcon from "@mui/icons-material/Search";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { sidebarData } from "../../constantData/sidebarData";
+import { adminSidebar, clientSidebar } from "../../constantData/sidebarData";
 import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../constantData/images/White_logo_No_background.png";
 const drawerWidth = 270;
@@ -93,7 +93,7 @@ export default function MiniDrawer() {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  // console.log(pathname);
+
   useEffect(() => {
     if (pathname === "/") {
       navigate("dashboard");
@@ -106,6 +106,14 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+  const sidebarData = (role) => {
+    if (role === "Admin") {
+      return adminSidebar;
+    }
+    if (role === "Client") {
+      return clientSidebar;
+    }
   };
 
   return (
@@ -143,13 +151,13 @@ export default function MiniDrawer() {
             </IconButton>
           </div>
           <div className="ml-auto">
-            <div className="flex justify-center items">
+            <div className="flex justify-center items-center">
               <header className="max-h-12 overflow-hidden">
-                <h4 className="text-orange-cus-1 text-left tracking-widest mb-0 text-xl">
+                <h4 className="text-orange-cus-1 text-left tracking-widest  text-xl">
                   AARON PARKER
                 </h4>
                 <p className="text-right text-orange-cus-1 capitalize">
-                  account settings
+                  {pathname === "/profile" ? null : "account settings"}
                 </p>
               </header>
               <div className="h-11 mx-4 w-11 overflow-x-hidden rounded-full border border-gray-600 grid place-content-center">
@@ -201,7 +209,7 @@ export default function MiniDrawer() {
             paddingTop: 0,
           }}
         >
-          {sidebarData.map((item) => (
+          {sidebarData("Admin").map((item) => (
             <NavLink className="flex" key={item.path} to={item.path}>
               <ListItem button>
                 <ListItemIcon>{item.icon}</ListItemIcon>

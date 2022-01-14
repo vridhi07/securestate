@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import DummyProfile from "../../constantData/images/dummyProfile.webp";
+
 export default function SBOMTab() {
   return (
     <div className="w-full flex flex-col mx-auto">
@@ -60,7 +61,7 @@ export default function SBOMTab() {
                 <TableCell align="center">Lorem, ipsum.</TableCell>
                 <TableCell align="center">Lorem, ipsum dors</TableCell>
                 <TableCell align="center">loremipsum214@gmail.com</TableCell>
-                <TableCell sx={{ textAlign: "left" }}>22/12/2022</TableCell>
+                <TableCell align="center">22/12/2022</TableCell>
                 <TableCell align="center">
                   <IconButton color="error" onClick={() => console.log(index)}>
                     <DeleteIcon />

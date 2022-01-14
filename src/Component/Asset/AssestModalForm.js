@@ -1,5 +1,5 @@
 import { AssetType } from "../../constantData/addAssetInfo";
-import { useDispatch } from "react-redux";
+
 export default function AssetModal({ handleClose }) {
   return (
     <form className="px-3 py-4">

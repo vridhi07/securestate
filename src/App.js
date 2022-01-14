@@ -27,6 +27,7 @@ import {
   Settings,
   ErrorPage,
   PrivateRoute,
+  AdminPrivateRoute,
 } from "./Pages/Index";
 
 function App() {
@@ -62,9 +63,30 @@ function App() {
           </Route>
         </Route>
         <Route path="inbox" element={<Inbox />} />
-        <Route path="customer" element={<Customer />} />
-        <Route path="users" element={<Users />} />
-        <Route path="wallet" element={<Wallet />} />
+        <Route
+          path="customer"
+          element={
+            <AdminPrivateRoute>
+              <Customer />
+            </AdminPrivateRoute>
+          }
+        />
+        <Route
+          path="users"
+          element={
+            <AdminPrivateRoute>
+              <Users />
+            </AdminPrivateRoute>
+          }
+        />
+        <Route
+          path="wallet"
+          element={
+            <AdminPrivateRoute>
+              <Wallet />
+            </AdminPrivateRoute>
+          }
+        />
         <Route path="invoices" element={<Invoices />} />
         <Route path="profile" element={<Profile />} />
         <Route path="settings" element={<Settings />} />
