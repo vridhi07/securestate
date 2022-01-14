@@ -1,20 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 // import * as authAction from "../../Redux/actions/authACtions";
 import { useNavigate } from "react-router-dom";
+import { LoginRequest } from "../../Redux/action";
 
 const Login = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
-  const [formInputs, setFormInputs] = useState({ email: "", password: "" });
+  const [formInputs, setFormInputs] = useState({ userName: "", password: "" });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const loginStatus = useSelector((state)=> state.Login)
+
+  useEffect(()=>{
+    if(loginStatus.isSuccess){
+      navigate("/dashboard");
+    }
+    if(loginStatus.isError){
+      console.log(loginStatus.response,"rrrrr")
+    }
+  },[loginStatus.isSuccess, loginStatus.isError])
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (formInputs.email && formInputs.password) {
-      localStorage.setItem("Auth Token", "hello");
-      navigate("/dashboard");
+    if (formInputs.userName && formInputs.password) {
+      const payload = {
+        userName: formInputs.userName,
+        password: formInputs.password,
+      }
+      dispatch(LoginRequest(payload))
     }
   };
 
@@ -50,7 +66,7 @@ const Login = () => {
                 onSubmit={onSubmit}
               >
                 <section>
-                  <label className="text-sm font-medium">Email</label>
+                  <label className="text-sm font-medium">Username</label>
                   <input
                     className="mb-3  py-1.5
           mt-1 block w-full px-2  border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
@@ -59,11 +75,11 @@ const Login = () => {
           focus:ring-1
           focus:ring-sky-500
           focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
-                    type="email"
-                    name="email"
-                    placeholder="@email.com"
+                    type="text"
+                    name="userName"
+                    placeholder="username"
                     required
-                    value={formInputs.email}
+                    value={formInputs.userName}
                     onChange={handleFormInput}
                   />
                 </section>

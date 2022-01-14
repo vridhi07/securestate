@@ -5,18 +5,19 @@ import axios from "axios";
 export function* LoginSaga(action) {
 
   try {
-    let url = `${process.env.REACT_APP_BASE_URL}`
+    let url = `${process.env.REACT_APP_BASE_URL}user/login`
 
     let response = yield call(
       axios.post,
       `${url}`,
       action.payload
     );
-    if (response) {
-      // localStorage.setItem("token", response.data.token);
+    if (response && response.data?.status===1) {
+      // console.log(response.data,"uuuuu");
+      localStorage.setItem("token", response.data.token);
       yield put(LoginSuccess("login success"));
     }
   } catch (error) {
-    yield put(LoginError("login error"));
+    yield put(LoginError("invalid credentials"));
   }
 }
