@@ -6,6 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
+import { SignUpRequest } from "../../Redux/action";
 // import { HandleFormInput } from "../../Redux/actions/authACtions";
 const SignUp = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
@@ -16,6 +17,22 @@ const SignUp = () => {
     password: "",
     role: "",
   });
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    // e.preventDefault();
+    // if (formInputs.email && formInputs.password) {
+    //   const payload = {
+    //     userName: formInputs.userName,
+    //     email: formInputs.email,
+    //     password: formInputs.password,
+    //     role: formInputs.role,
+    //   }
+    //   dispatch(SignUpRequest(payload))
+    // }
+  };
+
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -41,7 +58,7 @@ const SignUp = () => {
               <div className="flex items-center justify-center text-4xl font-black text-sky-900 m-3">
                 <h1 className="tracking-wide">Sign Up</h1>
               </div>
-              <form id="login_form" className="flex flex-col justify-center">
+              <form onSubmit={handleSubmit} id="login_form" className="flex flex-col justify-center">
                 <section>
                   <label className="text-sm font-medium">User Name</label>
                   <input
