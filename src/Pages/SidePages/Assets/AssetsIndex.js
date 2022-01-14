@@ -1,21 +1,32 @@
 import FilterOption from "../../../Component/Common/FilterOption";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import * as assestAction from "../../../Redux/actions/AssetActions";
 import Dialog from "@mui/material/Dialog";
 
 import AssetModal from "../../../Component/Asset/AssestModalForm";
-
+import * as action from "../../../Redux/action/index";
+import { useDispatch, useSelector } from "react-redux";
 const AssetsIndex = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const state = useSelector((state) => state);
+  const { Asset, isLoading } = state.Assets;
+
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const dispatch = useDispatch();
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    dispatch(action.AssetRequest());
+  }, []);
+  if (isLoading) {
+    return <div>Loading......</div>;
+  }
   return (
     <div className="mt-8 ">
       <div className="xl:mx-56 md:mx-44 sm:mx-36 mx-12">
@@ -32,21 +43,20 @@ const AssetsIndex = () => {
           </button>
         </div>
         <div className="mt-4 flex-col justify-between items-center w-full border-2 h-3/5 ">
-          {["name", "cat", "roger"].map((item, index) => {
+          {Asset?.map((item) => {
+            const { asset_name, asset_type, status, _id: id } = item;
             return (
               <div
-                key={index}
+                key={id}
                 className="flex justify-between  hover:cursor-pointer items-center px-8 md:pr-24 border-b-2 py-3 text-gray-500"
-                onClick={() =>
-                  navigate(`${index}/details`, { state: { id: index } })
-                }
+                onClick={() => navigate(`${id}/details`, { state: { id } })}
               >
                 <div>
-                  <h4>Asset Name</h4>
-                  <p>Asset Type</p>
+                  <h4>{asset_name}</h4>
+                  <p>{asset_type}</p>
                 </div>
                 <div>
-                  <h4>Status</h4>
+                  <h4>{status}</h4>
                 </div>
               </div>
             );

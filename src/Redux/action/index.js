@@ -8,3 +8,7 @@ export const LoginError = createAction(actions.LOGIN_ERROR);
 export const SignUpRequest = createAction(actions.SIGNUP_REQUEST);
 export const SignUpSuccess = createAction(actions.SIGNUP_SUCCESS);
 export const SignUpError = createAction(actions.SIGNUP_ERROR);
+
+export const AssetRequest = createAction(actions.ASSET_REQUEST);
+export const AssetSuccess = createAction(actions.ASSET_SUCCESS);
+export const AssetError = createAction(actions.ASSET_ERROR);
