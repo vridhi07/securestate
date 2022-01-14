@@ -11,6 +11,17 @@ const AssetsIndex = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const state = useSelector((state) => state);
+
+  const [assetForm, setAssetForm] = useState({
+    asset_name: "",
+    asset_type: "",
+    status: "",
+    tech_stack: "",
+    third_party_components: "",
+    internal_external: "",
+    additional_details: "",
+  });
+
   const { Asset, isLoading } = state.Assets;
 
   const handleClickOpen = () => {
@@ -21,6 +32,12 @@ const AssetsIndex = () => {
     setOpen(false);
   };
 
+  const handleAssetForm = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setAssetForm({ ...assetForm, [name]: value });
+  };
   useEffect(() => {
     dispatch(action.AssetRequest());
   }, []);
@@ -69,7 +86,11 @@ const AssetsIndex = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <AssetModal handleClose={handleClose} />
+        <AssetModal
+          handleClose={handleClose}
+          handleAssetForm={handleAssetForm}
+          assetForm={assetForm}
+        />
       </Dialog>
     </div>
   );
