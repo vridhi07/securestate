@@ -6,6 +6,7 @@ import {
   AddAssetError,
   DeleteAssetSuccess,
   DeleteAssetError,
+  AssetRequest,
   UpdateAssetSuccess,
   UpdateAssetError,
 } from "../action";
@@ -30,6 +31,7 @@ export function* AddAssetSaga(action) {
     console.log(response);
     if (response && response.data?.status === 1) {
       yield put(AddAssetSuccess(response.data.message));
+      yield put(AssetRequest());
     }
   } catch (error) {
     console.log(error);
@@ -44,6 +46,7 @@ export function* DeleteAssetSaga(action) {
     });
     if (response && response.data?.status === 1) {
       yield put(DeleteAssetSuccess(response.data.message));
+      yield put(AssetRequest());
     }
   } catch (error) {
     yield put(DeleteAssetError("Error"));
