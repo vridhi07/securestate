@@ -9,14 +9,14 @@ import AssetModal from "../../../Component/Asset/AssestModalForm";
 import AssetMenuButton from "../../../Component/Asset/AssetMenuButton";
 import * as action from "../../../Redux/action/index";
 import { useDispatch, useSelector } from "react-redux";
-import Axios from "../../../Service/axiosInstance";
+
 const AssetsIndex = () => {
-  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const { Asset, isLoading, message } = state.Assets;
 
+  const [open, setOpen] = useState(false);
   const [assetForm, setAssetForm] = useState({
     asset_name: "",
     asset_type: "",
@@ -28,6 +28,7 @@ const AssetsIndex = () => {
   });
   const [isEdit, setIsEdit] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -44,8 +45,6 @@ const AssetsIndex = () => {
     setAssetForm({ ...assetForm, [name]: value });
   };
 
-  const [anchorEl, setAnchorEl] = useState(null);
-
   const handleMenuOpen = (e, id) => {
     setAnchorEl(e.currentTarget);
     setSelectedId(id);
@@ -60,6 +59,7 @@ const AssetsIndex = () => {
     handleMenuClose();
     dispatch(action.DeleteAssetRequest(selectedId));
   };
+
   const handleEdit = () => {
     let singleData = Asset.find((item) => item._id === selectedId);
     console.log(singleData);

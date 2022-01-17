@@ -98,3 +98,12 @@ export const clientSidebar = [
     icon: <SettingsIcon sx={{ fontSize: "1.5rem", color: "#F67A32" }} />,
   },
 ];
+
+export const sidebarData = (role) => {
+  if (role === "admin") {
+    return adminSidebar;
+  }
+  if (role === "client") {
+    return clientSidebar;
+  }
+};

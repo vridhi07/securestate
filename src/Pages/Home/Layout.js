@@ -17,9 +17,14 @@ import ListItemText from "@mui/material/ListItemText";
 import SearchIcon from "@mui/icons-material/Search";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { adminSidebar, clientSidebar } from "../../constantData/sidebarData";
+import {
+  sidebarData,
+  adminSidebar,
+  clientSidebar,
+} from "../../constantData/sidebarData";
 import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../constantData/images/White_logo_No_background.png";
+import { getRole } from "../../Service/localStorage";
 const drawerWidth = 270;
 
 const openedMixin = (theme) => ({
@@ -106,14 +111,6 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
-  };
-  const sidebarData = (role) => {
-    if (role === "Admin") {
-      return adminSidebar;
-    }
-    if (role === "Client") {
-      return clientSidebar;
-    }
   };
 
   return (
@@ -209,7 +206,7 @@ export default function MiniDrawer() {
             paddingTop: 0,
           }}
         >
-          {sidebarData("Admin").map((item) => (
+          {sidebarData(getRole()).map((item) => (
             <NavLink className="flex" key={item.path} to={item.path}>
               <ListItem button>
                 <ListItemIcon>{item.icon}</ListItemIcon>
