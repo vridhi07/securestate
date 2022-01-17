@@ -6,6 +6,7 @@ import {
   AddAssetError,
   DeleteAssetSuccess,
   DeleteAssetError,
+  AssetRequest
 } from "../action";
 import Axios from "../../Service/axiosInstance";
 import { CONFIG } from "../../Service/CONFIG";
@@ -28,6 +29,7 @@ export function* AddAssetSaga(action) {
     console.log(response);
     if (response && response.data?.status === 1) {
       yield put(AddAssetSuccess(response.data.message));
+      yield put(AssetRequest());
     }
   } catch (error) {
     console.log(error);
@@ -40,6 +42,7 @@ export function* DeleteAssetSaga(action) {
     let response = yield call(Axios.delete, CONFIG.deleteAsset, {data : { assetId : action.payload}});
     if (response && response.data?.status === 1) {
       yield put(DeleteAssetSuccess(response.data.message));
+      yield put(AssetRequest());
     }
   } catch (error) {
     yield put(DeleteAssetError("Error"));
