@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import dummy from "../../../constantData/images/dummyProfile.webp";
 const Profile = () => {
@@ -20,23 +20,23 @@ const Profile = () => {
   const openEdit = (e) => {
     setIsEdit(true);
 
-    let documents = focusRef.current;
-    console.log(documents);
-    if (document) {
-      // let inputFocus = documents.getElementById("name");
-      // console.log(inputFocus);
-      // inputFocus.autofocus = true;
-    }
     let name = e.target.name;
     let value = e.target.value;
     setProfileForm({ ...profileForm, [name]: value });
   };
+
+  useEffect(() => {
+    if (isEdit) {
+      focusRef.current.focus();
+    }
+  }, [isEdit]);
+
   const cancelEdit = () => {
     setIsEdit(false);
   };
   return (
-    <div className="w-full test">
-      <div className="flex test flex-col px-2 py-2 max-w-sm mx-auto">
+    <div className="w-full">
+      <div className="flex flex-col px-2 py-2 max-w-sm mx-auto">
         <section className="h-[9rem] w-[9rem] flex flex-col mx-auto mb-5">
           <img
             src={dummy}
@@ -47,97 +47,108 @@ const Profile = () => {
             {profileForm.name}
           </h3>
         </section>
-        <section className="mt-6 test px-20">
-          <div className="border ">
-            {isEdit ? (
-              <div className="border">
-                <input
-                  type="text"
-                  className="focus:outline-none px-3 py-2 w-full"
-                  value={profileForm.name}
-                  name="name"
-                  id="name"
-                  ref={focusRef}
-                  onChange={handleFormInput}
-                />
-              </div>
-            ) : (
-              <div className="px-3 py-2">
-                <h3>{profileForm.name}</h3>
-              </div>
-            )}
+        <section className="m-6  px-[2%] text-left ">
+          <div className="flex items-center">
+            <label htmlFor="name" className="mr-8">
+              Name
+            </label>
+
+            <div className="border">
+              <input
+                type="text"
+                className="focus:outline-none px-3 py-2 w-full  "
+                value={profileForm.name}
+                name="name"
+                id="name"
+                ref={focusRef}
+                onChange={handleFormInput}
+                readOnly={isEdit ? false : true}
+              />
+            </div>
           </div>
-          <div className="mt-3 border ">
-            {isEdit ? (
-              <div>
-                <input
-                  type="text"
-                  className="focus:outline-none px-3 py-2 w-full"
-                  value={profileForm.email}
-                  name="email"
-                  onChange={handleFormInput}
-                />
-              </div>
-            ) : (
-              <div className="px-3 py-2">
-                <h3>{profileForm.email}</h3>
-              </div>
-            )}
+          <div className="mt-3 flex items-center   ">
+            <label htmlFor="email" className="mr-9">
+              Email
+            </label>
+
+            <div className="border">
+              <input
+                type="text"
+                className="focus:outline-none px-3 py-2 w-full"
+                value={profileForm.email}
+                name="email"
+                id="email"
+                onChange={handleFormInput}
+                readOnly={isEdit ? false : true}
+              />
+            </div>
           </div>
-          <div className="mt-3 border ">
-            {isEdit ? (
-              <div>
-                <input
-                  type="text"
-                  className="focus:outline-none px-3 py-2 w-full"
-                  value={profileForm.company}
-                  name="company"
-                  onChange={handleFormInput}
-                />
-              </div>
-            ) : (
-              <div className="px-3 py-2">
-                <h3>{profileForm.company}</h3>
-              </div>
-            )}
+          <div className="mt-3 flex items-center ">
+            <label htmlFor="company" className="mr-2">
+              Company
+            </label>
+
+            <div className="border">
+              <input
+                type="text"
+                className="focus:outline-none px-3 py-2 w-full"
+                value={profileForm.company}
+                name="company"
+                id="company"
+                onChange={handleFormInput}
+                readOnly={isEdit ? false : true}
+              />
+            </div>
           </div>
-          <div className="mt-3 border ">
-            {isEdit ? (
-              <div>
-                <input
-                  type="text"
-                  className="focus:outline-none px-3 py-2 w-full"
-                  value={profileForm.phone}
-                  name="phone"
-                  onChange={handleFormInput}
-                />
-              </div>
-            ) : (
-              <div className="px-3 py-2">
-                <h3>{profileForm.phone}</h3>
-              </div>
-            )}
+          <div className="mt-3  flex items-center ">
+            <label htmlFor="phone" className="mr-8">
+              Phone
+            </label>
+
+            <div className="border">
+              <input
+                type="text"
+                className="focus:outline-none px-3 py-2 w-full"
+                value={profileForm.phone}
+                name="phone"
+                id="phone"
+                onChange={handleFormInput}
+                readOnly={isEdit ? false : true}
+              />
+            </div>
           </div>
-          <div className="mt-3 border ">
-            {isEdit ? (
-              <div>
-                <input
-                  type="text"
-                  className="focus:outline-none px-3 py-2 w-full"
-                  value={profileForm.location}
-                  name="location"
-                  onChange={handleFormInput}
-                />
-              </div>
-            ) : (
-              <div className="px-3 py-2">
-                <h3>{profileForm.location}</h3>
-              </div>
-            )}
+          <div className="mt-3 flex items-center ">
+            <label htmlFor="location" className="mr-4">
+              Location
+            </label>
+
+            <div className="border">
+              <input
+                type="text"
+                className="focus:outline-none px-3 py-2 w-full"
+                value={profileForm.location}
+                name="location"
+                id="location"
+                onChange={handleFormInput}
+                readOnly={isEdit ? false : true}
+              />
+            </div>
           </div>
-          <div>
-            <button onClick={openEdit}>{isEdit ? "Save" : "Edit"}</button>
-            {isEdit && <button onClick={cancelEdit}>Cancel</button>}
+          <div className="mt-4 flex items-center">
+            <button
+              className="px-8 py-2 bg-slate-300 text-gray-500 mr-[5%]"
+              onClick={openEdit}
+            >
+              {isEdit ? "Save" : "Edit"}
+            </button>
+            {isEdit && (
+              <button
+                className="px-8 py-2 bg-slate-300 text-gray-500"
+                onClick={cancelEdit}
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </section>
       </div>
