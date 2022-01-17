@@ -5,6 +5,7 @@ const initialState = {
   isSuccess: false,
   isError: false,
   Asset: [],
+  Message: "",
 };
 
 const AssetReducer = (state = initialState, action) => {
@@ -18,7 +19,6 @@ const AssetReducer = (state = initialState, action) => {
       };
 
     case actions.ASSET_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         isLoading: false,
@@ -29,12 +29,52 @@ const AssetReducer = (state = initialState, action) => {
 
     case actions.ASSET_ERROR:
       return {
+        ...state,
         isLoading: false,
         isSuccess: false,
         isError: true,
-        Asset: action.payload,
       };
 
+    case actions.ADD_ASSET_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+
+        isError: false,
+        Message: "",
+      };
+
+    case actions.ADD_ASSET_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        Message: action.payload,
+      };
+    case actions.DELETE_ASSET_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        Message: "",
+      };
+
+    case actions.DELETE_ASSET_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        Message: action.payload,
+      };
+
+    case actions.DELETE_ASSET_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: false,
+        isError: true,
+        Message: action.payload,
+      };
     default:
       return state;
   }

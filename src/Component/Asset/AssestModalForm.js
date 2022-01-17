@@ -8,6 +8,8 @@ export default function AssetModal({
   handleClose,
   assetForm,
   handleAssetForm,
+  handleSubmitAsset,
+  isEdit,
 }) {
   const {
     asset_name,
@@ -20,10 +22,10 @@ export default function AssetModal({
   } = assetForm;
 
   return (
-    <form className="px-3 py-4">
+    <form className="px-3 py-4" onSubmit={handleSubmitAsset}>
       <header className="mb-3">
         <h2 className="text-center text-2xl font-bold tracking-wider">
-          New Asset
+          {isEdit ? "Edit Asset" : "New Asset"}
         </h2>
       </header>
 
@@ -39,6 +41,7 @@ export default function AssetModal({
             inputProps={{ maxLength: 80 }}
             value={asset_name}
             onChange={handleAssetForm}
+            required
           />
         </div>
         <div className="md:col-span-2 col-span-4"></div>
@@ -53,6 +56,9 @@ export default function AssetModal({
               id="assetType"
               size="small"
               label="Asset Type"
+              value={asset_type}
+              onChange={handleAssetForm}
+              required
             >
               {AssetType.map((item) => {
                 return (
@@ -77,6 +83,9 @@ export default function AssetModal({
               id="Status"
               size="small"
               label="Status"
+              value={status}
+              onChange={handleAssetForm}
+              required
             >
               <MenuItem value={"ACTIVE"}>ACTIVE</MenuItem>
               <MenuItem value={"INACTIVE"}>INACTIVE</MenuItem>
@@ -93,6 +102,9 @@ export default function AssetModal({
             label="Tech Stack"
             inputProps={{ maxLength: 250 }}
             size="small"
+            value={tech_stack}
+            onChange={handleAssetForm}
+            required
           />
         </div>
         <div className="md:col-span-2 col-span-4"></div>
@@ -105,6 +117,9 @@ export default function AssetModal({
             label="Third Party Components"
             inputProps={{ maxLength: 250 }}
             size="small"
+            value={third_party_components}
+            onChange={handleAssetForm}
+            required
           />
         </div>
         <div className="md:col-span-2 col-span-4"></div>
@@ -119,6 +134,9 @@ export default function AssetModal({
               name="internal_external"
               id="internal_external"
               size="small"
+              value={internal_external}
+              onChange={handleAssetForm}
+              required
             >
               <MenuItem value={"Internal"}>Internal</MenuItem>
               <MenuItem value={"External"}>External</MenuItem>
@@ -136,14 +154,17 @@ export default function AssetModal({
           rows={4}
           sx={{ width: "100%" }}
           label="Additional Details"
+          value={additional_details}
+          onChange={handleAssetForm}
+          required
         />
       </section>
       <div className="flex justify-between items-center mt-3">
         <button
-          type="button"
+          type="submit"
           className="px-14 text-white py-2 rounded-md tracking-wide bg-gray-cus-5"
         >
-          Add
+          {isEdit ? "Save" : "Add"}
         </button>
         <button
           type="button"

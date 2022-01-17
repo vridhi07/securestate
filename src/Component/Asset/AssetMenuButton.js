@@ -1,20 +1,15 @@
 import * as React from "react";
-
 import Popover from "@mui/material/Popover";
-import Paper from "@mui/material/Paper";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-// import * as scopeAction from "../../Redux/Pentest/actions/pentestActions";
-import { useDispatch, useSelector } from "react-redux";
-const ScopeMenuButton = () => {
-  const [anchorEl, setAnchorEl] = React.useState(false);
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-
-  // const { anchorEl, scopeEditId } = state.pentestReducer;
-
+import Paper from "@mui/material/Paper";
+export default function BasicPopover({
+  anchorEl,
+  handleMenuClose,
+  handleEdit,
+  handleAssetDelete,
+}) {
   const open = Boolean(anchorEl);
-  const id = open ? "scope-edit-delete-popover" : undefined;
+  const id = open ? "asset_edit_popover" : undefined;
 
   return (
     <div>
@@ -22,7 +17,7 @@ const ScopeMenuButton = () => {
         id={id}
         open={open}
         anchorEl={anchorEl}
-        // onClose={() => dispatch(scopeAction.closeScopePopover())}
+        onClose={handleMenuClose}
         anchorOrigin={{
           vertical: "top",
           horizontal: "left",
@@ -36,14 +31,14 @@ const ScopeMenuButton = () => {
         <Paper sx={{ width: "10rem", borderRadius: 0 }}>
           <button
             className="px-1 py-2 tracking-wider  flex justify-between items-center w-full text-left m-0 border border-black bg-green-400 hover:bg-green-500 "
-            // onClick={() => dispatch(scopeAction.scopeEditCall())}
+            onClick={handleEdit}
           >
             <span>Edit</span>
             <ArrowRightIcon />
           </button>
           <button
             className="w-full text-left px-1 tracking-wider border-black py-2 m-0 border border-t-0 bg-red-500 hover:bg-red-600"
-            // onClick={() => dispatch(scopeAction.openDeleteModal(scopeEditId))}
+            onClick={handleAssetDelete}
           >
             Delete
           </button>
@@ -51,6 +46,4 @@ const ScopeMenuButton = () => {
       </Popover>
     </div>
   );
-};
-
-export default ScopeMenuButton;
+}
