@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import Dialog from "@mui/material/Dialog";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import Loader from "../../../Component/Common/Loader";
 import FilterOption from "../../../Component/Common/FilterOption";
 import AssetModal from "../../../Component/Asset/AssestModalForm";
 import AssetMenuButton from "../../../Component/Asset/AssetMenuButton";
@@ -55,9 +55,20 @@ const AssetsIndex = () => {
   };
 
   const handleAssetDelete = () => {
-    console.log(selectedId);
     handleMenuClose();
     dispatch(action.DeleteAssetRequest(selectedId));
+  };
+
+  const handleStatus = (status, id) => {
+    let newStatus;
+    if (status === "INACTIVE") {
+      newStatus = "ACTIVE";
+    }
+    if (status === "ACTIVE") {
+      newStatus = "INACTIVE";
+    }
+
+    dispatch(action.UpdateAssetRequest({ newStatus, id }));
   };
 
   const handleEdit = () => {
@@ -94,6 +105,8 @@ const AssetsIndex = () => {
     }
     if (isEdit) {
       console.log("Edit");
+      dispatch(action.UpdateAssetRequest(assetForm));
+      setIsEdit(false);
     }
     handleClose();
     setAssetForm({
@@ -112,7 +125,7 @@ const AssetsIndex = () => {
   }, [message]);
 
   if (isLoading) {
-    return <div>Loading......</div>;
+    return <Loader />;
   }
   return (
     <div className="mt-8 ">
@@ -138,16 +151,33 @@ const AssetsIndex = () => {
                   className="w-full flex items-center text-gray-500 border-b-2 pl-8 pr-2   "
                   key={id}
                 >
-                  <div
-                    className="w-[95%] flex justify-between  hover:cursor-pointer items-center  md:pr-3  py-3 "
-                    onClick={() => navigate(`${id}/details`, { state: { id } })}
-                  >
+                  <div className="w-[95%] flex justify-between  hover:cursor-pointer items-center  md:pr-3  py-3 ">
                     <div>
                       <h4>{asset_name}</h4>
                       <p>{asset_type}</p>
                     </div>
-                    <div>
-                      <h4>{status}</h4>
+                    <div className="flex items-center justify-start">
+                      <button
+                        type="button"
+                        className={` text-white rounded-sm tracking-wider ${
+                          status === "ACTIVE"
+                            ? "bg-green-500  px-8 py-2"
+                            : "bg-red-500 px-6 py-2"
+                        }`}
+                        onClick={() => handleStatus(status, id)}
+                      >
+                        {status}
+                      </button>
+                      <div className="ml-5">
+                        <p
+                          onClick={() =>
+                            navigate(`${id}/details`, { state: { id } })
+                          }
+                          className="text-sky-600 hover:cursor-pointer"
+                        >
+                          Details
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <div className="w-[2%] text-center">

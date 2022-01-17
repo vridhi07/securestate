@@ -54,7 +54,7 @@ const AssetReducer = (state = initialState, action) => {
     case actions.DELETE_ASSET_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
         isError: false,
         Message: "",
       };
@@ -68,6 +68,27 @@ const AssetReducer = (state = initialState, action) => {
       };
 
     case actions.DELETE_ASSET_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: false,
+        isError: true,
+        Message: action.payload,
+      };
+    case actions.UPDATE_ASSET_REQUEST:
+      return {
+        ...state,
+        Message: "",
+        isError: false,
+      };
+    case actions.UPDATE_ASSET_SUCCESS:
+      return {
+        ...state,
+
+        isError: false,
+        Message: action.payload,
+      };
+    case actions.UPDATE_ASSET_ERROR:
       return {
         ...state,
         isLoading: false,

@@ -20,3 +20,7 @@ export const AddAssetError = createAction(actions.ADD_ASSET_ERROR);
 export const DeleteAssetRequest = createAction(actions.DELETE_ASSET_REQUEST);
 export const DeleteAssetSuccess = createAction(actions.DELETE_ASSET_SUCCESS);
 export const DeleteAssetError = createAction(actions.DELETE_ASSET_ERROR);
+
+export const UpdateAssetRequest = createAction(actions.UPDATE_ASSET_REQUEST);
+export const UpdateAssetSuccess = createAction(actions.UPDATE_ASSET_SUCCESS);
+export const UpdateAssetError = createAction(actions.UPDATE_ASSET_ERROR);

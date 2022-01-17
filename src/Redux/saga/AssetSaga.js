@@ -6,6 +6,8 @@ import {
   AddAssetError,
   DeleteAssetSuccess,
   DeleteAssetError,
+  UpdateAssetSuccess,
+  UpdateAssetError,
 } from "../action";
 import Axios from "../../Service/axiosInstance";
 import { CONFIG } from "../../Service/CONFIG";
@@ -37,16 +39,31 @@ export function* AddAssetSaga(action) {
 
 export function* DeleteAssetSaga(action) {
   try {
-    console.log(action.payload);
     let response = yield call(Axios.delete, CONFIG.deleteAsset, {
-      assetId: action.payload,
+      data: { assetId: action.payload },
     });
-    console.log(response);
     if (response && response.data?.status === 1) {
       yield put(DeleteAssetSuccess(response.data.message));
     }
   } catch (error) {
-    console.log(error);
     yield put(DeleteAssetError("Error"));
+  }
+}
+
+export function* UpdateAssetSaga(action) {
+  console.log(action.payload);
+
+  try {
+    const { newStatus, id } = action.payload;
+    let response = yield call(Axios.put, CONFIG.updateAsset, {
+      id,
+      status: newStatus,
+    });
+    console.log(response);
+    if (response && response.data?.status === 1) {
+      yield put(UpdateAssetSuccess(response.data.message));
+    }
+  } catch (error) {
+    yield put(UpdateAssetError("Error occurred"));
   }
 }

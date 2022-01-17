@@ -4,4 +4,5 @@ export const CONFIG = {
   assets: "/assets/assetsDetails",
   addAsset: "/assets/addAssets",
   deleteAsset: "/assets/deleteAssets",
+  updateAsset: "/assets/updateAssets",
 };
