@@ -1,16 +1,15 @@
 import axios from "axios";
 import { baseURL } from "./CONFIG";
 import { getAuthToken } from "./localStorage";
-const Axios = axios.create({
-  baseURL: baseURL,
-});
 let token = localStorage.getItem("token");
+let headers = {};
+if (token) {
+  headers.Authorization = `Bearer ${token}`;
+}
 
-export const AxiosCalls = (method, url) => {
-  const config = {
-    method: method,
-    url: url,
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  return Axios(config);
-};
+const AxiosInstance = axios.create({
+  baseURL: baseURL,
+  headers,
+});
+
+export default AxiosInstance;
