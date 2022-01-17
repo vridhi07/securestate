@@ -37,16 +37,11 @@ export function* AddAssetSaga(action) {
 
 export function* DeleteAssetSaga(action) {
   try {
-    console.log(action.payload);
-    let response = yield call(Axios.delete, CONFIG.deleteAsset, {
-      assetId: action.payload,
-    });
-    console.log(response);
+    let response = yield call(Axios.delete, CONFIG.deleteAsset, {data : { assetId : action.payload}});
     if (response && response.data?.status === 1) {
       yield put(DeleteAssetSuccess(response.data.message));
     }
   } catch (error) {
-    console.log(error);
     yield put(DeleteAssetError("Error"));
   }
 }

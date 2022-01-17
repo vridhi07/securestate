@@ -56,7 +56,6 @@ const AssetsIndex = () => {
   };
 
   const handleAssetDelete = () => {
-    console.log(selectedId);
     handleMenuClose();
     dispatch(action.DeleteAssetRequest(selectedId));
   };
