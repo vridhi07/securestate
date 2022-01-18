@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -6,7 +6,8 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -92,8 +93,10 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [userMenu, setUserMenu] = useState(null);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const menuOpen = Boolean(userMenu);
 
   useEffect(() => {
     if (pathname === "/") {
@@ -108,6 +111,19 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleUserMenu = (event) => {
+    setUserMenu(event.currentTarget)
+  }
+
+  const handleCloseUserMenu = () => {
+    setUserMenu(null);
+  }
+
+  const handleLogout = () => {
+    navigate("/login");
+    localStorage.clear();
+  }
 
   return (
     <Box sx={{ display: "flex", background: "white" }}>
@@ -153,9 +169,20 @@ export default function MiniDrawer() {
                   {pathname === "/profile" ? null : "account settings"}
                 </p>
               </header>
-              <div className="h-11 mx-4 w-11 overflow-x-hidden rounded-full border border-gray-600 grid place-content-center">
+              <div id="person" onClick={handleUserMenu} className="h-11 mx-4 w-11 overflow-x-hidden rounded-full border border-gray-600 grid place-content-center cursor-pointer">
                 <PersonIcon />
               </div>
+              <Menu
+                id="basic-menu"
+                anchorEl={userMenu}
+                open={menuOpen}
+                onClose={handleCloseUserMenu}
+                MenuListProps={{
+                  'aria-labelledby': 'person',
+                }}
+              >
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
             </div>
           </div>
         </Toolbar>
