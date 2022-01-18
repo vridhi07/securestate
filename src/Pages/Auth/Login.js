@@ -18,10 +18,7 @@ const Login = () => {
     if (loginStatus.response === "login success") {
       navigate("/dashboard");
     }
-    if (loginStatus.isError.status) {
-      console.log(loginStatus.response, "rrrrr");
-    }
-  }, [loginStatus.response, loginStatus.isError.msg]);
+  }, [loginStatus.response]);
 
   const onSubmit = (e) => {
     e.preventDefault();

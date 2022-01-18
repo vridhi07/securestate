@@ -4,7 +4,7 @@ import * as actions from "../../Redux/action/index";
 import { useSelector, useDispatch } from "react-redux";
 const AuthAlert = () => {
   const login = useSelector((state) => state.Login);
-  console.log(login);
+
   const dispatch = useDispatch();
   useEffect(() => {
     let timeOut = setTimeout(() => {

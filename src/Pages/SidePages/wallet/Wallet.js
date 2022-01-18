@@ -83,7 +83,7 @@ const Wallet = () => {
           </button>
         </div>
       </div>
-      <div className="px-[5%] mt-3">
+      <div className="px-[5%] mt-3 mb-4">
         <WalletTable />
       </div>
     </div>
