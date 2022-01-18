@@ -5,23 +5,23 @@ import { useSelector, useDispatch } from "react-redux";
 // import * as authAction from "../../Redux/actions/authACtions";
 import { useNavigate } from "react-router-dom";
 import { LoginRequest } from "../../Redux/action";
-
+import AuthAlert from "../../Component/Common/AuthAlert";
 const Login = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
   const [formInputs, setFormInputs] = useState({ userName: "", password: "" });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const loginStatus = useSelector((state)=> state.Login)
+  const loginStatus = useSelector((state) => state.Login);
 
-  useEffect(()=>{
-    if(loginStatus.isSuccess){
+  useEffect(() => {
+    if (loginStatus.isSuccess) {
       navigate("/dashboard");
     }
-    if(loginStatus.isError){
-      console.log(loginStatus.response,"rrrrr")
+    if (loginStatus.isError.status) {
+      console.log(loginStatus.response, "rrrrr");
     }
-  },[loginStatus.isSuccess, loginStatus.isError])
+  }, [loginStatus.isSuccess, loginStatus.isError.msg]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -29,8 +29,8 @@ const Login = () => {
       const payload = {
         userName: formInputs.userName,
         password: formInputs.password,
-      }
-      dispatch(LoginRequest(payload))
+      };
+      dispatch(LoginRequest(payload));
     }
   };
 
@@ -57,8 +57,13 @@ const Login = () => {
             className=" py-4 md:py-32 flex flex-col justify-center  max-w-md mx-auto"
           >
             <div className="p-6 bg-sky-100 rounded shadow-md">
-              <div className="flex items-center justify-center text-4xl font-black text-sky-900 m-3">
+              <div className="flex flex-col items-center justify-center text-4xl font-black text-sky-900 m-3">
                 <h1 className="tracking-wide">Log In</h1>
+                {loginStatus.isError.status && (
+                  <div>
+                    <AuthAlert />
+                  </div>
+                )}
               </div>
               <form
                 id="login_form"
@@ -133,8 +138,9 @@ const Login = () => {
                 <button
                   className="px-4 py-1.5 rounded-md shadow-lg bg-sky-600 font-medium text-gray-100 block hover:bg-sky-700 transition duration-300"
                   type="submit"
+                  disabled={loginStatus.isLoading}
                 >
-                  Login
+                  {loginStatus.isLoading ? "Logging in ...." : " Login"}
                 </button>
                 <section className="mt-3">
                   <Link to="/signup" className="text-green-500 underline">

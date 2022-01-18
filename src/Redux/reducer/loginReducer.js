@@ -3,7 +3,7 @@ import * as actions from "../constant";
 const initialState = {
   isLoading: false,
   isSuccess: false,
-  isError: false,
+  isError: { status: false, msg: "" },
 };
 
 const LoginReducer = (state = initialState, action) => {
@@ -13,7 +13,7 @@ const LoginReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
         isSuccess: false,
-        isError: false,
+        isError: { ...state.isError, status: false, msg: "" },
       };
 
     case actions.LOGIN_SUCCESS:
@@ -21,18 +21,26 @@ const LoginReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isSuccess: true,
-        isError: false,
-        response: action.payload,
+        isError: { ...state.isError, status: false, msg: "" },
       };
 
     case actions.LOGIN_ERROR:
+      const { isError } = state;
       return {
+        ...state,
         isLoading: false,
         isSuccess: false,
-        isError: true,
-        response: action.payload,
+        isError: { ...isError, status: true, msg: action.payload },
       };
-
+    case actions.RESET_LOG_ALERT:
+      return {
+        ...state,
+        isError: {
+          ...state.isError,
+          status: false,
+          msg: "",
+        },
+      };
     default:
       return state;
   }

@@ -13,6 +13,7 @@ export function* LoginSaga(action) {
       yield put(LoginSuccess("login success"));
     }
   } catch (error) {
-    yield put(LoginError("invalid credentials"));
+    // console.log(error.response.data.message);
+    yield put(LoginError(error.response.data.message));
   }
 }
