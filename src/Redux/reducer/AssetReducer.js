@@ -55,7 +55,7 @@ const AssetReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isError: false,
+        isError: true,
         Message: "",
       };
 
@@ -79,12 +79,15 @@ const AssetReducer = (state = initialState, action) => {
       return {
         ...state,
         Message: "",
+        isLoading: true,
+        isSuccess: false,
         isError: false,
       };
     case actions.UPDATE_ASSET_SUCCESS:
       return {
         ...state,
-
+        isLoading: true,
+        isSuccess: false,
         isError: false,
         Message: action.payload,
       };

@@ -51,7 +51,7 @@ export default function AssetModal({
           <FormControl fullWidth>
             <InputLabel id="assetType">Asset Type</InputLabel>
             <Select
-              aria-label="search select "
+              aria-label="search select"
               name="asset_type"
               id="assetType"
               size="small"

@@ -17,11 +17,7 @@ import ListItemText from "@mui/material/ListItemText";
 import SearchIcon from "@mui/icons-material/Search";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {
-  sidebarData,
-  adminSidebar,
-  clientSidebar,
-} from "../../constantData/sidebarData";
+import { sidebarData } from "../../constantData/sidebarData";
 import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../constantData/images/White_logo_No_background.png";
 import { getRole } from "../../Service/localStorage";
@@ -177,19 +173,19 @@ export default function MiniDrawer() {
         <div
           className={`${
             open
-              ? "flex px-4 bg-gray-cus-2 justify-center items-center pt-4"
-              : "flex px-4 pb-3 transition-all hover:bg-gray-hover hover:cursor-pointer bg-orange-cus-2 justify-center items-center pt-4"
-          }`}
+              ? " px-4 bg-gray-cus-2  pt-4"
+              : " px-4 pb-3 transition-all hover:bg-gray-hover  bg-orange-cus-2  pt-4 "
+          } hover:cursor-pointer flex justify-center items-center`}
           onClick={handleDrawerOpen}
         >
           {open ? (
-            <div className="border py-2 flex border-black">
+            <div className="border flex items-center">
               <span>
-                <SearchIcon sx={{ color: "#F67A32" }} />
+                <SearchIcon sx={{ color: "#F67A32", ml: 0.9 }} />
               </span>
               <input
                 type="text"
-                className=" focus:outline-none bg-gray-cus-2  placeholder:text-orange-cus-1"
+                className=" border-0 focus:bg-none focus:outline-none focus:ring-0 bg-gray-cus-2  placeholder:text-orange-cus-1"
                 placeholder="Search..."
               />
             </div>

@@ -14,7 +14,7 @@ const AssetsIndex = () => {
   const navigate = useNavigate();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const { Asset, isLoading, message } = state.Assets;
+  const { Asset, isLoading, Message } = state.Assets;
 
   const [open, setOpen] = useState(false);
   const [assetForm, setAssetForm] = useState({
@@ -68,7 +68,9 @@ const AssetsIndex = () => {
       newStatus = "INACTIVE";
     }
 
-    dispatch(action.UpdateAssetRequest({ newStatus, id }));
+    dispatch(
+      action.UpdateAssetRequest({ newStatus, id, updateType: "statusType" })
+    );
   };
 
   const handleEdit = () => {
@@ -122,7 +124,7 @@ const AssetsIndex = () => {
   };
   useEffect(() => {
     dispatch(action.AssetRequest());
-  }, [message]);
+  }, [Message]);
 
   if (isLoading) {
     return <Loader />;
@@ -173,7 +175,7 @@ const AssetsIndex = () => {
                           onClick={() =>
                             navigate(`${id}/details`, { state: { id } })
                           }
-                          className="text-sky-600 hover:cursor-pointer"
+                          className="text-sky-600 hover:cursor-pointer hover:text-sky-700 "
                         >
                           Details
                         </p>
