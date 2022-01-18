@@ -4,6 +4,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   isError: { status: false, msg: "" },
+  response: "",
 };
 
 const LoginReducer = (state = initialState, action) => {
@@ -14,6 +15,7 @@ const LoginReducer = (state = initialState, action) => {
         isLoading: true,
         isSuccess: false,
         isError: { ...state.isError, status: false, msg: "" },
+        response: "",
       };
 
     case actions.LOGIN_SUCCESS:
@@ -22,6 +24,7 @@ const LoginReducer = (state = initialState, action) => {
         isLoading: false,
         isSuccess: true,
         isError: { ...state.isError, status: false, msg: "" },
+        response: action.payload,
       };
 
     case actions.LOGIN_ERROR:
@@ -40,6 +43,11 @@ const LoginReducer = (state = initialState, action) => {
           status: false,
           msg: "",
         },
+      };
+    case actions.LOG_OUT:
+      return {
+        ...state,
+        response: "",
       };
     default:
       return state;

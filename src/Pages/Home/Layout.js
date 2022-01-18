@@ -6,8 +6,8 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -22,6 +22,8 @@ import { sidebarData } from "../../constantData/sidebarData";
 import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../constantData/images/White_logo_No_background.png";
 import { getRole } from "../../Service/localStorage";
+import { useDispatch } from "react-redux";
+import * as actions from "../../Redux/action/index";
 const drawerWidth = 270;
 
 const openedMixin = (theme) => ({
@@ -97,7 +99,7 @@ export default function MiniDrawer() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const menuOpen = Boolean(userMenu);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (pathname === "/") {
       navigate("dashboard");
@@ -113,17 +115,18 @@ export default function MiniDrawer() {
   };
 
   const handleUserMenu = (event) => {
-    setUserMenu(event.currentTarget)
-  }
+    setUserMenu(event.currentTarget);
+  };
 
   const handleCloseUserMenu = () => {
     setUserMenu(null);
-  }
+  };
 
   const handleLogout = () => {
-    navigate("/login");
+    dispatch(actions.LogOut());
     localStorage.clear();
-  }
+    navigate("/login");
+  };
 
   return (
     <Box sx={{ display: "flex", background: "white" }}>
@@ -169,7 +172,11 @@ export default function MiniDrawer() {
                   {pathname === "/profile" ? null : "account settings"}
                 </p>
               </header>
-              <div id="person" onClick={handleUserMenu} className="h-11 mx-4 w-11 overflow-x-hidden rounded-full border border-gray-600 grid place-content-center cursor-pointer">
+              <div
+                id="person"
+                onClick={handleUserMenu}
+                className="h-11 mx-4 w-11 overflow-x-hidden rounded-full border border-gray-600 grid place-content-center cursor-pointer"
+              >
                 <PersonIcon />
               </div>
               <Menu
@@ -178,7 +185,7 @@ export default function MiniDrawer() {
                 open={menuOpen}
                 onClose={handleCloseUserMenu}
                 MenuListProps={{
-                  'aria-labelledby': 'person',
+                  "aria-labelledby": "person",
                 }}
               >
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>

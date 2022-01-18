@@ -15,13 +15,13 @@ const Login = () => {
   const loginStatus = useSelector((state) => state.Login);
 
   useEffect(() => {
-    if (loginStatus.isSuccess) {
+    if (loginStatus.response === "login success") {
       navigate("/dashboard");
     }
     if (loginStatus.isError.status) {
       console.log(loginStatus.response, "rrrrr");
     }
-  }, [loginStatus.isSuccess, loginStatus.isError.msg]);
+  }, [loginStatus.response, loginStatus.isError.msg]);
 
   const onSubmit = (e) => {
     e.preventDefault();
