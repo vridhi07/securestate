@@ -10,7 +10,7 @@ const MessageForm = () => {
       ></textarea>
       <div className="w-full flex justify-between">
         <div></div>
-        <GrayButton className="mr-3 " text={"Send"} />
+        <GrayButton className="mr-3 ">send</GrayButton>
       </div>
     </form>
   );

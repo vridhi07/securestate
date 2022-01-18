@@ -12,7 +12,7 @@ const Inbox = () => {
           <input
             type="text"
             placeholder="Search"
-            className="w-full py-1 pl-2 focus:outline-none rounded-3xl "
+            className="w-full py-1 pl-2  rounded-3xl border-0 focus:bg-none focus:outline-none focus:ring-0"
           />
         </div>
         <div className="md:mr-8 mr-2">

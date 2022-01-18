@@ -41,7 +41,7 @@ const Users = () => {
             <SearchIcon sx={{ ml: "0.5rem", mt: "0.2rem" }} />
             <input
               type="search"
-              className="py-1 px-1 focus:outline-none bg-clip-padding placeholder:text-gray-600"
+              className="py-1 px-1 focus:outline-none bg-clip-padding placeholder:text-gray-600 border-0 focus:bg-none  focus:ring-0"
               placeholder="Search"
               value={profileSearch}
               onChange={(e) => setProfileSearch(e.target.value)}

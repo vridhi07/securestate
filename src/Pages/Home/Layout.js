@@ -190,9 +190,9 @@ export default function MiniDrawer() {
               />
             </div>
           ) : (
-            <h2 className="md:mr-3 mr-3">
+            <button className="md:mr-3 mr-3">
               <SearchIcon className=" text-2xl text-orange-cus-1" />
-            </h2>
+            </button>
           )}
         </div>
         <List
