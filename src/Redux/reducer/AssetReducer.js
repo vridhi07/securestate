@@ -51,6 +51,13 @@ const AssetReducer = (state = initialState, action) => {
         isError: false,
         Message: action.payload,
       };
+    case actions.ADD_ASSET_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        Message: action.payload,
+      };
     case actions.DELETE_ASSET_REQUEST:
       return {
         ...state,

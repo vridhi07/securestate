@@ -8,6 +8,8 @@ import {
   DeleteAssetSaga,
   UpdateAssetSaga,
 } from "./AssetSaga";
+import { GetCompanySaga } from "./CompanySaga";
+import { GetUserDetails } from "./UserSaga";
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
   yield takeLatest(actions.SignUpRequest, SignupSaga);
@@ -15,6 +17,8 @@ function* watchAllSaga() {
   yield takeLatest(actions.AddAssetRequest, AddAssetSaga);
   yield takeLatest(actions.DeleteAssetRequest, DeleteAssetSaga);
   yield takeLatest(actions.UpdateAssetRequest, UpdateAssetSaga);
+  yield takeLatest(actions.CompanyRequest, GetCompanySaga);
+  yield takeLatest(actions.UserDetailsRequest, GetUserDetails);
 }
 
 export default function* rootSaga() {

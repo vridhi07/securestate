@@ -1,14 +1,16 @@
 import * as actions from "../constant";
 
 const initialState = {
-  isLoading: false,
+  isLoading: true,
   isSuccess: false,
   isError: false,
+  userDetails: [],
+  Message: "",
 };
 
-const SignupReducer = (state = initialState, action) => {
+const UserDetailsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actions.SIGNUP_REQUEST:
+    case actions.USER_DETAILS_REQUEST:
       return {
         ...state,
         isLoading: true,
@@ -16,22 +18,22 @@ const SignupReducer = (state = initialState, action) => {
         isError: false,
       };
 
-    case actions.SIGNUP_SUCCESS:
+    case actions.USER_DETAILS_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isSuccess: true,
         isError: false,
-        response: action.payload,
+        userDetails: action.payload,
       };
 
-    case actions.SIGNUP_ERROR:
+    case actions.USER_DETAILS_ERROR:
       return {
         ...state,
         isLoading: false,
         isSuccess: false,
         isError: true,
-        response: action.payload,
+        Message: action.payload,
       };
 
     default:
@@ -39,4 +41,4 @@ const SignupReducer = (state = initialState, action) => {
   }
 };
 
-export default SignupReducer;
+export default UserDetailsReducer;

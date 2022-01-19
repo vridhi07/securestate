@@ -5,4 +5,6 @@ export const CONFIG = {
   addAsset: "/assets/addAssets",
   deleteAsset: "/assets/deleteAssets",
   updateAsset: "/assets/updateAssets",
+  getCompany: "/company/companyDetails",
+  getUserDetails: "/user/userDetails",
 };

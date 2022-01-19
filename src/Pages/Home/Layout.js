@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -22,7 +23,7 @@ import { sidebarData } from "../../constantData/sidebarData";
 import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../constantData/images/White_logo_No_background.png";
 import { getRole } from "../../Service/localStorage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../Redux/action/index";
 const drawerWidth = 270;
 
@@ -100,11 +101,19 @@ export default function MiniDrawer() {
   const { pathname } = useLocation();
   const menuOpen = Boolean(userMenu);
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+
+  const { userDetails, isLoading } = state?.user;
+  const loading = true;
   useEffect(() => {
     if (pathname === "/") {
       navigate("dashboard");
     }
   }, [pathname]);
+
+  useEffect(() => {
+    dispatch(actions.UserDetailsRequest());
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -163,34 +172,40 @@ export default function MiniDrawer() {
             </IconButton>
           </div>
           <div className="ml-auto">
-            <div className="flex justify-center items-center">
-              <header className="max-h-12 overflow-hidden">
-                <h4 className="text-orange-cus-1 text-left tracking-widest  text-xl">
-                  AARON PARKER
-                </h4>
-                <p className="text-right text-orange-cus-1 capitalize">
-                  {pathname === "/profile" ? null : "account settings"}
-                </p>
-              </header>
-              <div
-                id="person"
-                onClick={handleUserMenu}
-                className="h-11 mx-4 w-11 overflow-x-hidden rounded-full border border-gray-600 grid place-content-center cursor-pointer"
-              >
-                <PersonIcon />
+            {isLoading ? (
+              <div className="mr-3">
+                <CircularProgress />
               </div>
-              <Menu
-                id="basic-menu"
-                anchorEl={userMenu}
-                open={menuOpen}
-                onClose={handleCloseUserMenu}
-                MenuListProps={{
-                  "aria-labelledby": "person",
-                }}
-              >
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </Menu>
-            </div>
+            ) : (
+              <div className="flex justify-center items-center">
+                <header className="max-h-12 overflow-hidden">
+                  <h4 className="text-orange-cus-1 uppercase text-left tracking-widest  text-xl">
+                    {userDetails.user_name}
+                  </h4>
+                  <p className="text-right text-orange-cus-1 capitalize">
+                    {pathname === "/profile" ? null : "account settings"}
+                  </p>
+                </header>
+                <div
+                  id="person"
+                  onClick={handleUserMenu}
+                  className="h-11 mx-4 w-11 overflow-x-hidden rounded-full border border-gray-600 grid place-content-center cursor-pointer"
+                >
+                  <PersonIcon />
+                </div>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={userMenu}
+                  open={menuOpen}
+                  onClose={handleCloseUserMenu}
+                  MenuListProps={{
+                    "aria-labelledby": "person",
+                  }}
+                >
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+              </div>
+            )}
           </div>
         </Toolbar>
       </AppBar>
@@ -219,7 +234,7 @@ export default function MiniDrawer() {
               </span>
               <input
                 type="text"
-                className=" border-0 focus:bg-none focus:outline-none focus:ring-0 bg-gray-cus-2  placeholder:text-orange-cus-1"
+                className=" border-0 focus:bg-none focus:outline-none focus:ring-0 bg-gray-cus-2  placeholder:text-orange-cus-1 py-2 pl-3"
                 placeholder="Search..."
               />
             </div>

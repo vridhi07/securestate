@@ -1,31 +1,63 @@
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as action from "../../Redux/action/index";
 const FilterOption = () => {
+  const [selectedCompany, setSelectedCompany] = useState("");
+  const dispatch = useDispatch();
+  const getID = useRef(null);
+  const company = useSelector((state) => state?.company);
+  const { companyDetails } = company;
+
+  const getSelectedCompanyData = (data) => {
+    return (
+      companyDetails &&
+      companyDetails
+        .map((item) => item)
+        .filter((item) => item.company_name === data)[0]
+    );
+  };
+
+  const handleChange = (e) => {
+    setSelectedCompany(e.target.value);
+  };
+
+  useEffect(() => {
+    if (selectedCompany) {
+      dispatch(
+        action.GetSelectedCompany(getSelectedCompanyData(selectedCompany))
+      );
+    }
+  }, [selectedCompany]);
+
+  useEffect(() => {
+    dispatch(action.CompanyRequest());
+  }, []);
+
   return (
     <div className="flex justify-center">
-      <div className="w-full">
-        <select
-          className="form-select
-      block
-      w-full
-      px-3
-      py-1.5
-      text-base
-      font-normal
-      text-gray-700
-      bg-white bg-clip-padding bg-no-repeat
-      border border-solid border-gray-600
-      rounded
-      transition
-      ease-in-out
-      m-0
-      focus:text-gray-700 focus:bg-white focus:border-gray-500 focus:outline-none"
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Select Company</InputLabel>
+        <Select
           aria-label="search select "
+          value={selectedCompany}
+          onChange={handleChange}
+          label="Select Company"
+          ref={getID}
         >
-          <option defaultValue>Select Company...</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
+          {companyDetails &&
+            companyDetails?.map((item) => {
+              return (
+                <MenuItem value={item.company_name} key={item._id}>
+                  {item.company_name}
+                </MenuItem>
+              );
+            })}
+        </Select>
+      </FormControl>
     </div>
   );
 };

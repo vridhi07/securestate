@@ -28,14 +28,13 @@ export function* AssetSaga() {
 export function* AddAssetSaga(action) {
   try {
     let response = yield call(Axios.post, CONFIG.addAsset, action.payload);
-    console.log(response);
     if (response && response.data?.status === 1) {
       yield put(AddAssetSuccess(response.data.message));
       yield put(AssetRequest());
     }
   } catch (error) {
     console.log(error);
-    yield put(AddAssetError("Error"));
+    yield put(AddAssetError(error.response.data.message));
   }
 }
 
@@ -57,11 +56,7 @@ export function* UpdateAssetSaga(action) {
   console.log(action.payload);
 
   try {
-    const { newStatus, id } = action.payload;
-    let response = yield call(Axios.put, CONFIG.updateAsset, {
-      id,
-      status: newStatus,
-    });
+    let response = yield call(Axios.put, CONFIG.updateAsset, action.payload);
     console.log(response);
     if (response && response.data?.status === 1) {
       yield put(UpdateAssetSuccess(response.data.message));
