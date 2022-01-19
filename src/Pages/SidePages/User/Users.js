@@ -18,6 +18,9 @@ const Users = () => {
   const handleUserFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+    if (name === "phone") {
+      value = e.target.value.replace(/\D/, "");
+    }
     setUserForm({ ...userForm, [name]: value });
   };
 

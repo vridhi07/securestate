@@ -18,7 +18,7 @@ import PentestFinding from "./SidePages/Pentest/PentestFinding";
 import PentestChat from "./SidePages/Pentest/PentestChat";
 import Inbox from "./SidePages/Inbox/Inbox";
 import Home from "./Home/Home";
-import Customer from "./SidePages/Customer";
+import Customer from "./SidePages/Customer/Customer";
 import Users from "./SidePages/User/Users";
 import Wallet from "./SidePages/wallet/Wallet";
 import Invoices from "./SidePages/Invoice/Invoices";

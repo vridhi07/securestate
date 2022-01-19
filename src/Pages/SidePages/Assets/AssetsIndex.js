@@ -200,6 +200,12 @@ const AssetsIndex = () => {
           </div>
         </div>
         <div className="mt-4 min-w-[400px] flex-col justify-between items-center w-full border-2 h-3/5 ">
+          {/* <div className="w-full flex items-center text-gray-500 border-b-2 pl-8 pr-2 hover:bg-slate-100 ">
+            <div className="w-[72%] sm:w-[76%] md:[79%] lg:w-[85%] flex justify-between py-4">
+              <h4>Asset Name</h4>
+              <h4>Status</h4>
+            </div>
+          </div> */}
           {Asset.length > 0 &&
             Asset?.map((item) => {
               const { asset_name, asset_type, status, _id: id } = item;
