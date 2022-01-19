@@ -20,7 +20,7 @@ export default function AlertDialog({
   handleFormInput,
   getDate,
 }) {
-  const { invoice, totalAmount, dueDate, status } = formInput;
+  const { invoice, totalAmount, dueDate, status, attachData } = formInput;
   return (
     <div>
       <Dialog
@@ -121,7 +121,13 @@ export default function AlertDialog({
                 <AttachFileIcon />
                 Attach file
               </label>
-              <input type="file" id="file" className="hidden" />
+              <input
+                type="file"
+                id="file"
+                name="attachData"
+                onChange={handleFormInput}
+                className="hidden"
+              />
             </div>
           </div>
         </form>

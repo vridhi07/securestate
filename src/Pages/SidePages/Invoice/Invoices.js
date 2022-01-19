@@ -9,6 +9,7 @@ const Invoices = () => {
     totalAmount: "",
     dueDate: new Date(),
     status: "",
+    attachData: "",
   });
   const getDate = (newValue) => {
     setFormInput({ ...formInput, dueDate: newValue._d });
@@ -16,6 +17,9 @@ const Invoices = () => {
   const handleFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+    if (name === "attachData") {
+      value = e.target.files[0];
+    }
     setFormInput({ ...formInput, [name]: value });
   };
   const handleClickOpen = () => {

@@ -163,8 +163,8 @@ const AssetsIndex = () => {
                         type="button"
                         className={` text-white rounded-sm tracking-wider ${
                           status === "ACTIVE"
-                            ? "bg-green-500  px-8 py-2"
-                            : "bg-red-500 px-6 py-2"
+                            ? "bg-green-500  px-4 py-2"
+                            : "bg-red-500 px-2 py-2"
                         }`}
                         onClick={() => handleStatus(status, id)}
                       >
