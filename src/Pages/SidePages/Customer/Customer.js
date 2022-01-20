@@ -1,6 +1,7 @@
 import FilterOption from "../../../Component/Common/FilterOption";
 import NewCustomerForm from "../../../Component/Customer/NewCustomerForm";
 import CompanyGroup from "../../../Component/Customer/CompanyGroup";
+import Subscription from "../../../Component/Customer/Subscription";
 import { useState } from "react";
 const Customer = () => {
   const [isCustomerFormOpen, setIsCustomerFormOpen] = useState(false);
@@ -29,10 +30,10 @@ const Customer = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-screen">
       <div className="max-w-4xl mt-4  flex flex-col lg:flex-row  items-start lg:items-center justify-start  mx-auto  ">
         <div className="w-[100%] lg:w-[80%] min-w-[300px]">
-          <FilterOption />
+          {/* <FilterOption /> */}
         </div>
         <div className="lg:ml-auto h-[2rem] mt-3 lg:mt-0 flex justify-center items-center ">
           <button
@@ -43,9 +44,12 @@ const Customer = () => {
           </button>
         </div>
       </div>
-      <div className="mt-6 ">
+      <div className="mt-6  mb-6 h-[759px] lg:h-[392px]">
         <CompanyGroup />
       </div>
+
+      <Subscription />
+
       <NewCustomerForm
         isCustomerFormOpen={isCustomerFormOpen}
         closeCustomerForm={closeCustomerForm}

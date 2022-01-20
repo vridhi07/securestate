@@ -12,7 +12,7 @@ const Invoices = () => {
     attachData: "",
   });
   const getDate = (newValue) => {
-    setFormInput({ ...formInput, dueDate: newValue._d });
+    setFormInput({ ...formInput, dueDate: newValue });
   };
   const handleFormInput = (e) => {
     let name = e.target.name;

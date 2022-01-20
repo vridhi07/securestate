@@ -5,7 +5,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import Dialog from "@mui/material/Dialog";
 import TextField from "@mui/material/TextField";
-import DateAdapter from "@mui/lab/AdapterMoment";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
@@ -67,12 +67,11 @@ export default function AlertDialog({
 
           <div className="w-full mb-3">
             <LocalizationProvider
-              dateAdapter={DateAdapter}
+              dateAdapter={AdapterDateFns}
               sx={{ width: "100%" }}
             >
               <DesktopDatePicker
                 label="Due Date"
-                inputFormat="DD/MM/yyyy"
                 value={dueDate}
                 onChange={getDate}
                 renderInput={(params) => <TextField {...params} />}

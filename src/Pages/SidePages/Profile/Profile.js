@@ -33,6 +33,14 @@ const Profile = () => {
 
   const cancelEdit = () => {
     setIsEdit(false);
+    setProfileForm({
+      ...profileForm,
+      name: "Renne Mckkke",
+      email: "Samu",
+      company: "Etech",
+      phone: "2282272727",
+      location: "delhi",
+    });
   };
   return (
     <div className="w-full">
