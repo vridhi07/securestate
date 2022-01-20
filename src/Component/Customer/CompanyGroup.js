@@ -1,12 +1,32 @@
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
-const CompanyGroup = ({
-  isCompanyDetailsEdit,
-  handleCompanyDetailsEdit,
-  cancelCompanyDetailsEdit,
-  CompanyInfo,
-}) => {
+import { useState } from "react";
+const CompanyGroup = () => {
+  const [isCompanyDetailsEdit, setIsCompanyDetailsEdit] = useState(false);
+
+  const [CompanyInfo, setCompanyInfo] = useState({
+    company_name: "Auzzi Tech",
+    location: "Australia",
+    website: "http//liAUziee.com",
+    main_poc: "ABbsds",
+    main_poc_email: "abcd@gmail.com",
+    main_poc_phone: "2798383838",
+  });
+  const handleCompanyInfo = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === "main_poc_phone") {
+      value = e.target.value.replace(/\D/, "");
+    }
+    setCompanyInfo({ ...CompanyInfo, [name]: value });
+  };
+  const handleCompanyDetailsEdit = () => {
+    setIsCompanyDetailsEdit(true);
+  };
+  const cancelCompanyDetailsEdit = () => {
+    setIsCompanyDetailsEdit(false);
+  };
   return (
     <div>
       <div className="mt-3 flex justify-end items-center">

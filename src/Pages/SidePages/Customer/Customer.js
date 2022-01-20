@@ -12,15 +12,6 @@ const Customer = () => {
     main_poc_email: "",
     main_poc_phone: "",
   });
-  const [CompanyInfo, setCompanyInfo] = useState({
-    company_name: "Auzzi Tech",
-    location: "Australia",
-    website: "http//liAUziee.com",
-    main_poc: "ABbsds",
-    main_poc_email: "abcd@gmail.com",
-    main_poc_phone: "2798383838",
-  });
-  const [isCompanyDetailsEdit, setIsCompanyDetailsEdit] = useState(false);
   const handleCustomerForm = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -29,26 +20,14 @@ const Customer = () => {
     }
     setCustomerForm({ ...customerForm, [name]: value });
   };
-  const handleCompanyInfo = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    if (name === "main_poc_phone") {
-      value = e.target.value.replace(/\D/, "");
-    }
-    setCompanyInfo({ ...customerForm, [name]: value });
-  };
+
   const openCustomerForm = () => {
     setIsCustomerFormOpen(true);
   };
   const closeCustomerForm = () => {
     setIsCustomerFormOpen(false);
   };
-  const handleCompanyDetailsEdit = () => {
-    setIsCompanyDetailsEdit(true);
-  };
-  const cancelCompanyDetailsEdit = () => {
-    setIsCompanyDetailsEdit(false);
-  };
+
   return (
     <div>
       <div className="max-w-4xl mt-4  flex flex-col lg:flex-row  items-start lg:items-center justify-start  mx-auto  ">
@@ -65,13 +44,7 @@ const Customer = () => {
         </div>
       </div>
       <div className="mt-6 ">
-        <CompanyGroup
-          isCompanyDetailsEdit={isCompanyDetailsEdit}
-          handleCompanyDetailsEdit={handleCompanyDetailsEdit}
-          cancelCompanyDetailsEdit={cancelCompanyDetailsEdit}
-          CompanyInfo={CompanyInfo}
-          handleCompanyInfo={handleCompanyInfo}
-        />
+        <CompanyGroup />
       </div>
       <NewCustomerForm
         isCustomerFormOpen={isCustomerFormOpen}
