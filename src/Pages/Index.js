@@ -23,7 +23,7 @@ import Users from "./SidePages/User/Users";
 import Wallet from "./SidePages/wallet/Wallet";
 import Invoices from "./SidePages/Invoice/Invoices";
 import Profile from "./SidePages/Profile/Profile";
-import Settings from "./SidePages/Settings";
+import Settings from "./SidePages/Setting/Settings";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import AdminPrivateRoute from "./AdminPrivateRoute";

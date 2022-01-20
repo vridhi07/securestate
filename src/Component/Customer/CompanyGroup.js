@@ -4,6 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect, useRef } from "react";
 import SingleGroupCLient from "./SingleGroupCLient";
+import AddUserToGroup from "./AddUserToGroup";
 const CompanyGroup = () => {
   const [isCompanyDetailsEdit, setIsCompanyDetailsEdit] = useState(false);
   const focusRef = useRef();
@@ -15,6 +16,17 @@ const CompanyGroup = () => {
     main_poc_email: "abcd@gmail.com",
     main_poc_phone: "2798383838",
   });
+
+  const [isAddUserGroupOpen, setIsAddUserGroupOpen] = useState(false);
+
+  const openAddUserToGroup = () => {
+    setIsAddUserGroupOpen(true);
+  };
+
+  const closeAddUserToGroup = () => {
+    setIsAddUserGroupOpen(false);
+  };
+
   const handleCompanyInfo = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -172,10 +184,11 @@ const CompanyGroup = () => {
               />
             </div>
             <div className="md:mr-8 mr-2 ml-[3%]">
-              <button className="w-12 h-12 ease-in duration-300 border-none rounded-full bg-orange-cus-1 grid place-content-center shadow-lg  cursor-pointer hover:shadow-xl">
-                <div className="ease-in duration-300 ">
-                  <AddIcon sx={{ color: "white" }} />
-                </div>
+              <button
+                className="w-12 h-12 ease-in duration-300 border-none rounded-full bg-orange-cus-1 grid place-content-center shadow-lg  cursor-pointer hover:shadow-xl"
+                onClick={openAddUserToGroup}
+              >
+                <AddIcon sx={{ color: "white" }} />
               </button>
             </div>
           </div>
@@ -188,6 +201,10 @@ const CompanyGroup = () => {
           </div>
         </div>
       </div>
+      <AddUserToGroup
+        isAddUserGroupOpen={isAddUserGroupOpen}
+        closeAddUserToGroup={closeAddUserToGroup}
+      />
     </div>
   );
 };

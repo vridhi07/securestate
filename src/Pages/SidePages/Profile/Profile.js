@@ -15,6 +15,9 @@ const Profile = () => {
   const handleFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+    if (name === "phone") {
+      value = e.target.value.replace(/\D/, "");
+    }
     setProfileForm({ ...profileForm, [name]: value });
   };
   const openEdit = (e) => {
@@ -22,6 +25,7 @@ const Profile = () => {
 
     let name = e.target.name;
     let value = e.target.value;
+
     setProfileForm({ ...profileForm, [name]: value });
   };
 
@@ -55,12 +59,11 @@ const Profile = () => {
             {profileForm.name}
           </h3>
         </section>
-        <section className="m-6  px-[2%] text-left ">
+        <form className="m-6  px-[2%] text-left mt-8">
           <div className="flex items-center">
             <label htmlFor="name" className="mr-8">
               Name
             </label>
-
             <div className="border">
               <input
                 type="text"
@@ -145,6 +148,7 @@ const Profile = () => {
           <div className="mt-4 flex items-center">
             <button
               className="px-8 py-2 bg-slate-300 text-gray-500 mr-[5%]"
+              type="button"
               onClick={openEdit}
             >
               {isEdit ? "Save" : "Edit"}
@@ -152,13 +156,14 @@ const Profile = () => {
             {isEdit && (
               <button
                 className="px-8 py-2 bg-slate-300 text-gray-500"
+                type="button"
                 onClick={cancelEdit}
               >
                 Cancel
               </button>
             )}
           </div>
-        </section>
+        </form>
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ const Customer = () => {
     <div className="min-h-screen">
       <div className="max-w-4xl mt-4  flex flex-col lg:flex-row  items-start lg:items-center justify-start  mx-auto  ">
         <div className="w-[100%] lg:w-[80%] min-w-[300px]">
-          {/* <FilterOption /> */}
+          <FilterOption />
         </div>
         <div className="lg:ml-auto h-[2rem] mt-3 lg:mt-0 flex justify-center items-center ">
           <button
