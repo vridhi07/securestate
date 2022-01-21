@@ -28,6 +28,7 @@ import {
   ErrorPage,
   PrivateRoute,
   AdminPrivateRoute,
+  Home,
 } from "./Pages/Index";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/home" element={<Home />} />
       <Route
         path="/"
         element={

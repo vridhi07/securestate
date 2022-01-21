@@ -5,6 +5,6 @@ import { Navigate } from "react-router-dom";
 function PrivateRoute({ children }) {
   let token = getAuthToken();
 
-  return token ? children : <Navigate to="/login" />;
+  return token ? children : <Navigate to="/home" />;
 }
 export default PrivateRoute;

@@ -4,6 +4,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 const Settings = () => {
   const notificationOptions = ["Never", "Show"];
   const chatNotificationOptions = ["Mentions Only", "Friends Only", "Everyone"];
+
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isChatNotificationOpen, setIsChatNotificationOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Never");

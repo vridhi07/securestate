@@ -26,7 +26,7 @@ import { getRole } from "../../Service/localStorage";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../Redux/action/index";
 const drawerWidth = 270;
-
+console.log(getRole());
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {

@@ -5,7 +5,7 @@ const Profile = () => {
   const [profileForm, setProfileForm] = useState({
     name: "Renne Mckkke",
     email: "Samu",
-    company: "Etech",
+    company: "AUzzTech",
     phone: "2282272727",
     location: "delhi",
   });

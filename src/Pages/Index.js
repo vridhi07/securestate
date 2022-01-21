@@ -17,7 +17,6 @@ import PentestScope from "./SidePages/Pentest/PentestScope";
 import PentestFinding from "./SidePages/Pentest/PentestFinding";
 import PentestChat from "./SidePages/Pentest/PentestChat";
 import Inbox from "./SidePages/Inbox/Inbox";
-import Home from "./Home/Home";
 import Customer from "./SidePages/Customer/Customer";
 import Users from "./SidePages/User/Users";
 import Wallet from "./SidePages/wallet/Wallet";
@@ -27,6 +26,8 @@ import Settings from "./SidePages/Setting/Settings";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import AdminPrivateRoute from "./AdminPrivateRoute";
+import Home from "./SecureStatePage/Home";
+
 export {
   Layout,
   Login,
@@ -46,7 +47,6 @@ export {
   PentestFinding,
   PentestChat,
   Inbox,
-  Home,
   Customer,
   Users,
   Wallet,
@@ -57,4 +57,5 @@ export {
   PrivateRoute,
   PentestTabs,
   AdminPrivateRoute,
+  Home,
 };

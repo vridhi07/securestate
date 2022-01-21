@@ -8,5 +8,6 @@ export const getAuthToken = () => {
 export const getRole = () => {
   let token = getAuthToken();
   const decode = jwt_decode(token);
-  return decode?.role;
+  console.log(decode?.user);
+  return decode?.user.role;
 };
