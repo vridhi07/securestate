@@ -7,7 +7,9 @@ export const getAuthToken = () => {
 
 export const getRole = () => {
   let token = getAuthToken();
-  const decode = jwt_decode(token);
-  console.log(decode?.user);
-  return decode?.user.role;
+  if (token) {
+    const decode = jwt_decode(token);
+    console.log(decode?.user);
+    return decode?.user.role;
+  }
 };

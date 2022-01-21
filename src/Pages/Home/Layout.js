@@ -134,7 +134,7 @@ export default function MiniDrawer() {
   const handleLogout = () => {
     dispatch(actions.LogOut());
     localStorage.clear();
-    navigate("/login");
+    navigate("/home");
   };
 
   return (
