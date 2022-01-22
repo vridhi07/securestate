@@ -7,4 +7,5 @@ export const CONFIG = {
   updateAsset: "/assets/updateAssets",
   getCompany: "/company/companyDetails",
   getUserDetails: "/user/userDetails",
+  pentestActive: "/pentest/active/",
 };

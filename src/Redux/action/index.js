@@ -35,3 +35,11 @@ export const GetSelectedCompany = createAction(actions.GET_SELECTED_COMPANY);
 export const UserDetailsRequest = createAction(actions.USER_DETAILS_REQUEST);
 export const UserDetailsSuccess = createAction(actions.USER_DETAILS_SUCCESS);
 export const UserDetailsError = createAction(actions.USER_DETAILS_ERROR);
+
+export const ActivePentestRequest = createAction(
+  actions.ACTIVE_PENTEST_REQUEST
+);
+export const ActivePentestSuccess = createAction(
+  actions.ACTIVE_PENTEST_SUCCESS
+);
+export const ActivePentestError = createAction(actions.ACTIVE_PENTEST_ERROR);

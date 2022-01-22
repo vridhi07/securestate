@@ -104,6 +104,7 @@ export default function MiniDrawer() {
   const state = useSelector((state) => state);
 
   const { userDetails, isLoading } = state?.user;
+  // console.log(userDetails);
   const loading = true;
   useEffect(() => {
     if (pathname === "/") {
@@ -180,7 +181,7 @@ export default function MiniDrawer() {
               <div className="flex justify-center items-center">
                 <header className="max-h-12 overflow-hidden">
                   <h4 className="text-orange-cus-1 uppercase text-left tracking-widest  text-xl">
-                    {userDetails.user_name}
+                    {userDetails?.user?.user_name}
                   </h4>
                   <p className="text-right text-orange-cus-1 capitalize">
                     {pathname === "/profile" ? null : "account settings"}

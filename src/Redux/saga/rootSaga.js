@@ -10,6 +10,7 @@ import {
 } from "./AssetSaga";
 import { GetCompanySaga } from "./CompanySaga";
 import { GetUserDetails } from "./UserSaga";
+import { GetActivePentestSaga } from "./PentestSaga";
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
   yield takeLatest(actions.SignUpRequest, SignupSaga);
@@ -19,6 +20,7 @@ function* watchAllSaga() {
   yield takeLatest(actions.UpdateAssetRequest, UpdateAssetSaga);
   yield takeLatest(actions.CompanyRequest, GetCompanySaga);
   yield takeLatest(actions.UserDetailsRequest, GetUserDetails);
+  yield takeLatest(actions.ActivePentestRequest, GetActivePentestSaga);
 }
 
 export default function* rootSaga() {

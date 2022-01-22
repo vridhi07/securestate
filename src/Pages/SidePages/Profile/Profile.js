@@ -1,7 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-
+import { useSelector } from "react-redux";
 import dummy from "../../../constantData/images/dummyProfile.webp";
 const Profile = () => {
+  const state = useSelector((state) => state);
+  const { userDetails, isLoading } = state?.user;
+
+  const { company, user } = userDetails;
   const [profileForm, setProfileForm] = useState({
     name: "Renne Mckkke",
     email: "Samu",

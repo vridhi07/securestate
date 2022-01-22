@@ -16,6 +16,7 @@ const UserDetailsReducer = (state = initialState, action) => {
         isLoading: true,
         isSuccess: false,
         isError: false,
+        Message: "",
       };
 
     case actions.USER_DETAILS_SUCCESS:
@@ -25,6 +26,7 @@ const UserDetailsReducer = (state = initialState, action) => {
         isSuccess: true,
         isError: false,
         userDetails: action.payload,
+        Message: "",
       };
 
     case actions.USER_DETAILS_ERROR:

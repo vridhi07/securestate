@@ -9,7 +9,7 @@ export const getRole = () => {
   let token = getAuthToken();
   if (token) {
     const decode = jwt_decode(token);
-    console.log(decode?.user);
+    // console.log(decode?.user);
     return decode?.user.role;
   }
 };
