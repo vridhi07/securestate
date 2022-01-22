@@ -10,4 +10,5 @@ export const CONFIG = {
   pentestActive: "/pentest/active/",
   pentestCompleted: "/pentest/completed/",
   pentestUpcoming: "/pentest/upcoming/",
+  addPentest: "/pentest/addPentest",
 };

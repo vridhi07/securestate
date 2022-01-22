@@ -63,3 +63,7 @@ export const UpcomingPentestSuccess = createAction(
 export const UpcomingPentestError = createAction(
   actions.UPCOMING_PENTEST_ERROR
 );
+
+export const AddPentestRequest = createAction(actions.ADD_PENTEST_REQUEST);
+export const AddPentestSuccess = createAction(actions.ADD_PENTEST_SUCCESS);
+export const AddPentestError = createAction(actions.ADD_PENTEST_ERROR);

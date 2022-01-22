@@ -14,6 +14,7 @@ import {
   GetActivePentestSaga,
   GetCompletedPentestSaga,
   GetUpcomingPentestSaga,
+  AddPentestSaga,
 } from "./PentestSaga";
 
 function* watchAllSaga() {
@@ -28,6 +29,7 @@ function* watchAllSaga() {
   yield takeLatest(actions.ActivePentestRequest, GetActivePentestSaga);
   yield takeLatest(actions.CompletedPentestRequest, GetCompletedPentestSaga);
   yield takeLatest(actions.UpcomingPentestRequest, GetUpcomingPentestSaga);
+  yield takeLatest(actions.AddPentestRequest, AddPentestSaga);
 }
 
 export default function* rootSaga() {

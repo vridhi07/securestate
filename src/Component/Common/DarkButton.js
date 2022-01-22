@@ -3,7 +3,7 @@ const DarkButton = ({ text, onClick, type }) => {
     <button
       onClick={onClick}
       type={type}
-      className="flex justify-center items-center bg-gray-500 text-white px-5 py-3 cursor-pointer"
+      className=" bg-gray-500 text-white px-3 py-3 cursor-pointer"
     >
       {text}
     </button>
