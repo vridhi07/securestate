@@ -1,17 +1,17 @@
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
+import Loader from "../../../Component/Common/Loader";
 import dummy from "../../../constantData/images/dummyProfile.webp";
 const Profile = () => {
   const state = useSelector((state) => state);
   const { userDetails, isLoading } = state?.user;
 
-  const { company, user } = userDetails;
   const [profileForm, setProfileForm] = useState({
-    name: "Renne Mckkke",
-    email: "Samu",
-    company: "AUzzTech",
-    phone: "2282272727",
-    location: "delhi",
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    location: "",
   });
 
   const [isEdit, setIsEdit] = useState(false);
@@ -24,13 +24,17 @@ const Profile = () => {
     }
     setProfileForm({ ...profileForm, [name]: value });
   };
-  const openEdit = (e) => {
+  const openEdit = () => {
     setIsEdit(true);
 
-    let name = e.target.name;
-    let value = e.target.value;
-
-    setProfileForm({ ...profileForm, [name]: value });
+    setProfileForm({
+      ...profileForm,
+      name: userDetails?.user?.name,
+      email: userDetails?.user?.email,
+      company: userDetails?.company,
+      phone: userDetails?.user?.phone,
+      location: userDetails?.user?.location,
+    });
   };
 
   useEffect(() => {
@@ -39,17 +43,30 @@ const Profile = () => {
     }
   }, [isEdit]);
 
+  // useEffect(() => {
+  //   setProfileForm({
+  //     ...profileForm,
+  //     name: userDetails?.user?.name,
+  //     email: userDetails?.user?.email,
+  //     company: userDetails?.company,
+  //     phone: userDetails?.user?.phone,
+  //     location: userDetails?.user?.location,
+  //   });
+  // }, [userDetails]);
   const cancelEdit = () => {
     setIsEdit(false);
     setProfileForm({
       ...profileForm,
-      name: "Renne Mckkke",
-      email: "Samu",
-      company: "Etech",
-      phone: "2282272727",
-      location: "delhi",
+      name: userDetails?.user?.name,
+      email: userDetails?.user?.email,
+      company: userDetails?.company,
+      phone: userDetails?.user?.phone,
+      location: userDetails?.user?.location,
     });
   };
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div className="w-full">
       <div className="flex flex-col px-2 py-2 max-w-sm mx-auto">
@@ -60,25 +77,31 @@ const Profile = () => {
             className="w-full border rounded-full"
           />
           <h3 className="text-center text-gray-500 text-base uppercase mt-3">
-            {profileForm.name}
+            {userDetails?.user?.name}
           </h3>
         </section>
-        <form className="m-6  px-[2%] text-left mt-8">
+        <form className="m-6  px-[2%] text-left mt-8 ">
           <div className="flex items-center">
             <label htmlFor="name" className="mr-8">
               Name
             </label>
             <div className="border">
-              <input
-                type="text"
-                className="focus:outline-none px-3 py-2 w-full  "
-                value={profileForm.name}
-                name="name"
-                id="name"
-                ref={focusRef}
-                onChange={handleFormInput}
-                readOnly={isEdit ? false : true}
-              />
+              {isEdit ? (
+                <input
+                  type="text"
+                  className="focus:outline-none px-3 py-2 w-full  "
+                  value={profileForm.name}
+                  name="name"
+                  id="name"
+                  ref={focusRef}
+                  onChange={handleFormInput}
+                  readOnly={isEdit ? false : true}
+                />
+              ) : (
+                <div className="w-[226.94px] px-3 py-2 px ">
+                  {userDetails?.user?.name}
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-3 flex items-center   ">
@@ -87,15 +110,21 @@ const Profile = () => {
             </label>
 
             <div className="border">
-              <input
-                type="text"
-                className="focus:outline-none px-3 py-2 w-full"
-                value={profileForm.email}
-                name="email"
-                id="email"
-                onChange={handleFormInput}
-                readOnly={isEdit ? false : true}
-              />
+              {isEdit ? (
+                <input
+                  type="text"
+                  className="focus:outline-none px-3 py-2 w-full"
+                  value={profileForm.email}
+                  name="email"
+                  id="email"
+                  onChange={handleFormInput}
+                  readOnly={isEdit ? false : true}
+                />
+              ) : (
+                <div className="w-[226.94px] px-3 py-2 px ">
+                  {userDetails?.user?.email}
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-3 flex items-center ">
@@ -104,15 +133,21 @@ const Profile = () => {
             </label>
 
             <div className="border">
-              <input
-                type="text"
-                className="focus:outline-none px-3 py-2 w-full"
-                value={profileForm.company}
-                name="company"
-                id="company"
-                onChange={handleFormInput}
-                readOnly={isEdit ? false : true}
-              />
+              {isEdit ? (
+                <input
+                  type="text"
+                  className="focus:outline-none px-3 py-2 w-full"
+                  value={profileForm.company}
+                  name="company"
+                  id="company"
+                  onChange={handleFormInput}
+                  readOnly={isEdit ? false : true}
+                />
+              ) : (
+                <div className="w-[226.94px] px-3 py-2 px ">
+                  {userDetails?.company}
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-3  flex items-center ">
@@ -121,15 +156,21 @@ const Profile = () => {
             </label>
 
             <div className="border">
-              <input
-                type="text"
-                className="focus:outline-none px-3 py-2 w-full"
-                value={profileForm.phone}
-                name="phone"
-                id="phone"
-                onChange={handleFormInput}
-                readOnly={isEdit ? false : true}
-              />
+              {isEdit ? (
+                <input
+                  type="text"
+                  className="focus:outline-none px-3 py-2 w-full"
+                  value={profileForm.phone}
+                  name="phone"
+                  id="phone"
+                  onChange={handleFormInput}
+                  readOnly={isEdit ? false : true}
+                />
+              ) : (
+                <div className="w-[226.94px] px-3 py-2 px ">
+                  {userDetails?.user?.phone}
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-3 flex items-center ">
@@ -138,15 +179,21 @@ const Profile = () => {
             </label>
 
             <div className="border">
-              <input
-                type="text"
-                className="focus:outline-none px-3 py-2 w-full"
-                value={profileForm.location}
-                name="location"
-                id="location"
-                onChange={handleFormInput}
-                readOnly={isEdit ? false : true}
-              />
+              {isEdit ? (
+                <input
+                  type="text"
+                  className="focus:outline-none px-3 py-2 w-full"
+                  value={profileForm.location}
+                  name="location"
+                  id="location"
+                  onChange={handleFormInput}
+                  readOnly={isEdit ? false : true}
+                />
+              ) : (
+                <div className="w-[226.94px] px-3 py-2 px ">
+                  {userDetails?.user?.location}
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-4 flex items-center">

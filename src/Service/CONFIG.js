@@ -9,4 +9,5 @@ export const CONFIG = {
   getUserDetails: "/user/userDetails",
   pentestActive: "/pentest/active/",
   pentestCompleted: "/pentest/completed/",
+  pentestUpcoming: "/pentest/upcoming/",
 };
