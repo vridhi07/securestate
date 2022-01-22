@@ -13,7 +13,7 @@ const FilterOption = () => {
   const company = useSelector((state) => state?.company);
 
   const { companyDetails } = company;
-  console.log(selectId);
+  // console.log(selectId);
   const getSelectedCompanyData = (id) => {
     return (
       companyDetails &&

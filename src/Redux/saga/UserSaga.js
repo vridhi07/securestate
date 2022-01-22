@@ -7,7 +7,7 @@ export function* GetUserDetails() {
   try {
     let response = yield call(Axios.get, CONFIG.getUserDetails);
     if (response && response.data?.status === 1) {
-      console.log(response.data);
+      // console.log(response.data);
       yield put(actions.UserDetailsSuccess(response.data.data));
     }
   } catch (error) {
