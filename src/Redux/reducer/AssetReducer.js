@@ -6,6 +6,7 @@ const initialState = {
   isError: false,
   Asset: [],
   Message: "",
+  allAsset: [],
 };
 
 const AssetReducer = (state = initialState, action) => {
@@ -105,6 +106,28 @@ const AssetReducer = (state = initialState, action) => {
         isSuccess: false,
         isError: true,
         Message: action.payload,
+      };
+    case actions.GET_ALL_ASSET_LIST_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+      };
+    case actions.GET_ALL_ASSET_LIST_SUCCESS:
+      return {
+        ...state,
+        allAsset: action.payload,
+        isLoading: false,
+        isSuccess: false,
+        isError: false,
+      };
+    case actions.GET_ALL_ASSET_LIST_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: false,
+        isError: true,
       };
     default:
       return state;

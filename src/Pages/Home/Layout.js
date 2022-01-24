@@ -121,6 +121,9 @@ export default function MiniDrawer() {
     }
   }, []);
 
+  useEffect(() => {
+    dispatch(actions.CompanyRequest());
+  }, []);
   let newPathname = pathname.split("").slice(1).join("");
   // console.log(newPathname);
   const handleDrawerOpen = () => {

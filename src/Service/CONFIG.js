@@ -2,6 +2,7 @@ export const baseURL = process.env.REACT_APP_BASE_URL;
 
 export const CONFIG = {
   assets: "/assets/assetLists",
+  getAllAsset: "/assets/allAssets",
   addAsset: "/assets/addAssets",
   deleteAsset: "/assets/deleteAssets",
   updateAsset: "/assets/updateAssets",
@@ -11,6 +12,7 @@ export const CONFIG = {
   pentestCompleted: "/pentest/completed/",
   pentestUpcoming: "/pentest/upcoming/",
   addPentest: "/pentest/addPentest",
+  deletePentest: "/pentest/deletePentest",
 };
 
 // pentestActive: "/pentest",

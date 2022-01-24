@@ -29,7 +29,6 @@ const FilterOption = () => {
   };
 
   useEffect(() => {
-    dispatch(action.CompanyRequest());
     dispatch(action.GetSelectedCompany(userDetails?.company_id._id));
   }, []);
   return (

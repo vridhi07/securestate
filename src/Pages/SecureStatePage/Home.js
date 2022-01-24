@@ -143,21 +143,21 @@ const Home = () => {
             </h4>
           </header>
           <div className="grid md:grid-cols-4 gap-x-3  w-ful">
-            <article className="md:col-span-2 col-span-4 pt-4 md:pl-[7rem] test">
+            <article className="md:col-span-2 col-span-4 pt-4 md:pl-[7rem] ">
               <div className="border shadow-lg shadow-orange-cus-1 rounded-md px-3 py-2">
-                <p className="text-[1.625rem] font-normal test max-w-[343px] mb-5">
+                <p className="text-[1.625rem] font-normal  max-w-[343px] mb-5">
                   Bring security to the table on day one and eliminate
                   vulnerabilities before they ever reach production. A bug
                   discovered in design is a fraction of the cost when discovered
                   in production.
                 </p>
-                <p className="mb-3 test">
+                <p className="mb-3 ">
                   <span> Capability Gap:</span> Most security teams can't get
                   past the capability gap of standard testing at the end of the
                   development litecycle, our tools help integrate security
                   earlier in the design and development phases
                 </p>
-                <p className="test">
+                <p>
                   <span>Actionable Intelligence:</span> Findings reported on the
                   platform come with actionable recommendations that | give
                   developers the tools and guidance to quickly remediate bugs to
@@ -165,7 +165,7 @@ const Home = () => {
                 </p>
               </div>
             </article>
-            <article className="md:col-span-2 col-span-4  mt-4 md:mt-0 px-4 test ">
+            <article className="md:col-span-2 col-span-4  mt-4 md:mt-0 px-4  ">
               <header className="mb-3 ">
                 <h2 className="text-[#3b4754] text-2xl font-bold text-left">
                   Securing the Software <br /> Development LifeCycle

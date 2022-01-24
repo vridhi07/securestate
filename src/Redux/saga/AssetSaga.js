@@ -9,6 +9,8 @@ import {
   AssetRequest,
   UpdateAssetSuccess,
   UpdateAssetError,
+  getAllAssetListSuccess,
+  getAllAssetListError,
 } from "../action";
 import Axios from "../../Service/axiosInstance";
 import { CONFIG } from "../../Service/CONFIG";
@@ -16,7 +18,11 @@ import { CONFIG } from "../../Service/CONFIG";
 export function* AssetSaga(action) {
   console.log(action.payload);
   try {
-    let response = yield call(Axios.get, `${CONFIG.assets}/${action.payload}`);
+    const { company_id, assetPageNumber } = action.payload;
+    let response = yield call(
+      Axios.get,
+      `${CONFIG.assets}/${company_id}/${assetPageNumber}`
+    );
     if (response && response.data?.status === 1) {
       yield put(AssetSuccess(response.data.data));
     }
@@ -64,5 +70,19 @@ export function* UpdateAssetSaga(action) {
     }
   } catch (error) {
     yield put(UpdateAssetError("Error occurred"));
+  }
+}
+
+export function* GetAllAssetList(action) {
+  try {
+    let response = yield call(
+      Axios.get,
+      `${CONFIG.getAllAsset}/${action.payload}`
+    );
+    if (response && response.data?.status === 1) {
+      yield put(getAllAssetListSuccess(response.data.data));
+    }
+  } catch (error) {
+    yield put(getAllAssetListError("Error occurred"));
   }
 }

@@ -7,6 +7,7 @@ import {
   AddAssetSaga,
   DeleteAssetSaga,
   UpdateAssetSaga,
+  GetAllAssetList,
 } from "./AssetSaga";
 import { GetCompanySaga } from "./CompanySaga";
 import { GetUserDetails } from "./UserSaga";
@@ -15,6 +16,7 @@ import {
   GetCompletedPentestSaga,
   GetUpcomingPentestSaga,
   AddPentestSaga,
+  DeletePentestSaga,
 } from "./PentestSaga";
 
 function* watchAllSaga() {
@@ -30,6 +32,8 @@ function* watchAllSaga() {
   yield takeLatest(actions.CompletedPentestRequest, GetCompletedPentestSaga);
   yield takeLatest(actions.UpcomingPentestRequest, GetUpcomingPentestSaga);
   yield takeLatest(actions.AddPentestRequest, AddPentestSaga);
+  yield takeLatest(actions.DeletePentestRequest, DeletePentestSaga);
+  yield takeLatest(actions.getAllAssetListRequest, GetAllAssetList);
 }
 
 export default function* rootSaga() {

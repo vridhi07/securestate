@@ -14,6 +14,16 @@ export const AssetRequest = createAction(actions.ASSET_REQUEST);
 export const AssetSuccess = createAction(actions.ASSET_SUCCESS);
 export const AssetError = createAction(actions.ASSET_ERROR);
 
+export const getAllAssetListRequest = createAction(
+  actions.GET_ALL_ASSET_LIST_REQUEST
+);
+export const getAllAssetListSuccess = createAction(
+  actions.GET_ALL_ASSET_LIST_SUCCESS
+);
+export const getAllAssetListError = createAction(
+  actions.GET_ALL_ASSET_LIST_ERROR
+);
+
 export const AddAssetRequest = createAction(actions.ADD_ASSET_REQUEST);
 export const AddAssetSuccess = createAction(actions.ADD_ASSET_SUCCESS);
 export const AddAssetError = createAction(actions.ADD_ASSET_ERROR);
@@ -67,3 +77,11 @@ export const UpcomingPentestError = createAction(
 export const AddPentestRequest = createAction(actions.ADD_PENTEST_REQUEST);
 export const AddPentestSuccess = createAction(actions.ADD_PENTEST_SUCCESS);
 export const AddPentestError = createAction(actions.ADD_PENTEST_ERROR);
+
+export const DeletePentestRequest = createAction(
+  actions.DELETE_PENTEST_REQUEST
+);
+export const DeletePentestSuccess = createAction(
+  actions.DELETE_PENTEST_SUCCESS
+);
+export const DeletePentestError = createAction(actions.DELETE_PENTEST_ERROR);

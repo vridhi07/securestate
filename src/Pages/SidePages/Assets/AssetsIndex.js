@@ -3,7 +3,8 @@ import IconButton from "@mui/material/IconButton";
 import Dialog from "@mui/material/Dialog";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import Loader from "../../../Component/Common/PentestLoader";
 import FilterOption from "../../../Component/Common/FilterOption";
 import AssetModal from "../../../Component/Asset/AssestModalForm";
@@ -28,6 +29,7 @@ const AssetsIndex = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [assetPageNumber, setAssetPageNumber] = useState(1);
   // * Redux data
   const { Asset, isLoading, Message } = state.Assets;
   const { selectedCompany } = state?.company;
@@ -70,7 +72,9 @@ const AssetsIndex = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-
+  const handleAssetPageNumber = (e, i) => {
+    setAssetPageNumber(i);
+  };
   const handleAssetDelete = () => {
     handleMenuClose();
     dispatch(action.DeleteAssetRequest(selectedId));
@@ -172,8 +176,8 @@ const AssetsIndex = () => {
     });
   };
   useEffect(() => {
-    dispatch(action.AssetRequest(company_id));
-  }, [Message, company_id]);
+    dispatch(action.AssetRequest({ company_id, assetPageNumber }));
+  }, [Message, company_id, assetPageNumber]);
 
   return (
     <div className="mt-8 ">
@@ -206,8 +210,8 @@ const AssetsIndex = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            Asset.length > 0 &&
-            Asset?.map((item) => {
+            Asset?.assetData &&
+            Asset?.assetData?.map((item) => {
               const { asset_name, asset_type, status, _id: id } = item;
               return (
                 <div
@@ -257,6 +261,19 @@ const AssetsIndex = () => {
                 </div>
               );
             })
+          )}
+          {Asset?.totalPage > 1 && (
+            <div className="mt-4">
+              <Stack spacing={2}>
+                <Pagination
+                  count={Asset?.totalPage}
+                  variant="outlined"
+                  onChange={handleAssetPageNumber}
+                  color="primary"
+                  page={assetPageNumber}
+                />
+              </Stack>
+            </div>
           )}
         </div>
       </section>
