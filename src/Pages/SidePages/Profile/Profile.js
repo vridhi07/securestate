@@ -5,7 +5,7 @@ import dummy from "../../../constantData/images/dummyProfile.webp";
 const Profile = () => {
   const state = useSelector((state) => state);
   const { userDetails, isLoading } = state?.user;
-
+  console.log(userDetails);
   const [profileForm, setProfileForm] = useState({
     name: "",
     email: "",
@@ -29,11 +29,11 @@ const Profile = () => {
 
     setProfileForm({
       ...profileForm,
-      name: userDetails?.user?.name,
-      email: userDetails?.user?.email,
+      name: userDetails?.name,
+      email: userDetails?.email,
       company: userDetails?.company,
-      phone: userDetails?.user?.phone,
-      location: userDetails?.user?.location,
+      phone: userDetails?.phone,
+      location: userDetails?.location,
     });
   };
 
@@ -77,7 +77,7 @@ const Profile = () => {
             className="w-full border rounded-full"
           />
           <h3 className="text-center text-gray-500 text-base uppercase mt-3">
-            {userDetails?.user?.name}
+            {userDetails?.name}
           </h3>
         </section>
         <form className="m-6  px-[2%] text-left mt-8 ">
@@ -99,7 +99,7 @@ const Profile = () => {
                 />
               ) : (
                 <div className="w-[226.94px] px-3 py-2 px ">
-                  {userDetails?.user?.name}
+                  {userDetails?.name}
                 </div>
               )}
             </div>
@@ -122,7 +122,7 @@ const Profile = () => {
                 />
               ) : (
                 <div className="w-[226.94px] px-3 py-2 px ">
-                  {userDetails?.user?.email}
+                  {userDetails?.email}
                 </div>
               )}
             </div>
@@ -145,7 +145,7 @@ const Profile = () => {
                 />
               ) : (
                 <div className="w-[226.94px] px-3 py-2 px ">
-                  {userDetails?.company}
+                  {userDetails?.company_id.company_name}
                 </div>
               )}
             </div>
@@ -168,7 +168,7 @@ const Profile = () => {
                 />
               ) : (
                 <div className="w-[226.94px] px-3 py-2 px ">
-                  {userDetails?.user?.phone}
+                  {userDetails?.phone}
                 </div>
               )}
             </div>
@@ -191,7 +191,7 @@ const Profile = () => {
                 />
               ) : (
                 <div className="w-[226.94px] px-3 py-2 px ">
-                  {userDetails?.user?.location}
+                  {userDetails?.location}
                 </div>
               )}
             </div>

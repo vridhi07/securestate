@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { sidebarData } from "../../constantData/sidebarData";
 import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../constantData/images/White_logo_No_background.png";
+import Loader from "../../Component/Common/Loader";
 import { getRole } from "../../Service/localStorage";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../Redux/action/index";
@@ -105,7 +106,7 @@ export default function MiniDrawer() {
 
   const { userDetails, isLoading } = state?.user;
   // console.log(userDetails);
-  const loading = true;
+  // const loading = true;
   useEffect(() => {
     if (pathname === "/") {
       navigate("dashboard");
@@ -116,6 +117,8 @@ export default function MiniDrawer() {
     dispatch(actions.UserDetailsRequest());
   }, []);
 
+  let newPathname = pathname.split("").slice(1).join("");
+  // console.log(newPathname);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -137,7 +140,9 @@ export default function MiniDrawer() {
     localStorage.clear();
     navigate("/home");
   };
-
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <Box sx={{ display: "flex", background: "white" }}>
       <CssBaseline />
@@ -181,7 +186,7 @@ export default function MiniDrawer() {
               <div className="flex justify-center items-center">
                 <header className="max-h-12 overflow-hidden">
                   <h4 className="text-orange-cus-1 uppercase text-left tracking-widest  text-xl">
-                    {userDetails?.user?.user_name}
+                    {userDetails?.user_name}
                   </h4>
                   <p className="text-right text-orange-cus-1 capitalize">
                     {pathname === "/profile" ? null : "account settings"}
@@ -252,8 +257,12 @@ export default function MiniDrawer() {
             paddingTop: 0,
           }}
         >
-          {sidebarData(getRole()).map((item) => (
-            <NavLink className="flex" key={item.path} to={item.path}>
+          {sidebarData(userDetails?.role).map((item) => (
+            <NavLink
+              className={`flex ${item.path === newPathname && "bg-slate-300"}`}
+              key={item.path}
+              to={item.path}
+            >
               <ListItem button>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText

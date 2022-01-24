@@ -13,9 +13,10 @@ import {
 import Axios from "../../Service/axiosInstance";
 import { CONFIG } from "../../Service/CONFIG";
 
-export function* AssetSaga() {
+export function* AssetSaga(action) {
+  console.log(action.payload);
   try {
-    let response = yield call(Axios.get, CONFIG.assets);
+    let response = yield call(Axios.get, `${CONFIG.assets}/${action.payload}`);
     if (response && response.data?.status === 1) {
       yield put(AssetSuccess(response.data.data));
     }

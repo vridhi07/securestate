@@ -7,8 +7,12 @@ export const CONFIG = {
   updateAsset: "/assets/updateAssets",
   getCompany: "/company/companyDetails",
   getUserDetails: "/user/userDetails",
-  pentestActive: "/pentest/active/",
+  pentestDetails: "/pentest",
   pentestCompleted: "/pentest/completed/",
   pentestUpcoming: "/pentest/upcoming/",
   addPentest: "/pentest/addPentest",
 };
+
+// pentestActive: "/pentest",
+// pentestCompleted: "/pentest/completed/",
+// pentestUpcoming: "/pentest/upcoming/",

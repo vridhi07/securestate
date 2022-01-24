@@ -3,7 +3,8 @@ import IconButton from "@mui/material/IconButton";
 import Dialog from "@mui/material/Dialog";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Loader from "../../../Component/Common/Loader";
+
+import Loader from "../../../Component/Common/PentestLoader";
 import FilterOption from "../../../Component/Common/FilterOption";
 import AssetModal from "../../../Component/Asset/AssestModalForm";
 import AssetMenuButton from "../../../Component/Asset/AssetMenuButton";
@@ -14,9 +15,6 @@ const AssetsIndex = () => {
   const navigate = useNavigate();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const { Asset, isLoading, Message } = state.Assets;
-  const { selectedCompany } = state?.company;
-
   const [open, setOpen] = useState(false);
   const [assetForm, setAssetForm] = useState({
     asset_name: "",
@@ -30,7 +28,14 @@ const AssetsIndex = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
-
+  // * Redux data
+  const { Asset, isLoading, Message } = state.Assets;
+  const { selectedCompany } = state?.company;
+  const { userDetails } = state?.user;
+  const company_id = selectedCompany
+    ? selectedCompany
+    : userDetails?.company_id._id;
+  console.log(company_id);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -126,7 +131,6 @@ const AssetsIndex = () => {
     } = assetForm;
     //* TO AAdd
     if (!isEdit) {
-      const company_id = selectedCompany._id;
       const addData = {
         asset_name,
         asset_type,
@@ -168,12 +172,11 @@ const AssetsIndex = () => {
     });
   };
   useEffect(() => {
-    dispatch(action.AssetRequest());
-  }, [Message]);
+    if (company_id) {
+      dispatch(action.AssetRequest(company_id));
+    }
+  }, [Message, company_id]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
   return (
     <div className="mt-8 ">
       <div className="max-w-2xl mx-auto">
@@ -183,30 +186,29 @@ const AssetsIndex = () => {
         <div className="flex justify-between items-center w-full ">
           <h4 className="text-orange-cus-1 tracking-wide  text-6xl">Assets</h4>
           <div className="flex flex-col items-start justify-end">
-            {!selectedCompany && (
-              <p className="text-red-500 pb-3 ">
-                To Add Asset Please select Company
-              </p>
-            )}
             <button
               onClick={handleClickOpen}
-              className={`bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm ${
-                !selectedCompany && "ml-auto"
-              } `}
-              disabled={!selectedCompany}
+              className={`bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm`}
             >
               add asset
             </button>
           </div>
         </div>
-        <div className="mt-4 min-w-[400px] flex-col justify-between items-center w-full border-2 h-3/5 ">
+        <div
+          className={`mt-4 min-w-[400px] flex-col justify-between items-center w-full ${
+            !isLoading && "border - 2"
+          }  h-3/5 `}
+        >
           {/* <div className="w-full flex items-center text-gray-500 border-b-2 pl-8 pr-2 hover:bg-slate-100 ">
             <div className="w-[72%] sm:w-[76%] md:[79%] lg:w-[85%] flex justify-between py-4">
               <h4>Asset Name</h4>
               <h4>Status</h4>
             </div>
           </div> */}
-          {Asset.length > 0 &&
+          {isLoading ? (
+            <Loader />
+          ) : (
+            Asset.length > 0 &&
             Asset?.map((item) => {
               const { asset_name, asset_type, status, _id: id } = item;
               return (
@@ -256,7 +258,8 @@ const AssetsIndex = () => {
                   </div>
                 </div>
               );
-            })}
+            })
+          )}
         </div>
       </section>
       <Dialog

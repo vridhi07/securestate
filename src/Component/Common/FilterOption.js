@@ -6,30 +6,28 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "../../Redux/action/index";
 const FilterOption = () => {
+  const state = useSelector((state) => state);
+  const { userDetails } = state?.user;
+
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectId, setSelectId] = useState(null);
   const dispatch = useDispatch();
   const getID = useRef(null);
-  const company = useSelector((state) => state?.company);
+  const { companyDetails } = state?.company;
 
-  const { companyDetails } = company;
-  // console.log(selectId);
-  const getSelectedCompanyData = (id) => {
-    return (
-      companyDetails &&
-      companyDetails.map((item) => item).filter((item) => item._id === id)[0]
-    );
-  };
+  useEffect(() => {
+    setSelectedCompany(userDetails?.company_id.company_name);
+    setSelectId(userDetails?.company_id._id);
+
+    dispatch(action.GetSelectedCompany(selectId));
+  }, []);
 
   const handleChange = (e) => {
     setSelectedCompany(e.target.value);
-  };
-
-  useEffect(() => {
     if (selectedCompany) {
-      dispatch(action.GetSelectedCompany(getSelectedCompanyData(selectId)));
+      dispatch(action.GetSelectedCompany(selectId));
     }
-  }, [selectedCompany]);
+  };
 
   useEffect(() => {
     dispatch(action.CompanyRequest());
