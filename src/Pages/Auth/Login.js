@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginRequest } from "../../Redux/action";
 import AuthAlert from "../../Component/Common/AuthAlert";
+import { getAuthToken } from "../../Service/localStorage";
 const Login = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(false);
   const [formInputs, setFormInputs] = useState({ userName: "", password: "" });
@@ -13,12 +14,12 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const loginStatus = useSelector((state) => state.Login);
-
+  let token = getAuthToken();
   useEffect(() => {
-    if (loginStatus.response === "login success") {
+    if (token && loginStatus.response === "login success") {
       navigate("/dashboard");
     }
-  }, [loginStatus.response]);
+  }, [loginStatus.response, token]);
 
   const onSubmit = (e) => {
     e.preventDefault();

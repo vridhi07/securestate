@@ -5,6 +5,7 @@ const initialState = {
   isSuccess: false,
   isError: { status: false, msg: "" },
   companyDetails: [],
+
   selectedCompany: "",
 };
 
@@ -16,6 +17,7 @@ const CompanyReducer = (state = initialState, action) => {
         isLoading: true,
         isSuccess: false,
         isError: { ...state.isError, status: false, msg: "" },
+        selectedCompany: "",
       };
 
     case actions.COMPANY_SUCCESS:
@@ -25,6 +27,7 @@ const CompanyReducer = (state = initialState, action) => {
         isSuccess: true,
         isError: { ...state.isError, status: false, msg: "" },
         companyDetails: action.payload,
+        selectedCompany: "",
       };
 
     case actions.COMPANY_ERROR:
@@ -33,6 +36,7 @@ const CompanyReducer = (state = initialState, action) => {
         isLoading: false,
         isSuccess: false,
         isError: { ...state.isError, status: false, msg: action.payload },
+        selectedCompany: "",
       };
 
     case actions.GET_SELECTED_COMPANY:

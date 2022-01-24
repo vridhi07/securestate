@@ -172,9 +172,7 @@ const AssetsIndex = () => {
     });
   };
   useEffect(() => {
-    if (company_id) {
-      dispatch(action.AssetRequest(company_id));
-    }
+    dispatch(action.AssetRequest(company_id));
   }, [Message, company_id]);
 
   return (

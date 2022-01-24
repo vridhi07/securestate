@@ -26,6 +26,7 @@ import Loader from "../../Component/Common/Loader";
 import { getRole } from "../../Service/localStorage";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../Redux/action/index";
+import { getAuthToken } from "../../Service/localStorage";
 const drawerWidth = 270;
 console.log(getRole());
 const openedMixin = (theme) => ({
@@ -95,7 +96,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer() {
-  const theme = useTheme();
+  // const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [userMenu, setUserMenu] = useState(null);
   const navigate = useNavigate();
@@ -107,6 +108,7 @@ export default function MiniDrawer() {
   const { userDetails, isLoading } = state?.user;
   // console.log(userDetails);
   // const loading = true;
+  let token = getAuthToken();
   useEffect(() => {
     if (pathname === "/") {
       navigate("dashboard");
@@ -114,7 +116,9 @@ export default function MiniDrawer() {
   }, [pathname]);
 
   useEffect(() => {
-    dispatch(actions.UserDetailsRequest());
+    if (token) {
+      dispatch(actions.UserDetailsRequest());
+    }
   }, []);
 
   let newPathname = pathname.split("").slice(1).join("");
