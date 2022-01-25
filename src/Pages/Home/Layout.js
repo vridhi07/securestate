@@ -23,12 +23,12 @@ import { sidebarData } from "../../constantData/sidebarData";
 import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../constantData/images/White_logo_No_background.png";
 import Loader from "../../Component/Common/Loader";
-import { getRole } from "../../Service/localStorage";
+// import { getRole } from "../../Service/localStorage";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../Redux/action/index";
 import { getAuthToken } from "../../Service/localStorage";
 const drawerWidth = 270;
-console.log(getRole());
+// console.log(getRole());
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {

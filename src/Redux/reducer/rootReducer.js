@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import LoginReducer from "./loginReducer";
 import SignupReducer from "./signupReducer";
-import AssetReducer from "./AssetReducer";
+import AssetReducer from "./Asset/AssetReducer";
 import CompanyReducer from "./CompanyReducer";
 import UserDetailsReducer from "./UserDetailsReducer";
 import ActivePentestReducer from "./Pentest/ActivePentestReducer";
