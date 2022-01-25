@@ -108,7 +108,7 @@ export default function MiniDrawer() {
   const { userDetails, isLoading } = state?.user;
   // console.log(userDetails);
   // const loading = true;
-  let token = getAuthToken();
+  let token = localStorage.getItem("token");
   useEffect(() => {
     if (pathname === "/") {
       navigate("dashboard");
@@ -116,9 +116,7 @@ export default function MiniDrawer() {
   }, [pathname]);
 
   useEffect(() => {
-    if (token) {
-      dispatch(actions.UserDetailsRequest());
-    }
+    dispatch(actions.UserDetailsRequest());
   }, []);
 
   useEffect(() => {
@@ -147,6 +145,12 @@ export default function MiniDrawer() {
     localStorage.clear();
     navigate("/home");
   };
+  useEffect(() => {
+    if (token === null) {
+      dispatch(actions.LogOut());
+      navigate("/home");
+    }
+  }, [token]);
   if (isLoading) {
     return <Loader />;
   }

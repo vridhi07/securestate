@@ -7,6 +7,8 @@ import UserDetailsReducer from "./UserDetailsReducer";
 import ActivePentestReducer from "./Pentest/ActivePentestReducer";
 import CompletedPentest from "./Pentest/CompletedPentest";
 import UpcomingPentestReducer from "./Pentest/UpcomingPentestReducer";
+import HistoryReducer from "./Asset/HistoryReducer";
+
 const rootReducer = combineReducers({
   Login: LoginReducer,
   Signup: SignupReducer,
@@ -16,6 +18,7 @@ const rootReducer = combineReducers({
   activePentest: ActivePentestReducer,
   CompletedPentest,
   UpcomingPentest: UpcomingPentestReducer,
+  assetHistory: HistoryReducer,
 });
 
 export default rootReducer;

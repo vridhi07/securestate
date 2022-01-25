@@ -4,14 +4,17 @@ import { getAuthToken } from "./localStorage";
 // let token = getAuthToken();
 // console.log(token);
 let token = localStorage.getItem("token");
-let headers = {};
-if (token) {
-  headers.Authorization = `Bearer ${token}`;
-}
+
+// let headers = {};
+// if (token) {
+//   headers.Authorization = `Bearer ${token}`;
+// }
 
 const AxiosInstance = axios.create({
   baseURL: baseURL,
-  headers,
 });
 
+AxiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+// console.log(AxiosInstance);
 export default AxiosInstance;

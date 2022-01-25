@@ -16,7 +16,7 @@ const Login = () => {
   const loginStatus = useSelector((state) => state.Login);
   let token = getAuthToken();
   useEffect(() => {
-    if (token && loginStatus.response === "login success") {
+    if (token && loginStatus.response) {
       navigate("/dashboard");
     }
   }, [loginStatus.response, token]);

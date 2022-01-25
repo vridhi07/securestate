@@ -6,6 +6,7 @@ export const CONFIG = {
   addAsset: "/assets/addAssets",
   deleteAsset: "/assets/deleteAssets",
   updateAsset: "/assets/updateAssets",
+  assetTabs: "/assets",
   getCompany: "/company/companyDetails",
   getUserDetails: "/user/userDetails",
   pentestDetails: "/pentest",

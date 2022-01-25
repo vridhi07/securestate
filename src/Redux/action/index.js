@@ -85,3 +85,12 @@ export const DeletePentestSuccess = createAction(
   actions.DELETE_PENTEST_SUCCESS
 );
 export const DeletePentestError = createAction(actions.DELETE_PENTEST_ERROR);
+
+// * HISTORY
+export const GetHistoryRequest = createAction(actions.GET_HISTORY_REQUEST);
+export const GetHistorySuccess = createAction(actions.GET_HISTORY_SUCCESS);
+export const GetHistoryError = createAction(actions.GET_HISTORY_ERROR);
+
+export const AddHistoryRequest = createAction(actions.ADD_HISTORY_REQUEST);
+export const AddHistorySuccess = createAction(actions.ADD_HISTORY_SUCCESS);
+export const AddHistoryError = createAction(actions.ADD_HISTORY_ERROR);
