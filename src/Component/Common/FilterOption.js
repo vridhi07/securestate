@@ -21,7 +21,7 @@ const FilterOption = () => {
   // console.log(companyName);
 
   useEffect(() => {
-    setSelectedCompany(userDetails?.company_id.company_name);
+    setSelectedCompany(userDetails?.company_id?.company_name);
   }, []);
 
   const handleChange = (e) => {
@@ -29,7 +29,7 @@ const FilterOption = () => {
   };
 
   useEffect(() => {
-    dispatch(action.GetSelectedCompany(userDetails?.company_id._id));
+    dispatch(action.GetSelectedCompany(userDetails?.company_id?._id));
   }, []);
   return (
     <div className="flex justify-center">
