@@ -37,7 +37,7 @@ const AssetsIndex = () => {
   const company_id = selectedCompany
     ? selectedCompany
     : userDetails?.company_id._id;
-  console.log(company_id);
+  // console.log(company_id);
   const handleClickOpen = () => {
     setOpen(true);
   };

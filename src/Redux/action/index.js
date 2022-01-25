@@ -86,6 +86,7 @@ export const DeletePentestSuccess = createAction(
 );
 export const DeletePentestError = createAction(actions.DELETE_PENTEST_ERROR);
 
+//! ASSET TABS
 // * HISTORY
 export const GetHistoryRequest = createAction(actions.GET_HISTORY_REQUEST);
 export const GetHistorySuccess = createAction(actions.GET_HISTORY_SUCCESS);
@@ -94,3 +95,12 @@ export const GetHistoryError = createAction(actions.GET_HISTORY_ERROR);
 export const AddHistoryRequest = createAction(actions.ADD_HISTORY_REQUEST);
 export const AddHistorySuccess = createAction(actions.ADD_HISTORY_SUCCESS);
 export const AddHistoryError = createAction(actions.ADD_HISTORY_ERROR);
+
+// * SBOM
+export const GetSBOMRequest = createAction(actions.GET_SBOM_REQUEST);
+export const GetSBOMSuccess = createAction(actions.GET_SBOM_SUCCESS);
+export const GetSBOMError = createAction(actions.GET_SBOM_ERROR);
+
+export const addSbomRequest = createAction(actions.ADD_SBOM_REQUEST);
+export const addSbomSuccess = createAction(actions.ADD_SBOM_SUCCESS);
+export const addSbomError = createAction(actions.ADD_SBOM_ERROR);

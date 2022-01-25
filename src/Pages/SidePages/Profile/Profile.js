@@ -31,7 +31,7 @@ const Profile = () => {
       ...profileForm,
       name: userDetails?.name,
       email: userDetails?.email,
-      company: userDetails?.company,
+      company: userDetails?.company_id?.company_name,
       phone: userDetails?.phone,
       location: userDetails?.location,
     });

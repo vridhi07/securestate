@@ -40,7 +40,7 @@ const CompanyReducer = (state = initialState, action) => {
       };
 
     case actions.GET_SELECTED_COMPANY:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         selectedCompany: action.payload,
