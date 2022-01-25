@@ -28,8 +28,8 @@ export default function SBOMTab() {
     sbom_author: "",
   });
   const [SboMPageNumber, setSboMPageNumber] = useState(1);
-
-  const [selectedId, setSelectedId] = useState(null);
+  // console.log(SboMPageNumber);
+  // const [selectedId, setSelectedId] = useState(null);
 
   // * router location
   const location = useLocation();
@@ -95,6 +95,14 @@ export default function SBOMTab() {
     });
   };
 
+  const deleteSbom = (id) => {
+    dispatch(action.deleteSbomRequest({ assetId, fileId: id }));
+    if (sbomDetails?.data.length === 1) {
+      setSboMPageNumber(1);
+    }
+  };
+
+  // console.log(sbomDetails?.data.length);
   //* SBOM DATA CALLED
 
   useEffect(() => {
@@ -118,7 +126,6 @@ export default function SBOMTab() {
           <Loader />
         ) : (
           <>
-            {" "}
             <TableContainer component={Paper} elevation={0}>
               <Table
                 sx={{ minWidth: 650 }}
@@ -160,7 +167,7 @@ export default function SBOMTab() {
                         <TableCell align="right">
                           <IconButton
                             color="error"
-                            onClick={() => setSelectedId(item._id)}
+                            onClick={() => deleteSbom(item._id)}
                           >
                             <DeleteIcon />
                           </IconButton>

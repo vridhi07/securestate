@@ -57,6 +57,27 @@ const sbomReducer = (state = initialState, action) => {
         addMessage: action.payload,
         isError: true,
       };
+    case actions.DELETE_SBOM_REQUEST:
+      return {
+        ...state,
+        addLoading: true,
+        isError: false,
+        addMessage: "",
+      };
+    case actions.DELETE_SBOM_SUCCESS:
+      return {
+        ...state,
+        addLoading: false,
+        addMessage: action.payload,
+        isError: false,
+      };
+    case actions.DELETE_SBOM_ERROR:
+      return {
+        ...state,
+        addLoading: false,
+        addMessage: action.payload,
+        isError: true,
+      };
     default:
       return state;
   }

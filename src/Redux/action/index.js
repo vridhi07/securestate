@@ -104,3 +104,7 @@ export const GetSBOMError = createAction(actions.GET_SBOM_ERROR);
 export const addSbomRequest = createAction(actions.ADD_SBOM_REQUEST);
 export const addSbomSuccess = createAction(actions.ADD_SBOM_SUCCESS);
 export const addSbomError = createAction(actions.ADD_SBOM_ERROR);
+
+export const deleteSbomRequest = createAction(actions.DELETE_SBOM_REQUEST);
+export const deleteSbomSuccess = createAction(actions.DELETE_SBOM_SUCCESS);
+export const deleteSbomError = createAction(actions.DELETE_SBOM_ERROR);

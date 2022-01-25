@@ -29,11 +29,34 @@ export function* AddSBOMSaga(action) {
       data
     );
     if (response && response.data?.status === 1) {
-      console.log(response, "history");
+      // console.log(response, "history");
       yield put(actions.addSbomSuccess("Successfully added"));
     }
   } catch (error) {
     // console.log(error.response.data.message);
     yield put(actions.addSbomError(error.response.data.message));
+  }
+}
+
+export function* deleteSbomSaga(action) {
+  try {
+    const { assetId, fileId } = action.payload;
+    console.log(assetId, fileId);
+    let response = yield call(
+      Axios.delete,
+      `${CONFIG.assetTabs}/${assetId}/deleteComponent`,
+      {
+        data: {
+          fileId,
+        },
+      }
+    );
+    if (response && response.data?.status === 1) {
+      console.log(response, "history");
+      yield put(actions.deleteSbomSuccess("Successfully added"));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.deleteSbomError(error.response.data.message));
   }
 }
