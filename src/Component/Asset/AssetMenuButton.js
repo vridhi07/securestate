@@ -6,7 +6,7 @@ export default function BasicPopover({
   anchorEl,
   handleMenuClose,
   handleEdit,
-  handleAssetDelete,
+  openDeleteModal,
 }) {
   const open = Boolean(anchorEl);
   const id = open ? "asset_edit_popover" : undefined;
@@ -30,15 +30,15 @@ export default function BasicPopover({
       >
         <Paper sx={{ width: "10rem", borderRadius: 0 }}>
           <button
-            className="px-1 py-2 tracking-wider  flex justify-between items-center w-full text-left m-0 border border-black bg-green-400 hover:bg-green-500 "
+            className="px-1 py-2 tracking-wider  flex justify-between items-center w-full text-left m-0 border border-black bg-[#AEDD94] hover:bg-green-500 "
             onClick={handleEdit}
           >
             <span>Edit</span>
             <ArrowRightIcon />
           </button>
           <button
-            className="w-full text-left px-1 tracking-wider border-black py-2 m-0 border border-t-0 bg-red-500 hover:bg-red-600"
-            onClick={handleAssetDelete}
+            className="w-full text-left px-1 tracking-wider border-black py-2 m-0 border border-t-0 bg-[#F8B3B0] hover:bg-red-600"
+            onClick={openDeleteModal}
           >
             Delete
           </button>

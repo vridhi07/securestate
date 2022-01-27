@@ -116,11 +116,15 @@ export default function MiniDrawer() {
   }, [pathname]);
 
   useEffect(() => {
-    dispatch(actions.UserDetailsRequest());
+    if (token) {
+      dispatch(actions.UserDetailsRequest());
+    }
   }, []);
 
   useEffect(() => {
-    dispatch(actions.CompanyRequest());
+    if (token) {
+      dispatch(actions.CompanyRequest());
+    }
   }, []);
   let newPathname = pathname.split("").slice(1).join("");
   // console.log(newPathname);

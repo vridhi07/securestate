@@ -108,3 +108,9 @@ export const addSbomError = createAction(actions.ADD_SBOM_ERROR);
 export const deleteSbomRequest = createAction(actions.DELETE_SBOM_REQUEST);
 export const deleteSbomSuccess = createAction(actions.DELETE_SBOM_SUCCESS);
 export const deleteSbomError = createAction(actions.DELETE_SBOM_ERROR);
+
+// Files
+
+export const addFilesRequest = createAction(actions.ADD_FILES_REQUEST);
+export const addFilesSuccess = createAction(actions.ADD_FILES_SUCCESS);
+export const addFilesError = createAction(actions.ADD_FILES_ERROR);

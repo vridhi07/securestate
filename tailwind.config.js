@@ -36,6 +36,12 @@ module.exports = {
         "xs-cus": "0.938rem",
         "lg-cus": "1.063rem",
       },
+      backgroundImage: {
+        dragAndDrop: "url('./constantData/images/H0xdb.png')",
+      },
+      backgroundSize: {
+        50: "400px",
+      },
     },
   },
   plugins: [],

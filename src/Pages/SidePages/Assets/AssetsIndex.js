@@ -9,6 +9,7 @@ import Loader from "../../../Component/Common/PentestLoader";
 import FilterOption from "../../../Component/Common/FilterOption";
 import AssetModal from "../../../Component/Asset/AssestModalForm";
 import AssetMenuButton from "../../../Component/Asset/AssetMenuButton";
+import DeleteModal from "../../../Component/Common/DeleteModal";
 import * as action from "../../../Redux/action/index";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -30,6 +31,7 @@ const AssetsIndex = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [assetPageNumber, setAssetPageNumber] = useState(1);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   // * Redux data
   const { Asset, isLoading, Message } = state.Assets;
   const { selectedCompany } = state?.company;
@@ -38,6 +40,7 @@ const AssetsIndex = () => {
     ? selectedCompany
     : userDetails?.company_id._id;
   // console.log(company_id);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -75,9 +78,18 @@ const AssetsIndex = () => {
   const handleAssetPageNumber = (e, i) => {
     setAssetPageNumber(i);
   };
-  const handleAssetDelete = () => {
+  const openDeleteModal = () => {
+    setDeleteModalOpen(true);
     handleMenuClose();
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setSelectedId(null);
+  };
+  const handleDelete = () => {
     dispatch(action.DeleteAssetRequest(selectedId));
+    closeDeleteModal();
   };
 
   //* Handle Status
@@ -92,7 +104,7 @@ const AssetsIndex = () => {
 
   //* switch on edit
   const handleEdit = () => {
-    let singleData = Asset.find((item) => item._id === selectedId);
+    let singleData = Asset?.assetData.find((item) => item._id === selectedId);
     console.log(singleData);
     const {
       asset_name,
@@ -255,7 +267,7 @@ const AssetsIndex = () => {
                       anchorEl={anchorEl}
                       handleMenuClose={handleMenuClose}
                       handleEdit={handleEdit}
-                      handleAssetDelete={handleAssetDelete}
+                      openDeleteModal={openDeleteModal}
                     />
                   </div>
                 </div>
@@ -291,6 +303,11 @@ const AssetsIndex = () => {
           handleSubmitAsset={handleSubmitAsset}
         />
       </Dialog>
+      <DeleteModal
+        isDeleteModalOpen={isDeleteModalOpen}
+        handleDelete={handleDelete}
+        closeDeleteModal={closeDeleteModal}
+      />
     </div>
   );
 };

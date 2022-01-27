@@ -11,9 +11,9 @@ import {
   UpdateAssetError,
   getAllAssetListSuccess,
   getAllAssetListError,
-} from "../action";
-import Axios from "../../Service/axiosInstance";
-import { CONFIG } from "../../Service/CONFIG";
+} from "../../action";
+import Axios from "../../../Service/axiosInstance";
+import { CONFIG } from "../../../Service/CONFIG";
 
 export function* AssetSaga(action) {
   console.log(action.payload);

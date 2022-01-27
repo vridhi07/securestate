@@ -12,12 +12,14 @@ import ModalForm from "../../../../Component/Asset/SBOMModalForm";
 import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
 import Loader from "../../../../Component/Common/PentestLoader";
+import DeleteModal from "../../../../Component/Common/DeleteModal";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import * as action from "../../../../Redux/action/index";
 export default function SBOMTab() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [selectedId, setSelectedId] = useState(null);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [componentForm, setComponentForm] = useState({
     supplier: "",
     component: "",
@@ -95,13 +97,34 @@ export default function SBOMTab() {
     });
   };
 
-  const deleteSbom = (id) => {
-    dispatch(action.deleteSbomRequest({ assetId, fileId: id }));
-    if (sbomDetails?.data.length === 1) {
-      setSboMPageNumber(1);
-    }
+  const openDeleteModal = () => {
+    setDeleteModalOpen(true);
   };
 
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setSelectedId(null);
+  };
+  const OpenDeleteSbomModal = (id) => {
+    console.log(id);
+    openDeleteModal();
+    setSelectedId(id);
+  };
+
+  const handleDelete = () => {
+    dispatch(action.deleteSbomRequest({ assetId, fileId: selectedId }));
+    if (sbomDetails?.data.length === 1) {
+      setSboMPageNumber((current) => {
+        let newNumber = current - 1;
+        if (current === 1) {
+          newNumber = 1;
+        }
+        return newNumber;
+      });
+    }
+
+    closeDeleteModal();
+  };
   // console.log(sbomDetails?.data.length);
   //* SBOM DATA CALLED
 
@@ -167,7 +190,7 @@ export default function SBOMTab() {
                         <TableCell align="right">
                           <IconButton
                             color="error"
-                            onClick={() => deleteSbom(item._id)}
+                            onClick={() => OpenDeleteSbomModal(item._id)}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -193,13 +216,17 @@ export default function SBOMTab() {
           </>
         )}
       </div>
-
       <ModalForm
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         componentForm={componentForm}
         handleComponentForm={handleComponentForm}
         handleSubmit={handleSubmit}
+      />
+      <DeleteModal
+        isDeleteModalOpen={isDeleteModalOpen}
+        closeDeleteModal={closeDeleteModal}
+        handleDelete={handleDelete}
       />
     </div>
   );
