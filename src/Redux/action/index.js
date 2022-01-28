@@ -109,8 +109,16 @@ export const deleteSbomRequest = createAction(actions.DELETE_SBOM_REQUEST);
 export const deleteSbomSuccess = createAction(actions.DELETE_SBOM_SUCCESS);
 export const deleteSbomError = createAction(actions.DELETE_SBOM_ERROR);
 
-// Files
+//* Files
 
 export const addFilesRequest = createAction(actions.ADD_FILES_REQUEST);
 export const addFilesSuccess = createAction(actions.ADD_FILES_SUCCESS);
 export const addFilesError = createAction(actions.ADD_FILES_ERROR);
+
+export const getAssetFilesRequest = createAction(
+  actions.GET_ASSET_FILES_REQUEST
+);
+export const getAssetFilesSuccess = createAction(
+  actions.GET_ASSET_FILES_SUCCESS
+);
+export const getAssetFilesError = createAction(actions.GET_ASSET_FILES_ERROR);

@@ -12,7 +12,8 @@ import {
 
 import { GetHistorySaga, AddHistoryAction } from "./Asset/HistorySaga";
 import { GetSBOMSaga, AddSBOMSaga, deleteSbomSaga } from "./Asset/SbomSaga";
-import { AddFilesSaga } from "./Asset/AssetFilesSaga";
+import { AddFilesSaga, GetFilesSaga } from "./Asset/AssetFilesSaga";
+
 import { GetCompanySaga } from "./CompanySaga";
 import { GetUserDetails } from "./UserSaga";
 import {
@@ -36,6 +37,8 @@ function* watchAllSaga() {
   yield takeLatest(actions.addSbomRequest, AddSBOMSaga);
   yield takeLatest(actions.deleteSbomRequest, deleteSbomSaga);
   yield takeLatest(actions.addFilesRequest, AddFilesSaga);
+  yield takeLatest(actions.getAssetFilesRequest, GetFilesSaga);
+
   yield takeLatest(actions.CompanyRequest, GetCompanySaga);
   yield takeLatest(actions.UserDetailsRequest, GetUserDetails);
   yield takeLatest(actions.ActivePentestRequest, GetActivePentestSaga);

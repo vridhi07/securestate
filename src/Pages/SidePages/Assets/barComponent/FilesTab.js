@@ -1,12 +1,16 @@
 import { Pagination, Stack } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import * as action from "../../../../Redux/action/index";
 import AssetFileModal from "../../../../Component/Asset/AssetFileModal";
+import Loader from "../../../../Component/Common/PentestLoader";
 import { useSelector, useDispatch } from "react-redux";
+
+import moment from "moment";
 const FilesTab = () => {
   //* React States
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
   const [fileForm, setFileForm] = useState({
     fileName: "",
     description: "",
@@ -18,6 +22,11 @@ const FilesTab = () => {
   const location = useLocation();
   const assetId = location?.state.id;
   console.log(assetId);
+
+  //! REDUX STATES
+
+  const { assetFiles, isLoading, addLoading, AddMessage } = state?.assetFiles;
+
   //* Functions
   const handleFilesPageNumber = (e, i) => {
     setFilesPageNumber(i);
@@ -65,13 +74,17 @@ const FilesTab = () => {
     formdata.append("description", `${fileForm.description}`);
     console.log(formdata);
     dispatch(action.addFilesRequest({ assetId, formdata }));
-
+    closeFileModal();
     setFileForm({
       fileName: "",
       description: "",
     });
     setFile("");
   };
+  useEffect(() => {
+    dispatch(action.getAssetFilesRequest({ assetId, filesPageNumber }));
+  }, [filesPageNumber, AddMessage]);
+
   return (
     <div className="w-full flex flex-col mx-auto">
       <section className="flex mb-3 items-center justify-end">
@@ -84,7 +97,7 @@ const FilesTab = () => {
         </button>
       </section>
       <form className="flex items-center justify-end"></form>
-      <section className="grid grid-cols-10 justify-center items-center text-center font-bold text-gray-text-3  uppercase">
+      <section className="grid grid-cols-12 justify-center items-center text-center font-bold text-gray-text-3  uppercase">
         <div className="col-span-3 ">
           <h4>File</h4>
         </div>
@@ -94,36 +107,62 @@ const FilesTab = () => {
         <div className="col-span-4 ">
           <h4>document description</h4>
         </div>
+        <div className="col-span-2 ">delete</div>
       </section>
-      <div className="w-full mt-3 border border-gray-400 text-gray-text-4 border-t-0">
-        {[1, 2, 3, 4, 5].map((item, index) => {
-          return (
-            <article
-              key={index}
-              className={`${
-                index === 0 ? "border-t tableAsset" : " border-t-2 tableAsset"
-              } `}
-            >
-              <div className="col-span-3 ">Architecture Diagram</div>
-              <div className="col-span-3 ">11.21.21</div>
-              <div className="col-span-4 ">
-                Diagram of application components
-              </div>
-            </article>
-          );
-        })}
+      <div
+        className={`w-full mt-3 ${
+          !isLoading && "border"
+        }border border-gray-400 text-gray-text-4 border-t-0`}
+      >
+        {isLoading ? (
+          <Loader />
+        ) : (
+          assetFiles?.data &&
+          assetFiles?.data?.map((item, index) => {
+            return (
+              <article
+                key={item._id}
+                className={`py-5 grid grid-cols-12 items-center justify-center w-full border text-center px-3 `}
+              >
+                <div className="col-span-3 ml-7">
+                  <a
+                    href={item.file}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex justify-center items-center"
+                  >
+                    <img src={item.file} alt="file" className="h-10 w-10" />
+                  </a>
+                </div>
+                <div className="col-span-3">
+                  <p> {moment(item.createdAt).format("l")}</p>
+                </div>
+                <div className="col-span-4">
+                  <p> {item.description}</p>
+                </div>
+                <div className="col-span-2">
+                  <button>X</button>
+                </div>
+              </article>
+            );
+          })
+        )}
       </div>
-      <div className="pb-5 mt-4">
-        <Stack spacing={2}>
-          <Pagination
-            count={10}
-            variant="outlined"
-            onChange={handleFilesPageNumber}
-            color="primary"
-            page={filesPageNumber}
-          />
-        </Stack>
-      </div>
+
+      {assetFiles?.total && assetFiles?.total > 1 && (
+        <div className="pb-5 mt-4">
+          <Stack spacing={2}>
+            <Pagination
+              count={assetFiles?.total}
+              variant="outlined"
+              onChange={handleFilesPageNumber}
+              color="primary"
+              page={filesPageNumber}
+            />
+          </Stack>
+        </div>
+      )}
+
       <section>
         <AssetFileModal
           isFileModalOpen={isFileModalOpen}
