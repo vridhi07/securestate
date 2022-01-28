@@ -53,6 +53,27 @@ const assetFilesReducer = (state = initialState, action) => {
         isError: { ...state.isError, status: true, msg: action.payload },
         AddMessage: "",
       };
+    case constant.DELETE_FILES_REQUEST:
+      return {
+        ...state,
+        addLoading: false,
+        isError: { ...state.isError, status: true, msg: "" },
+        AddMessage: "",
+      };
+    case constant.DELETE_FILES_SUCCESS:
+      return {
+        ...state,
+        addLoading: false,
+        isError: { ...state.isError, status: true, msg: "" },
+        AddMessage: action.payload,
+      };
+    case constant.DELETE_FILES_ERROR:
+      return {
+        ...state,
+        addLoading: false,
+        isError: { ...state.isError, status: true, msg: action.payload },
+        AddMessage: "",
+      };
     default:
       return state;
   }

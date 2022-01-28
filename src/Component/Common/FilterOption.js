@@ -6,16 +6,17 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "../../Redux/action/index";
 import getFilterOPtion from "../../constantData/FilterOption";
+import { useLocation } from "react-router-dom";
 const FilterOption = () => {
   const state = useSelector((state) => state);
   const { userDetails } = state?.user;
-
-  const [Company, setSelectedCompany] = useState("");
+  const { pathname } = useLocation();
+  const [Company, setSelectedCompany] = useState([]);
   // const [selectId, setSelectId] = useState(null);
   // console.log(selectId);
   const dispatch = useDispatch();
   const getID = useRef(null);
-  const { companyDetails } = state?.company;
+  const { companyDetails, selectedCompany } = state?.company;
 
   const {
     userDetails: { role },
@@ -39,10 +40,8 @@ const FilterOption = () => {
   useEffect(() => {
     if (role === "superAdmin") {
       dispatch(action.GetSelectedCompany(companyDetails[0]?._id));
-    } else {
-      dispatch(action.GetSelectedCompany(userDetails?.company_id?._id));
     }
-  }, [role]);
+  }, []);
   return (
     <div className="flex justify-center">
       <FormControl fullWidth>

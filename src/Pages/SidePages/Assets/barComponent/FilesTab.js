@@ -5,7 +5,9 @@ import * as action from "../../../../Redux/action/index";
 import AssetFileModal from "../../../../Component/Asset/AssetFileModal";
 import Loader from "../../../../Component/Common/PentestLoader";
 import { useSelector, useDispatch } from "react-redux";
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
+import DeleteModal from "../../../../Component/Common/DeleteModal";
 import moment from "moment";
 const FilesTab = () => {
   //* React States
@@ -18,10 +20,11 @@ const FilesTab = () => {
   const [file, setFile] = useState([]);
   const [isFileModalOpen, setIsFileModalOpen] = useState(false);
   const [filesPageNumber, setFilesPageNumber] = useState(1);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
   // console.log(file && file[0][0]);
   const location = useLocation();
   const assetId = location?.state.id;
-  console.log(assetId);
 
   //! REDUX STATES
 
@@ -81,6 +84,37 @@ const FilesTab = () => {
     });
     setFile("");
   };
+
+  const openDeleteModal = (id) => {
+    setDeleteModalOpen(true);
+    setSelectedId(id);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setSelectedId(null);
+  };
+
+  const handleDelete = () => {
+    dispatch(action.deleteFilesRequest({ assetId, fileId: selectedId }));
+
+    // console.log("deleted");
+    if (assetFiles?.data?.length === 1) {
+      setFilesPageNumber((current) => {
+        let newNumber;
+        if (current === 1) {
+          newNumber = 1;
+        }
+        if (current > 1) {
+          newNumber = current - 1;
+        }
+        return newNumber;
+      });
+    }
+
+    closeDeleteModal();
+  };
+
   useEffect(() => {
     dispatch(action.getAssetFilesRequest({ assetId, filesPageNumber }));
   }, [filesPageNumber, AddMessage]);
@@ -107,7 +141,7 @@ const FilesTab = () => {
         <div className="col-span-4 ">
           <h4>document description</h4>
         </div>
-        <div className="col-span-2 ">delete</div>
+        <div className="col-span-2 ">Remove</div>
       </section>
       <div
         className={`w-full mt-3 ${
@@ -129,9 +163,9 @@ const FilesTab = () => {
                     href={item.file}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex justify-center items-center"
+                    className=" underline text-sky-400 text-center md:mr-10"
                   >
-                    <img src={item.file} alt="file" className="h-10 w-10" />
+                    {item.file_name}
                   </a>
                 </div>
                 <div className="col-span-3">
@@ -141,14 +175,18 @@ const FilesTab = () => {
                   <p>{item.description}</p>
                 </div>
                 <div className="col-span-2">
-                  <button>X</button>
+                  <IconButton
+                    color="error"
+                    onClick={() => openDeleteModal(item._id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
                 </div>
               </article>
             );
           })
         )}
       </div>
-
       {assetFiles?.total > 1 && (
         <div className="pb-5 mt-4">
           <Stack spacing={2}>
@@ -162,7 +200,6 @@ const FilesTab = () => {
           </Stack>
         </div>
       )}
-
       <section>
         <AssetFileModal
           isFileModalOpen={isFileModalOpen}
@@ -176,6 +213,11 @@ const FilesTab = () => {
           handleSubmit={handleSubmit}
         />
       </section>
+      <DeleteModal
+        isDeleteModalOpen={isDeleteModalOpen}
+        closeDeleteModal={closeDeleteModal}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 };

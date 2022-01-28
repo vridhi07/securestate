@@ -7,7 +7,6 @@ import {
   AddAssetError,
   DeleteAssetSuccess,
   DeleteAssetError,
-  AssetRequest,
   UpdateAssetSuccess,
   UpdateAssetError,
   getAllAssetListSuccess,

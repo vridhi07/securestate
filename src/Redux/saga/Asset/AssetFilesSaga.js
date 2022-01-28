@@ -36,3 +36,23 @@ export function* GetFilesSaga(action) {
     yield put(actions.getAssetFilesError(error.response.data.message));
   }
 }
+
+export function* DeleteFileSaga(action) {
+  try {
+    const { assetId, fileId } = action.payload;
+    let response = yield call(
+      axios.delete,
+      `${CONFIG.assetTabs}/${assetId}/deleteFile`,
+      {
+        data: { fileId },
+      }
+    );
+    if (response && response.data?.status === 1) {
+      console.log(response, "files");
+      yield put(actions.getAssetFilesSuccess("delete Successfully"));
+    }
+  } catch (error) {
+    console.log(error.response.data);
+    yield put(actions.getAssetFilesError(error.response.data.message));
+  }
+}

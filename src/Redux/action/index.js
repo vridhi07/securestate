@@ -122,3 +122,7 @@ export const getAssetFilesSuccess = createAction(
   actions.GET_ASSET_FILES_SUCCESS
 );
 export const getAssetFilesError = createAction(actions.GET_ASSET_FILES_ERROR);
+
+export const deleteFilesRequest = createAction(actions.DELETE_FILES_REQUEST);
+export const deleteFilesSuccess = createAction(actions.DELETE_FILES_SUCCESS);
+export const deleteFilesError = createAction(actions.DELETE_FILES_ERROR);

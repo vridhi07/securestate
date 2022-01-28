@@ -115,9 +115,12 @@ export default function SBOMTab() {
     dispatch(action.deleteSbomRequest({ assetId, fileId: selectedId }));
     if (sbomDetails?.data.length === 1) {
       setSboMPageNumber((current) => {
-        let newNumber = current - 1;
+        let newNumber;
         if (current === 1) {
           newNumber = 1;
+        }
+        if (current > 1) {
+          newNumber = current - 1;
         }
         return newNumber;
       });

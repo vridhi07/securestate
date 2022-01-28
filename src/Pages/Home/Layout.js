@@ -123,13 +123,14 @@ export default function MiniDrawer() {
     }
   }, []);
 
-  const { companyDetails } = state?.company;
+  const { companyDetails, selectedCompany } = state?.company;
   useEffect(() => {
     if (userDetails?.role === "superAdmin") {
       dispatch(actions.GetSelectedCompany(companyDetails[0]?._id));
-    } else {
-      dispatch(actions.GetSelectedCompany(userDetails?.company_id?._id));
     }
+    //  else {
+    // //   dispatch(actions.GetSelectedCompany(userDetails?.company_id?._id));
+    // // }
   }, [userDetails?.role]);
 
   let newPathname = pathname.split("").slice(1).join("");
