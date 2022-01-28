@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 const AssetsIndex = () => {
   const navigate = useNavigate();
   const state = useSelector((state) => state);
+  // const updateAssetStatus = useSelector((state) => state.)
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [assetForm, setAssetForm] = useState({
@@ -33,18 +34,25 @@ const AssetsIndex = () => {
   const [assetPageNumber, setAssetPageNumber] = useState(1);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   // * Redux data
-  const { Asset, isLoading, Message } = state.Assets;
+  const { Asset, isLoading, Message, updateLoading } = state.Assets;
   const { selectedCompany } = state?.company;
   const { userDetails } = state?.user;
-  const company_id = selectedCompany
-    ? selectedCompany
-    : userDetails?.company_id._id;
+  const { companyDetails } = state?.company;
+  // const company_id = selectedCompany
+  //   ? selectedCompany
+  //   : userDetails?.company_id._id;
   // console.log(company_id);
-
+  const getCompanyId = (role) => {
+    if (role === "superAdmin") {
+      return selectedCompany ? selectedCompany : companyDetails[0]?._id;
+    }
+    return selectedCompany ? selectedCompany : userDetails?.company_id._id;
+  };
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const company_id = getCompanyId(userDetails?.role);
+  console.log(company_id);
   const handleClose = () => {
     setOpen(false);
     setAssetForm({
@@ -88,7 +96,7 @@ const AssetsIndex = () => {
     setSelectedId(null);
   };
   const handleDelete = () => {
-    dispatch(action.DeleteAssetRequest(selectedId));
+    dispatch(action.DeleteAssetRequest({ assetId: selectedId }));
     closeDeleteModal();
   };
 
@@ -158,7 +166,11 @@ const AssetsIndex = () => {
         company_id,
       };
       console.log(addData);
-      dispatch(action.AddAssetRequest(addData));
+      dispatch(
+        action.AddAssetRequest({
+          data: addData,
+        })
+      );
     }
     //* for Edit
     if (isEdit) {
@@ -189,7 +201,7 @@ const AssetsIndex = () => {
   };
   useEffect(() => {
     dispatch(action.AssetRequest({ company_id, assetPageNumber }));
-  }, [Message, company_id, assetPageNumber]);
+  }, [company_id, assetPageNumber, Message]);
 
   return (
     <div className="mt-8 ">
@@ -244,6 +256,7 @@ const AssetsIndex = () => {
                             : "bg-red-500 px-2 py-2"
                         }`}
                         onClick={() => handleStatus(status, id)}
+                        disabled={updateLoading}
                       >
                         {status}
                       </button>

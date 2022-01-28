@@ -117,15 +117,21 @@ export default function MiniDrawer() {
 
   useEffect(() => {
     if (token) {
+      // console.log(token, "======");
       dispatch(actions.UserDetailsRequest());
-    }
-  }, []);
-
-  useEffect(() => {
-    if (token) {
       dispatch(actions.CompanyRequest());
     }
   }, []);
+
+  const { companyDetails } = state?.company;
+  useEffect(() => {
+    if (userDetails?.role === "superAdmin") {
+      dispatch(actions.GetSelectedCompany(companyDetails[0]?._id));
+    } else {
+      dispatch(actions.GetSelectedCompany(userDetails?.company_id?._id));
+    }
+  }, [userDetails?.role]);
+
   let newPathname = pathname.split("").slice(1).join("");
   // console.log(newPathname);
   const handleDrawerOpen = () => {
@@ -147,7 +153,7 @@ export default function MiniDrawer() {
   const handleLogout = () => {
     dispatch(actions.LogOut());
     localStorage.clear();
-    navigate("/home");
+    window.location.replace("/home");
   };
   useEffect(() => {
     if (token === null) {

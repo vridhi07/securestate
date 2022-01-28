@@ -1,13 +1,12 @@
-import Axios from "../../../Service/axiosInstance";
 import { CONFIG } from "../../../Service/CONFIG";
 import { put, call } from "redux-saga/effects";
 import * as actions from "../../action/index";
-
+import axios from "axios";
 export function* GetSBOMSaga(action) {
   try {
     const { assetId, SboMPageNumber } = action.payload;
     let response = yield call(
-      Axios.get,
+      axios.get,
       `${CONFIG.assetTabs}/${assetId}/sbom/${SboMPageNumber}`
     );
     if (response && response.data?.status === 1) {
@@ -24,7 +23,7 @@ export function* AddSBOMSaga(action) {
   try {
     const { assetId, data } = action.payload;
     let response = yield call(
-      Axios.post,
+      axios.post,
       `${CONFIG.assetTabs}/${assetId}/addComponent`,
       data
     );
@@ -43,7 +42,7 @@ export function* deleteSbomSaga(action) {
     const { assetId, fileId } = action.payload;
     console.log(assetId, fileId);
     let response = yield call(
-      Axios.delete,
+      axios.delete,
       `${CONFIG.assetTabs}/${assetId}/deleteComponent`,
       {
         data: {

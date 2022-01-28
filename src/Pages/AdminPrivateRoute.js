@@ -12,7 +12,7 @@ function AdminPrivateRoute({ children }) {
 
   // let role = getRole();
   let role = state?.user?.userDetails?.role;
-  if (token && role === "admin") {
+  if ((token && role === "admin") || role === "superAdmin") {
     return children;
   } else {
     return <Navigate to="/dashboard" />;

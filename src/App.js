@@ -30,7 +30,8 @@ import {
   AdminPrivateRoute,
   Home,
 } from "./Pages/Index";
-
+import defaultAxios from "./Service/defaultAxios";
+defaultAxios();
 function App() {
   return (
     <Routes>

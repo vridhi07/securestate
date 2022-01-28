@@ -1,4 +1,5 @@
 import { put, call } from "redux-saga/effects";
+
 import {
   AssetSuccess,
   AssetError,
@@ -12,16 +13,19 @@ import {
   getAllAssetListSuccess,
   getAllAssetListError,
 } from "../../action";
-import Axios from "../../../Service/axiosInstance";
+
 import { CONFIG } from "../../../Service/CONFIG";
+
+import axios from "axios";
 
 export function* AssetSaga(action) {
   console.log(action.payload);
   try {
     const { company_id, assetPageNumber } = action.payload;
     let response = yield call(
-      Axios.get,
+      axios.get,
       `${CONFIG.assets}/${company_id}/${assetPageNumber}`
+      // { Authorization: `Bearer ${localStorage.getItem("token")}` }
     );
     if (response && response.data?.status === 1) {
       yield put(AssetSuccess(response.data.data));
@@ -34,25 +38,26 @@ export function* AssetSaga(action) {
 
 export function* AddAssetSaga(action) {
   try {
-    let response = yield call(Axios.post, CONFIG.addAsset, action.payload);
-    if (response && response.data?.status === 1) {
-      yield put(AddAssetSuccess(response.data.message));
-      yield put(AssetRequest());
+    let response = yield call(axios.post, CONFIG.addAsset, action.payload.data);
+    if (response && response?.data?.status === 1) {
+      yield put(AddAssetSuccess("asset added"));
+      // yield put(AssetRequest({ company_id, assetPageNumber }));
     }
   } catch (error) {
     console.log(error);
-    yield put(AddAssetError(error.response.data.message));
+    yield put(AddAssetError(error?.response?.data?.message));
   }
 }
 
 export function* DeleteAssetSaga(action) {
   try {
-    let response = yield call(Axios.delete, CONFIG.deleteAsset, {
-      data: { assetId: action.payload },
+    let response = yield call(axios.delete, `${CONFIG.deleteAsset}`, {
+      data: action.payload,
     });
-    if (response && response.data?.status === 1) {
-      yield put(DeleteAssetSuccess(response.data.message));
-      yield put(AssetRequest());
+
+    if (response && response?.data?.status === 1) {
+      yield put(DeleteAssetSuccess("Delete Success"));
+      // yield put(AssetRequest());
     }
   } catch (error) {
     yield put(DeleteAssetError("Error"));
@@ -60,13 +65,13 @@ export function* DeleteAssetSaga(action) {
 }
 
 export function* UpdateAssetSaga(action) {
-  console.log(action.payload);
-
   try {
-    let response = yield call(Axios.put, CONFIG.updateAsset, action.payload);
-    console.log(response);
+    let response = yield call(axios.put, CONFIG.updateAsset, action.payload);
+    // console.log(response, "iiiiiii");
+
     if (response && response.data?.status === 1) {
-      yield put(UpdateAssetSuccess(response.data.message));
+      yield put(UpdateAssetSuccess("UpdateSuccess"));
+      // yield put(AssetRequest());
     }
   } catch (error) {
     yield put(UpdateAssetError("Error occurred"));
@@ -76,11 +81,11 @@ export function* UpdateAssetSaga(action) {
 export function* GetAllAssetList(action) {
   try {
     let response = yield call(
-      Axios.get,
+      axios.get,
       `${CONFIG.getAllAsset}/${action.payload}`
     );
     if (response && response.data?.status === 1) {
-      yield put(getAllAssetListSuccess(response.data.data));
+      yield put(getAllAssetListSuccess(response?.data?.data));
     }
   } catch (error) {
     yield put(getAllAssetListError("Error occurred"));

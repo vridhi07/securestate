@@ -5,6 +5,7 @@ import Select from "@mui/material/Select";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "../../Redux/action/index";
+import getFilterOPtion from "../../constantData/FilterOption";
 const FilterOption = () => {
   const state = useSelector((state) => state);
   const { userDetails } = state?.user;
@@ -15,22 +16,33 @@ const FilterOption = () => {
   const dispatch = useDispatch();
   const getID = useRef(null);
   const { companyDetails } = state?.company;
+
+  const {
+    userDetails: { role },
+  } = state?.user;
+  let Role = getFilterOPtion(role);
   // let companyName = companyDetails.find(
   //   (item) => item._id === userDetails?.company_id._id
   // );
   // console.log(companyName);
-
+  // console.log(Role);
   useEffect(() => {
-    setSelectedCompany(userDetails?.company_id?.company_name);
-  }, []);
+    if (role === "superAdmin") {
+      setSelectedCompany(companyDetails[0]?.company_name);
+    }
+  }, [role]);
 
   const handleChange = (e) => {
     setSelectedCompany(e.target.value);
   };
 
   useEffect(() => {
-    dispatch(action.GetSelectedCompany(userDetails?.company_id?._id));
-  }, []);
+    if (role === "superAdmin") {
+      dispatch(action.GetSelectedCompany(companyDetails[0]?._id));
+    } else {
+      dispatch(action.GetSelectedCompany(userDetails?.company_id?._id));
+    }
+  }, [role]);
   return (
     <div className="flex justify-center">
       <FormControl fullWidth>
@@ -41,6 +53,7 @@ const FilterOption = () => {
           onChange={handleChange}
           label="Select Company"
           ref={getID}
+          disabled={Role}
         >
           {companyDetails &&
             companyDetails?.map((item) => {

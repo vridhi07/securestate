@@ -60,21 +60,21 @@ const sbomReducer = (state = initialState, action) => {
     case actions.DELETE_SBOM_REQUEST:
       return {
         ...state,
-        addLoading: true,
+
         isError: false,
         addMessage: "",
       };
     case actions.DELETE_SBOM_SUCCESS:
       return {
         ...state,
-        addLoading: false,
+
         addMessage: action.payload,
         isError: false,
       };
     case actions.DELETE_SBOM_ERROR:
       return {
         ...state,
-        addLoading: false,
+
         addMessage: action.payload,
         isError: true,
       };

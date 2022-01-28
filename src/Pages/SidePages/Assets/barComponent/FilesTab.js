@@ -118,7 +118,7 @@ const FilesTab = () => {
           <Loader />
         ) : (
           assetFiles?.data &&
-          assetFiles?.data?.map((item, index) => {
+          assetFiles?.data?.map((item) => {
             return (
               <article
                 key={item._id}
@@ -138,7 +138,7 @@ const FilesTab = () => {
                   <p> {moment(item.createdAt).format("l")}</p>
                 </div>
                 <div className="col-span-4">
-                  <p> {item.description}</p>
+                  <p>{item.description}</p>
                 </div>
                 <div className="col-span-2">
                   <button>X</button>
@@ -149,7 +149,7 @@ const FilesTab = () => {
         )}
       </div>
 
-      {assetFiles?.total && assetFiles?.total > 1 && (
+      {assetFiles?.total > 1 && (
         <div className="pb-5 mt-4">
           <Stack spacing={2}>
             <Pagination

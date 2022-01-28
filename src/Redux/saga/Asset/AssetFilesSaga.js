@@ -1,13 +1,12 @@
-import Axios from "../../../Service/axiosInstance";
 import { CONFIG } from "../../../Service/CONFIG";
 import { put, call } from "redux-saga/effects";
 import * as actions from "../../action/index";
-
+import axios from "axios";
 export function* AddFilesSaga(action) {
   try {
     const { assetId, formdata } = action.payload;
     let response = yield call(
-      Axios.post,
+      axios.post,
       `${CONFIG.assetTabs}/${assetId}/uploadFile`,
       formdata
     );
@@ -25,7 +24,7 @@ export function* GetFilesSaga(action) {
   try {
     const { assetId, filesPageNumber } = action.payload;
     let response = yield call(
-      Axios.get,
+      axios.get,
       `${CONFIG.assetTabs}/${assetId}/files/${filesPageNumber}`
     );
     if (response && response.data?.status === 1) {

@@ -7,6 +7,8 @@ const initialState = {
   Asset: [],
   Message: "",
   allAsset: [],
+  ErrorMessage: "",
+  updateLoading: false,
 };
 
 const AssetReducer = (state = initialState, action) => {
@@ -17,6 +19,7 @@ const AssetReducer = (state = initialState, action) => {
         isLoading: true,
         isSuccess: false,
         isError: false,
+        ErrorMessage: "",
       };
 
     case actions.ASSET_SUCCESS:
@@ -26,6 +29,7 @@ const AssetReducer = (state = initialState, action) => {
         isSuccess: true,
         isError: false,
         Asset: action.payload,
+        ErrorMessage: "",
       };
 
     case actions.ASSET_ERROR:
@@ -34,12 +38,12 @@ const AssetReducer = (state = initialState, action) => {
         isLoading: false,
         isSuccess: false,
         isError: true,
+        ErrorMessage: "",
       };
 
     case actions.ADD_ASSET_REQUEST:
       return {
         ...state,
-        isLoading: true,
 
         isError: false,
         Message: "",
@@ -48,14 +52,14 @@ const AssetReducer = (state = initialState, action) => {
     case actions.ADD_ASSET_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+
         isError: false,
         Message: action.payload,
       };
     case actions.ADD_ASSET_ERROR:
       return {
         ...state,
-        isLoading: false,
+
         isError: true,
         Message: action.payload,
       };
@@ -87,25 +91,26 @@ const AssetReducer = (state = initialState, action) => {
       return {
         ...state,
         Message: "",
-        isLoading: true,
         isSuccess: false,
         isError: false,
+        updateLoading: false,
       };
     case actions.UPDATE_ASSET_SUCCESS:
       return {
         ...state,
-        isLoading: true,
         isSuccess: false,
         isError: false,
         Message: action.payload,
+        updateLoading: true,
       };
     case actions.UPDATE_ASSET_ERROR:
       return {
         ...state,
-        isLoading: false,
+
         isSuccess: false,
         isError: true,
         Message: action.payload,
+        updateLoading: false,
       };
     case actions.GET_ALL_ASSET_LIST_REQUEST:
       return {

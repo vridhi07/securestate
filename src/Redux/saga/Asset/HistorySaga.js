@@ -1,13 +1,12 @@
-import Axios from "../../../Service/axiosInstance";
 import { CONFIG } from "../../../Service/CONFIG";
 import { put, call } from "redux-saga/effects";
 import * as actions from "../../action/index";
-
+import axios from "axios";
 export function* GetHistorySaga(action) {
   try {
     const { pageId, historyPageNumber } = action.payload;
     let response = yield call(
-      Axios.get,
+      axios.get,
       `${CONFIG.assetTabs}/${pageId}/history/${historyPageNumber}`
     );
     if (response && response.data?.status === 1) {
@@ -23,7 +22,7 @@ export function* AddHistoryAction(action) {
   try {
     const { data, pageId } = action.payload;
     let response = yield call(
-      Axios.post,
+      axios.post,
       `${CONFIG.assetTabs}/${pageId}/addEvent`,
       data
     );

@@ -103,7 +103,13 @@ export const sidebarData = (role) => {
   if (role === "admin") {
     return adminSidebar;
   }
+  if (role === "superAdmin") {
+    return adminSidebar;
+  }
   if (role === "client") {
+    return clientSidebar;
+  }
+  if (role === "hacker") {
     return clientSidebar;
   }
 };
