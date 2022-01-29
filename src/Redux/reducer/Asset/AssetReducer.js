@@ -101,7 +101,7 @@ const AssetReducer = (state = initialState, action) => {
         isSuccess: false,
         isError: false,
         Message: action.payload,
-        updateLoading: true,
+        updateLoading: false,
       };
     case actions.UPDATE_ASSET_ERROR:
       return {

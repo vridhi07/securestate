@@ -10,7 +10,7 @@ export function* GetHistorySaga(action) {
       `${CONFIG.assetTabs}/${pageId}/history/${historyPageNumber}`
     );
     if (response && response.data?.status === 1) {
-      console.log(response, "history");
+      // console.log(response, "history");
       yield put(actions.GetHistorySuccess(response.data.data));
     }
   } catch (error) {

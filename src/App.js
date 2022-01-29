@@ -31,7 +31,9 @@ import {
   Home,
 } from "./Pages/Index";
 import defaultAxios from "./Service/defaultAxios";
+import { response } from "./Service/defaultAxios";
 defaultAxios();
+response();
 function App() {
   return (
     <Routes>

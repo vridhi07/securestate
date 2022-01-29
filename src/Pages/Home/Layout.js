@@ -148,7 +148,8 @@ export default function MiniDrawer() {
   const handleLogout = () => {
     dispatch(actions.LogOut());
     localStorage.clear();
-    window.location.replace("/home");
+    // window.location.replace("/home");
+    navigate("./home");
   };
   useEffect(() => {
     if (token === null) {

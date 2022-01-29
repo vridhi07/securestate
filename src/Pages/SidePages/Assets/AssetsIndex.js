@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AssetsIndex = () => {
   const navigate = useNavigate();
-  const state = useSelector((state) => state);
+
   // const updateAssetStatus = useSelector((state) => state.)
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -34,14 +34,12 @@ const AssetsIndex = () => {
   const [assetPageNumber, setAssetPageNumber] = useState(1);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   // * Redux data
-  const { Asset, isLoading, Message, updateLoading } = state.Assets;
-  const { selectedCompany } = state?.company;
-  const { userDetails } = state?.user;
-  const { companyDetails } = state?.company;
-  // const company_id = selectedCompany
-  //   ? selectedCompany
-  //   : userDetails?.company_id._id;
-  // console.log(company_id);
+  const { Asset, isLoading, Message, updateLoading } = useSelector(
+    (state) => state.Assets
+  );
+  const { selectedCompany } = useSelector((state) => state?.company);
+  const { userDetails } = useSelector((state) => state?.user);
+
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
