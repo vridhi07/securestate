@@ -5,7 +5,7 @@ const initialState = {
   isSuccess: false,
   isError: { status: false, msg: "" },
   companyDetails: [],
-
+  selectedName: "",
   selectedCompany: "",
 };
 
@@ -21,13 +21,15 @@ const CompanyReducer = (state = initialState, action) => {
       };
 
     case actions.COMPANY_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
         isLoading: false,
         isSuccess: true,
         isError: { ...state.isError, status: false, msg: "" },
         companyDetails: action.payload,
-        selectedCompany: "",
+        selectedCompany: action.payload[0]?._id,
+        selectedName: action.payload[0]?.company_name,
       };
 
     case actions.COMPANY_ERROR:
@@ -44,6 +46,11 @@ const CompanyReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedCompany: action.payload,
+      };
+    case actions.HANDLE_COMPANY_NAME_CHANGE:
+      return {
+        ...state,
+        selectedName: action.payload,
       };
     default:
       return state;

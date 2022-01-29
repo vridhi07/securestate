@@ -35,13 +35,15 @@ export const DeleteAssetError = createAction(actions.DELETE_ASSET_ERROR);
 export const UpdateAssetRequest = createAction(actions.UPDATE_ASSET_REQUEST);
 export const UpdateAssetSuccess = createAction(actions.UPDATE_ASSET_SUCCESS);
 export const UpdateAssetError = createAction(actions.UPDATE_ASSET_ERROR);
-
+// ! COMPANY
 export const CompanyRequest = createAction(actions.COMPANY_REQUEST);
 export const CompanySuccess = createAction(actions.COMPANY_SUCCESS);
 export const CompanyError = createAction(actions.COMPANY_ERROR);
 
 export const GetSelectedCompany = createAction(actions.GET_SELECTED_COMPANY);
-
+export const handleCompanyNameChange = createAction(
+  actions.HANDLE_COMPANY_NAME_CHANGE
+);
 export const UserDetailsRequest = createAction(actions.USER_DETAILS_REQUEST);
 export const UserDetailsSuccess = createAction(actions.USER_DETAILS_SUCCESS);
 export const UserDetailsError = createAction(actions.USER_DETAILS_ERROR);

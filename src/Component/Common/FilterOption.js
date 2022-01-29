@@ -2,59 +2,46 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useEffect, useState, useRef } from "react";
+import * as Roles from "../../constantData/Roles";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "../../Redux/action/index";
 import getFilterOPtion from "../../constantData/FilterOption";
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
 const FilterOption = () => {
   const state = useSelector((state) => state);
-  const { userDetails } = state?.user;
-  const { pathname } = useLocation();
-  const [Company, setSelectedCompany] = useState([]);
-  // const [selectId, setSelectId] = useState(null);
-  // console.log(selectId);
-  const dispatch = useDispatch();
-  const getID = useRef(null);
-  const { companyDetails, selectedCompany } = state?.company;
 
-  const {
-    userDetails: { role },
-  } = state?.user;
-  let Role = getFilterOPtion(role);
-  // let companyName = companyDetails.find(
-  //   (item) => item._id === userDetails?.company_id._id
-  // );
-  // console.log(companyName);
-  // console.log(Role);
-  useEffect(() => {
-    if (role === "superAdmin") {
-      setSelectedCompany(companyDetails[0]?.company_name);
-    }
-  }, [role]);
+  const dispatch = useDispatch();
+
+  const { companyDetails, selectedName } = state?.company;
+
+  const { userDetails } = state?.user;
 
   const handleChange = (e) => {
-    setSelectedCompany(e.target.value);
+    let value = e.target.value;
+    dispatch(action.handleCompanyNameChange(value));
   };
-
   useEffect(() => {
-    if (role === "superAdmin") {
-      dispatch(action.GetSelectedCompany(companyDetails[0]?._id));
+    if (userDetails?.role !== Roles.superAdmin) {
+      dispatch(
+        action.handleCompanyNameChange(userDetails?.company_id?.company_name)
+      );
     }
-  }, []);
+  }, [userDetails?.role]);
+  let Role = getFilterOPtion(userDetails?.role);
   return (
     <div className="flex justify-center">
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Select Company</InputLabel>
         <Select
           aria-label="search select "
-          value={Company}
+          value={selectedName}
           onChange={handleChange}
           label="Select Company"
-          ref={getID}
           disabled={Role}
         >
-          {companyDetails &&
+          {userDetails?.role == Roles.superAdmin ? (
+            companyDetails &&
             companyDetails?.map((item) => {
               return (
                 <MenuItem
@@ -65,7 +52,12 @@ const FilterOption = () => {
                   {item.company_name}
                 </MenuItem>
               );
-            })}
+            })
+          ) : (
+            <MenuItem value={userDetails?.company_id?.company_name}>
+              {userDetails?.company_id?.company_name}
+            </MenuItem>
+          )}
         </Select>
       </FormControl>
     </div>

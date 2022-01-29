@@ -44,9 +44,9 @@ const AssetsIndex = () => {
   // console.log(company_id);
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
-      return selectedCompany ? selectedCompany : companyDetails[0]?._id;
+      return selectedCompany;
     }
-    return selectedCompany ? selectedCompany : userDetails?.company_id._id;
+    return userDetails?.company_id._id;
   };
   const handleClickOpen = () => {
     setOpen(true);

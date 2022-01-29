@@ -27,6 +27,7 @@ import Loader from "../../Component/Common/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../Redux/action/index";
 import { getAuthToken } from "../../Service/localStorage";
+import * as Roles from "../../constantData/Roles";
 const drawerWidth = 270;
 // console.log(getRole());
 const openedMixin = (theme) => ({
@@ -103,9 +104,8 @@ export default function MiniDrawer() {
   const { pathname } = useLocation();
   const menuOpen = Boolean(userMenu);
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
 
-  const { userDetails, isLoading } = state?.user;
+  const { userDetails, isLoading } = useSelector((state) => state?.user);
   // console.log(userDetails);
   // const loading = true;
   let token = localStorage.getItem("token");
@@ -119,20 +119,14 @@ export default function MiniDrawer() {
     if (token) {
       // console.log(token, "======");
       dispatch(actions.UserDetailsRequest());
-      dispatch(actions.CompanyRequest());
     }
   }, []);
 
-  const { companyDetails, selectedCompany } = state?.company;
   useEffect(() => {
-    if (userDetails?.role === "superAdmin") {
-      dispatch(actions.GetSelectedCompany(companyDetails[0]?._id));
+    if (userDetails?.role && userDetails?.role === Roles.superAdmin) {
+      dispatch(actions.CompanyRequest());
     }
-    //  else {
-    // //   dispatch(actions.GetSelectedCompany(userDetails?.company_id?._id));
-    // // }
   }, [userDetails?.role]);
-
   let newPathname = pathname.split("").slice(1).join("");
   // console.log(newPathname);
   const handleDrawerOpen = () => {
@@ -165,6 +159,9 @@ export default function MiniDrawer() {
   if (isLoading) {
     return <Loader />;
   }
+
+  const sideBarData = sidebarData(userDetails?.role);
+
   return (
     <Box sx={{ display: "flex", background: "white" }}>
       <CssBaseline />
@@ -276,10 +273,11 @@ export default function MiniDrawer() {
           sx={{
             ...(open === true && { background: "#F9F9F9" }),
             ...(open === false && { background: "#FEF8F5" }),
+            // ...(sideBarData === "client" && { height: "100vh" }),
             paddingTop: 0,
           }}
         >
-          {sidebarData(userDetails?.role).map((item) => (
+          {sideBarData.map((item) => (
             <NavLink
               className={`flex ${item.path === newPathname && "bg-slate-300"}`}
               key={item.path}
