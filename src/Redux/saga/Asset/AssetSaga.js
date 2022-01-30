@@ -18,7 +18,7 @@ import { CONFIG } from "../../../Service/CONFIG";
 import axios from "axios";
 
 export function* AssetSaga(action) {
-  console.log(action.payload);
+  // console.log(action.payload);
   try {
     const { company_id, assetPageNumber } = action.payload;
     let response = yield call(

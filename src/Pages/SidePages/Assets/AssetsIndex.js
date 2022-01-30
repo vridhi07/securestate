@@ -50,7 +50,7 @@ const AssetsIndex = () => {
     setOpen(true);
   };
   const company_id = getCompanyId(userDetails?.role);
-  console.log(company_id);
+  // console.log(company_id);
   const handleClose = () => {
     setOpen(false);
     setAssetForm({

@@ -24,11 +24,14 @@ import {
   GetPentestSaga,
   AddPentestSaga,
   DeletePentestSaga,
-} from "./PentestSaga";
+  UpdatePentestSaga,
+} from "./pentest/PentestSaga";
 
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
   yield takeLatest(actions.SignUpRequest, SignupSaga);
+
+  // !Asset
   yield takeLatest(actions.AssetRequest, AssetSaga);
   yield takeLatest(actions.AddAssetRequest, AddAssetSaga);
   yield takeLatest(actions.DeleteAssetRequest, DeleteAssetSaga);
@@ -41,13 +44,16 @@ function* watchAllSaga() {
   yield takeLatest(actions.addFilesRequest, AddFilesSaga);
   yield takeLatest(actions.getAssetFilesRequest, GetFilesSaga);
   yield takeLatest(actions.deleteFilesRequest, DeleteFileSaga);
-
+  // !company
   yield takeLatest(actions.CompanyRequest, GetCompanySaga);
+  // !userDetails
   yield takeLatest(actions.UserDetailsRequest, GetUserDetails);
+  // !Pentest
   yield takeLatest(actions.PentestRequest, GetPentestSaga);
-
   yield takeLatest(actions.AddPentestRequest, AddPentestSaga);
   yield takeLatest(actions.DeletePentestRequest, DeletePentestSaga);
+  yield takeLatest(actions.updatePentestRequest, UpdatePentestSaga);
+  // !all asset
   yield takeLatest(actions.getAllAssetListRequest, GetAllAssetList);
 }
 

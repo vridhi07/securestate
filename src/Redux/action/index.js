@@ -9,7 +9,7 @@ export const LogOut = createAction(actions.LOG_OUT);
 export const SignUpRequest = createAction(actions.SIGNUP_REQUEST);
 export const SignUpSuccess = createAction(actions.SIGNUP_SUCCESS);
 export const SignUpError = createAction(actions.SIGNUP_ERROR);
-
+//! ASSET TABS
 export const AssetRequest = createAction(actions.ASSET_REQUEST);
 export const AssetSuccess = createAction(actions.ASSET_SUCCESS);
 export const AssetError = createAction(actions.ASSET_ERROR);
@@ -35,36 +35,7 @@ export const DeleteAssetError = createAction(actions.DELETE_ASSET_ERROR);
 export const UpdateAssetRequest = createAction(actions.UPDATE_ASSET_REQUEST);
 export const UpdateAssetSuccess = createAction(actions.UPDATE_ASSET_SUCCESS);
 export const UpdateAssetError = createAction(actions.UPDATE_ASSET_ERROR);
-// ! COMPANY
-export const CompanyRequest = createAction(actions.COMPANY_REQUEST);
-export const CompanySuccess = createAction(actions.COMPANY_SUCCESS);
-export const CompanyError = createAction(actions.COMPANY_ERROR);
 
-export const GetSelectedCompany = createAction(actions.GET_SELECTED_COMPANY);
-export const handleCompanyNameChange = createAction(
-  actions.HANDLE_COMPANY_NAME_CHANGE
-);
-export const UserDetailsRequest = createAction(actions.USER_DETAILS_REQUEST);
-export const UserDetailsSuccess = createAction(actions.USER_DETAILS_SUCCESS);
-export const UserDetailsError = createAction(actions.USER_DETAILS_ERROR);
-
-export const PentestRequest = createAction(actions.PENTEST_REQUEST);
-export const PentestSuccess = createAction(actions.PENTEST_SUCCESS);
-export const PentestError = createAction(actions.PENTEST_ERROR);
-
-export const AddPentestRequest = createAction(actions.ADD_PENTEST_REQUEST);
-export const AddPentestSuccess = createAction(actions.ADD_PENTEST_SUCCESS);
-export const AddPentestError = createAction(actions.ADD_PENTEST_ERROR);
-
-export const DeletePentestRequest = createAction(
-  actions.DELETE_PENTEST_REQUEST
-);
-export const DeletePentestSuccess = createAction(
-  actions.DELETE_PENTEST_SUCCESS
-);
-export const DeletePentestError = createAction(actions.DELETE_PENTEST_ERROR);
-
-//! ASSET TABS
 // * HISTORY
 export const GetHistoryRequest = createAction(actions.GET_HISTORY_REQUEST);
 export const GetHistorySuccess = createAction(actions.GET_HISTORY_SUCCESS);
@@ -104,3 +75,43 @@ export const getAssetFilesError = createAction(actions.GET_ASSET_FILES_ERROR);
 export const deleteFilesRequest = createAction(actions.DELETE_FILES_REQUEST);
 export const deleteFilesSuccess = createAction(actions.DELETE_FILES_SUCCESS);
 export const deleteFilesError = createAction(actions.DELETE_FILES_ERROR);
+
+// ! COMPANY
+export const CompanyRequest = createAction(actions.COMPANY_REQUEST);
+export const CompanySuccess = createAction(actions.COMPANY_SUCCESS);
+export const CompanyError = createAction(actions.COMPANY_ERROR);
+
+export const GetSelectedCompany = createAction(actions.GET_SELECTED_COMPANY);
+export const handleCompanyNameChange = createAction(
+  actions.HANDLE_COMPANY_NAME_CHANGE
+);
+
+// ! COMPANY
+export const UserDetailsRequest = createAction(actions.USER_DETAILS_REQUEST);
+export const UserDetailsSuccess = createAction(actions.USER_DETAILS_SUCCESS);
+export const UserDetailsError = createAction(actions.USER_DETAILS_ERROR);
+
+// !PESNTEST
+export const PentestRequest = createAction(actions.PENTEST_REQUEST);
+export const PentestSuccess = createAction(actions.PENTEST_SUCCESS);
+export const PentestError = createAction(actions.PENTEST_ERROR);
+
+export const AddPentestRequest = createAction(actions.ADD_PENTEST_REQUEST);
+export const AddPentestSuccess = createAction(actions.ADD_PENTEST_SUCCESS);
+export const AddPentestError = createAction(actions.ADD_PENTEST_ERROR);
+
+export const DeletePentestRequest = createAction(
+  actions.DELETE_PENTEST_REQUEST
+);
+export const DeletePentestSuccess = createAction(
+  actions.DELETE_PENTEST_SUCCESS
+);
+export const DeletePentestError = createAction(actions.DELETE_PENTEST_ERROR);
+
+export const updatePentestRequest = createAction(
+  actions.UPDATE_PENTEST_REQUEST
+);
+export const updatePentestSuccess = createAction(
+  actions.UPDATE_PENTEST_SUCCESS
+);
+export const updatePentestError = createAction(actions.UPDATE_PENTEST_ERROR);
