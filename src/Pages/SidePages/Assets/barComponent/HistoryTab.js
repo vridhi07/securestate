@@ -17,9 +17,9 @@ const HistoryTab = () => {
   const [historyPageNumber, setHistoryPageNumber] = useState(1);
   const dispatch = useDispatch();
 
-  const state = useSelector((state) => state);
-  const { isLoading, historyDetails, addMessage, addLoading } =
-    state?.assetHistory;
+  const { isLoading, historyDetails, addMessage, addLoading } = useSelector(
+    (state) => state?.assetHistory
+  );
   // console.log(historyDetails);
   const location = useLocation();
   let pageId = location.state.id;

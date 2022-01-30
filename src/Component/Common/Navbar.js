@@ -14,8 +14,8 @@ const Navbar = () => {
             className="object-cover cursor-pointer"
           />
         </header>
-        <div className="md:hidden">hello</div>
-        <ul className="md:flex md:items-center md:justify-between hidden md:w-[50%] mr-3 ">
+        <div className="sm:hidden">hello</div>
+        <ul className="sm:flex sm:items-center gap-12 hidden sm:w-[50%] mr-3 ">
           <li>
             <a
               href="#"
@@ -43,7 +43,7 @@ const Navbar = () => {
           <li>
             <NavLink
               to={"/login"}
-              className="px-8 py-2 bg-orange-cus-1 text-white rounded-md"
+              className="sm:px-8 sm:py-2 bg-orange-cus-1 text-white rounded-md"
             >
               LOG IN
             </NavLink>

@@ -12,7 +12,7 @@ import moment from "moment";
 const FilesTab = () => {
   //* React States
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+
   const [fileForm, setFileForm] = useState({
     fileName: "",
     description: "",
@@ -28,7 +28,9 @@ const FilesTab = () => {
 
   //! REDUX STATES
 
-  const { assetFiles, isLoading, addLoading, AddMessage } = state?.assetFiles;
+  const { assetFiles, isLoading, addLoading, AddMessage } = useSelector(
+    (state) => state?.assetFiles
+  );
 
   //* Functions
   const handleFilesPageNumber = (e, i) => {

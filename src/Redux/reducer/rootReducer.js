@@ -4,9 +4,8 @@ import SignupReducer from "./signupReducer";
 import AssetReducer from "./Asset/AssetReducer";
 import CompanyReducer from "./CompanyReducer";
 import UserDetailsReducer from "./UserDetailsReducer";
-import ActivePentestReducer from "./Pentest/ActivePentestReducer";
-import CompletedPentest from "./Pentest/CompletedPentest";
-import UpcomingPentestReducer from "./Pentest/UpcomingPentestReducer";
+import PentestReducer from "./Pentest/PentestReducer";
+
 import HistoryReducer from "./Asset/HistoryReducer";
 import sbomReducer from "./Asset/SBOMReducer";
 import assetFilesReducer from "./Asset/FilesReducer";
@@ -17,9 +16,7 @@ const rootReducer = combineReducers({
   Assets: AssetReducer,
   company: CompanyReducer,
   user: UserDetailsReducer,
-  activePentest: ActivePentestReducer,
-  CompletedPentest,
-  UpcomingPentest: UpcomingPentestReducer,
+  Pentest: PentestReducer,
   assetHistory: HistoryReducer,
   sbom: sbomReducer,
   assetFiles: assetFilesReducer,

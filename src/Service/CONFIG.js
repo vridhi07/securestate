@@ -11,8 +11,6 @@ export const CONFIG = {
   getCompany: "company/companyDetails",
   getUserDetails: "user/userDetails",
   pentestDetails: "pentest",
-  pentestCompleted: "pentest/completed/",
-  pentestUpcoming: "pentest/upcoming/",
   addPentest: "pentest/addPentest",
   deletePentest: "pentest/deletePentest",
 };

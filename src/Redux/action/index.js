@@ -48,33 +48,9 @@ export const UserDetailsRequest = createAction(actions.USER_DETAILS_REQUEST);
 export const UserDetailsSuccess = createAction(actions.USER_DETAILS_SUCCESS);
 export const UserDetailsError = createAction(actions.USER_DETAILS_ERROR);
 
-export const ActivePentestRequest = createAction(
-  actions.ACTIVE_PENTEST_REQUEST
-);
-export const ActivePentestSuccess = createAction(
-  actions.ACTIVE_PENTEST_SUCCESS
-);
-export const ActivePentestError = createAction(actions.ACTIVE_PENTEST_ERROR);
-
-export const CompletedPentestRequest = createAction(
-  actions.COMPLETED_PENTEST_REQUEST
-);
-export const CompletedPentestSuccess = createAction(
-  actions.COMPLETED_PENTEST_SUCCESS
-);
-export const CompletedPentestError = createAction(
-  actions.COMPLETED_PENTEST_ERROR
-);
-
-export const UpcomingPentestRequest = createAction(
-  actions.UPCOMING_PENTEST_REQUEST
-);
-export const UpcomingPentestSuccess = createAction(
-  actions.UPCOMING_PENTEST_SUCCESS
-);
-export const UpcomingPentestError = createAction(
-  actions.UPCOMING_PENTEST_ERROR
-);
+export const PentestRequest = createAction(actions.PENTEST_REQUEST);
+export const PentestSuccess = createAction(actions.PENTEST_SUCCESS);
+export const PentestError = createAction(actions.PENTEST_ERROR);
 
 export const AddPentestRequest = createAction(actions.ADD_PENTEST_REQUEST);
 export const AddPentestSuccess = createAction(actions.ADD_PENTEST_SUCCESS);

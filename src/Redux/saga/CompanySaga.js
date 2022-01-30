@@ -5,10 +5,7 @@ import * as actions from "../action/index";
 
 export function* GetCompanySaga() {
   try {
-    let response = yield call(
-      axios.get,
-      process.env.REACT_APP_BASE_URL + CONFIG.getCompany
-    );
+    let response = yield call(axios.get, CONFIG.getCompany);
     if (response && response.data?.status === 1) {
       yield put(actions.CompanySuccess(response.data.data));
     }

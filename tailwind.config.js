@@ -21,6 +21,8 @@ module.exports = {
         "gray-cus-6": "#9C8E96",
         "gay-cus-7": "#C8C7CC",
         "blue-cus-1": "#E3F2FD",
+        "yes-btn": "#F8B3B0",
+        "no-btn": "#AEDD94",
       },
       screens: {
         xs: "370px",

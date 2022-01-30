@@ -30,8 +30,6 @@ export default function SBOMTab() {
     sbom_author: "",
   });
   const [SboMPageNumber, setSboMPageNumber] = useState(1);
-  // console.log(SboMPageNumber);
-  // const [selectedId, setSelectedId] = useState(null);
 
   // * router location
   const location = useLocation();
@@ -50,8 +48,10 @@ export default function SBOMTab() {
 
   // * Redux states
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const { isLoading, sbomDetails, addLoading, addMessage } = state?.sbom;
+
+  const { isLoading, sbomDetails, addLoading, addMessage } = useSelector(
+    (state) => state?.sbom
+  );
 
   // * FUNCTIONS
   const handleComponentForm = (e) => {
