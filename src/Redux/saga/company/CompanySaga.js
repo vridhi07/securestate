@@ -1,7 +1,7 @@
 import axios from "axios";
-import { CONFIG } from "../../Service/CONFIG";
+import { CONFIG } from "../../../Service/CONFIG";
 import { put, call } from "redux-saga/effects";
-import * as actions from "../action/index";
+import * as actions from "../../action/index";
 
 export function* GetCompanySaga() {
   try {

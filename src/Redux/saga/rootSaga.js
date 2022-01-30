@@ -1,7 +1,7 @@
 import { all, takeLatest } from "redux-saga/effects";
 import * as actions from "../action";
-import { LoginSaga } from "./loginSaga";
-import { SignupSaga } from "./signupSaga";
+import { LoginSaga } from "./auth/loginSaga";
+import { SignupSaga } from "./auth/signupSaga";
 import {
   AssetSaga,
   AddAssetSaga,
@@ -18,8 +18,8 @@ import {
   DeleteFileSaga,
 } from "./Asset/AssetFilesSaga";
 
-import { GetCompanySaga } from "./CompanySaga";
-import { GetUserDetails } from "./UserSaga";
+import { GetCompanySaga } from "./company/CompanySaga";
+import { GetUserDetails } from "./user/UserSaga";
 import {
   GetPentestSaga,
   AddPentestSaga,

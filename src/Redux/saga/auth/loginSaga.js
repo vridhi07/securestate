@@ -1,5 +1,5 @@
 import { put, call } from "redux-saga/effects";
-import { LoginSuccess, LoginError } from "../action";
+import { LoginSuccess, LoginError } from "../../action";
 import axios from "axios";
 const setToken = (token) => {
   return localStorage.setItem("token", token);

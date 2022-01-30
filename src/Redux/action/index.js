@@ -115,3 +115,9 @@ export const updatePentestSuccess = createAction(
   actions.UPDATE_PENTEST_SUCCESS
 );
 export const updatePentestError = createAction(actions.UPDATE_PENTEST_ERROR);
+
+// ! Email
+
+export const getEmailRequest = createAction(actions.GET_EMAIL_REQUEST);
+export const getEmailSuccess = createAction(actions.GET_EMAIL_SUCCESS);
+export const getEmailError = createAction(actions.GET_EMAIL_ERROR);

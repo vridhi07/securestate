@@ -1,41 +1,37 @@
-import * as actions from "../constant";
+import * as actions from "../../constant";
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   isSuccess: false,
   isError: false,
-  userDetails: [],
-  Message: "",
 };
 
-const UserDetailsReducer = (state = initialState, action) => {
+const SignupReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actions.USER_DETAILS_REQUEST:
+    case actions.SIGNUP_REQUEST:
       return {
         ...state,
         isLoading: true,
         isSuccess: false,
         isError: false,
-        Message: "",
       };
 
-    case actions.USER_DETAILS_SUCCESS:
+    case actions.SIGNUP_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isSuccess: true,
         isError: false,
-        userDetails: action.payload,
-        Message: "",
+        response: action.payload,
       };
 
-    case actions.USER_DETAILS_ERROR:
+    case actions.SIGNUP_ERROR:
       return {
         ...state,
         isLoading: false,
         isSuccess: false,
         isError: true,
-        Message: action.payload,
+        response: action.payload,
       };
 
     default:
@@ -43,4 +39,4 @@ const UserDetailsReducer = (state = initialState, action) => {
   }
 };
 
-export default UserDetailsReducer;
+export default SignupReducer;
