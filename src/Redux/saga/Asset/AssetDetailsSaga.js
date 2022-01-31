@@ -7,11 +7,11 @@ export function* AssetDetailsSaga(action) {
     console.log("was called");
     let response = yield call(
       axios.get,
-      `${CONFIG.assetTabs}/${action.payload}`
+      `${CONFIG.assetTabs}/getasstById/${action.payload}`
     );
     if (response && response.data?.status === 1) {
       console.log(response, "files");
-      yield put(actions.getAssetDetailsRequest("Added successfully"));
+      yield put(actions.getAssetDetailsSuccess(response?.data?.data));
     }
   } catch (error) {
     // console.log(error.response.data.message);

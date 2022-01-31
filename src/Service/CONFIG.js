@@ -14,6 +14,7 @@ export const CONFIG = {
   addPentest: "pentest/addPentest",
   deletePentest: "pentest/deletePentest",
   pentestTabs: "pentest",
+  getUsers: "user/userList",
 };
 
 // pentestActive: "/pentest",

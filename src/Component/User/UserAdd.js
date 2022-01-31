@@ -12,6 +12,7 @@ export default function UserAdd({
   isUserAddOpen,
   handleUserFormInput,
   userForm,
+  companyDetails = [],
 }) {
   const { company, firstName, lastName, role, title, email, phone } = userForm;
   return (
@@ -37,9 +38,11 @@ export default function UserAdd({
                   name="company"
                   onChange={handleUserFormInput}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  {companyDetails.map((item) => (
+                    <MenuItem value={item} key={item?._id}>
+                      {item?.company_name}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
               <FormControl fullWidth sx={{ mt: 1 }}>
@@ -140,7 +143,7 @@ export default function UserAdd({
                   onChange={handleUserFormInput}
                 />
               </FormControl>
-              <div className="flex flex-col justify-center items-center mt-3">
+              <div className="flex flex-col justify-center items-center mt-3 mb-4">
                 <button
                   onClick={handleClose}
                   type="submit"
@@ -148,7 +151,7 @@ export default function UserAdd({
                 >
                   Save
                 </button>
-                <button
+                {/* <button
                   onClick={handleClose}
                   type="button"
                   className=" px-7 py-2 text-white tracking-wider bg-orange-cus-1 rounded-md   my-4"
@@ -161,7 +164,7 @@ export default function UserAdd({
                   className=" px-[2.9rem] py-2 text-white tracking-wider bg-[#E74021] rounded-md "
                 >
                   Delete User
-                </button>
+                </button> */}
               </div>
             </form>
           </DialogContent>

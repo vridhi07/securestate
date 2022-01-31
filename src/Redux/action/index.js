@@ -87,6 +87,9 @@ export const getAssetDetailsError = createAction(
   actions.GET_ASSET_DETAILS_ERROR
 );
 
+export const handleAssetDetailsChange = createAction(
+  actions.HANDLE_ASSET_DETAILS_CHANGE
+);
 // ! COMPANY
 export const CompanyRequest = createAction(actions.COMPANY_REQUEST);
 export const CompanySuccess = createAction(actions.COMPANY_SUCCESS);
@@ -155,3 +158,8 @@ export const deleteScopeError = createAction(actions.DELETE_SCOPE_ERROR);
 export const getEmailRequest = createAction(actions.GET_EMAIL_REQUEST);
 export const getEmailSuccess = createAction(actions.GET_EMAIL_SUCCESS);
 export const getEmailError = createAction(actions.GET_EMAIL_ERROR);
+
+// ! Users
+export const getUsersRequest = createAction(actions.GET_USERS_REQUEST);
+export const getUsersSuccess = createAction(actions.GET_USERS_SUCCESS);
+export const getUsersError = createAction(actions.GET_USERS_ERROR);

@@ -1,22 +1,50 @@
-import { useEffect } from "react";
-import {
-  Priority,
-  AssetType,
-  Status,
-} from "../../../../constantData/AssestTabInfo";
+import { useEffect, useState } from "react";
+import { Priority, Status } from "../../../../constantData/AssestTabInfo";
+// import { AssetType } from "../../../constantData/addAssetInfo";
+import { AssetType } from "../../../../constantData/addAssetInfo";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as action from "../../../../Redux/action";
+import {
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 const Details = () => {
   const {
     state: { id },
   } = useLocation();
   const dispatch = useDispatch();
-
+  const { assetDetails } = useSelector((state) => state?.assetDetails);
+  const [details, setDetails] = useState();
   useEffect(() => {
     dispatch(action.getAssetDetailsRequest(id));
   }, []);
+  const [assetForm, setAssetForm] = useState();
 
+  useEffect(() => {
+    if (details?.asset_name) {
+      setAssetForm({
+        assetName: details.asset_name,
+        assetType: details.asset_type,
+        assetStatus: details.asset_name,
+        additionalINfo: details.additional_details,
+      });
+    }
+  }, [details]);
+  const handleChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setAssetForm({ ...assetForm, [name]: value });
+  };
+  useEffect(() => {
+    setDetails(assetDetails);
+  }, [assetDetails]);
+  // console.log("=====11", assetForm);
+  // console.log(assetForm?.assetType);
+  // console.log(AssetType);
   return (
     <div className="mt-2   flex flex-col  w-full  text-center  ">
       <section className="flex items-center  mb-3 justify-end">
@@ -30,133 +58,134 @@ const Details = () => {
       <form className="flex flex-col">
         <section className="flex  lg:w-2/4  lg:mx-auto sm:w-2/3 sm:mx-auto items-center">
           <div className="w-full mr-4">
-            <input
-              type="text"
-              className="w-full py-0.56 px-3 text-gray-700 text-base  border border-solid border-gray-400
-                focus:text-gray-700 focus:bg-white focus:border-gray-500 focus:outline-none"
-              placeholder="Asset Name"
-              required
-              name="assetName"
-              id="assestName"
-            />
+            {assetForm?.assetName && (
+              <TextField
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                required
+                name="assetName"
+                id="assestName"
+                size="small"
+                fullWidth
+                defaultValue={assetForm?.assetName}
+                value={assetForm?.assetName}
+                onChange={handleChange}
+                disabled={true}
+              />
+            )}
           </div>
           <div className=" w-full">
-            <select
-              className="form-select
-      block
-      w-full
-      px-3
-      py-1.5
-      text-base
-      font-normal
-      text-gray-400
-      bg-white bg-clip-padding bg-no-repeat
-    border border-solid border-gray-400
-      
-      transition
-      ease-in-out
-      m-0
-      focus:text-gray-700 focus:bg-white focus:border-gray-500 focus:outline-none"
-              aria-label="search select "
-              id="assetPriority"
-              name="assetPriority"
-            >
-              <option hidden value="default">
-                Priority
-              </option>
-              {Priority.map((item) => {
-                return (
-                  <option value={item} key={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
+            <FormControl fullWidth>
+              <InputLabel id="assetPriority">Priority</InputLabel>
+              <Select
+                labelId="assetPriority"
+                value=""
+                label="Priority"
+                id="assetPriority"
+                name="assetPriority"
+                size="small"
+                // onChange={handleChange}
+              >
+                {Priority.map((item) => {
+                  return (
+                    <MenuItem value={item} key={item}>
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
           </div>
         </section>
         <section className="flex lg:w-2/4  lg:mx-auto sm:w-2/3 sm:mx-auto  mt-4 items-center ">
-          <div className=" w-full mr-4">
-            <select
-              className="form-select
-      block
-      w-full
-      px-3
-      py-1.5
-      text-base
-      font-normal
-      text-gray-400
-      bg-white bg-clip-padding bg-no-repeat
-       border border-solid border-gray-400 
-      transition
-      ease-in-out
-      m-0
-      focus:text-gray-700 focus:bg-white focus:border-gray-500 focus:outline-none"
-              aria-label="search select "
-              name="assetType"
-              id="assetType"
-            >
-              <option hidden value="default">
-                Asset Type
-              </option>
-              {AssetType.map((item) => {
-                return (
-                  <option value={item} key={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
+          <div className=" w-[50%] mr-4">
+            <FormControl fullWidth>
+              <InputLabel id="assetType">AssetType</InputLabel>
+              {/* {console.log(assetForm?.assetType, "9009090909")} */}
+              {assetForm?.assetType && (
+                <Select
+                  labelId="assetType"
+                  // value={age}
+                  label="Asset Type"
+                  name="assetType"
+                  id="assetType"
+                  size="small"
+                  defaultValue={assetForm?.assetType}
+                  value={assetForm?.assetType}
+                  onChange={handleChange}
+                  disabled={true}
+                >
+                  {AssetType.map((item) => {
+                    // console.log(item);
+                    return (
+                      <MenuItem value={item} key={item}>
+                        {item}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              )}
+            </FormControl>
           </div>
-          <div className=" w-full">
-            <select
-              className="form-select
-      block
-      w-full
-      px-3
-      py-1.5
-      text-base
-      font-normal
-      text-gray-400
-      bg-white bg-clip-padding bg-no-repeat
-     border border-solid border-gray-400 
-      transition
-      ease-in-out
-      m-0
-      focus:text-gray-700 focus:bg-white focus:border-gray-500 focus:outline-none"
-              aria-label="search select "
-              id="assetStatus"
-              name="assetStatus"
-            >
-              <option hidden value="default">
-                Status
-              </option>
-              {Status.map((item) => {
-                return (
-                  <option value={item} key={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
+          <div className=" w-[50%]">
+            <FormControl fullWidth>
+              <InputLabel id="assetStatus">Status</InputLabel>
+              <Select
+                labelId="assetStatus"
+                value={""}
+                label="Status"
+                id="assetStatus"
+                name="assetStatus"
+                size="small"
+                // onChange={handleChange}
+                // defaultValue={assetForm?.assetStatus}
+                // value={assetForm?.assetStatus}
+              >
+                {Status.map((item) => {
+                  return (
+                    <MenuItem value={item} key={item}>
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
           </div>
         </section>
 
         <section className="mt-8 flex flex-col lg:w-2/4 sm:w-2/3 sm:mx-auto lg:mx-auto items-center ">
-          <textarea
+          <TextField
+            label="Additional Details (Frameworks,Backend,Frontend,DB,APIs etc.)"
+            variant="outlined"
+            required
+            size="small"
+            fullWidth
+            multiline
+            rows={5}
             name="additionalINfo"
             id="additionalINfo"
-            className="w-full resize-none border-2 border-solid border-b-gray-400 focus:outline-none focus:text-gray-700 focus:bg-white focus:border-gray-400 px-3 py-1.5 h-32  "
-            placeholder="Additional Details (Frameworks,Backend,Frontend,DB,APIs etc.)"
-          ></textarea>
+            // value={""}
+            defaultValue={assetForm?.additionalINfo}
+            value={assetForm?.additionalINfo}
+            onChange={handleChange}
+            disabled={true}
+          />
         </section>
 
         <section className="mt-4 flex flex-col lg:w-2/4  sm:w-2/3 sm:mx-auto lg:mx-auto  items-center ">
-          <textarea
+          <TextField
+            id="outlined-basic"
+            label="Terms & Condition"
+            variant="outlined"
+            required
+            size="small"
+            fullWidth
+            multiline
+            rows={5}
             name="termsAndCondition"
             id="termsAndCondition"
-            className="w-full resize-none border-2 border-solid border-b-gray-400 focus:outline-none focus:text-gray-700 focus:bg-white focus:border-gray-400 px-3 py-1.5 h-32  "
-            placeholder="Terms & Condition"
-          ></textarea>
+          />
         </section>
       </form>
 

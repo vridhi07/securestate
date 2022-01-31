@@ -9,8 +9,8 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import DummyProfile from "../../constantData/images/dummyProfile.webp";
-
-export default function SBOMTab() {
+import moment from "moment";
+export default function SBOMTab({ users = [] }) {
   return (
     <div className="w-full flex flex-col mx-auto">
       <TableContainer component={Paper} elevation={0}>
@@ -32,43 +32,52 @@ export default function SBOMTab() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[1, 2, 3, 3].map((row, index) => (
-              <TableRow
-                key={index}
-                sx={{
-                  "&:last-child td, &:last-child th": { border: 0 },
-                }}
-              >
-                <TableCell>
-                  <img
-                    src={DummyProfile}
-                    alt="profile"
-                    height={40}
-                    width={40}
-                    className="rounded-full "
-                  />
-                </TableCell>
-                <TableCell align="center" colSpan={2}>
-                  Lorem ipsum dolor
-                </TableCell>
-                <TableCell align="center" colSpan={2}>
-                  {index === 0
-                    ? "Admin"
-                    : index === 2
-                    ? "Security Researcher"
-                    : "Client"}
-                </TableCell>
-                <TableCell align="center">Lorem, ipsum.</TableCell>
-                <TableCell align="center">Lorem, ipsum dors</TableCell>
-                <TableCell align="center">loremipsum214@gmail.com</TableCell>
-                <TableCell align="center">22/12/2022</TableCell>
-                <TableCell align="center">
-                  <IconButton color="error" onClick={() => console.log(index)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+            {users &&
+              users.map((user) => {
+                const { company_id, email, name, role, _id, lastLogin } = user;
+                return (
+                  <TableRow
+                    key={_id}
+                    sx={{
+                      "&:last-child td, &:last-child th": { border: 0 },
+                    }}
+                  >
+                    <TableCell>
+                      <img
+                        src={DummyProfile}
+                        alt="profile"
+                        height={40}
+                        width={40}
+                        className="rounded-full "
+                      />
+                    </TableCell>
+                    <TableCell align="center" colSpan={2}>
+                      {name}
+                    </TableCell>
+                    <TableCell align="center" colSpan={2}>
+                      {role}
+                    </TableCell>
+                    <TableCell align="center">
+                      {company_id?.company_name}
+                    </TableCell>
+                    <TableCell align="center">Lorem, ipsum dors</TableCell>
+                    <TableCell align="center">{email}</TableCell>
+                    <TableCell align="center">
+                      {lastLogin
+                        ? moment(lastLogin).format("l")
+                        : "22 / 12 / 2022"}
+                    </TableCell>
+                    <TableCell align="center">
+                      <IconButton
+                        color="error"
+                        onClick={() => console.log(_id)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>

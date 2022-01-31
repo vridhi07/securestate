@@ -1,7 +1,9 @@
 import SearchIcon from "@mui/icons-material/Search";
 import ProfileTable from "../../../Component/User/UserTable";
 import UserAdd from "../../../Component/User/UserAdd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import * as action from "../../../Redux/action";
 const Users = () => {
   const [profileSearch, setProfileSearch] = useState("");
   const [isUserAddOpen, setIsUserAddOpen] = useState(false);
@@ -15,6 +17,10 @@ const Users = () => {
     phone: "",
   });
 
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state?.users);
+  const { companyDetails } = useSelector((state) => state?.company);
+  // console.log(companyDetails);
   const handleUserFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -23,7 +29,6 @@ const Users = () => {
     }
     setUserForm({ ...userForm, [name]: value });
   };
-
   const handleClickOpen = () => {
     setIsUserAddOpen(true);
   };
@@ -32,6 +37,9 @@ const Users = () => {
     setIsUserAddOpen(false);
   };
 
+  useEffect(() => {
+    dispatch(action.getUsersRequest());
+  }, []);
   return (
     <div>
       <section className="mt-8  md:mr-28 flex items-center justify-between md:justify-end">
@@ -60,13 +68,14 @@ const Users = () => {
         </button>
       </section>
       <div className="w-full mt-8">
-        <ProfileTable />
+        <ProfileTable users={users} />
       </div>
       <UserAdd
         handleClose={handleClose}
         isUserAddOpen={isUserAddOpen}
         handleUserFormInput={handleUserFormInput}
         userForm={userForm}
+        companyDetails={companyDetails}
       />
     </div>
   );

@@ -4,6 +4,7 @@ import SignupReducer from "./auth/signupReducer";
 import AssetReducer from "./Asset/AssetReducer";
 import CompanyReducer from "./company/CompanyReducer";
 import UserDetailsReducer from "./user/UserDetailsReducer";
+import UsersReducer from "./user/UserReducer";
 import PentestReducer from "./Pentest/PentestReducer";
 
 import HistoryReducer from "./Asset/HistoryReducer";
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   assetFiles: assetFilesReducer,
   assetDetails: AssetDetailsReducer,
   pentestTab: AssetTabsDetailsReducer,
+  users: UsersReducer,
 });
 
 export default rootReducer;
