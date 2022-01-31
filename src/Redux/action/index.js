@@ -163,3 +163,11 @@ export const getEmailError = createAction(actions.GET_EMAIL_ERROR);
 export const getUsersRequest = createAction(actions.GET_USERS_REQUEST);
 export const getUsersSuccess = createAction(actions.GET_USERS_SUCCESS);
 export const getUsersError = createAction(actions.GET_USERS_ERROR);
+
+export const addUsersRequest = createAction(actions.ADD_USERS_REQUEST);
+export const addUsersSuccess = createAction(actions.ADD_USERS_SUCCESS);
+export const addUsersError = createAction(actions.ADD_USERS_ERROR);
+
+export const deleteUsersRequest = createAction(actions.DELETE_USERS_REQUEST);
+export const deleteUsersSuccess = createAction(actions.DELETE_USERS_SUCCESS);
+export const deleteUsersError = createAction(actions.DELETE_USERS_ERROR);

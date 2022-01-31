@@ -13,6 +13,8 @@ export default function UserAdd({
   handleUserFormInput,
   userForm,
   companyDetails = [],
+  handleSubmit,
+  getCompanyId,
 }) {
   const { company, firstName, lastName, role, title, email, phone } = userForm;
   return (
@@ -26,7 +28,7 @@ export default function UserAdd({
             <button onClick={handleClose} className="absolute top-3 right-3">
               <CloseIcon />
             </button>
-            <form>
+            <form onSubmit={handleSubmit}>
               <FormControl fullWidth sx={{ mt: 2 }}>
                 <InputLabel id="userCompany">Company</InputLabel>
                 <Select
@@ -38,11 +40,16 @@ export default function UserAdd({
                   name="company"
                   onChange={handleUserFormInput}
                 >
-                  {companyDetails.map((item) => (
-                    <MenuItem value={item} key={item?._id}>
-                      {item?.company_name}
-                    </MenuItem>
-                  ))}
+                  {companyDetails &&
+                    companyDetails.map((item) => (
+                      <MenuItem
+                        value={item}
+                        key={item?._id}
+                        onClick={() => getCompanyId(item?._id)}
+                      >
+                        {item?.company_name}
+                      </MenuItem>
+                    ))}
                 </Select>
               </FormControl>
               <FormControl fullWidth sx={{ mt: 1 }}>
@@ -145,7 +152,6 @@ export default function UserAdd({
               </FormControl>
               <div className="flex flex-col justify-center items-center mt-3 mb-4">
                 <button
-                  onClick={handleClose}
                   type="submit"
                   className=" px-[4.5rem] py-2 text-white tracking-wider bg-orange-cus-1 rounded-md  "
                 >

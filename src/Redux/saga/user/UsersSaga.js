@@ -16,3 +16,33 @@ export function* GetUsersSaga() {
     yield put(actions.getUsersError(error?.response?.data?.message));
   }
 }
+
+export function* AddUsersSaga(action) {
+  try {
+    let response = yield call(axios.post, CONFIG.addUsers, action.payload);
+
+    if (response && response?.data?.status === 1) {
+      // console.log(response.data);
+      yield put(actions.addUsersSuccess("success"));
+      yield put(actions.getUsersRequest());
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.addUsersError(error?.response?.data?.message));
+  }
+}
+
+export function* DeleteUserSaga(action) {
+  try {
+    let response = yield call(axios.delete, `user/${action.payload}`);
+
+    if (response && response?.data?.status === 1) {
+      // console.log(response.data);
+      yield put(actions.deleteUsersSuccess("success"));
+      yield put(actions.getUsersRequest());
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.deleteUsersError(error?.response?.data?.message));
+  }
+}

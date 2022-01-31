@@ -9,8 +9,15 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import DummyProfile from "../../constantData/images/dummyProfile.webp";
+import DeleteModal from "../Common/DeleteModal";
 import moment from "moment";
-export default function SBOMTab({ users = [] }) {
+export default function SBOMTab({
+  users = [],
+  openDeleteModal,
+  handleDelete,
+  isDeleteModalOpen,
+  closeDeleteModal,
+}) {
   return (
     <div className="w-full flex flex-col mx-auto">
       <TableContainer component={Paper} elevation={0}>
@@ -70,7 +77,7 @@ export default function SBOMTab({ users = [] }) {
                     <TableCell align="center">
                       <IconButton
                         color="error"
-                        onClick={() => console.log(_id)}
+                        onClick={() => openDeleteModal(_id)}
                       >
                         <DeleteIcon />
                       </IconButton>
@@ -81,6 +88,11 @@ export default function SBOMTab({ users = [] }) {
           </TableBody>
         </Table>
       </TableContainer>
+      <DeleteModal
+        isDeleteModalOpen={isDeleteModalOpen}
+        closeDeleteModal={closeDeleteModal}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 }

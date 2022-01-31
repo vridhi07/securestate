@@ -16,11 +16,22 @@ const Users = () => {
     email: "",
     phone: "",
   });
-
+  const [companyId, setCompanyId] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedId, setSelected] = useState(null);
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state?.users);
   const { companyDetails } = useSelector((state) => state?.company);
   // console.log(companyDetails);
+  const openDeleteModal = (id) => {
+    setIsDeleteModalOpen(true);
+    console.log(id);
+    setSelected(id);
+  };
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelected(null);
+  };
   const handleUserFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -32,9 +43,48 @@ const Users = () => {
   const handleClickOpen = () => {
     setIsUserAddOpen(true);
   };
-
   const handleClose = () => {
     setIsUserAddOpen(false);
+    setCompanyId(null);
+    setUserForm({
+      ...userForm,
+      company: "",
+      firstName: "",
+      lastName: "",
+      role: "",
+      title: "",
+      email: "",
+      phone: "",
+    });
+  };
+
+  const handleSubmit = (e) => {
+    const { company, firstName, lastName, role, title, email, phone } =
+      userForm;
+    e.preventDefault();
+
+    let data = {
+      fname: firstName,
+      lname: lastName,
+      role,
+      title,
+      email,
+      phone,
+      companyId,
+    };
+    console.log(data);
+    dispatch(action.addUsersRequest(data));
+    handleClose();
+  };
+
+  const getCompanyId = (id) => {
+    console.log(id);
+    setCompanyId(id);
+  };
+
+  const handleDelete = () => {
+    dispatch(action.deleteUsersRequest(selectedId));
+    closeDeleteModal();
   };
 
   useEffect(() => {
@@ -68,7 +118,13 @@ const Users = () => {
         </button>
       </section>
       <div className="w-full mt-8">
-        <ProfileTable users={users} />
+        <ProfileTable
+          users={users}
+          openDeleteModal={openDeleteModal}
+          handleDelete={handleDelete}
+          isDeleteModalOpen={isDeleteModalOpen}
+          closeDeleteModal={closeDeleteModal}
+        />
       </div>
       <UserAdd
         handleClose={handleClose}
@@ -76,6 +132,8 @@ const Users = () => {
         handleUserFormInput={handleUserFormInput}
         userForm={userForm}
         companyDetails={companyDetails}
+        handleSubmit={handleSubmit}
+        getCompanyId={getCompanyId}
       />
     </div>
   );

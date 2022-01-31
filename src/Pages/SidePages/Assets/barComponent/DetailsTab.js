@@ -138,6 +138,7 @@ const Details = () => {
                 id="assetStatus"
                 name="assetStatus"
                 size="small"
+                disabled={true}
                 // onChange={handleChange}
                 // defaultValue={assetForm?.assetStatus}
                 // value={assetForm?.assetStatus}
@@ -185,6 +186,7 @@ const Details = () => {
             rows={5}
             name="termsAndCondition"
             id="termsAndCondition"
+            disabled={true}
           />
         </section>
       </form>
