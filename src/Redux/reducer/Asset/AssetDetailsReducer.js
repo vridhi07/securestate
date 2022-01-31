@@ -6,7 +6,6 @@ const initialState = {
   assetDetails: [],
   addLoading: false,
   isError: false,
-
   addMessage: "",
 };
 
