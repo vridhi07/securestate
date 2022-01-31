@@ -26,7 +26,7 @@ const CustomTabs = () => {
           Overview
         </div>
         <div
-          onClick={() => navigate(`scope`)}
+          onClick={() => navigate(`scope`, { state: { id } })}
           className={`px-4 py-2 text-sm ${
             path === "scope"
               ? "bg-orange-cus-1 text-white"
@@ -36,7 +36,7 @@ const CustomTabs = () => {
           Scope
         </div>
         <div
-          onClick={() => navigate(`findings`)}
+          onClick={() => navigate(`findings`, { state: { id } })}
           className={`px-4 py-2 text-sm ${
             path === "findings"
               ? "bg-orange-cus-1 text-white"
@@ -46,7 +46,7 @@ const CustomTabs = () => {
           Findings
         </div>
         <div
-          onClick={() => navigate(`chat`)}
+          onClick={() => navigate(`chat`, { state: { id } })}
           className={`px-4 py-2 text-sm rounded-tr-lg rounded-br-lg  ${
             path === "chat"
               ? "bg-orange-cus-1 text-white"

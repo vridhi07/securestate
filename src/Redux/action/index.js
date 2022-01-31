@@ -76,6 +76,17 @@ export const deleteFilesRequest = createAction(actions.DELETE_FILES_REQUEST);
 export const deleteFilesSuccess = createAction(actions.DELETE_FILES_SUCCESS);
 export const deleteFilesError = createAction(actions.DELETE_FILES_ERROR);
 
+//* asset details
+export const getAssetDetailsRequest = createAction(
+  actions.GET_ASSET_DETAILS_REQUEST
+);
+export const getAssetDetailsSuccess = createAction(
+  actions.GET_ASSET_DETAILS_SUCCESS
+);
+export const getAssetDetailsError = createAction(
+  actions.GET_ASSET_DETAILS_ERROR
+);
+
 // ! COMPANY
 export const CompanyRequest = createAction(actions.COMPANY_REQUEST);
 export const CompanySuccess = createAction(actions.COMPANY_SUCCESS);
@@ -115,6 +126,29 @@ export const updatePentestSuccess = createAction(
   actions.UPDATE_PENTEST_SUCCESS
 );
 export const updatePentestError = createAction(actions.UPDATE_PENTEST_ERROR);
+
+// * SCOPE
+export const getPentestTabDetailsRequest = createAction(
+  actions.GET_PENTEST_TAB_DETAILS_REQUEST
+);
+export const getPentestTabDetailsSuccess = createAction(
+  actions.GET_PENTEST_TAB_DETAILS_SUCCESS
+);
+export const getPentestTabDetailsError = createAction(
+  actions.GET_PENTEST_TAB_DETAILS_ERROR
+);
+
+export const addScopeRequest = createAction(actions.ADD_SCOPE_REQUEST);
+export const addScopeSuccess = createAction(actions.ADD_SCOPE_SUCCESS);
+export const addScopeError = createAction(actions.ADD_SCOPE_ERROR);
+
+export const updateScopeRequest = createAction(actions.UPDATE_SCOPE_REQUEST);
+export const updateScopeSuccess = createAction(actions.UPDATE_SCOPE_SUCCESS);
+export const updateScopeError = createAction(actions.UPDATE_SCOPE_ERROR);
+
+export const deleteScopeRequest = createAction(actions.DELETE_SCOPE_REQUEST);
+export const deleteScopeSuccess = createAction(actions.DELETE_SCOPE_SUCCESS);
+export const deleteScopeError = createAction(actions.DELETE_SCOPE_ERROR);
 
 // ! Email
 

@@ -9,7 +9,8 @@ import PentestReducer from "./Pentest/PentestReducer";
 import HistoryReducer from "./Asset/HistoryReducer";
 import sbomReducer from "./Asset/SBOMReducer";
 import assetFilesReducer from "./Asset/FilesReducer";
-
+import AssetDetailsReducer from "./Asset/AssetDetailsReducer";
+import AssetTabsDetailsReducer from "./Pentest/PentestTabReducer";
 const rootReducer = combineReducers({
   Login: LoginReducer,
   Signup: SignupReducer,
@@ -20,6 +21,8 @@ const rootReducer = combineReducers({
   assetHistory: HistoryReducer,
   sbom: sbomReducer,
   assetFiles: assetFilesReducer,
+  assetDetails: AssetDetailsReducer,
+  pentestTab: AssetTabsDetailsReducer,
 });
 
 export default rootReducer;

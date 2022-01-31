@@ -1,14 +1,22 @@
+import { useEffect } from "react";
 import {
   Priority,
   AssetType,
   Status,
 } from "../../../../constantData/AssestTabInfo";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import * as action from "../../../../Redux/action";
 const Details = () => {
   const {
     state: { id },
   } = useLocation();
-  console.log(id);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(action.getAssetDetailsRequest(id));
+  }, []);
+
   return (
     <div className="mt-2   flex flex-col  w-full  text-center  ">
       <section className="flex items-center  mb-3 justify-end">

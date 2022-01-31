@@ -13,6 +13,7 @@ export const CONFIG = {
   pentestDetails: "pentest",
   addPentest: "pentest/addPentest",
   deletePentest: "pentest/deletePentest",
+  pentestTabs: "pentest",
 };
 
 // pentestActive: "/pentest",

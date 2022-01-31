@@ -1,21 +1,19 @@
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import IconButton from "@mui/material/IconButton";
+// import MoreVertIcon from "@mui/icons-material/MoreVert";
+// import IconButton from "@mui/material/IconButton";
 import Dialog from "@mui/material/Dialog";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, useRef } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Loader from "../../../Component/Common/PentestLoader";
 import FilterOption from "../../../Component/Common/FilterOption";
 import AssetModal from "../../../Component/Asset/AssestModalForm";
-import AssetMenuButton from "../../../Component/Asset/AssetMenuButton";
+// import AssetMenuButton from "../../../Component/Asset/AssetMenuButton";
 import DeleteModal from "../../../Component/Common/DeleteModal";
 import * as action from "../../../Redux/action/index";
 import { useDispatch, useSelector } from "react-redux";
-
+import AssetList from "../../../Component/Asset/AssetList";
 const AssetsIndex = () => {
-  const navigate = useNavigate();
-
   // const updateAssetStatus = useSelector((state) => state.)
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -33,12 +31,22 @@ const AssetsIndex = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [assetPageNumber, setAssetPageNumber] = useState(1);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [assetsList, setAssetsList] = useState([]);
+  // const [check, setChecked] = useState(false);
   // * Redux data
   const { Asset, isLoading, Message, updateLoading } = useSelector(
     (state) => state.Assets
   );
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
+
+  const inputTag = useRef();
+
+  useEffect(() => {
+    if (Asset?.assetData?.length > 0) {
+      setAssetsList([...Asset.assetData]);
+    }
+  }, [Asset.assetData]);
 
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
@@ -201,6 +209,22 @@ const AssetsIndex = () => {
     dispatch(action.AssetRequest({ company_id, assetPageNumber }));
   }, [company_id, assetPageNumber, Message]);
 
+  const Status = (i) => {
+    let newStatus = i === "INACTIVE" ? false : true;
+    return newStatus;
+  };
+  // const handleSwitch = () => {
+  //   inputTag.current.checked;
+  // };
+  const handleSwitchAssets = (assetId, assetStatus) => {
+    console.log(assetId, assetStatus, "==1q222323");
+    const newData = {
+      id: assetId,
+      status: assetStatus === true ? "INACTIVE" : "ACTIVE",
+    };
+    dispatch(action.UpdateAssetRequest(newData));
+  };
+  // console.log(assetsList, "===8888");
   return (
     <div className="mt-8 ">
       <div className="max-w-2xl mx-auto">
@@ -232,56 +256,19 @@ const AssetsIndex = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            Asset?.assetData &&
-            Asset?.assetData?.map((item) => {
-              const { asset_name, asset_type, status, _id: id } = item;
+            assetsList?.map((item) => {
               return (
-                <div
-                  className="w-full flex items-center text-gray-500 border-b-2 pl-8 pr-2 hover:bg-slate-100  "
-                  key={id}
-                >
-                  <div className="w-[95%] flex justify-between   items-center  md:pr-3  py-3 ">
-                    <div>
-                      <h4>{asset_name}</h4>
-                      <p>{asset_type}</p>
-                    </div>
-                    <div className="flex items-center justify-start">
-                      <button
-                        type="button"
-                        className={` text-white rounded-sm tracking-wider ${
-                          status === "ACTIVE"
-                            ? "bg-green-500  px-4 py-2"
-                            : "bg-red-500 px-2 py-2"
-                        }`}
-                        onClick={() => handleStatus(status, id)}
-                        disabled={updateLoading}
-                      >
-                        {status}
-                      </button>
-                      <div className="ml-5">
-                        <p
-                          onClick={() =>
-                            navigate(`${id}/details`, { state: { id } })
-                          }
-                          className="text-sky-600 hover:cursor-pointer hover:text-sky-700 "
-                        >
-                          Details
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-[2%] text-center">
-                    <IconButton onClick={(e) => handleMenuOpen(e, id)}>
-                      <MoreVertIcon />
-                    </IconButton>
-                    <AssetMenuButton
-                      anchorEl={anchorEl}
-                      handleMenuClose={handleMenuClose}
-                      handleEdit={handleEdit}
-                      openDeleteModal={openDeleteModal}
-                    />
-                  </div>
-                </div>
+                <AssetList
+                  key={item._id}
+                  item={item}
+                  handleMenuOpen={handleMenuOpen}
+                  handleMenuClose={handleMenuClose}
+                  handleStatus={handleStatus}
+                  openDeleteModal={openDeleteModal}
+                  handleEdit={handleEdit}
+                  anchorEl={anchorEl}
+                  handleSwitchAssets={handleSwitchAssets}
+                />
               );
             })
           )}
