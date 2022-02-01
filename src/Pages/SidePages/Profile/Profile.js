@@ -69,7 +69,7 @@ const Profile = () => {
   }
   return (
     <div className="w-full">
-      <div className="flex flex-col px-2 test py-2 max-w-md mx-auto">
+      <div className="flex flex-col px-2  py-2 max-w-md mx-auto">
         <section className="h-[10rem]  w-[10rem] flex flex-col mx-auto mb-5">
           <img
             src={dummy}
@@ -80,7 +80,7 @@ const Profile = () => {
             {userDetails?.name}
           </h3>
         </section>
-        <form className="m-6 test  px-[2%] text-left mt-8 ">
+        <form className="m-6   px-[2%] text-left mt-8 ">
           <div className="flex items-center">
             <label htmlFor="name" className="mr-8">
               Name
@@ -89,7 +89,7 @@ const Profile = () => {
               {isEdit ? (
                 <input
                   type="text"
-                  className="focus:outline-none px-3 py-2 w-full  "
+                  className="focus:outline-none px-3 py-2  w-[300px]  "
                   value={profileForm.name}
                   name="name"
                   id="name"
@@ -113,7 +113,7 @@ const Profile = () => {
               {isEdit ? (
                 <input
                   type="text"
-                  className="focus:outline-none px-3 py-2 w-full"
+                  className="focus:outline-none px-3 py-2  w-[300px]"
                   value={profileForm.email}
                   name="email"
                   id="email"
@@ -137,7 +137,7 @@ const Profile = () => {
                 {isEdit ? (
                   <input
                     type="text"
-                    className="focus:outline-none px-3 py-2 w-full"
+                    className="focus:outline-none px-3 py-2  w-[300px]"
                     value={profileForm.company}
                     name="company"
                     id="company"
@@ -162,7 +162,7 @@ const Profile = () => {
               {isEdit ? (
                 <input
                   type="text"
-                  className="focus:outline-none px-3 py-2 w-full"
+                  className="focus:outline-none px-3 py-2  w-[300px]"
                   value={profileForm.phone}
                   name="phone"
                   id="phone"
@@ -185,7 +185,7 @@ const Profile = () => {
               {isEdit ? (
                 <input
                   type="text"
-                  className="focus:outline-none px-3 py-2 w-full"
+                  className="focus:outline-none px-3 py-2  w-[300px]"
                   value={profileForm.location}
                   name="location"
                   id="location"

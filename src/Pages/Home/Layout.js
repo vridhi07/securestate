@@ -149,7 +149,13 @@ export default function MiniDrawer() {
     dispatch(actions.LogOut());
     localStorage.clear();
     // window.location.replace("/home");
+    handleCloseUserMenu();
     navigate("./home");
+  };
+
+  const handleProfileSetting = () => {
+    handleCloseUserMenu();
+    navigate("profile");
   };
   useEffect(() => {
     if (token === null) {
@@ -219,6 +225,14 @@ export default function MiniDrawer() {
                 <Menu
                   id="basic-menu"
                   anchorEl={userMenu}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                  }}
                   open={menuOpen}
                   onClose={handleCloseUserMenu}
                   MenuListProps={{
@@ -226,6 +240,9 @@ export default function MiniDrawer() {
                   }}
                 >
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  <MenuItem onClick={handleProfileSetting}>
+                    Profile setting
+                  </MenuItem>
                 </Menu>
               </div>
             )}
