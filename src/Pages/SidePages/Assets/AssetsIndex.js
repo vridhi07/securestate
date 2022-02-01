@@ -34,7 +34,7 @@ const AssetsIndex = () => {
   const [assetsList, setAssetsList] = useState([]);
   // const [check, setChecked] = useState(false);
   // * Redux data
-  const { Asset, isLoading } = useSelector((state) => state.Assets);
+  const { Asset, isLoading, Message } = useSelector((state) => state.Assets);
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
 
@@ -226,11 +226,14 @@ const AssetsIndex = () => {
   // };
   const handleSwitchAssets = (assetId, assetStatus) => {
     // console.log(assetId, assetStatus, "==1q222323");
-    const newData = {
+    const editData = {
       id: assetId,
       status: assetStatus === true ? "INACTIVE" : "ACTIVE",
     };
-    dispatch(action.UpdateAssetRequest(newData));
+    console.log(editData);
+    dispatch(
+      action.UpdateAssetRequest({ editData, company_id, assetPageNumber })
+    );
   };
   // console.log(assetsList, "===8888");
   return (
