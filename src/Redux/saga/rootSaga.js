@@ -28,7 +28,11 @@ import {
   UpdatePentestSaga,
 } from "./pentest/PentestSaga";
 import { PentestTabSaga } from "./pentest/PentestTabsSaga";
-import { AddScopeSaga } from "./pentest/ScopePentestSaga";
+import {
+  AddScopeSaga,
+  UpdateScopeSaga,
+  deleteScopeSaga,
+} from "./pentest/ScopePentestSaga";
 
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
@@ -68,6 +72,9 @@ function* watchAllSaga() {
   yield takeLatest(actions.getPentestTabDetailsRequest, PentestTabSaga);
   // *Scope
   yield takeLatest(actions.addScopeRequest, AddScopeSaga);
+  yield takeLatest(actions.updateScopeRequest, UpdateScopeSaga);
+  yield takeLatest(actions.deleteScopeRequest, deleteScopeSaga);
+
   // !all asset
   yield takeLatest(actions.getAllAssetListRequest, GetAllAssetList);
 }

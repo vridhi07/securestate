@@ -3,6 +3,7 @@ import { put, call } from "redux-saga/effects";
 import {
   AssetSuccess,
   AssetError,
+  AssetRequest,
   AddAssetSuccess,
   AddAssetError,
   DeleteAssetSuccess,
@@ -37,10 +38,11 @@ export function* AssetSaga(action) {
 
 export function* AddAssetSaga(action) {
   try {
-    let response = yield call(axios.post, CONFIG.addAsset, action.payload.data);
+    const { company_id, assetPageNumber, data } = action.payload;
+    let response = yield call(axios.post, CONFIG.addAsset, data);
     if (response && response?.data?.status === 1) {
       yield put(AddAssetSuccess("asset added"));
-      // yield put(AssetRequest({ company_id, assetPageNumber }));
+      yield put(AssetRequest({ company_id, assetPageNumber }));
     }
   } catch (error) {
     console.log(error);
@@ -50,13 +52,14 @@ export function* AddAssetSaga(action) {
 
 export function* DeleteAssetSaga(action) {
   try {
+    const { assetId, company_id, assetPageNumber } = action.payload;
     let response = yield call(axios.delete, `${CONFIG.deleteAsset}`, {
-      data: action.payload,
+      data: { assetId },
     });
 
     if (response && response?.data?.status === 1) {
       yield put(DeleteAssetSuccess("Delete Success"));
-      // yield put(AssetRequest());
+      yield put(AssetRequest({ company_id, assetPageNumber }));
     }
   } catch (error) {
     yield put(DeleteAssetError("Error"));
@@ -65,12 +68,13 @@ export function* DeleteAssetSaga(action) {
 
 export function* UpdateAssetSaga(action) {
   try {
-    let response = yield call(axios.put, CONFIG.updateAsset, action.payload);
+    const { editData, company_id, assetPageNumber } = action.payload;
+    let response = yield call(axios.put, CONFIG.updateAsset, editData);
     // console.log(response, "iiiiiii");
 
     if (response && response.data?.status === 1) {
       yield put(UpdateAssetSuccess("UpdateSuccess"));
-      // yield put(AssetRequest());
+      yield put(AssetRequest({ company_id, assetPageNumber }));
     }
   } catch (error) {
     yield put(UpdateAssetError("Error occurred"));

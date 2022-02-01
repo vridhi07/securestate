@@ -74,7 +74,7 @@ const Details = () => {
                   id="assestName"
                   size="small"
                   fullWidth
-                  defaultValue={assetForm?.assetName}
+                  // defaultValue={assetForm?.assetName}
                   value={assetForm?.assetName}
                   onChange={handleChange}
                   disabled={true}
@@ -118,7 +118,7 @@ const Details = () => {
                     name="assetType"
                     id="assetType"
                     size="small"
-                    defaultValue={assetForm?.assetType}
+                    // defaultValue={assetForm?.assetType}
                     value={assetForm?.assetType}
                     onChange={handleChange}
                     disabled={true}
@@ -174,7 +174,7 @@ const Details = () => {
               name="additionalINfo"
               id="additionalINfo"
               // value={""}
-              defaultValue={assetForm?.additionalINfo}
+              // defaultValue={assetForm?.additionalINfo}
               value={assetForm?.additionalINfo}
               onChange={handleChange}
               disabled={true}

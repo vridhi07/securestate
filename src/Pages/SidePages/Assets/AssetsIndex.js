@@ -34,13 +34,11 @@ const AssetsIndex = () => {
   const [assetsList, setAssetsList] = useState([]);
   // const [check, setChecked] = useState(false);
   // * Redux data
-  const { Asset, isLoading, Message, updateLoading } = useSelector(
-    (state) => state.Assets
-  );
+  const { Asset, isLoading } = useSelector((state) => state.Assets);
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
 
-  const inputTag = useRef();
+  // const inputTag = useRef();
 
   useEffect(() => {
     if (Asset?.assetData?.length > 0) {
@@ -102,7 +100,13 @@ const AssetsIndex = () => {
     setSelectedId(null);
   };
   const handleDelete = () => {
-    dispatch(action.DeleteAssetRequest({ assetId: selectedId }));
+    dispatch(
+      action.DeleteAssetRequest({
+        assetId: selectedId,
+        company_id,
+        assetPageNumber,
+      })
+    );
     closeDeleteModal();
   };
 
@@ -175,6 +179,8 @@ const AssetsIndex = () => {
       dispatch(
         action.AddAssetRequest({
           data: addData,
+          company_id,
+          assetPageNumber,
         })
       );
     }
@@ -190,7 +196,9 @@ const AssetsIndex = () => {
         internal_external,
         additional_details,
       };
-      dispatch(action.UpdateAssetRequest(editData));
+      dispatch(
+        action.UpdateAssetRequest({ editData, company_id, assetPageNumber })
+      );
       setIsEdit(false);
     }
     handleClose();
@@ -207,17 +215,17 @@ const AssetsIndex = () => {
   };
   useEffect(() => {
     dispatch(action.AssetRequest({ company_id, assetPageNumber }));
-  }, [company_id, assetPageNumber, Message]);
+  }, [company_id, assetPageNumber]);
 
-  const Status = (i) => {
-    let newStatus = i === "INACTIVE" ? false : true;
-    return newStatus;
-  };
+  // const Status = (i) => {
+  //   let newStatus = i === "INACTIVE" ? false : true;
+  //   return newStatus;
+  // };
   // const handleSwitch = () => {
   //   inputTag.current.checked;
   // };
   const handleSwitchAssets = (assetId, assetStatus) => {
-    console.log(assetId, assetStatus, "==1q222323");
+    // console.log(assetId, assetStatus, "==1q222323");
     const newData = {
       id: assetId,
       status: assetStatus === true ? "INACTIVE" : "ACTIVE",
