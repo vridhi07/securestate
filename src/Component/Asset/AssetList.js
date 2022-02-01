@@ -68,7 +68,7 @@ const AssetList = ({
           <div className="ml-5">
             <p
               onClick={() => navigate(`${id}/details`, { state: { id } })}
-              className="text-sky-600 hover:cursor-pointer hover:text-sky-700 "
+              className="text-sky-600 hover:cursor-pointer hover:text-sky-700 underline  "
             >
               Details
             </p>

@@ -69,8 +69,8 @@ const Profile = () => {
   }
   return (
     <div className="w-full">
-      <div className="flex flex-col px-2 py-2 max-w-sm mx-auto">
-        <section className="h-[9rem] w-[9rem] flex flex-col mx-auto mb-5">
+      <div className="flex flex-col px-2 test py-2 max-w-md mx-auto">
+        <section className="h-[10rem]  w-[10rem] flex flex-col mx-auto mb-5">
           <img
             src={dummy}
             alt="profile pic"
@@ -80,7 +80,7 @@ const Profile = () => {
             {userDetails?.name}
           </h3>
         </section>
-        <form className="m-6  px-[2%] text-left mt-8 ">
+        <form className="m-6 test  px-[2%] text-left mt-8 ">
           <div className="flex items-center">
             <label htmlFor="name" className="mr-8">
               Name
@@ -98,7 +98,7 @@ const Profile = () => {
                   readOnly={isEdit ? false : true}
                 />
               ) : (
-                <div className="w-[226.94px] px-3 py-2 px ">
+                <div className="w-[300px] px-3 py-2 px ">
                   {userDetails?.name}
                 </div>
               )}
@@ -121,35 +121,38 @@ const Profile = () => {
                   readOnly={isEdit ? false : true}
                 />
               ) : (
-                <div className="w-[226.94px] px-3 py-2 px ">
+                <div className="w-[300px] px-3 py-2 px ">
                   {userDetails?.email}
                 </div>
               )}
             </div>
           </div>
-          <div className="mt-3 flex items-center ">
-            <label htmlFor="company" className="mr-2">
-              Company
-            </label>
+          {userDetails?.role !== "superAdmin" && (
+            <div className="mt-3 flex items-center ">
+              <label htmlFor="company" className="mr-2">
+                Company
+              </label>
 
-            <div className="border">
-              {isEdit ? (
-                <input
-                  type="text"
-                  className="focus:outline-none px-3 py-2 w-full"
-                  value={profileForm.company}
-                  name="company"
-                  id="company"
-                  onChange={handleFormInput}
-                  readOnly={isEdit ? false : true}
-                />
-              ) : (
-                <div className="w-[226.94px] px-3 py-2 px ">
-                  {userDetails?.company_id.company_name}
-                </div>
-              )}
+              <div className="border">
+                {isEdit ? (
+                  <input
+                    type="text"
+                    className="focus:outline-none px-3 py-2 w-full"
+                    value={profileForm.company}
+                    name="company"
+                    id="company"
+                    onChange={handleFormInput}
+                    readOnly={isEdit ? false : true}
+                  />
+                ) : (
+                  <div className="w-[300px] px-3 py-2 px ">
+                    {userDetails?.company_id.company_name}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
+
           <div className="mt-3  flex items-center ">
             <label htmlFor="phone" className="mr-8">
               Phone
@@ -167,7 +170,7 @@ const Profile = () => {
                   readOnly={isEdit ? false : true}
                 />
               ) : (
-                <div className="w-[226.94px] px-3 py-2 px ">
+                <div className="w-[300px] px-3 py-2 px ">
                   {userDetails?.phone}
                 </div>
               )}
@@ -190,7 +193,7 @@ const Profile = () => {
                   readOnly={isEdit ? false : true}
                 />
               ) : (
-                <div className="w-[226.94px] px-3 py-2 px ">
+                <div className="w-[300px] px-3 py-2 px ">
                   {userDetails?.location}
                 </div>
               )}

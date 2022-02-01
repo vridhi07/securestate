@@ -208,9 +208,6 @@ export default function MiniDrawer() {
                   <h4 className="text-orange-cus-1 uppercase text-left tracking-widest  text-xl">
                     {userDetails?.user_name}
                   </h4>
-                  <p className="text-right text-orange-cus-1 capitalize">
-                    {pathname === "/profile" ? null : "account settings"}
-                  </p>
                 </header>
                 <div
                   id="person"

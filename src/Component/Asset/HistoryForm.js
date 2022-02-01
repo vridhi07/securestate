@@ -3,6 +3,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import TextField from "@mui/material/TextField";
+import CloseIcon from "@mui/icons-material/Close";
 export default function FormDialog({
   isHistoryOpen,
   closeHistoryModal,
@@ -15,8 +16,15 @@ export default function FormDialog({
 
   return (
     <div>
-      <Dialog open={isHistoryOpen} onClose={closeHistoryModal}>
-        <form className="px-5 py-2 md:px-20" onSubmit={handleSubmit}>
+      <Dialog open={isHistoryOpen}>
+        <form className="px-5 py-2 md:px-20 relative" onSubmit={handleSubmit}>
+          <button
+            type="button"
+            onClick={closeHistoryModal}
+            className="absolute top-4 right-4"
+          >
+            <CloseIcon />
+          </button>
           <h2 className="mb-3 py-3 font-bold text-gray-700 text-lg text-center">
             Add Event
           </h2>

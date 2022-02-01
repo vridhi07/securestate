@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import pdfImage from "../../constantData/images/pdf_image.png";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
+import CloseIcon from "@mui/icons-material/Close";
 export default function FormDialog({
   isFileModalOpen,
   closeFileModal,
@@ -35,6 +36,13 @@ export default function FormDialog({
           className="px-5 md:px-16  pt-6 pb-10  flex flex-col"
           onSubmit={handleSubmit}
         >
+          <button
+            type="button"
+            onClick={closeFileModal}
+            className="absolute top-4 right-4"
+          >
+            <CloseIcon />
+          </button>
           <h2 className="text-center my-4 text-lg text-gray-700 font-bold ">
             Files
           </h2>

@@ -34,7 +34,10 @@ export function* AddUsersSaga(action) {
 
 export function* DeleteUserSaga(action) {
   try {
-    let response = yield call(axios.delete, `user/${action.payload}`);
+    let response = yield call(
+      axios.delete,
+      `${CONFIG.deleteUsers}/${action.payload}`
+    );
 
     if (response && response?.data?.status === 1) {
       // console.log(response.data);

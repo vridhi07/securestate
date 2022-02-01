@@ -4,6 +4,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import CloseIcon from "@mui/icons-material/Close";
 export default function AssetModal({
   handleClose,
   assetForm,
@@ -22,14 +23,21 @@ export default function AssetModal({
   } = assetForm;
 
   return (
-    <form className="px-3 py-4" onSubmit={handleSubmitAsset}>
+    <form className="px-10 pt-10 pb-12 relative" onSubmit={handleSubmitAsset}>
+      <button
+        type="button"
+        onClick={handleClose}
+        className="absolute top-4 right-4"
+      >
+        <CloseIcon />
+      </button>
       <header className="mb-3">
         <h2 className="text-center text-2xl font-bold tracking-wider">
           {isEdit ? "Edit Asset" : "New Asset"}
         </h2>
       </header>
 
-      <section className="grid grid-cols-4 my-2">
+      <section className="grid grid-cols-4 gap-8 my-2">
         <div className="md:col-span-2 col-span-4">
           <TextField
             name="asset_name"
@@ -44,9 +52,6 @@ export default function AssetModal({
             required
           />
         </div>
-        <div className="md:col-span-2 col-span-4"></div>
-      </section>
-      <section className="grid grid-cols-4 my-2">
         <div className="md:col-span-2 col-span-4">
           <FormControl fullWidth>
             <InputLabel id="assetType">Asset Type</InputLabel>
@@ -70,9 +75,9 @@ export default function AssetModal({
             </Select>
           </FormControl>
         </div>
-        <div className="md:col-span-2 col-span-4"></div>
       </section>
-      <section className="grid grid-cols-4 my-4">
+
+      <section className="grid grid-cols-4 gap-8 my-4">
         <div className="md:col-span-2 col-span-4">
           <FormControl fullWidth>
             <InputLabel id="Status">Status</InputLabel>
@@ -92,10 +97,7 @@ export default function AssetModal({
             </Select>
           </FormControl>
         </div>
-        <div className="md:col-span-2 col-span-4"></div>
-      </section>
-      <section className="grid grid-cols-4 my-3">
-        <div className="md:col-span-2 col-span-4">
+        <div className="md:col-span-2 gap-8 col-span-4">
           <TextField
             name="tech_stack"
             id="tech_stack"
@@ -107,9 +109,9 @@ export default function AssetModal({
             required
           />
         </div>
-        <div className="md:col-span-2 col-span-4"></div>
       </section>
-      <section className="grid grid-cols-4 my-2">
+
+      <section className="grid gap-8 grid-cols-4 my-2">
         <div className="md:col-span-2 col-span-4">
           <TextField
             name="third_party_components"
@@ -122,10 +124,7 @@ export default function AssetModal({
             required
           />
         </div>
-        <div className="md:col-span-2 col-span-4"></div>
-      </section>
-      <section className="grid grid-cols-4 my-3">
-        <div className="md:col-span-2 col-span-4">
+        <div className="md:col-span-2 gap-8 col-span-4">
           <FormControl fullWidth>
             <InputLabel id="assetType">Internal/External</InputLabel>
             <Select
@@ -143,8 +142,8 @@ export default function AssetModal({
             </Select>
           </FormControl>
         </div>
-        <div className="md:col-span-2 col-span-4"></div>
       </section>
+
       <section className="w-full mt-4">
         <TextField
           name="additional_details"
