@@ -12,6 +12,7 @@ import sbomReducer from "./Asset/SBOMReducer";
 import assetFilesReducer from "./Asset/FilesReducer";
 import AssetDetailsReducer from "./Asset/AssetDetailsReducer";
 import AssetTabsDetailsReducer from "./Pentest/PentestTabReducer";
+import scopeReducer from "./Pentest/scopeReducer";
 const rootReducer = combineReducers({
   Login: LoginReducer,
   Signup: SignupReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   assetDetails: AssetDetailsReducer,
   pentestTab: AssetTabsDetailsReducer,
   users: UsersReducer,
+  scope: scopeReducer,
 });
 
 export default rootReducer;
