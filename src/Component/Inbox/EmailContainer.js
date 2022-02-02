@@ -19,46 +19,37 @@ const DoubleCircle = () => {
     </div>
   );
 };
-const Text =
-  "Lorem ipsum dolor sit amet consectetur adipisicing ipsam saepe eligendi asperiores elit. Omnis laboriosam asperiores elit. Omnis laboriosam";
+// const Text =
+//   "Lorem ipsum dolor sit amet consectetur adipisicing ipsam saepe eligendi asperiores elit. Omnis laboriosam asperiores elit. Omnis laboriosam";
 
-const EmailContainer = () => {
-  const array = Array.from({ length: 10 }, (_, index) => index);
-  const email = [
-    {
-      name: "",
-    },
-  ];
+const EmailContainer = ({ email = [], HandleOpenMail }) => {
+  const { _id, from, to, subject, text, read, attachments } = email;
+
   return (
-    <div className=" h-screen overflow-y-auto">
-      <div className="messageWrapper flex flex-col  px-3">
-        {array.map((item, index) => {
-          return (
-            <article className=" cursor-pointer pt-2 " key={index}>
-              <header className="flex justify-between items-center">
-                <section className="flex justify-start items-center">
-                  <DoubleCircle />
-                  <h2 className="ml-1 font-bold text-lg-cus ">Email sender</h2>
-                </section>
-                <section className="flex justify-start items-center md:mr-10  ">
-                  <span className="text-gray-cus-6 text-base ">1 min ago</span>
-                  <span>
-                    <ChevronRightOutlinedIcon sx={{ color: "#9C8E96" }} />
-                  </span>
-                </section>
-              </header>
-              <section className="md:mr-14 mt-1  pb-3 md:ml-5 ">
-                <h3 className="text-xs-cus font-bold ">Email subject</h3>
-                <p className="text-justify max-w-md text-xs-cus font-normal text-gray-cus-6">
-                  {Text.substring(0, 105)}
-                </p>
-              </section>
-              <hr />
-            </article>
-          );
-        })}
-      </div>
-    </div>
+    <article
+      className=" cursor-pointer pt-2 "
+      onClick={() => HandleOpenMail(email)}
+    >
+      <header className="flex justify-between items-center">
+        <section className="flex justify-start items-center">
+          <DoubleCircle />
+          <h2 className="ml-1 font-bold text-lg-cus ">{from}</h2>
+        </section>
+        <section className="flex justify-start items-center md:mr-10  ">
+          <span className="text-gray-cus-6 text-base ">1 min ago</span>
+          <span>
+            <ChevronRightOutlinedIcon sx={{ color: "#9C8E96" }} />
+          </span>
+        </section>
+      </header>
+      <section className="md:mr-14 mt-1  pb-3 md:ml-5 ">
+        <h3 className="text-xs-cus font-bold ">{subject}</h3>
+        <p className="text-justify max-w-md text-xs-cus font-normal text-gray-cus-6">
+          {text.substring(0, 105)}
+        </p>
+      </section>
+      <hr />
+    </article>
   );
 };
 

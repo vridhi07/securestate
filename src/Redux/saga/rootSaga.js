@@ -40,7 +40,7 @@ import {
 } from "./pentest/FindingsSaga";
 
 import { getPentestChatSaga, SendPentestChatSaga } from "./pentest/PentestChat";
-
+import { GetMailSaga } from "./Mail/MailSaga";
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
   yield takeLatest(actions.SignUpRequest, SignupSaga);
@@ -88,7 +88,8 @@ function* watchAllSaga() {
   // *char
   yield takeLatest(actions.pentestChatRequest, getPentestChatSaga);
   yield takeLatest(actions.sendChatRequest, SendPentestChatSaga);
-
+  // !Mail
+  yield takeLatest(actions.getEmailRequest, GetMailSaga);
   // !all asset
   yield takeLatest(actions.getAllAssetListRequest, GetAllAssetList);
 }

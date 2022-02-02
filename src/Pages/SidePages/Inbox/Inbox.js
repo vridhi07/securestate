@@ -3,9 +3,51 @@ import AddIcon from "@mui/icons-material/Add";
 import MessageForm from "../../../Component/Inbox/MessageForm";
 import MessageContainer from "../../../Component/Inbox/MessageContainer";
 import EmailContainer from "../../../Component/Inbox/EmailContainer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as action from "../../../Redux/action";
+import { useDispatch, useSelector } from "react-redux";
 const Inbox = () => {
+  const dispatch = useDispatch();
+  const [openMail, setOpenMail] = useState([]);
+  const [search, setSearch] = useState("");
+  const { email } = useSelector((state) => state?.emails);
+  const [emailData, setEmailData] = useState([]);
+  const [selectData, setSelecData] = useState({
+    sendEmail: "",
+    id: "",
+  });
+
+  // console.log(selectData);
+  const HandleOpenMail = (item) => {
+    setOpenMail(item);
+    setSelecData({ sendEMail: item.to, id: item._id });
+  };
+
+  useEffect(() => {
+    dispatch(action.getEmailRequest());
+  }, []);
+
+  useEffect(() => {
+    if (email) {
+      setEmailData([...email]);
+    }
+  }, [email]);
+
+  const getFilter = (data, search) => {
+    let tempData = [...data];
+    if (search) {
+      tempData = tempData.filter((item) =>
+        item.from.toLowerCase().startsWith(search)
+      );
+    }
+    return tempData;
+  };
+
+  let filterData;
+  if (emailData) {
+    filterData = getFilter(emailData, search);
+  }
+  // console.log(filterData);
   return (
     <div className="flex flex-col">
       <div className="mt-3 flex justify-between">
@@ -15,6 +57,8 @@ const Inbox = () => {
             type="text"
             placeholder="Search"
             className="w-full py-1 pl-2  rounded-3xl border-0 focus:bg-none focus:outline-none focus:ring-0"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
         <div className="md:mr-8 mr-2">
@@ -27,12 +71,28 @@ const Inbox = () => {
       </div>
       <div className="grid grid-cols-6 mt-3">
         <div className="col-span-3 ">
-          <EmailContainer />
+          <div className=" h-screen overflow-y-auto">
+            <div className="messageWrapper flex flex-col  px-3">
+              {filterData.length > 0 &&
+                filterData.map((item) => {
+                  // console.log(item);
+                  return (
+                    <EmailContainer
+                      key={item._id}
+                      email={item}
+                      HandleOpenMail={HandleOpenMail}
+                    />
+                  );
+                })}
+            </div>
+          </div>
         </div>
-        <div className="col-span-3 border w-full relative  shadow-xl h-screen rounded-md bg-blue-cus-1">
-          <MessageContainer />
-          <MessageForm />
-        </div>
+        {openMail.length !== 0 && (
+          <div className="col-span-3 border w-full relative  shadow-xl h-screen rounded-md bg-blue-cus-1">
+            <MessageContainer openMail={openMail} />
+            <MessageForm />
+          </div>
+        )}
       </div>
     </div>
   );

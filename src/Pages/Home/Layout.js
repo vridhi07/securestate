@@ -108,7 +108,7 @@ export default function MiniDrawer() {
   const IsOnline = navigator.onLine;
   const [isOnlineTrue, setIsOnlineTrue] = useState();
   const { userDetails, isLoading } = useSelector((state) => state?.user);
-  console.log(IsOnline);
+  // console.log(IsOnline);
   // console.log(userDetails);
   // const loading = true;
 

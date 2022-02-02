@@ -14,6 +14,7 @@ import AssetDetailsReducer from "./Asset/AssetDetailsReducer";
 import AssetTabsDetailsReducer from "./Pentest/PentestTabReducer";
 import scopeReducer from "./Pentest/scopeReducer";
 import pentestChatReducer from "./Pentest/PentestChatReducer";
+import EmailReducer from "./Email/emailReducer";
 const rootReducer = combineReducers({
   Login: LoginReducer,
   Signup: SignupReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   users: UsersReducer,
   scope: scopeReducer,
   pentestChat: pentestChatReducer,
+  emails: EmailReducer,
 });
 
 export default rootReducer;
