@@ -7,7 +7,7 @@ const MessageContainer = () => {
   //   scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   // }, [array]);
   return (
-    <div className="messageHeights  px-4  ">
+    <div className="messageHeights   px-4  ">
       <div className="flex-col flex justify-end messageWrapper">
         {array.map((item, key) => {
           return (

@@ -27,6 +27,7 @@ import Loader from "../../Component/Common/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../Redux/action/index";
 import { getAuthToken } from "../../Service/localStorage";
+import IsOnlinePage from "../../Component/Common/IsOnline";
 import * as Roles from "../../constantData/Roles";
 const drawerWidth = 270;
 // console.log(getRole());
@@ -104,10 +105,16 @@ export default function MiniDrawer() {
   const { pathname } = useLocation();
   const menuOpen = Boolean(userMenu);
   const dispatch = useDispatch();
-
+  const IsOnline = navigator.onLine;
+  const [isOnlineTrue, setIsOnlineTrue] = useState();
   const { userDetails, isLoading } = useSelector((state) => state?.user);
+  console.log(IsOnline);
   // console.log(userDetails);
   // const loading = true;
+
+  useEffect(() => {
+    setIsOnlineTrue(IsOnline);
+  }, [IsOnline]);
   let token = localStorage.getItem("token");
   useEffect(() => {
     if (pathname === "/") {
@@ -166,7 +173,9 @@ export default function MiniDrawer() {
   if (isLoading) {
     return <Loader />;
   }
-
+  if (!isOnlineTrue) {
+    return <IsOnlinePage />;
+  }
   const sideBarData = sidebarData(userDetails?.role);
 
   return (
@@ -292,21 +301,24 @@ export default function MiniDrawer() {
             paddingTop: 0,
           }}
         >
-          {sideBarData.map((item) => (
-            <NavLink
-              className={`flex ${item.path === newPathname && "bg-slate-300"}`}
-              key={item.path}
-              to={item.path}
-            >
-              <ListItem button>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText
-                  primary={item.linkName}
-                  sx={{ color: "#F67A32" }}
-                />
-              </ListItem>
-            </NavLink>
-          ))}
+          {sideBarData &&
+            sideBarData.map((item) => (
+              <NavLink
+                className={`flex ${
+                  item.path === newPathname && "bg-slate-300"
+                }`}
+                key={item.path}
+                to={item.path}
+              >
+                <ListItem button>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText
+                    primary={item.linkName}
+                    sx={{ color: "#F67A32" }}
+                  />
+                </ListItem>
+              </NavLink>
+            ))}
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

@@ -38,6 +38,9 @@ import {
   deleteFindings,
   updateFindings,
 } from "./pentest/FindingsSaga";
+
+import { getPentestChatSaga, SendPentestChatSaga } from "./pentest/PentestChat";
+
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
   yield takeLatest(actions.SignUpRequest, SignupSaga);
@@ -82,6 +85,9 @@ function* watchAllSaga() {
   yield takeLatest(actions.addFindingsRequest, AddPentestFindings);
   yield takeLatest(actions.deleteScopeRequest, deleteScopeSaga);
   yield takeLatest(actions.updateFindingsRequest, updateFindings);
+  // *char
+  yield takeLatest(actions.pentestChatRequest, getPentestChatSaga);
+  yield takeLatest(actions.sendChatRequest, SendPentestChatSaga);
 
   // !all asset
   yield takeLatest(actions.getAllAssetListRequest, GetAllAssetList);

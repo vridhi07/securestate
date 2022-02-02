@@ -174,6 +174,15 @@ export const updateFindingsSuccess = createAction(
 );
 export const updateFindingsError = createAction(actions.UPDATE_FINDINGS_ERROR);
 
+// * Pentest chat
+export const pentestChatRequest = createAction(actions.PENTEST_CHAT_REQUEST);
+export const pentestChatSuccess = createAction(actions.PENTEST_CHAT_SUCCESS);
+export const pentestChatError = createAction(actions.PENTEST_CHAT_ERROR);
+
+export const sendChatRequest = createAction(actions.SEND_CHAT_REQUEST);
+export const sendChatSuccess = createAction(actions.SEND_CHAT_SUCCESS);
+export const sendChatError = createAction(actions.SEND_CHAT_ERROR);
+
 // ! Email
 
 export const getEmailRequest = createAction(actions.GET_EMAIL_REQUEST);
