@@ -153,6 +153,27 @@ export const deleteScopeRequest = createAction(actions.DELETE_SCOPE_REQUEST);
 export const deleteScopeSuccess = createAction(actions.DELETE_SCOPE_SUCCESS);
 export const deleteScopeError = createAction(actions.DELETE_SCOPE_ERROR);
 
+//* FINDINGS
+export const addFindingsRequest = createAction(actions.ADD_FINDINGS_REQUEST);
+export const addFindingsSuccess = createAction(actions.ADD_FINDINGS_SUCCESS);
+export const addFindingsError = createAction(actions.ADD_FINDINGS_ERROR);
+
+export const deleteFindingsRequest = createAction(
+  actions.DELETE_FINDINGS_REQUEST
+);
+export const deleteFindingsSuccess = createAction(
+  actions.DELETE_FINDINGS_SUCCESS
+);
+export const deleteFindingsError = createAction(actions.DELETE_FINDINGS_ERROR);
+
+export const updateFindingsRequest = createAction(
+  actions.UPDATE_FINDINGS_REQUEST
+);
+export const updateFindingsSuccess = createAction(
+  actions.UPDATE_FINDINGS_SUCCESS
+);
+export const updateFindingsError = createAction(actions.UPDATE_FINDINGS_ERROR);
+
 // ! Email
 
 export const getEmailRequest = createAction(actions.GET_EMAIL_REQUEST);

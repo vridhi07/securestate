@@ -33,7 +33,11 @@ import {
   UpdateScopeSaga,
   deleteScopeSaga,
 } from "./pentest/ScopePentestSaga";
-
+import {
+  AddPentestFindings,
+  deleteFindings,
+  updateFindings,
+} from "./pentest/FindingsSaga";
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
   yield takeLatest(actions.SignUpRequest, SignupSaga);
@@ -67,13 +71,17 @@ function* watchAllSaga() {
   yield takeLatest(actions.AddPentestRequest, AddPentestSaga);
   yield takeLatest(actions.DeletePentestRequest, DeletePentestSaga);
   yield takeLatest(actions.updatePentestRequest, UpdatePentestSaga);
+  yield takeLatest(actions.deleteFindingsRequest, deleteFindings);
 
   //* tabs details
   yield takeLatest(actions.getPentestTabDetailsRequest, PentestTabSaga);
   // *Scope
   yield takeLatest(actions.addScopeRequest, AddScopeSaga);
   yield takeLatest(actions.updateScopeRequest, UpdateScopeSaga);
+  // *FINDINGS
+  yield takeLatest(actions.addFindingsRequest, AddPentestFindings);
   yield takeLatest(actions.deleteScopeRequest, deleteScopeSaga);
+  yield takeLatest(actions.updateFindingsRequest, updateFindings);
 
   // !all asset
   yield takeLatest(actions.getAllAssetListRequest, GetAllAssetList);
