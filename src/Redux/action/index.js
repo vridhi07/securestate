@@ -201,3 +201,8 @@ export const addUsersError = createAction(actions.ADD_USERS_ERROR);
 export const deleteUsersRequest = createAction(actions.DELETE_USERS_REQUEST);
 export const deleteUsersSuccess = createAction(actions.DELETE_USERS_SUCCESS);
 export const deleteUsersError = createAction(actions.DELETE_USERS_ERROR);
+
+// ! update User
+export const updateUserRequest = createAction(actions.UPDATE_USER_REQUEST);
+export const updateUserSuccess = createAction(actions.UPDATE_USER_SUCCESS);
+export const updateUserError = createAction(actions.UPDATE_USER_ERROR);

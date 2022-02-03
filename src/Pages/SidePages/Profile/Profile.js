@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../../../Component/Common/Loader";
 import dummy from "../../../constantData/images/dummyProfile.webp";
+import * as action from "../../../Redux/action";
 const Profile = () => {
   const state = useSelector((state) => state);
   const { userDetails, isLoading } = state?.user;
@@ -35,6 +36,10 @@ const Profile = () => {
       phone: userDetails?.phone,
       location: userDetails?.location,
     });
+    if (isEdit) {
+      dis;
+      setIsEdit(false);
+    }
   };
 
   useEffect(() => {
