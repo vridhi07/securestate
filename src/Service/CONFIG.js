@@ -19,4 +19,6 @@ export const CONFIG = {
   deleteUsers: "user/userDelete",
   getMail: "email/getEmail",
   updateUser: "user/updateUser",
+  getInvoice: "invoice/invoiceList",
+  addInvoice: "invoice/addInvoice",
 };

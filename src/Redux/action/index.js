@@ -206,3 +206,14 @@ export const deleteUsersError = createAction(actions.DELETE_USERS_ERROR);
 export const updateUserRequest = createAction(actions.UPDATE_USER_REQUEST);
 export const updateUserSuccess = createAction(actions.UPDATE_USER_SUCCESS);
 export const updateUserError = createAction(actions.UPDATE_USER_ERROR);
+
+// ! Invoice
+export const getInvoiceRequest = createAction(actions.GET_INVOICE_REQUEST);
+export const getInvoiceSuccess = createAction(actions.GET_INVOICE_SUCCESS);
+export const getInvoiceError = createAction(actions.GET_INVOICE_ERROR);
+
+export const addInvoiceRequest = createAction(actions.ADD_INVOICE_REQUEST);
+export const addInvoiceSuccess = createAction(actions.ADD_INVOICE_SUCCESS);
+export const addInvoiceError = createAction(actions.ADD_INVOICE_ERROR);
+
+// !

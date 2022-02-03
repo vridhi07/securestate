@@ -41,7 +41,8 @@ export default function SBOMTab({
           <TableBody>
             {users &&
               users.map((user) => {
-                const { company_id, email, name, role, _id, lastLogin } = user;
+                const { company_id, email, name, role, _id, lastLogin, title } =
+                  user;
                 return (
                   <TableRow
                     key={_id}
@@ -67,7 +68,7 @@ export default function SBOMTab({
                     <TableCell align="center">
                       {company_id?.company_name}
                     </TableCell>
-                    <TableCell align="center">Lorem, ipsum dors</TableCell>
+                    <TableCell align="center">{title}</TableCell>
                     <TableCell align="center">{email}</TableCell>
                     <TableCell align="center">
                       {lastLogin

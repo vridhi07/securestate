@@ -1,8 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InvoiceTable from "../../../Component/Invoice/InvoiceTable";
 import FilterOption from "../../../Component/Common/FilterOption";
 import InvoiceModal from "../../../Component/Invoice/InvoiceForm";
+import * as action from "../../../Redux/action";
+import { useDispatch, useSelector } from "react-redux";
+
 const Invoices = () => {
+  const dispatch = useDispatch();
+
+  const { selectedCompany } = useSelector((state) => state?.company);
+  const { userDetails } = useSelector((state) => state?.user);
+
+  const getCompanyId = (role) => {
+    if (role === "superAdmin") {
+      return selectedCompany;
+    }
+    return userDetails?.company_id._id;
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const company_id = getCompanyId(userDetails?.role);
+  console.log(company_id);
   const [open, setOpen] = useState(false);
   const [formInput, setFormInput] = useState({
     invoice: "",
@@ -14,6 +33,7 @@ const Invoices = () => {
   const getDate = (newValue) => {
     setFormInput({ ...formInput, dueDate: newValue });
   };
+  // console.log(formInput.attachData);
   const handleFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -22,12 +42,45 @@ const Invoices = () => {
     }
     setFormInput({ ...formInput, [name]: value });
   };
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  // console.log(formInput.attachData);
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const removeAttachData = () => {
+    setFormInput({ ...formInput, attachData: "" });
+  };
+
+  useEffect(() => {
+    dispatch(action.getInvoiceRequest(company_id));
+  }, [company_id]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { invoice, totalAmount, dueDate, status, attachData } = formInput;
+    const data = new FormData();
+    if (attachData) {
+      data.append("file", attachData, attachData.name);
+    }
+    data.append("invoice", invoice);
+    data.append("total", totalAmount);
+    data.append("status", status);
+    data.append("company_id", company_id);
+
+    dispatch(action.addInvoiceRequest(data));
+
+    setFormInput({
+      ...formInput,
+      invoice: "",
+      totalAmount: "",
+      dueDate: new Date(),
+      status: "",
+      attachData: "",
+    });
+    handleClose();
   };
   return (
     <div>
@@ -52,6 +105,8 @@ const Invoices = () => {
         formInput={formInput}
         handleFormInput={handleFormInput}
         getDate={getDate}
+        removeAttachData={removeAttachData}
+        handleSubmit={handleSubmit}
       />
     </div>
   );

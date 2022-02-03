@@ -2,8 +2,12 @@ import FilterOption from "../../../Component/Common/FilterOption";
 import NewCustomerForm from "../../../Component/Customer/NewCustomerForm";
 import CompanyGroup from "../../../Component/Customer/CompanyGroup";
 import Subscription from "../../../Component/Customer/Subscription";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import * as action from "../../../Redux/action";
+import { useDispatch, useSelector } from "react-redux";
+import MultipleSelectChip from "../../../Component/Customer/MultiSelect";
 const Customer = () => {
+  const dispatch = useDispatch();
   const [isCustomerFormOpen, setIsCustomerFormOpen] = useState(false);
   const [customerForm, setCustomerForm] = useState({
     company_name: "",
@@ -21,14 +25,17 @@ const Customer = () => {
     }
     setCustomerForm({ ...customerForm, [name]: value });
   };
-
+  const { users } = useSelector((state) => state?.users);
+  console.log(users);
   const openCustomerForm = () => {
     setIsCustomerFormOpen(true);
   };
   const closeCustomerForm = () => {
     setIsCustomerFormOpen(false);
   };
-
+  useEffect(() => {
+    dispatch(action.getUsersRequest());
+  }, []);
   return (
     <div className="min-h-screen">
       <div className="max-w-4xl mt-4  flex flex-col lg:flex-row  items-start lg:items-center justify-start  mx-auto  ">
@@ -44,8 +51,9 @@ const Customer = () => {
           </button>
         </div>
       </div>
+      {/* <MultipleSelectChip /> */}
       <div className="mt-6  mb-6 h-[759px] lg:h-[392px]">
-        <CompanyGroup />
+        <CompanyGroup users={users} />
       </div>
 
       <Subscription />
