@@ -37,7 +37,7 @@ const Profile = () => {
       location: userDetails?.location,
     });
     if (isEdit) {
-      dis;
+      // dis;
       setIsEdit(false);
     }
   };
