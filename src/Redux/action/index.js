@@ -207,6 +207,33 @@ export const updateUserRequest = createAction(actions.UPDATE_USER_REQUEST);
 export const updateUserSuccess = createAction(actions.UPDATE_USER_SUCCESS);
 export const updateUserError = createAction(actions.UPDATE_USER_ERROR);
 
+//Add Company
+
+export const addCompanyRequest = createAction(actions.ADD_COMPANY_REQUEST);
+export const addCompanySuccess = createAction(actions.ADD_COMPANY_SUCCESS);
+export const addCompanyError = createAction(actions.ADD_COMPANY_ERROR);
+
+export const getCompanyByIdRequest = createAction(
+  actions.GET_COMPANY_BY_ID_REQUEST
+);
+export const getCompanyByIdSuccess = createAction(
+  actions.GET_COMPANY_BY_ID_SUCCESS
+);
+export const getCompanyByIdError = createAction(
+  actions.GET_COMPANY_BY_ID_ERROR
+);
+
+//Update company Details
+
+export const updateCompanyDetailsRequest = createAction(
+  actions.UPDATE_COMPANY_DETAILS_REQUEST
+);
+export const updateCompanyDetailsSuccess = createAction(
+  actions.UPDATE_COMPANY_DETAILS_SUCCESS
+);
+export const updateCompanyDetailsError = createAction(
+  actions.UPDATE_COMPANY_DETAILS_ERROR
+);
 // ! Invoice
 export const getInvoiceRequest = createAction(actions.GET_INVOICE_REQUEST);
 export const getInvoiceSuccess = createAction(actions.GET_INVOICE_SUCCESS);

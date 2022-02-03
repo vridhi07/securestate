@@ -2,10 +2,11 @@ import FilterOption from "../../../Component/Common/FilterOption";
 import NewCustomerForm from "../../../Component/Customer/NewCustomerForm";
 import CompanyGroup from "../../../Component/Customer/CompanyGroup";
 import Subscription from "../../../Component/Customer/Subscription";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../../Redux/action";
 import { useEffect, useState } from "react";
 import * as action from "../../../Redux/action";
-import { useDispatch, useSelector } from "react-redux";
-import MultipleSelectChip from "../../../Component/Customer/MultiSelect";
+
 const Customer = () => {
   const dispatch = useDispatch();
   const [isCustomerFormOpen, setIsCustomerFormOpen] = useState(false);
@@ -17,6 +18,14 @@ const Customer = () => {
     main_poc_email: "",
     main_poc_phone: "",
   });
+  const addCompanyState=useSelector(state=>state.company)
+ 
+  useEffect(()=>{
+if(addCompanyState?.isCompanySuccess){
+  setIsCustomerFormOpen(false)
+}
+
+  },[addCompanyState])
   const handleCustomerForm = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -33,6 +42,13 @@ const Customer = () => {
   const closeCustomerForm = () => {
     setIsCustomerFormOpen(false);
   };
+
+ 
+  const handleAddCompany = (e) => {
+    e.preventDefault();
+    dispatch(actions.addCompanyRequest({ ...customerForm }));
+  };
+
   useEffect(() => {
     dispatch(action.getUsersRequest());
   }, []);
@@ -63,6 +79,7 @@ const Customer = () => {
         closeCustomerForm={closeCustomerForm}
         handleCustomerForm={handleCustomerForm}
         customerForm={customerForm}
+        handleAddCompany={handleAddCompany}
       />
     </div>
   );

@@ -9,6 +9,7 @@ export default function NewCustomerForm({
   closeCustomerForm,
   handleCustomerForm,
   customerForm,
+  handleAddCompany
 }) {
   const {
     company_name,
@@ -19,12 +20,14 @@ export default function NewCustomerForm({
     main_poc_phone,
   } = customerForm;
 
+
   return (
     <div>
       <Dialog open={isCustomerFormOpen}>
         <form
           className=" px-5 md:px-20 min-w-[300px] flex flex-col relative pb-7"
           autoComplete="off"
+          onSubmit={(e)=>handleAddCompany(e)}
         >
           <button
             type="button"
@@ -104,6 +107,7 @@ export default function NewCustomerForm({
           <button
             type="submit"
             className=" border border-black rounded-md mt-3 py-2 bg-[#EBEBEB]"
+          
           >
             Add Company
           </button>
