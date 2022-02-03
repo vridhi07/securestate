@@ -41,6 +41,7 @@ import {
 
 import { getPentestChatSaga, SendPentestChatSaga } from "./pentest/PentestChat";
 import { GetMailSaga } from "./Mail/MailSaga";
+import { GetInvoiceSaga, addInvoiceSaga } from "./Invoice/InvoiceSaga";
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
   yield takeLatest(actions.SignUpRequest, SignupSaga);
@@ -97,6 +98,9 @@ function* watchAllSaga() {
   yield takeLatest(actions.addCompanyRequest,AddCompanySaga)
   yield takeLatest(actions.getCompanyByIdRequest,GetCompanyByIdSaga)
   yield takeLatest(actions.updateCompanyDetailsRequest,UpdateCompanyDetails)
+  // ! Invoice
+  yield takeLatest(actions.getInvoiceRequest, GetInvoiceSaga);
+  yield takeLatest(actions.addInvoiceRequest, addInvoiceSaga);
 }
 
 export default function* rootSaga() {

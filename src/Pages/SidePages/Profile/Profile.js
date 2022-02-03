@@ -111,7 +111,7 @@ const Profile = () => {
   return (
     <div className="w-full">
       <div className="flex flex-col px-2  py-2 max-w-md mx-auto">
-        <section className="h-[12rem]  w-[10rem] flex flex-col mx-auto mb-5">
+        <section className="w-[10rem] flex flex-col mx-auto mb-5">
           <img
             src={userDetails?.profilepic && userDetails?.profilepic != 'profilepic' ? userDetails?.profilepic:dummy}
             alt="profile pic"
@@ -121,13 +121,16 @@ const Profile = () => {
             {userDetails?.name}
           </h3>
           {
-            isEdit &&  <form onSubmit={(e) => _handleSubmit(e)}>
+            isEdit &&  
+            <div className="">
+              <form onSubmit={(e) => _handleSubmit(e)}>
             <input
               className="fileInput"
               type="file"
               onChange={(e) => _handleImageChange(e)}
             />
           </form>
+              </div>
           }
          
         </section>

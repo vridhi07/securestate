@@ -234,3 +234,13 @@ export const updateCompanyDetailsSuccess = createAction(
 export const updateCompanyDetailsError = createAction(
   actions.UPDATE_COMPANY_DETAILS_ERROR
 );
+// ! Invoice
+export const getInvoiceRequest = createAction(actions.GET_INVOICE_REQUEST);
+export const getInvoiceSuccess = createAction(actions.GET_INVOICE_SUCCESS);
+export const getInvoiceError = createAction(actions.GET_INVOICE_ERROR);
+
+export const addInvoiceRequest = createAction(actions.ADD_INVOICE_REQUEST);
+export const addInvoiceSuccess = createAction(actions.ADD_INVOICE_SUCCESS);
+export const addInvoiceError = createAction(actions.ADD_INVOICE_ERROR);
+
+// !

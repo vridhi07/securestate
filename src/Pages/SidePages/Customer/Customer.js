@@ -5,7 +5,10 @@ import Subscription from "../../../Component/Customer/Subscription";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../Redux/action";
 import { useEffect, useState } from "react";
+import * as action from "../../../Redux/action";
+
 const Customer = () => {
+  const dispatch = useDispatch();
   const [isCustomerFormOpen, setIsCustomerFormOpen] = useState(false);
   const [customerForm, setCustomerForm] = useState({
     company_name: "",
@@ -16,9 +19,7 @@ const Customer = () => {
     main_poc_phone: "",
   });
   const addCompanyState=useSelector(state=>state.company)
-  const dispatch = useDispatch();
-
-
+ 
   useEffect(()=>{
 if(addCompanyState?.isCompanySuccess){
   setIsCustomerFormOpen(false)
@@ -33,7 +34,8 @@ if(addCompanyState?.isCompanySuccess){
     }
     setCustomerForm({ ...customerForm, [name]: value });
   };
-
+  const { users } = useSelector((state) => state?.users);
+  console.log(users);
   const openCustomerForm = () => {
     setIsCustomerFormOpen(true);
   };
@@ -47,6 +49,9 @@ if(addCompanyState?.isCompanySuccess){
     dispatch(actions.addCompanyRequest({ ...customerForm }));
   };
 
+  useEffect(() => {
+    dispatch(action.getUsersRequest());
+  }, []);
   return (
     <div className="min-h-screen">
       <div className="max-w-4xl mt-4  flex flex-col lg:flex-row  items-start lg:items-center justify-start  mx-auto  ">
@@ -62,8 +67,9 @@ if(addCompanyState?.isCompanySuccess){
           </button>
         </div>
       </div>
+      {/* <MultipleSelectChip /> */}
       <div className="mt-6  mb-6 h-[759px] lg:h-[392px]">
-        <CompanyGroup />
+        <CompanyGroup users={users} />
       </div>
 
       <Subscription />

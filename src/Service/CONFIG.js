@@ -21,5 +21,7 @@ export const CONFIG = {
   updateUser: "user/updateUser",
   addCompany:"company/addCompany",
   getCompanyById:"company/getcompanyById",
-  updateCompanyDetails:"company/updateCompany"
+  updateCompanyDetails:"company/updateCompany",
+  getInvoice: "invoice/invoiceList",
+  addInvoice: "invoice/addInvoice",
 };
