@@ -7,6 +7,8 @@ const initialState = {
   companyDetails: [],
   selectedName: "",
   selectedCompany: "",
+  isCompanyLoading: false,
+  isCompanySuccess: false,
 };
 
 const CompanyReducer = (state = initialState, action) => {
@@ -21,7 +23,6 @@ const CompanyReducer = (state = initialState, action) => {
       };
 
     case actions.COMPANY_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         isLoading: false,
@@ -51,6 +52,40 @@ const CompanyReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedName: action.payload,
+      };
+
+    case actions.ADD_COMPANY_REQUEST:
+      return {
+        ...state,
+        isCompanyLoading: true,
+        isCompanySuccess: false,
+      };
+
+    case actions.ADD_COMPANY_SUCCESS:
+      return {
+        ...state,
+        isCompanyLoading: false,
+        isCompanySuccess: true,
+        addCompanyStatue: action.payload,
+      };
+
+    case actions.ADD_COMPANY_ERROR:
+      return {
+        ...state,
+        isCompanyLoading: false,
+        isCompanySuccess: false,
+      };
+
+    case actions.GET_COMPANY_BY_ID_SUCCESS:
+      return {
+        ...state,
+        companyListById: action.payload,
+      };
+
+    case actions.UPDATE_COMPANY_DETAILS_SUCCESS:
+      return {
+        ...state,
+        companyUpdateStatus: action.payload,
       };
     default:
       return state;

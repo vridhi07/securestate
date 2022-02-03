@@ -2,23 +2,74 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import TextField from "@mui/material/TextField";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import SingleGroupCLient from "./SingleGroupCLient";
 import AddUserToGroup from "./AddUserToGroup";
+import * as actions from "../../Redux/action";
+
 const CompanyGroup = () => {
   const [isCompanyDetailsEdit, setIsCompanyDetailsEdit] = useState(false);
   const focusRef = useRef();
   const [CompanyInfo, setCompanyInfo] = useState({
-    company_name: "Auzzi Tech",
-    location: "Australia",
-    website: "http//liAUziee.com",
-    main_poc: "ABbsds",
-    main_poc_email: "abcd@gmail.com",
-    main_poc_phone: "2798383838",
+    company_name: "",
+    location: "",
+    website: "",
+    main_poc: "",
+    main_poc_email: "",
+    main_poc_phone: "",
   });
+  const dispatch = useDispatch();
+  const companyDetails = useSelector(
+    (state) => state?.company?.companyListById
+  );
+  const selectedCompany = useSelector(
+    (state) => state?.company?.selectedCompany
+  );
+  const defaultSelectedCompany = useSelector(
+    (state) => state.user.userDetails.company_id
+  );
 
   const [isAddUserGroupOpen, setIsAddUserGroupOpen] = useState(false);
 
+  useEffect(() => {
+    if (isCompanyDetailsEdit) {
+      const div = focusRef.current;
+      const input = div.children[1].children[0];
+      input.focus();
+    }
+  }, [isCompanyDetailsEdit]);
+
+  useEffect(() => {
+    if (selectedCompany) {
+      dispatch(
+        actions.getCompanyByIdRequest({
+          companyId: selectedCompany,
+        })
+      );
+    } else {
+      if (defaultSelectedCompany) {
+        dispatch(
+          actions.getCompanyByIdRequest({
+            companyId: defaultSelectedCompany?._id,
+          })
+        );
+      }
+    }
+  }, [selectedCompany, defaultSelectedCompany]);
+
+  useEffect(() => {
+    if (companyDetails) {
+      setCompanyInfo({
+        company_name: companyDetails?.company_name,
+        location: companyDetails?.location,
+        main_poc: companyDetails?.main_poc,
+        main_poc_email: companyDetails?.main_poc_email,
+        main_poc_phone: companyDetails?.main_poc_phone,
+        website: companyDetails?.website,
+      });
+    }
+  }, [companyDetails]);
   const openAddUserToGroup = () => {
     setIsAddUserGroupOpen(true);
   };
@@ -42,29 +93,31 @@ const CompanyGroup = () => {
     setIsCompanyDetailsEdit(false);
     setCompanyInfo({
       ...CompanyInfo,
-      company_name: "Auzzi Tech",
-      location: "Australia",
-      website: "http//liAUziee.com",
-      main_poc: "ABbsds",
-      main_poc_email: "abcd@gmail.com",
-      main_poc_phone: "2798383838",
     });
   };
-  useEffect(() => {
-    if (isCompanyDetailsEdit) {
-      const div = focusRef.current;
-      const input = div.children[1].children[0];
-      // console.log(div.children[1].children[0]);
-      input.focus();
-    }
-  }, [isCompanyDetailsEdit]);
+
+  const handleUpdateCompanyDetails = (e) => {
+    e.preventDefault();
+    const payload = {
+      ...CompanyInfo,
+      id: defaultSelectedCompany
+        ? defaultSelectedCompany?._id
+        : selectedCompany,
+    };
+    dispatch(actions.updateCompanyDetailsRequest({ ...payload }));
+    setIsCompanyDetailsEdit(false);
+  };
+
   return (
     <div className=" gap-y-[300%] grid grid-cols-10 gap-x-4 h-20">
       {/* Company Info */}
       <div className=" col-span-10 lg:col-span-4 lg:mt-[3.8rem]">
         <div className="grid grid-cols-7 h-32">
           <div className="col-span-6 ">
-            <form className="py-2 px-4 pr-8">
+            <form
+              className="py-2 px-4 pr-8"
+              onSubmit={(e) => handleUpdateCompanyDetails(e)}
+            >
               <div className="flex flex-col">
                 <TextField
                   type="text"
@@ -148,7 +201,10 @@ const CompanyGroup = () => {
               </div>
               {isCompanyDetailsEdit && (
                 <div className="mt-3">
-                  <button className="px-4 py-2 bg-slate-400 text-gray-700 mr-3 rounded-md ">
+                  <button
+                    className="px-4 py-2 bg-slate-400 text-gray-700 mr-3 rounded-md"
+                    type="submit"
+                  >
                     save
                   </button>
                   <button

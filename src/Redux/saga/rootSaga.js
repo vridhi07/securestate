@@ -18,7 +18,7 @@ import {
   DeleteFileSaga,
 } from "./Asset/AssetFilesSaga";
 import { AssetDetailsSaga } from "./Asset/AssetDetailsSaga";
-import { GetCompanySaga } from "./company/CompanySaga";
+import { GetCompanySaga ,AddCompanySaga,GetCompanyByIdSaga,UpdateCompanyDetails} from "./company/CompanySaga";
 import { GetUserDetails, updateUserSaga } from "./user/UserSaga";
 import { GetUsersSaga, AddUsersSaga, DeleteUserSaga } from "./user/UsersSaga";
 import {
@@ -94,6 +94,9 @@ function* watchAllSaga() {
   yield takeLatest(actions.getEmailRequest, GetMailSaga);
   // !all asset
   yield takeLatest(actions.getAllAssetListRequest, GetAllAssetList);
+  yield takeLatest(actions.addCompanyRequest,AddCompanySaga)
+  yield takeLatest(actions.getCompanyByIdRequest,GetCompanyByIdSaga)
+  yield takeLatest(actions.updateCompanyDetailsRequest,UpdateCompanyDetails)
 }
 
 export default function* rootSaga() {

@@ -1,18 +1,21 @@
 import { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../../Component/Common/Loader";
 import dummy from "../../../constantData/images/dummyProfile.webp";
 import * as action from "../../../Redux/action";
+
 const Profile = () => {
   const state = useSelector((state) => state);
   const { userDetails, isLoading } = state?.user;
-  console.log(userDetails);
+  const dispatch = useDispatch();
+
   const [profileForm, setProfileForm] = useState({
     name: "",
     email: "",
     company: "",
     phone: "",
     location: "",
+    profilepic:''
   });
 
   const [isEdit, setIsEdit] = useState(false);
@@ -25,9 +28,32 @@ const Profile = () => {
     }
     setProfileForm({ ...profileForm, [name]: value });
   };
+
+  const _handleImageChange = (e) => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    let imageUrl = window.URL.createObjectURL(file);
+    setProfileForm({ ...profileForm, imageUrl: file });
+
+    reader.onloadend = () => {
+      setProfileForm({
+        ...profileForm,
+        file: file,
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+  const formData = new FormData();
+  formData.append("file", profileForm.file);
+  formData.append("name", profileForm.name);
+  formData.append("email", profileForm.email);
+  formData.append("company", profileForm.email);
+  formData.append("phone", profileForm.phone);
+  formData.append("location", profileForm.location);
+
   const openEdit = () => {
     setIsEdit(true);
-
     setProfileForm({
       ...profileForm,
       name: userDetails?.name,
@@ -37,7 +63,7 @@ const Profile = () => {
       location: userDetails?.location,
     });
     if (isEdit) {
-      // dis;
+      dispatch(action.updateUserRequest(formData));
       setIsEdit(false);
     }
   };
@@ -69,21 +95,41 @@ const Profile = () => {
       location: userDetails?.user?.location,
     });
   };
+
+  // const updateProfile=()=>{
+  //   dispatch(action.updateUserRequest({...profileForm}))
+  // }
+
   if (isLoading) {
     return <Loader />;
   }
+  const _handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+
   return (
     <div className="w-full">
       <div className="flex flex-col px-2  py-2 max-w-md mx-auto">
-        <section className="h-[10rem]  w-[10rem] flex flex-col mx-auto mb-5">
+        <section className="h-[12rem]  w-[10rem] flex flex-col mx-auto mb-5">
           <img
-            src={dummy}
+            src={userDetails?.profilepic && userDetails?.profilepic != 'profilepic' ? userDetails?.profilepic:dummy}
             alt="profile pic"
             className="w-full border rounded-full"
           />
           <h3 className="text-center text-gray-500 text-base uppercase mt-3">
             {userDetails?.name}
           </h3>
+          {
+            isEdit &&  <form onSubmit={(e) => _handleSubmit(e)}>
+            <input
+              className="fileInput"
+              type="file"
+              onChange={(e) => _handleImageChange(e)}
+            />
+          </form>
+          }
+         
         </section>
         <form className="m-6   px-[2%] text-left mt-8 ">
           <div className="flex items-center">

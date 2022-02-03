@@ -19,4 +19,7 @@ export const CONFIG = {
   deleteUsers: "user/userDelete",
   getMail: "email/getEmail",
   updateUser: "user/updateUser",
+  addCompany:"company/addCompany",
+  getCompanyById:"company/getcompanyById",
+  updateCompanyDetails:"company/updateCompany"
 };

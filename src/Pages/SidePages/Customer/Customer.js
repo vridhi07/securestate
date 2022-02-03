@@ -2,7 +2,9 @@ import FilterOption from "../../../Component/Common/FilterOption";
 import NewCustomerForm from "../../../Component/Customer/NewCustomerForm";
 import CompanyGroup from "../../../Component/Customer/CompanyGroup";
 import Subscription from "../../../Component/Customer/Subscription";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../../Redux/action";
+import { useEffect, useState } from "react";
 const Customer = () => {
   const [isCustomerFormOpen, setIsCustomerFormOpen] = useState(false);
   const [customerForm, setCustomerForm] = useState({
@@ -13,6 +15,16 @@ const Customer = () => {
     main_poc_email: "",
     main_poc_phone: "",
   });
+  const addCompanyState=useSelector(state=>state.company)
+  const dispatch = useDispatch();
+
+
+  useEffect(()=>{
+if(addCompanyState?.isCompanySuccess){
+  setIsCustomerFormOpen(false)
+}
+
+  },[addCompanyState])
   const handleCustomerForm = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -27,6 +39,12 @@ const Customer = () => {
   };
   const closeCustomerForm = () => {
     setIsCustomerFormOpen(false);
+  };
+
+ 
+  const handleAddCompany = (e) => {
+    e.preventDefault();
+    dispatch(actions.addCompanyRequest({ ...customerForm }));
   };
 
   return (
@@ -55,6 +73,7 @@ const Customer = () => {
         closeCustomerForm={closeCustomerForm}
         handleCustomerForm={handleCustomerForm}
         customerForm={customerForm}
+        handleAddCompany={handleAddCompany}
       />
     </div>
   );
