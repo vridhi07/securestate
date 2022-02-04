@@ -264,7 +264,7 @@ export default function MiniDrawer() {
             <MenuIcon sx={{ color: "white", fontSize: "2rem" }} />
           </button>
           <div className="pr-12 object-fill">
-            <img src={logoImage} className="h-12 w-32" />
+            <img src={logoImage} alt="logo" className="h-12 w-32" />
           </div>
         </DrawerHeader>
         <Divider />

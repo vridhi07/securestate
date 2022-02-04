@@ -6,7 +6,6 @@ import CompanyReducer from "./company/CompanyReducer";
 import UserDetailsReducer from "./user/UserDetailsReducer";
 import UsersReducer from "./user/UserReducer";
 import PentestReducer from "./Pentest/PentestReducer";
-
 import HistoryReducer from "./Asset/HistoryReducer";
 import sbomReducer from "./Asset/SBOMReducer";
 import assetFilesReducer from "./Asset/FilesReducer";
@@ -15,6 +14,8 @@ import AssetTabsDetailsReducer from "./Pentest/PentestTabReducer";
 import scopeReducer from "./Pentest/scopeReducer";
 import pentestChatReducer from "./Pentest/PentestChatReducer";
 import EmailReducer from "./Email/emailReducer";
+import InvoiceReducer from "./Invoice/Invoice";
+
 const rootReducer = combineReducers({
   Login: LoginReducer,
   Signup: SignupReducer,
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   scope: scopeReducer,
   pentestChat: pentestChatReducer,
   emails: EmailReducer,
+  Invoice: InvoiceReducer,
 });
 
 export default rootReducer;

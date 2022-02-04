@@ -25,7 +25,7 @@ const Users = () => {
   // console.log(companyDetails);
   const openDeleteModal = (id) => {
     setIsDeleteModalOpen(true);
-    console.log(id);
+    // console.log(id);
     setSelected(id);
   };
   const closeDeleteModal = () => {

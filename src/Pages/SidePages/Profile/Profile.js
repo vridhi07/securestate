@@ -15,7 +15,7 @@ const Profile = () => {
     company: "",
     phone: "",
     location: "",
-    profilepic:''
+    profilepic: "",
   });
 
   const [isEdit, setIsEdit] = useState(false);
@@ -33,7 +33,7 @@ const Profile = () => {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
-    let imageUrl = window.URL.createObjectURL(file);
+    // let imageUrl = window.URL.createObjectURL(file);
     setProfileForm({ ...profileForm, imageUrl: file });
 
     reader.onloadend = () => {
@@ -107,32 +107,34 @@ const Profile = () => {
     e.preventDefault();
   };
 
-
   return (
     <div className="w-full">
       <div className="flex flex-col px-2  py-2 max-w-md mx-auto">
         <section className="w-[10rem] flex flex-col mx-auto mb-5">
           <img
-            src={userDetails?.profilepic && userDetails?.profilepic != 'profilepic' ? userDetails?.profilepic:dummy}
+            src={
+              userDetails?.profilepic &&
+              userDetails?.profilepic !== "profilepic"
+                ? userDetails?.profilepic
+                : dummy
+            }
             alt="profile pic"
             className="w-full border rounded-full"
           />
           <h3 className="text-center text-gray-500 text-base uppercase mt-3">
             {userDetails?.name}
           </h3>
-          {
-            isEdit &&  
+          {isEdit && (
             <div className="">
               <form onSubmit={(e) => _handleSubmit(e)}>
-            <input
-              className="fileInput"
-              type="file"
-              onChange={(e) => _handleImageChange(e)}
-            />
-          </form>
-              </div>
-          }
-         
+                <input
+                  className="fileInput"
+                  type="file"
+                  onChange={(e) => _handleImageChange(e)}
+                />
+              </form>
+            </div>
+          )}
         </section>
         <form className="m-6   px-[2%] text-left mt-8 ">
           <div className="flex items-center">

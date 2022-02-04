@@ -109,7 +109,6 @@ const Details = () => {
           <section className="flex  lg:w-2/4  lg:mx-auto sm:w-2/3 sm:mx-auto items-center">
             <div className="w-full mr-4">
               <TextField
-                id="outlined-basic"
                 label="Name"
                 variant="outlined"
                 required
@@ -128,7 +127,6 @@ const Details = () => {
                 <InputLabel id="assetPriority">Priority</InputLabel>
                 <Select
                   labelId="assetPriority"
-                  value=""
                   label="Priority"
                   id="assetPriority"
                   name="priority"
@@ -183,7 +181,6 @@ const Details = () => {
                 <InputLabel id="assetStatus">Status</InputLabel>
                 <Select
                   labelId="assetStatus"
-                  value={""}
                   label="Status"
                   id="assetStatus"
                   name="assetStatus"

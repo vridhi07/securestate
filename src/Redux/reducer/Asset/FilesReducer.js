@@ -21,14 +21,12 @@ const assetFilesReducer = (state = initialState, action) => {
         isLoading: false,
         isError: { ...state.isError, status: false, msg: "" },
         assetFiles: action.payload,
-        assetFiles: action.payload,
       };
     case constant.GET_ASSET_FILES_ERROR:
       return {
         ...state,
         isLoading: false,
         isError: { ...state.isError, status: true, msg: action.payload },
-        assetFiles: action.payload,
       };
 
     case constant.ADD_FILES_REQUEST:

@@ -23,6 +23,7 @@ export default function MultipleSelectCheckmarks({
   personName,
   handleNameChange,
   getDetails,
+  selectedNames,
 }) {
   // const [personName, setPersonName] = React.useState([]);
   const { users } = useSelector((state) => state?.users);
@@ -55,7 +56,7 @@ export default function MultipleSelectCheckmarks({
                 value={item.name}
                 onClick={() => getDetails(item._id)}
               >
-                <Checkbox checked={personName.indexOf(item.name) > -1} />
+                <Checkbox checked={selectedNames?.indexOf(item._id) > -1} />
                 <ListItemText primary={item.name} />
               </MenuItem>
             ))}

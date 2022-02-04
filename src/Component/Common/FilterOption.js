@@ -29,7 +29,7 @@ const FilterOption = () => {
     }
   }, [userDetails?.role]);
   let Role = getFilterOPtion(userDetails?.role);
-  
+
   return (
     <div className="flex justify-center">
       <FormControl fullWidth>
@@ -41,7 +41,7 @@ const FilterOption = () => {
           label="Select Company"
           disabled={Role}
         >
-          {userDetails?.role == Roles.superAdmin ? (
+          {userDetails?.role === Roles.superAdmin ? (
             companyDetails &&
             companyDetails?.map((item) => {
               return (

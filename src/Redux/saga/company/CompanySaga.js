@@ -7,11 +7,11 @@ export function* GetCompanySaga() {
   try {
     let response = yield call(axios.get, CONFIG.getCompany);
     if (response && response.data?.status === 1) {
-      yield put(actions.CompanySuccess(response.data.data));
+      yield put(actions.CompanySuccess(response?.data?.data));
     }
   } catch (error) {
     // console.log(error.response.data.message);
-    yield put(actions.CompanyError(error.response.data.message));
+    yield put(actions.CompanyError(error?.response?.data?.message));
   }
 }
 
@@ -19,11 +19,11 @@ export function* AddCompanySaga(action) {
   try {
     let response = yield call(axios.post, CONFIG.addCompany, action.payload);
     if (response && response.data?.status === 1) {
-      yield put(actions.addCompanySuccess(response.data.data));
+      yield put(actions.addCompanySuccess(response?.data?.data));
     }
   } catch (error) {
     // console.log(error.response.data.message);
-    yield put(actions.addCompanyError(error.response.data.message));
+    yield put(actions.addCompanyError(error?.response?.data?.message));
   }
 }
 
@@ -35,11 +35,11 @@ export function* GetCompanyByIdSaga(action) {
       `${CONFIG.getCompanyById}/${companyId}`
     );
     if (response && response.data?.status === 1) {
-      yield put(actions.getCompanyByIdSuccess(response.data.data));
+      yield put(actions.getCompanyByIdSuccess(response?.data?.data));
     }
   } catch (error) {
     // console.log(error.response.data.message);
-    yield put(actions.getCompanyByIdError(error.response.data.message));
+    yield put(actions.getCompanyByIdError(error?.response?.data?.message));
   }
 }
 
@@ -48,7 +48,7 @@ export function* UpdateCompanyDetails(action) {
     const { data, companyId } = action.payload;
     let response = yield call(axios.put, CONFIG.updateCompanyDetails, data);
     if (response && response.data?.status === 1) {
-      yield put(actions.updateCompanyDetailsSuccess(response.data.data));
+      yield put(actions.updateCompanyDetailsSuccess(response?.data?.data));
       yield put(
         actions.getCompanyByIdRequest({
           companyId,
@@ -57,6 +57,8 @@ export function* UpdateCompanyDetails(action) {
     }
   } catch (error) {
     // console.log(error.response.data.message);
-    yield put(actions.updateCompanyDetailsError(error.response.data.message));
+    yield put(
+      actions.updateCompanyDetailsError(error?.response?.data?.message)
+    );
   }
 }

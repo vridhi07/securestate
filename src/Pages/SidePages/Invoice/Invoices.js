@@ -10,7 +10,7 @@ const Invoices = () => {
 
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
-
+  const { invoice } = useSelector((state) => state?.Invoice);
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
