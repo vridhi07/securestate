@@ -330,7 +330,9 @@ const CompanyGroup = () => {
         </div>
         <div className=" mt-3  border border-gray-700 px-1 py-2 h-[317px] overflow-y-auto">
           <div className="min-h-[100%] flex flex-col py-2 ">
-            {groupData &&
+            {groupData.length === 0 ? (
+              <div> No Group </div>
+            ) : (
               groupData.map((item, index) => {
                 return (
                   <GroupAccordion
@@ -341,7 +343,8 @@ const CompanyGroup = () => {
                     users={item}
                   />
                 );
-              })}
+              })
+            )}
           </div>
         </div>
       </div>
