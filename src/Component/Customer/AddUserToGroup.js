@@ -4,6 +4,10 @@ import MulitSelect from "./MultiSelect";
 export default function AddUserToGroup({
   isAddUserGroupOpen,
   closeAddUserToGroup,
+  company_id,
+  personName,
+  handleNameChange,
+  getDetails,
 }) {
   return (
     <div>
@@ -19,16 +23,23 @@ export default function AddUserToGroup({
             <header className="px-20">
               <h4>Add User to Company Group</h4>
             </header>
-            <MulitSelect />
-            <section className="bg-orange-cus-1 text-white flex items-end justify-between mt-4 py-3 pl-[15%] pr-[5%]">
-              {/* <div>
+            <MulitSelect
+              company_id={company_id}
+              personName={personName}
+              handleNameChange={handleNameChange}
+              getDetails={getDetails}
+            />
+          </div>
+          <section className="mx-6 flex justify-center items-center">
+            {/* <div>
               <button>Add New User</button>
             </div>
             <div> */}
-              <button>Save</button>
-              {/* </div> */}
-            </section>
-          </div>
+            <button className="bg-orange-cus-1 text-center text-white  w-full mt-4 py-3 ">
+              Add user
+            </button>
+            {/* </div> */}
+          </section>
         </div>
       </Dialog>
     </div>

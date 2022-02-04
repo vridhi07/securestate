@@ -18,14 +18,13 @@ const Customer = () => {
     main_poc_email: "",
     main_poc_phone: "",
   });
-  const addCompanyState=useSelector(state=>state.company)
- 
-  useEffect(()=>{
-if(addCompanyState?.isCompanySuccess){
-  setIsCustomerFormOpen(false)
-}
+  const addCompanyState = useSelector((state) => state.company);
 
-  },[addCompanyState])
+  useEffect(() => {
+    if (addCompanyState?.isCompanySuccess) {
+      setIsCustomerFormOpen(false);
+    }
+  }, [addCompanyState]);
   const handleCustomerForm = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -34,8 +33,8 @@ if(addCompanyState?.isCompanySuccess){
     }
     setCustomerForm({ ...customerForm, [name]: value });
   };
-  const { users } = useSelector((state) => state?.users);
-  console.log(users);
+  // const { users } = useSelector((state) => state?.users);
+  // console.log(users);
   const openCustomerForm = () => {
     setIsCustomerFormOpen(true);
   };
@@ -43,7 +42,6 @@ if(addCompanyState?.isCompanySuccess){
     setIsCustomerFormOpen(false);
   };
 
- 
   const handleAddCompany = (e) => {
     e.preventDefault();
     dispatch(actions.addCompanyRequest({ ...customerForm }));
@@ -69,7 +67,7 @@ if(addCompanyState?.isCompanySuccess){
       </div>
       {/* <MultipleSelectChip /> */}
       <div className="mt-6  mb-6 h-[759px] lg:h-[392px]">
-        <CompanyGroup users={users} />
+        <CompanyGroup />
       </div>
 
       <Subscription />

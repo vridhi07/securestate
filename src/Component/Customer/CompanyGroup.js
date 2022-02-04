@@ -19,17 +19,57 @@ const CompanyGroup = () => {
     main_poc_email: "",
     main_poc_phone: "",
   });
+
+  const [personName, setPersonName] = useState([]);
+  const [item, setItems] = useState([]);
+  // console.log(item);
+  const handleNameChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
+  const getDetails = (id) => {
+    // let data = [];
+    // let newData = { companyId, id, companyName };
+
+    setItems([...item, id]);
+    // console.log(item.indexOf(id));
+    // console.log(item.includes(i;
+    if (!item.includes(id)) {
+      setItems([...item, id]);
+    }
+    if (item.includes(id)) {
+      setItems(item.filter((data) => data !== id));
+    }
+    // setItems((current) => {
+    //   let newData = current.filter((item) => item !== id);
+    //   return newData;
+    // });
+  };
+
   const dispatch = useDispatch();
   const companyDetails = useSelector(
     (state) => state?.company?.companyListById
   );
-  const selectedCompany = useSelector(
-    (state) => state?.company?.selectedCompany
-  );
-  const defaultSelectedCompany = useSelector(
-    (state) => state.user.userDetails.company_id
-  );
+  const { selectedCompany } = useSelector((state) => state?.company);
+  const { userDetails } = useSelector((state) => state?.user);
 
+  const getCompanyId = (role) => {
+    if (role === "superAdmin") {
+      return selectedCompany;
+    }
+    return userDetails?.company_id._id;
+  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  const company_id = getCompanyId(userDetails?.role);
+  // console.log(company_id);
   const [isAddUserGroupOpen, setIsAddUserGroupOpen] = useState(false);
 
   useEffect(() => {
@@ -41,22 +81,12 @@ const CompanyGroup = () => {
   }, [isCompanyDetailsEdit]);
 
   useEffect(() => {
-    if (selectedCompany) {
-      dispatch(
-        actions.getCompanyByIdRequest({
-          companyId: selectedCompany,
-        })
-      );
-    } else {
-      if (defaultSelectedCompany) {
-        dispatch(
-          actions.getCompanyByIdRequest({
-            companyId: defaultSelectedCompany?._id,
-          })
-        );
-      }
-    }
-  }, [selectedCompany, defaultSelectedCompany]);
+    dispatch(
+      actions.getCompanyByIdRequest({
+        companyId: company_id,
+      })
+    );
+  }, [company_id]);
 
   useEffect(() => {
     if (companyDetails) {
@@ -76,6 +106,8 @@ const CompanyGroup = () => {
 
   const closeAddUserToGroup = () => {
     setIsAddUserGroupOpen(false);
+    setItems([]);
+    setPersonName([]);
   };
 
   const handleCompanyInfo = (e) => {
@@ -93,18 +125,24 @@ const CompanyGroup = () => {
     setIsCompanyDetailsEdit(false);
     setCompanyInfo({
       ...CompanyInfo,
+      company_name: companyDetails?.company_name,
+      location: companyDetails?.location,
+      main_poc: companyDetails?.main_poc,
+      main_poc_email: companyDetails?.main_poc_email,
+      main_poc_phone: companyDetails?.main_poc_phone,
+      website: companyDetails?.website,
     });
   };
 
   const handleUpdateCompanyDetails = (e) => {
     e.preventDefault();
-    const payload = {
+    const data = {
       ...CompanyInfo,
-      id: defaultSelectedCompany
-        ? defaultSelectedCompany?._id
-        : selectedCompany,
+      id: company_id,
     };
-    dispatch(actions.updateCompanyDetailsRequest({ ...payload }));
+    dispatch(
+      actions.updateCompanyDetailsRequest({ data, companyId: company_id })
+    );
     setIsCompanyDetailsEdit(false);
   };
 
@@ -260,6 +298,10 @@ const CompanyGroup = () => {
       <AddUserToGroup
         isAddUserGroupOpen={isAddUserGroupOpen}
         closeAddUserToGroup={closeAddUserToGroup}
+        company_id={company_id}
+        personName={personName}
+        handleNameChange={handleNameChange}
+        getDetails={getDetails}
       />
     </div>
   );

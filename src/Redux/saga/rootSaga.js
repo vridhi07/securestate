@@ -17,8 +17,16 @@ import {
   GetFilesSaga,
   DeleteFileSaga,
 } from "./Asset/AssetFilesSaga";
-import { AssetDetailsSaga } from "./Asset/AssetDetailsSaga";
-import { GetCompanySaga ,AddCompanySaga,GetCompanyByIdSaga,UpdateCompanyDetails} from "./company/CompanySaga";
+import {
+  AssetDetailsSaga,
+  UpdateAssetDetailsSaga,
+} from "./Asset/AssetDetailsSaga";
+import {
+  GetCompanySaga,
+  AddCompanySaga,
+  GetCompanyByIdSaga,
+  UpdateCompanyDetails,
+} from "./company/CompanySaga";
 import { GetUserDetails, updateUserSaga } from "./user/UserSaga";
 import { GetUsersSaga, AddUsersSaga, DeleteUserSaga } from "./user/UsersSaga";
 import {
@@ -60,6 +68,7 @@ function* watchAllSaga() {
   yield takeLatest(actions.getAssetFilesRequest, GetFilesSaga);
   yield takeLatest(actions.deleteFilesRequest, DeleteFileSaga);
   yield takeLatest(actions.getAssetDetailsRequest, AssetDetailsSaga);
+  yield takeLatest(actions.updateAssetDetailsRequest, UpdateAssetDetailsSaga);
 
   // !company
   yield takeLatest(actions.CompanyRequest, GetCompanySaga);
@@ -95,9 +104,9 @@ function* watchAllSaga() {
   yield takeLatest(actions.getEmailRequest, GetMailSaga);
   // !all asset
   yield takeLatest(actions.getAllAssetListRequest, GetAllAssetList);
-  yield takeLatest(actions.addCompanyRequest,AddCompanySaga)
-  yield takeLatest(actions.getCompanyByIdRequest,GetCompanyByIdSaga)
-  yield takeLatest(actions.updateCompanyDetailsRequest,UpdateCompanyDetails)
+  yield takeLatest(actions.addCompanyRequest, AddCompanySaga);
+  yield takeLatest(actions.getCompanyByIdRequest, GetCompanyByIdSaga);
+  yield takeLatest(actions.updateCompanyDetailsRequest, UpdateCompanyDetails);
   // ! Invoice
   yield takeLatest(actions.getInvoiceRequest, GetInvoiceSaga);
   yield takeLatest(actions.addInvoiceRequest, addInvoiceSaga);

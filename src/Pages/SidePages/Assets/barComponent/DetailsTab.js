@@ -22,10 +22,30 @@ const Details = () => {
     (state) => state?.assetDetails
   );
   const [details, setDetails] = useState();
+  const [assetForm, setAssetForm] = useState();
+  const [isEdit, setIsEdit] = useState(false);
+
+  const handleEdit = () => {
+    setIsEdit(!isEdit);
+  };
+
+  const submit = () => {
+    // console.log("submit");
+    const data = {
+      id,
+      asset_name: assetForm?.assetName,
+      asset_type: assetForm?.assetType,
+      status: assetForm?.status,
+      additional_details: assetForm?.additionalINfo,
+      termsAndConditions: assetForm?.termsAndConditions,
+    };
+    console.log(data);
+    dispatch(action.updateAssetDetailsRequest({ editData: data, id }));
+    setIsEdit(false);
+  };
   useEffect(() => {
     dispatch(action.getAssetDetailsRequest(id));
   }, []);
-  const [assetForm, setAssetForm] = useState();
 
   useEffect(() => {
     if (details?.asset_name) {
@@ -34,6 +54,9 @@ const Details = () => {
         assetType: details.asset_type,
         assetStatus: details.asset_name,
         additionalINfo: details.additional_details,
+        status: details.status,
+        priority: details.priority,
+        termsAndConditions: details.termsAndConditions,
       });
     }
   }, [details]);
@@ -51,12 +74,33 @@ const Details = () => {
   return (
     <div className="mt-2   flex flex-col  w-full  text-center  ">
       <section className="flex items-center  mb-3 justify-end">
-        <button
-          className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm
+        <div className="flex items-center">
+          {/* <button
+            className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm
           "
-        >
-          edit asset
-        </button>
+            type="button"
+            onClick={submit}
+          > */}
+          {isEdit && (
+            <button
+              className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm mr-3
+          "
+              type="button"
+              onClick={submit}
+            >
+              Save
+            </button>
+          )}
+
+          <button
+            className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm
+          "
+            type="button"
+            onClick={handleEdit}
+          >
+            {isEdit ? "cancel" : "edit asset"}
+          </button>
+        </div>
       </section>
       {isLoading ? (
         <Loader />
@@ -64,24 +108,22 @@ const Details = () => {
         <form className="flex flex-col">
           <section className="flex  lg:w-2/4  lg:mx-auto sm:w-2/3 sm:mx-auto items-center">
             <div className="w-full mr-4">
-              {assetForm?.assetName && (
-                <TextField
-                  id="outlined-basic"
-                  label="Name"
-                  variant="outlined"
-                  required
-                  name="assetName"
-                  id="assestName"
-                  size="small"
-                  fullWidth
-                  // defaultValue={assetForm?.assetName}
-                  value={assetForm?.assetName}
-                  onChange={handleChange}
-                  disabled={true}
-                />
-              )}
+              <TextField
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                required
+                name="assetName"
+                id="assestName"
+                size="small"
+                fullWidth
+                // defaultValue={assetForm?.assetName}
+                value={assetForm?.assetName}
+                onChange={handleChange}
+                disabled={isEdit ? false : true}
+              />
             </div>
-            <div className=" w-full">
+            <div className="w-full">
               <FormControl fullWidth>
                 <InputLabel id="assetPriority">Priority</InputLabel>
                 <Select
@@ -89,10 +131,11 @@ const Details = () => {
                   value=""
                   label="Priority"
                   id="assetPriority"
-                  name="assetPriority"
+                  name="priority"
                   size="small"
-                  // onChange={handleChange}
-                  disabled={true}
+                  value={assetForm?.priority}
+                  onChange={handleChange}
+                  disabled={isEdit ? false : true}
                 >
                   {Priority.map((item) => {
                     return (
@@ -121,7 +164,7 @@ const Details = () => {
                     // defaultValue={assetForm?.assetType}
                     value={assetForm?.assetType}
                     onChange={handleChange}
-                    disabled={true}
+                    disabled={isEdit ? false : true}
                   >
                     {AssetType.map((item) => {
                       // console.log(item);
@@ -145,10 +188,11 @@ const Details = () => {
                   id="assetStatus"
                   name="assetStatus"
                   size="small"
-                  disabled={true}
-                  // onChange={handleChange}
+                  name="status"
+                  disabled={isEdit ? false : true}
+                  onChange={handleChange}
                   // defaultValue={assetForm?.assetStatus}
-                  // value={assetForm?.assetStatus}
+                  value={assetForm?.status}
                 >
                   {Status.map((item) => {
                     return (
@@ -177,7 +221,7 @@ const Details = () => {
               // defaultValue={assetForm?.additionalINfo}
               value={assetForm?.additionalINfo}
               onChange={handleChange}
-              disabled={true}
+              disabled={isEdit ? false : true}
             />
           </section>
 
@@ -191,19 +235,21 @@ const Details = () => {
               fullWidth
               multiline
               rows={5}
-              name="termsAndCondition"
+              name="termsAndConditions"
               id="termsAndCondition"
-              disabled={true}
+              onChange={handleChange}
+              value={assetForm?.termsAndConditions}
+              disabled={isEdit ? false : true}
             />
           </section>
         </form>
       )}
 
-      <section className="ml-auto mt-10">
+      {/* <section className="ml-auto mt-10">
         <button className="py-2 px-8 bg-red-500 text-white">
           Delete Asset
         </button>
-      </section>
+      </section> */}
     </div>
   );
 };

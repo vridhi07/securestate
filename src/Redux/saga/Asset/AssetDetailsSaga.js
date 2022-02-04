@@ -18,3 +18,18 @@ export function* AssetDetailsSaga(action) {
     yield put(actions.getAssetDetailsError(error.response.data.message));
   }
 }
+
+export function* UpdateAssetDetailsSaga(action) {
+  try {
+    const { editData, id } = action.payload;
+    let response = yield call(axios.put, CONFIG.updateAsset, editData);
+    // console.log(response, "iiiiiii");
+
+    if (response && response.data?.status === 1) {
+      yield put(actions.updateAssetDetailsSuccess("UpdateSuccess"));
+      yield put(actions.getAssetDetailsRequest(id));
+    }
+  } catch (error) {
+    yield put(actions.updateAssetDetailsError("Error occurred"));
+  }
+}

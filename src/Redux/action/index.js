@@ -87,6 +87,16 @@ export const getAssetDetailsError = createAction(
   actions.GET_ASSET_DETAILS_ERROR
 );
 
+export const updateAssetDetailsRequest = createAction(
+  actions.UPDATE_ASSET_DETAILS_REQUEST
+);
+export const updateAssetDetailsSuccess = createAction(
+  actions.UPDATE_ASSET_DETAILS_SUCCESS
+);
+export const updateAssetDetailsError = createAction(
+  actions.UPDATE_ASSET_DETAILS_ERROR
+);
+
 export const handleAssetDetailsChange = createAction(
   actions.HANDLE_ASSET_DETAILS_CHANGE
 );
@@ -243,4 +253,18 @@ export const addInvoiceRequest = createAction(actions.ADD_INVOICE_REQUEST);
 export const addInvoiceSuccess = createAction(actions.ADD_INVOICE_SUCCESS);
 export const addInvoiceError = createAction(actions.ADD_INVOICE_ERROR);
 
-// !
+// !Customer
+// * Group
+export const getGroupListRequest = createAction(actions.GET_GROUP_LIST_REQUEST);
+export const getGroupListSuccess = createAction(actions.GET_GROUP_LIST_SUCCESS);
+export const getGroupListError = createAction(actions.GET_GROUP_LIST_ERROR);
+
+export const addUserToGroupRequest = createAction(
+  actions.ADD_USER_TO_GROUP_REQUEST
+);
+export const addUserToGroupSuccess = createAction(
+  actions.ADD_USER_TO_GROUP_SUCCESS
+);
+export const addUserToGroupError = createAction(
+  actions.ADD_USER_TO_GROUP_ERROR
+);

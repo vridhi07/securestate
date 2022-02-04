@@ -1,6 +1,6 @@
-export const Priority = ["Critical", "High", "Medium", "Low"];
+export const Priority = ["critical", "high", "medium", "low"];
 export const AssetType = ["Web App", "Mobile App", "API"];
-export const Status = ["In Production", "Sandbox"];
+export const Status = ["In Production", "Sandbox", "ACTIVE", "INACTIVE"];
 
 export const changeButtonName = (name, onClick) => {
   if (name === "details") {

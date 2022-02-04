@@ -18,40 +18,21 @@ const MenuProps = {
   },
 };
 
-// const names = [
-//   "Oliver Hansen",
-//   "Van Henry",
-//   "April Tucker",
-//   "Ralph Hubbard",
-//   "Omar Alexander",
-//   "Carlos Abbott",
-//   "Miriam Wagner",
-//   "Bradley Wilkerson",
-//   "Virginia Andrews",
-//   "Kelly Snyder",
-// ];
-
-export default function MultipleSelectCheckmarks() {
-  const [personName, setPersonName] = React.useState([]);
+export default function MultipleSelectCheckmarks({
+  company_id,
+  personName,
+  handleNameChange,
+  getDetails,
+}) {
+  // const [personName, setPersonName] = React.useState([]);
   const { users } = useSelector((state) => state?.users);
-  const [item, setItems] = React.useState([]);
-  console.log(item);
-  // console.log(personName);
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
-  const getDetails = (companyId, id, companyName) => {
-    // let data = [];
-    let newData = { companyId, id, companyName };
 
-    setItems([...item, newData]);
-  };
+  let newUser;
+  if (users) {
+    newUser = users.filter((item) => item.company_id._id === company_id);
+  }
+
+  // console.log(newUser);
 
   return (
     <div>
@@ -62,23 +43,17 @@ export default function MultipleSelectCheckmarks() {
           id="demo-multiple-checkbox"
           multiple
           value={personName}
-          onChange={handleChange}
+          onChange={handleNameChange}
           input={<OutlinedInput label="Select User" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
-          {users &&
-            users.map((item) => (
+          {newUser &&
+            newUser.map((item) => (
               <MenuItem
                 key={item._id}
                 value={item.name}
-                onClick={() =>
-                  getDetails(
-                    item._id,
-                    item?.company_id?._id,
-                    item?.company_id.company_name
-                  )
-                }
+                onClick={() => getDetails(item._id)}
               >
                 <Checkbox checked={personName.indexOf(item.name) > -1} />
                 <ListItemText primary={item.name} />

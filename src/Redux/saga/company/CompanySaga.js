@@ -17,7 +17,7 @@ export function* GetCompanySaga() {
 
 export function* AddCompanySaga(action) {
   try {
-    let response = yield call(axios.post, CONFIG.addCompany,action.payload);
+    let response = yield call(axios.post, CONFIG.addCompany, action.payload);
     if (response && response.data?.status === 1) {
       yield put(actions.addCompanySuccess(response.data.data));
     }
@@ -28,9 +28,12 @@ export function* AddCompanySaga(action) {
 }
 
 export function* GetCompanyByIdSaga(action) {
-  const data=action.payload
+  const { companyId } = action.payload;
   try {
-    let response = yield call(axios.get, `${CONFIG.getCompanyById}/${data.companyId}`);
+    let response = yield call(
+      axios.get,
+      `${CONFIG.getCompanyById}/${companyId}`
+    );
     if (response && response.data?.status === 1) {
       yield put(actions.getCompanyByIdSuccess(response.data.data));
     }
@@ -40,17 +43,20 @@ export function* GetCompanyByIdSaga(action) {
   }
 }
 
-
 export function* UpdateCompanyDetails(action) {
-  
   try {
-    let response = yield call(axios.put, CONFIG.updateCompanyDetails ,{...action.payload});
+    const { data, companyId } = action.payload;
+    let response = yield call(axios.put, CONFIG.updateCompanyDetails, data);
     if (response && response.data?.status === 1) {
       yield put(actions.updateCompanyDetailsSuccess(response.data.data));
+      yield put(
+        actions.getCompanyByIdRequest({
+          companyId,
+        })
+      );
     }
   } catch (error) {
     // console.log(error.response.data.message);
     yield put(actions.updateCompanyDetailsError(error.response.data.message));
   }
 }
-
