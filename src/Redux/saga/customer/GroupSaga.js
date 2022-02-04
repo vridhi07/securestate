@@ -10,6 +10,7 @@ export function* GetGroupList(action) {
     // console.log(action.payload);
     let response = yield call(axios.get, `${CONFIG.getGroupList}/${id}`);
     if (response && response.data?.status === 1) {
+      console.log(response);
       yield put(actions.getGroupListSuccess(response?.data?.data));
     }
   } catch (error) {

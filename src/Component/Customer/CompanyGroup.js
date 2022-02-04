@@ -4,11 +4,19 @@ import EditIcon from "@mui/icons-material/Edit";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
-import SingleGroupCLient from "./SingleGroupCLient";
+
 import AddUserToGroup from "./AddUserToGroup";
 import * as actions from "../../Redux/action";
-
+import GroupAccordion from "./GroupAccordion";
 const CompanyGroup = () => {
+  const dispatch = useDispatch();
+  const companyDetails = useSelector(
+    (state) => state?.company?.companyListById
+  );
+  const { selectedCompany } = useSelector((state) => state?.company);
+  const { userDetails } = useSelector((state) => state?.user);
+  const { GroupUsers } = useSelector((state) => state?.GroupUserList);
+  // console.log(GroupUsers, "group user");
   const [isCompanyDetailsEdit, setIsCompanyDetailsEdit] = useState(false);
   const focusRef = useRef();
   const [CompanyInfo, setCompanyInfo] = useState({
@@ -23,8 +31,13 @@ const CompanyGroup = () => {
   const [personName, setPersonName] = useState([]);
   const [groupName, setGroupName] = useState("");
   const [item, setItems] = useState([]);
-  // console.log(item);
 
+  const [expanded, setExpanded] = useState("panel0");
+  const [search, setSearch] = useState("");
+  let [groupUsers, setGroupUsers] = useState([]);
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
   const handleNameChange = (event) => {
     const {
       target: { value },
@@ -36,9 +49,6 @@ const CompanyGroup = () => {
   };
 
   const getDetails = (id) => {
-    // let data = [];
-    // let newData = { companyId, id, companyName };
-
     setItems([...item, id]);
     // console.log(item.indexOf(id));
     // console.log(item.includes(i;
@@ -54,13 +64,6 @@ const CompanyGroup = () => {
     // });
   };
 
-  const dispatch = useDispatch();
-  const companyDetails = useSelector(
-    (state) => state?.company?.companyListById
-  );
-  const { selectedCompany } = useSelector((state) => state?.company);
-  const { userDetails } = useSelector((state) => state?.user);
-
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
@@ -71,7 +74,7 @@ const CompanyGroup = () => {
   //   setOpen(true);
   // };
   const company_id = getCompanyId(userDetails?.role);
-  console.log(company_id);
+  // console.log(company_id);
   const [isAddUserGroupOpen, setIsAddUserGroupOpen] = useState(false);
 
   useEffect(() => {
@@ -93,10 +96,11 @@ const CompanyGroup = () => {
     }
   }, [company_id]);
 
-  // useEffect(() => {
-  //   if (company_id) {
-  //   }
-  // }, [company_id]);
+  useEffect(() => {
+    if (GroupUsers) {
+      setGroupUsers([...GroupUsers]);
+    }
+  }, [GroupUsers]);
 
   useEffect(() => {
     if (companyDetails) {
@@ -158,13 +162,29 @@ const CompanyGroup = () => {
   const addUserToCompany = () => {
     const data = {
       group_name: groupName,
-      company_id,
+      companyId: company_id,
       userId: [...item],
     };
     dispatch(actions.addUserToGroupRequest({ id: company_id, data }));
     setGroupName("");
     closeAddUserToGroup();
   };
+
+  const filterSearch = (data, search) => {
+    let newData = [...data];
+
+    if (search) {
+      newData = newData.filter((item) =>
+        item.group_name.toLowerCase().startsWith(search)
+      );
+    }
+    return newData;
+  };
+  let groupData;
+  if (groupUsers) {
+    groupData = filterSearch(groupUsers, search);
+  }
+  // console.log(groupData);
   return (
     <div className=" gap-y-[300%] grid grid-cols-10 gap-x-4 h-20">
       {/* Company Info */}
@@ -294,6 +314,8 @@ const CompanyGroup = () => {
                 type="text"
                 placeholder="Search"
                 className="w-full py-1 pl-2  rounded-3xl border-0 focus:bg-none focus:outline-none focus:ring-0"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
             <div className="md:mr-8 mr-2 ml-[3%]">
@@ -308,9 +330,18 @@ const CompanyGroup = () => {
         </div>
         <div className=" mt-3  border border-gray-700 px-1 py-2 h-[317px] overflow-y-auto">
           <div className="min-h-[100%] flex flex-col py-2 ">
-            {[1, 2, 3, 4].map((item) => {
-              return <SingleGroupCLient key={item} />;
-            })}
+            {groupData &&
+              groupData.map((item, index) => {
+                return (
+                  <GroupAccordion
+                    key={item._id}
+                    handleChange={handleChange}
+                    expanded={expanded}
+                    index={index}
+                    users={item}
+                  />
+                );
+              })}
           </div>
         </div>
       </div>
