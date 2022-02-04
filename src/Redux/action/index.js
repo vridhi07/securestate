@@ -199,6 +199,10 @@ export const getEmailRequest = createAction(actions.GET_EMAIL_REQUEST);
 export const getEmailSuccess = createAction(actions.GET_EMAIL_SUCCESS);
 export const getEmailError = createAction(actions.GET_EMAIL_ERROR);
 
+export const sendEmailRequest = createAction(actions.SEND_EMAIL_REQUEST);
+export const sendEmailSuccess = createAction(actions.SEND_EMAIL_SUCCESS);
+export const sendEmailError = createAction(actions.SEND_EMAIL_ERROR);
+
 // ! Users
 export const getUsersRequest = createAction(actions.GET_USERS_REQUEST);
 export const getUsersSuccess = createAction(actions.GET_USERS_SUCCESS);
