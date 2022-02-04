@@ -5,7 +5,8 @@ import axios from "axios";
 export function* GetMailSaga(action) {
   try {
     // const { company_id, activePageNumber, pentestStatus } = action.payload;
-    let response = yield call(axios.get, CONFIG.getMail);
+    const {perPage,pageNumber}=action.payload;
+    let response = yield call(axios.get, `${CONFIG.getMail}/${perPage}/${pageNumber}`);
     if (response && response.data?.status === 1) {
       // console.log(response, "uuuuuu");
       yield put(actions.getEmailSuccess(response?.data?.data));

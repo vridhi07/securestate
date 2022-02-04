@@ -1,21 +1,57 @@
+import { useEffect, useState, useRef } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import MessageForm from "../../../Component/Inbox/MessageForm";
 import MessageContainer from "../../../Component/Inbox/MessageContainer";
 import EmailContainer from "../../../Component/Inbox/EmailContainer";
-import { useEffect, useState } from "react";
+import TablePagination from "@mui/material/TablePagination";
+import CircularProgress from "@mui/material/CircularProgress";
 import * as action from "../../../Redux/action";
 import { useDispatch, useSelector } from "react-redux";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
 const Inbox = () => {
   const dispatch = useDispatch();
   const [openMail, setOpenMail] = useState([]);
   const [search, setSearch] = useState("");
   const { email } = useSelector((state) => state?.emails);
+  const { isLoading } = useSelector((state) => state?.emails);
   const [emailData, setEmailData] = useState([]);
   const [selectData, setSelecData] = useState({
     sendEmail: "",
     id: "",
   });
+  const [page, setPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const [openNewEmail, setOpenNewEmail] = useState(false);
+  
+  const emailTo = useRef();
+  const emailSubject = useRef();
+  const emailText = useRef();
+
+  const handleModalClickOpen = () => {
+    setOpenNewEmail(true);
+  };
+
+  const handleModalClose = () => {
+    setOpenNewEmail(false);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   // console.log(selectData);
   const HandleOpenMail = (item) => {
@@ -23,9 +59,18 @@ const Inbox = () => {
     setSelecData({ sendEMail: item.to, id: item._id });
   };
 
+  function sendMail(){ 
+    dispatch(action.sendEmailRequest({to:emailTo.current?.value,
+      subject:emailSubject.current?.value,
+      message:emailText.current?.value,
+      file:''}))
+  }
+
   useEffect(() => {
-    dispatch(action.getEmailRequest());
-  }, []);
+    dispatch(
+      action.getEmailRequest({ perPage: page, pageNumber: rowsPerPage })
+    );
+  }, [rowsPerPage, page]);
 
   useEffect(() => {
     if (email) {
@@ -47,6 +92,8 @@ const Inbox = () => {
   if (emailData) {
     filterData = getFilter(emailData, search);
   }
+  console.log(email, "isLoading");
+
   // console.log(filterData);
   return (
     <div className="flex flex-col">
@@ -61,31 +108,45 @@ const Inbox = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
+        <div>
+          <TablePagination
+            component="div"
+            count={100}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </div>
         <div className="md:mr-8 mr-2">
           <button className="w-12 h-12 ease-in duration-300 border-none rounded-full bg-orange-cus-1 grid place-content-center shadow-lg  cursor-pointer hover:shadow-xl">
             <div className="hover:rotate-90 ease-in duration-300 ">
-              <AddIcon sx={{ color: "white" }} />
+              <AddIcon onClick={handleModalClickOpen} sx={{ color: "white" }} />
             </div>
           </button>
         </div>
       </div>
       <div className="grid grid-cols-6 mt-3">
         <div className="col-span-3 ">
-          <div className=" h-screen overflow-y-auto">
-            <div className="messageWrapper flex flex-col  px-3">
-              {filterData.length > 0 &&
-                filterData.map((item) => {
-                  // console.log(item);
-                  return (
-                    <EmailContainer
-                      key={item._id}
-                      email={item}
-                      HandleOpenMail={HandleOpenMail}
-                    />
-                  );
-                })}
+          {isLoading ? (
+            <CircularProgress />
+          ) : (
+            <div className=" h-screen overflow-y-auto">
+              <div className="messageWrapper flex flex-col  px-3">
+                {filterData.length > 0 &&
+                  filterData.map((item) => {
+                    // console.log(item);
+                    return (
+                      <EmailContainer
+                        key={item._id}
+                        email={item}
+                        HandleOpenMail={HandleOpenMail}
+                      />
+                    );
+                  })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
         {openMail.length !== 0 && (
           <div className="col-span-3 border w-full relative  shadow-xl h-screen rounded-md bg-blue-cus-1">
@@ -93,6 +154,53 @@ const Inbox = () => {
             <MessageForm />
           </div>
         )}
+      </div>
+
+      <div>
+        <Dialog open={openNewEmail} onClose={handleModalClose}>
+          <DialogTitle>New Email </DialogTitle>
+          <DialogContent>
+            {/* <DialogContentText>
+            To subscribe to this website, please enter your email address here. We
+            will send updates occasionally.
+          </DialogContentText> */}
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="To"
+              type="email"
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              margin="dense"
+              id="subject"
+              label="Subject"
+              type="text"
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              margin="dense"
+              id="outlined-multiline-static"
+              label="Message"
+              multiline
+              type="text"
+              rows={8}
+              fullWidth
+              variant="standard"
+            />
+          </DialogContent>
+          <DialogActions>
+          <Button variant="contained" component="label">
+              Upload File
+              <input type="file" hidden />
+            </Button>
+            <Button onClick={handleModalClose}>Cancel</Button>
+            <Button onClick={handleModalClose}>Send</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </div>
   );
