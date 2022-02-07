@@ -7,8 +7,8 @@ const MessageContainer = ({ openMail = [] }) => {
   //   scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   // }, [array]);
   return (
-    <div className="messageHeights   px-4  ">
-      <div className="flex-col flex justify-end messageWrapper">
+    <div className="messageHeights   px-4  mt-5 ">
+      <div className="flex-col flex justify-start messageWrapper">
         <div
         //  ref={scrollRef}
         // key={openMail._id}

@@ -15,7 +15,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-
+import Loader from "../../../Component/Common/Loader";
+import MultipleSelectCheckmarks from "../../../Component/Inbox/ToInfo";
 const Inbox = () => {
   const dispatch = useDispatch();
   const [openMail, setOpenMail] = useState([]);
@@ -31,7 +32,7 @@ const Inbox = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const [openNewEmail, setOpenNewEmail] = useState(false);
-  
+  // const
   const emailTo = useRef();
   const emailSubject = useRef();
   const emailText = useRef();
@@ -59,11 +60,14 @@ const Inbox = () => {
     setSelecData({ sendEMail: item.to, id: item._id });
   };
 
-  function sendMail(){ 
-    dispatch(action.sendEmailRequest({to:emailTo.current?.value,
-      subject:emailSubject.current?.value,
-      message:emailText.current?.value,
-      file:''}))
+  function sendMail() {
+    const data = {
+      to: emailTo.current?.value,
+      subject: emailSubject.current?.value,
+      message: emailText.current?.value,
+      file: "",
+    };
+    dispatch(action.sendEmailRequest(data));
   }
 
   useEffect(() => {
@@ -93,7 +97,9 @@ const Inbox = () => {
     filterData = getFilter(emailData, search);
   }
   console.log(email, "isLoading");
-
+  if (isLoading) {
+    return <Loader />;
+  }
   // console.log(filterData);
   return (
     <div className="flex flex-col">
@@ -128,25 +134,21 @@ const Inbox = () => {
       </div>
       <div className="grid grid-cols-6 mt-3">
         <div className="col-span-3 ">
-          {isLoading ? (
-            <CircularProgress />
-          ) : (
-            <div className=" h-screen overflow-y-auto">
-              <div className="messageWrapper flex flex-col  px-3">
-                {filterData.length > 0 &&
-                  filterData.map((item) => {
-                    // console.log(item);
-                    return (
-                      <EmailContainer
-                        key={item._id}
-                        email={item}
-                        HandleOpenMail={HandleOpenMail}
-                      />
-                    );
-                  })}
-              </div>
+          <div className=" h-screen overflow-y-auto">
+            <div className="messageWrapper flex flex-col  px-3">
+              {filterData.length > 0 &&
+                filterData.map((item) => {
+                  // console.log(item);
+                  return (
+                    <EmailContainer
+                      key={item._id}
+                      email={item}
+                      HandleOpenMail={HandleOpenMail}
+                    />
+                  );
+                })}
             </div>
-          )}
+          </div>
         </div>
         {openMail.length !== 0 && (
           <div className="col-span-3 border w-full relative  shadow-xl h-screen rounded-md bg-blue-cus-1">
@@ -164,15 +166,7 @@ const Inbox = () => {
             To subscribe to this website, please enter your email address here. We
             will send updates occasionally.
           </DialogContentText> */}
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="To"
-              type="email"
-              fullWidth
-              variant="standard"
-            />
+            <MultipleSelectCheckmarks />
             <TextField
               margin="dense"
               id="subject"
@@ -180,6 +174,7 @@ const Inbox = () => {
               type="text"
               fullWidth
               variant="standard"
+              ref={emailSubject}
             />
             <TextField
               margin="dense"
@@ -193,7 +188,7 @@ const Inbox = () => {
             />
           </DialogContent>
           <DialogActions>
-          <Button variant="contained" component="label">
+            <Button variant="contained" component="label">
               Upload File
               <input type="file" hidden />
             </Button>

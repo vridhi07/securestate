@@ -4,7 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
-
+import DeleteModal from "../Common/DeleteModal";
 import AddUserToGroup from "./AddUserToGroup";
 import * as actions from "../../Redux/action";
 import GroupAccordion from "./GroupAccordion";
@@ -35,6 +35,39 @@ const CompanyGroup = () => {
   const [expanded, setExpanded] = useState("panel0");
   const [search, setSearch] = useState("");
   let [groupUsers, setGroupUsers] = useState([]);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModal] = useState(false);
+  // isDeleteModalOpen,
+  // closeDeleteModal,
+  // handleDelete,
+
+  const openDeleteModal = () => {
+    setIsDeleteModal(true);
+    handleMenuClose();
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModal(false);
+  };
+
+  const handleDelete = () => {
+    console.log("deleted");
+    closeDeleteModal();
+  };
+
+  const handleMenuOpen = (e, id) => {
+    console.log(id);
+    setAnchorEl(e.currentTarget);
+    setSelectedId(id);
+    openDeleteModal();
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
@@ -341,6 +374,9 @@ const CompanyGroup = () => {
                     expanded={expanded}
                     index={index}
                     users={item}
+                    anchorEl={anchorEl}
+                    handleMenuOpen={handleMenuOpen}
+                    handleMenuClose={handleMenuClose}
                   />
                 );
               })
@@ -359,6 +395,11 @@ const CompanyGroup = () => {
         groupName={groupName}
         setGroupName={setGroupName}
         addUserToCompany={addUserToCompany}
+      />
+      <DeleteModal
+        isDeleteModalOpen={isDeleteModalOpen}
+        handleDelete={handleDelete}
+        closeDeleteModal={closeDeleteModal}
       />
     </div>
   );

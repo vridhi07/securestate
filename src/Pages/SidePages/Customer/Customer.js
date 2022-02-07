@@ -50,6 +50,7 @@ const Customer = () => {
   useEffect(() => {
     dispatch(action.getUsersRequest());
   }, []);
+
   return (
     <div className="min-h-screen">
       <div className="max-w-4xl mt-4  flex flex-col lg:flex-row  items-start lg:items-center justify-start  mx-auto  ">

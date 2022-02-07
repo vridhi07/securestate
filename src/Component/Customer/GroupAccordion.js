@@ -47,11 +47,14 @@ export default function CustomizedAccordions({
   handleChange,
   expanded,
   users = [],
+  anchorEl,
+  handleMenuOpen,
+  handleMenuClose,
 }) {
   const { group_name, user_id } = users;
 
   return (
-    <div className="my-3">
+    <div className="my-3 relative">
       <Accordion
         expanded={expanded === `panel${index}`}
         onChange={handleChange(`panel${index}`)}
@@ -63,10 +66,22 @@ export default function CustomizedAccordions({
           <Typography>{group_name}</Typography>
         </AccordionSummary>
         <AccordionDetails>
+          <div className="text-right flex w-full justify-end mt-2 test">
+            <button onClick={() => console.log("Hello")}>Add Users</button>
+          </div>
+
           {user_id &&
             user_id.map((item) => {
               // console.log(item);
-              return <SingleGroupCLient key={item._id} groupUser={item} />;
+              return (
+                <SingleGroupCLient
+                  key={item._id}
+                  groupUser={item}
+                  anchorEl={anchorEl}
+                  handleMenuOpen={handleMenuOpen}
+                  handleMenuClose={handleMenuClose}
+                />
+              );
             })}
         </AccordionDetails>
       </Accordion>

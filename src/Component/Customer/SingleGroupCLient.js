@@ -1,7 +1,13 @@
 import React from "react";
 import dummyProfile from "../../constantData/images/blank-profile-picture.png";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-const SingleGroupCLient = ({ groupUser }) => {
+import DeleteMenu from "./DeleteMenu";
+const SingleGroupCLient = ({
+  groupUser,
+  anchorEl,
+  handleMenuOpen,
+  handleMenuClose,
+}) => {
   // console.log(groupUser);
   return (
     <div className="w-full flex flex-col  mb-3">
@@ -20,9 +26,13 @@ const SingleGroupCLient = ({ groupUser }) => {
             <h4>{groupUser.phone}</h4>
           </div>
           <div>
-            <button className="mt-5">
+            <button
+              className="mt-5"
+              onClick={(e) => handleMenuOpen(e, groupUser._id)}
+            >
               <MoreVertIcon />
             </button>
+            <DeleteMenu anchorEl={anchorEl} handleMenuClose={handleMenuClose} />
           </div>
         </div>
       </div>
