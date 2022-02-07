@@ -7,6 +7,7 @@ const SingleGroupCLient = ({
   anchorEl,
   handleMenuOpen,
   handleMenuClose,
+  openDeleteModal,
 }) => {
   // console.log(groupUser);
   return (
@@ -32,7 +33,11 @@ const SingleGroupCLient = ({
             >
               <MoreVertIcon />
             </button>
-            <DeleteMenu anchorEl={anchorEl} handleMenuClose={handleMenuClose} />
+            <DeleteMenu
+              anchorEl={anchorEl}
+              handleMenuClose={handleMenuClose}
+              openDeleteModal={openDeleteModal}
+            />
           </div>
         </div>
       </div>

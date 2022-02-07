@@ -40,11 +40,12 @@ export default function MultipleSelectCheckmarks({selectedEmails,setSelectedEmai
 
 const getUsersNames=(selectedList)=>{ 
   return userList?.users?.filter(val=>selectedList.includes(val._id))?.map(val=>{
-    if(selectedList.includes(val._id))
-    return val.email
+    if(selectedList.includes(val._id)){
+      return val.email
+    }
+    
   })
 }
-console.log(userList.users,'-09--0-0')
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }} variant="standard" fullWidth>
@@ -55,7 +56,7 @@ console.log(userList.users,'-09--0-0')
           multiple
           value={selectedEmails}
           onChange={handleChange}
-          input={<OutlinedInput label="To" />}
+          input={<OutlinedInput label="To"/>}
           renderValue={(selected) => getUsersNames(selected).join(", ")}
           MenuProps={MenuProps}
         >

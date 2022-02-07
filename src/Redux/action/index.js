@@ -282,3 +282,47 @@ export const sendEmailReplyError = createAction(actions.SEND_REPLY_ERROR);
 export const readEmailRequest = createAction(actions.READ_MAIL_REQUEST);
 export const readEmailSuccess = createAction(actions.READ_MAIL_SUCCESS);
 export const readEmailError = createAction(actions.READ_MAIL_ERROR);
+export const deleteUserFromGroupRequest = createAction(
+  actions.DELETE_USER_FROM_GROUP_REQUEST
+);
+export const deleteUserFromGroupSuccess = createAction(
+  actions.DELETE_USER_FROM_GROUP_SUCCESS
+);
+export const deleteUserFromGroupError = createAction(
+  actions.DELETE_USER_FROM_GROUP_ERROR
+);
+
+export const deleteGroupRequest = createAction(actions.DELETE_GROUP_REQUEST);
+export const deleteGroupSuccess = createAction(actions.DELETE_GROUP_SUCCESS);
+export const deleteGroupError = createAction(actions.DELETE_GROUP_ERROR);
+
+export const addMoreUserToGroupRequest = createAction(
+  actions.ADD_MORE_USER_TO_GROUP_REQUEST
+);
+export const addMoreUserToGroupSuccess = createAction(
+  actions.ADD_MORE_USER_TO_GROUP_SUCCESS
+);
+export const addMoreUserToGroupError = createAction(
+  actions.ADD_MORE_USER_TO_GROUP_ERROR
+);
+
+// *SUBSCRIPTION
+export const addSubscriptionRequest = createAction(
+  actions.ADD_SUBSCRIPTION_REQUEST
+);
+export const addSubscriptionSuccess = createAction(
+  actions.ADD_SUBSCRIPTION_SUCCESS
+);
+export const addSubscriptionError = createAction(
+  actions.ADD_SUBSCRIPTION_ERROR
+);
+
+export const getSubscriptionListRequest = createAction(
+  actions.GET_SUBSCRIPTION_LIST_REQUEST
+);
+export const getSubscriptionListSuccess = createAction(
+  actions.GET_SUBSCRIPTION_LIST_SUCCESS
+);
+export const getSubscriptionListError = createAction(
+  actions.GET_SUBSCRIPTION_LIST_ERROR
+);

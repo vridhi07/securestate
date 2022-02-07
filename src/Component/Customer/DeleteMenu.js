@@ -39,7 +39,7 @@ export default function BasicPopover({
             className="w-full text-left px-1 tracking-wider border-black py-2 m-0 border border-t-0 bg-[#F8B3B0] hover:bg-red-300"
             onClick={openDeleteModal}
           >
-            Delete
+            Remove User
           </button>
         </Paper>
       </Popover>

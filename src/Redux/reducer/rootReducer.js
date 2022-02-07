@@ -16,6 +16,7 @@ import pentestChatReducer from "./Pentest/PentestChatReducer";
 import EmailReducer from "./Email/emailReducer";
 import InvoiceReducer from "./Invoice/Invoice";
 import GroupUserListReducer from "./customer/GroupReducer";
+import GetSubscriptionReducer from "./customer/SubscriptionReducer";
 const rootReducer = combineReducers({
   Login: LoginReducer,
   Signup: SignupReducer,
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   emails: EmailReducer,
   Invoice: InvoiceReducer,
   GroupUserList: GroupUserListReducer,
+  subscriber: GetSubscriptionReducer,
 });
 
 export default rootReducer;

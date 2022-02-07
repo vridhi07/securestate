@@ -2,14 +2,14 @@ import * as constant from "../../constant";
 const initialState = {
   isLoading: false,
   isError: false,
-  invoiceData: [],
+  SubscriptionData: [],
   Message: "",
   ErrorMessage: "",
 };
 
-const InvoiceReducer = (state = initialState, action) => {
+const GetSubscriptionReducer = (state = initialState, action) => {
   switch (action.type) {
-    case constant.GET_INVOICE_REQUEST:
+    case constant.GET_SUBSCRIPTION_LIST_REQUEST:
       return {
         ...state,
         isLoading: true,
@@ -17,17 +17,17 @@ const InvoiceReducer = (state = initialState, action) => {
         Message: "",
         ErrorMessage: "",
       };
-    case constant.GET_INVOICE_SUCCESS:
+    case constant.GET_SUBSCRIPTION_LIST_SUCCESS:
       // console.log(action.payload);
       return {
         ...state,
         isLoading: false,
         isError: false,
-        invoiceData: action.payload,
+        SubscriptionData: action.payload,
         Message: "",
         ErrorMessage: "",
       };
-    case constant.GET_INVOICE_ERROR:
+    case constant.GET_SUBSCRIPTION_LIST_ERROR:
       return {
         ...state,
         isLoading: false,
@@ -41,4 +41,4 @@ const InvoiceReducer = (state = initialState, action) => {
   }
 };
 
-export default InvoiceReducer;
+export default GetSubscriptionReducer;

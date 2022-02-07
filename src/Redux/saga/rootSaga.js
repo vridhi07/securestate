@@ -51,8 +51,17 @@ import { getPentestChatSaga, SendPentestChatSaga } from "./pentest/PentestChat";
 import { GetMailSaga,SendMailSaga,MailReplySaga ,ReadmMailSaga} from "./Mail/MailSaga";
 import { GetInvoiceSaga, addInvoiceSaga } from "./Invoice/InvoiceSaga";
 
-import { GetGroupList, addUserToGroup } from "./customer/GroupSaga";
-
+import {
+  GetGroupList,
+  addUserToGroup,
+  deleteUserFromGroup,
+  deleteGroupSaga,
+  addMoreUserToGroupSaga,
+} from "./customer/GroupSaga";
+import {
+  AddSubscriptionSaga,
+  getSubscriptionSaga,
+} from "./customer/subsScriptionSaga";
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
   yield takeLatest(actions.SignUpRequest, SignupSaga);
@@ -121,6 +130,12 @@ function* watchAllSaga() {
  //read Email
  yield takeLatest(actions.readEmailRequest,ReadmMailSaga)
  
+  yield takeLatest(actions.deleteUserFromGroupRequest, deleteUserFromGroup);
+  yield takeLatest(actions.deleteGroupRequest, deleteGroupSaga);
+  yield takeLatest(actions.addMoreUserToGroupRequest, addMoreUserToGroupSaga);
+  // *Subscritption
+  yield takeLatest(actions.addSubscriptionRequest, AddSubscriptionSaga);
+  yield takeLatest(actions.getSubscriptionListRequest, getSubscriptionSaga);
 }
 
 export default function* rootSaga() {

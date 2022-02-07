@@ -10,7 +10,7 @@ const Invoices = () => {
 
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
-  const { invoice } = useSelector((state) => state?.Invoice);
+  const { invoiceData } = useSelector((state) => state?.Invoice);
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
@@ -37,6 +37,10 @@ const Invoices = () => {
   const handleFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+    if (name === "totalAmount") {
+      value = e.target.value.replace(/\D/, "");
+      console.log(value, "I want number");
+    }
     if (name === "attachData") {
       value = e.target.files[0];
     }
@@ -97,10 +101,11 @@ const Invoices = () => {
         </button>
       </div>
       <div className="px-[5%]">
-        <InvoiceTable />
+        <InvoiceTable invoiceData={invoiceData} />
       </div>
       <InvoiceModal
         open={open}
+        asset
         handleClose={handleClose}
         formInput={formInput}
         handleFormInput={handleFormInput}

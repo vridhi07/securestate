@@ -35,7 +35,30 @@ const GroupUserListReducer = (state = initialState, action) => {
         Message: "",
         ErrorMessage: action.payload,
       };
-
+    case constant.DELETE_GROUP_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        Message: "",
+        ErrorMessage: action.payload,
+      };
+    case constant.DELETE_GROUP_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        Message: action.payload,
+        ErrorMessage: action.payload,
+      };
+    case constant.DELETE_GROUP_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        Message: "",
+        ErrorMessage: action.payload,
+      };
     default:
       return state;
   }

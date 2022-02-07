@@ -28,5 +28,10 @@ export const CONFIG = {
   addUserToGroup: "company/addusertogroup",
   sendEmail:'email/sendMail',
   sendReply:'email/replyMail',
-  readMail:'email/readMail'
+  readMail:'email/readMail',
+  deleteUserFromGroup: "company/deleteUser",
+  deleteGroup: "company/deleteGroup",
+  addMoreUserToGroup: "company/addNewUserToGroup",
+  addSubscription: "company/newsubscription",
+  getSubscription: "company/subscriptionList",
 };

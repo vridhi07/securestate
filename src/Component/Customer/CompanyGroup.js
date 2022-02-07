@@ -8,6 +8,8 @@ import DeleteModal from "../Common/DeleteModal";
 import AddUserToGroup from "./AddUserToGroup";
 import * as actions from "../../Redux/action";
 import GroupAccordion from "./GroupAccordion";
+import AddMoreUserToGroup from "./AddMoreUserToGroup";
+import GroupDeleteModal from "./GroupDeleteModal";
 const CompanyGroup = () => {
   const dispatch = useDispatch();
   const companyDetails = useSelector(
@@ -16,6 +18,16 @@ const CompanyGroup = () => {
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
   const { GroupUsers } = useSelector((state) => state?.GroupUserList);
+  const getCompanyId = (role) => {
+    if (role === "superAdmin") {
+      return selectedCompany;
+    }
+    return userDetails?.company_id._id;
+  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  const company_id = getCompanyId(userDetails?.role);
   // console.log(GroupUsers, "group user");
   const [isCompanyDetailsEdit, setIsCompanyDetailsEdit] = useState(false);
   const focusRef = useRef();
@@ -39,9 +51,57 @@ const CompanyGroup = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModal] = useState(false);
-  // isDeleteModalOpen,
-  // closeDeleteModal,
-  // handleDelete,
+  const [groupId, setGroupId] = useState(null);
+  const [addMoreUserToGroup, setAddMoreUserToGroup] = useState(false);
+  const [isDeleteGroupOpen, setIsDeleteGroupOpen] = useState(false);
+
+  const openIsDeleteGroupOpen = () => {
+    setIsDeleteGroupOpen(true);
+  };
+
+  const closeIsDeleteGroupOpen = () => {
+    setIsDeleteGroupOpen();
+    setGroupId(null);
+  };
+
+  const handleDeleteGroup = (id) => {
+    console.log(id, "GroupId");
+    setGroupId(id);
+    openIsDeleteGroupOpen();
+  };
+
+  const DeleteGroup = () => {
+    console.log("deleted", groupId);
+    dispatch(actions.deleteGroupRequest({ groupId: groupId, id: company_id }));
+    closeIsDeleteGroupOpen();
+  };
+
+  // console.log(selectedId, "userId");
+  // console.log(groupId, "groupId");
+  const handleOpenAddMoreUserToGroup = (id, name) => {
+    // console.log(id, name);
+    setGroupId(id);
+    setGroupName(name);
+    setAddMoreUserToGroup(true);
+  };
+
+  const closeAddMoreUserToGroup = () => {
+    setGroupId(null);
+    setGroupName(null);
+    setAddMoreUserToGroup(false);
+    setItems([]);
+    setPersonName([]);
+  };
+
+  const handleAddMoreUserToGroup = () => {
+    // console.log("added");
+    const data = {
+      groupId: groupId,
+      userId: [...item],
+    };
+    dispatch(actions.addMoreUserToGroupRequest({ id: company_id, data }));
+    closeAddMoreUserToGroup();
+  };
 
   const openDeleteModal = () => {
     setIsDeleteModal(true);
@@ -53,15 +113,21 @@ const CompanyGroup = () => {
   };
 
   const handleDelete = () => {
-    console.log("deleted");
+    // console.log("deleted");
+    dispatch(
+      actions.deleteUserFromGroupRequest({
+        id: company_id,
+        groupId: groupId,
+        userId: selectedId,
+      })
+    );
     closeDeleteModal();
   };
 
   const handleMenuOpen = (e, id) => {
-    console.log(id);
+    // consol`e.log(id);
     setAnchorEl(e.currentTarget);
     setSelectedId(id);
-    openDeleteModal();
   };
 
   const handleMenuClose = () => {
@@ -97,16 +163,6 @@ const CompanyGroup = () => {
     // });
   };
 
-  const getCompanyId = (role) => {
-    if (role === "superAdmin") {
-      return selectedCompany;
-    }
-    return userDetails?.company_id._id;
-  };
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-  const company_id = getCompanyId(userDetails?.role);
   // console.log(company_id);
   const [isAddUserGroupOpen, setIsAddUserGroupOpen] = useState(false);
 
@@ -368,16 +424,24 @@ const CompanyGroup = () => {
             ) : (
               groupData.map((item, index) => {
                 return (
-                  <GroupAccordion
-                    key={item._id}
-                    handleChange={handleChange}
-                    expanded={expanded}
-                    index={index}
-                    users={item}
-                    anchorEl={anchorEl}
-                    handleMenuOpen={handleMenuOpen}
-                    handleMenuClose={handleMenuClose}
-                  />
+                  <div key={item._id} onClick={() => setGroupId(item._id)}>
+                    <GroupAccordion
+                      handleChange={handleChange}
+                      expanded={expanded}
+                      index={index}
+                      users={item}
+                      anchorEl={anchorEl}
+                      handleMenuOpen={handleMenuOpen}
+                      openDeleteModal={openDeleteModal}
+                      handleMenuClose={handleMenuClose}
+                      groupIdRef={item._id}
+                      group_name={item.group_name}
+                      handleOpenAddMoreUserToGroup={
+                        handleOpenAddMoreUserToGroup
+                      }
+                      handleDeleteGroup={handleDeleteGroup}
+                    />
+                  </div>
                 );
               })
             )}
@@ -396,10 +460,26 @@ const CompanyGroup = () => {
         setGroupName={setGroupName}
         addUserToCompany={addUserToCompany}
       />
+      <AddMoreUserToGroup
+        addMoreUserToGroup={addMoreUserToGroup}
+        company_id={company_id}
+        personName={personName}
+        handleNameChange={handleNameChange}
+        getDetails={getDetails}
+        selectedNames={item}
+        closeAddMoreUserToGroup={closeAddMoreUserToGroup}
+        groupName={groupName}
+        handleAddMoreUserToGroup={handleAddMoreUserToGroup}
+      />
       <DeleteModal
         isDeleteModalOpen={isDeleteModalOpen}
         handleDelete={handleDelete}
         closeDeleteModal={closeDeleteModal}
+      />
+      <GroupDeleteModal
+        isDeleteGroupOpen={isDeleteGroupOpen}
+        closeIsDeleteGroupOpen={closeIsDeleteGroupOpen}
+        DeleteGroup={DeleteGroup}
       />
     </div>
   );
