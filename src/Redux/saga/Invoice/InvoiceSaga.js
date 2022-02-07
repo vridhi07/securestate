@@ -7,7 +7,7 @@ export function* GetInvoiceSaga(action) {
   try {
     let response = yield call(
       axios.get,
-      `${CONFIG.getInvoice}/${action.payload}`
+      `${CONFIG.getInvoice}/${action.payload}/5/1`
     );
     if (response && response.data?.status === 1) {
       yield put(actions.getInvoiceSuccess(response.data.data));

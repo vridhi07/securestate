@@ -59,7 +59,7 @@ const Invoices = () => {
   };
 
   useEffect(() => {
-    dispatch(action.getInvoiceRequest(company_id));
+    dispatch(action.getInvoiceRequest({ company_id }));
   }, [company_id]);
 
   const handleSubmit = (e) => {
@@ -105,6 +105,7 @@ const Invoices = () => {
       </div>
       <InvoiceModal
         open={open}
+        asset
         handleClose={handleClose}
         formInput={formInput}
         handleFormInput={handleFormInput}

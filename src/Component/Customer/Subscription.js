@@ -11,6 +11,8 @@ const Subscription = () => {
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
   const { allAsset } = useSelector((state) => state.Assets);
+  const { SubscriptionData } = useSelector((state) => state?.subscriber);
+  console.log(SubscriptionData);
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
@@ -103,9 +105,10 @@ const Subscription = () => {
       </header>
       <div className="border border-gray-700  mt-3 h-[250px] overflow-y-auto">
         <div className="min-h-[100%] flex flex-col px-3 py-2">
-          {[1, 2, 3, 4].map((item) => {
-            return <SingleSubscriber key={item} />;
-          })}
+          {SubscriptionData &&
+            SubscriptionData.map((item) => {
+              return <SingleSubscriber key={item._id} subscriber={item} />;
+            })}
         </div>
       </div>
       <AddSubscription
