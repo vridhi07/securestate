@@ -26,4 +26,7 @@ export const CONFIG = {
   addInvoice: "invoice/addInvoice",
   getGroupList: "company/groupList",
   addUserToGroup: "company/addusertogroup",
+  sendEmail:'email/sendMail',
+  sendReply:'email/replyMail',
+  readMail:'email/readMail'
 };

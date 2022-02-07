@@ -9,30 +9,29 @@ const AngleAttachFileIcon = () => {
   );
 };
 
-const DoubleCircle = () => {
+const DoubleCircle = ({ isSelected }) => {
   return (
     <div className="relative">
       <CircleOutlinedIcon sx={{ fontSize: "1.1rem", color: "#FA9C2E" }} />
       <span className="absolute  left-1 top-0">
-        <CircleIcon sx={{ fontSize: "0.6rem", color: "#0C74FA" }} />
+        {isSelected && (
+          <CircleIcon sx={{ fontSize: "0.6rem", color: "#0C74FA" }} />
+        )}
       </span>
     </div>
   );
 };
-// const Text =
-//   "Lorem ipsum dolor sit amet consectetur adipisicing ipsam saepe eligendi asperiores elit. Omnis laboriosam asperiores elit. Omnis laboriosam";
 
-const EmailContainer = ({ email = [], HandleOpenMail }) => {
+const EmailContainer = ({ email = [], HandleOpenMail, selectedEmail }) => {
   const { _id, from, to, subject, text, read, attachments } = email;
-
   return (
     <article
-      className=" cursor-pointer pt-2 "
+      className={` cursor-pointer pt-2 ${ !read && "bg-blue-cus-1"}`}
       onClick={() => HandleOpenMail(email)}
     >
       <header className="flex justify-between items-center">
         <section className="flex justify-start items-center">
-          <DoubleCircle />
+          <DoubleCircle isSelected={selectedEmail?.id === _id} />
           <h2 className="ml-1 font-bold text-lg-cus ">{from}</h2>
         </section>
         <section className="flex justify-start items-center md:mr-10  ">
