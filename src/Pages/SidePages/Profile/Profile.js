@@ -110,18 +110,21 @@ const Profile = () => {
   return (
     <div className="w-full">
       <div className="flex flex-col px-2  py-2 max-w-md mx-auto">
-        <section className="w-[10rem] flex flex-col mx-auto mb-5">
-          <img
-            src={
-              userDetails?.profilepic &&
-              userDetails?.profilepic !== "profilepic"
-                ? userDetails?.profilepic
-                : dummy
-            }
-            alt="profile pic"
-            className="w-full border rounded-full"
-          />
-          <h3 className="text-center text-gray-500 text-base uppercase mt-3">
+        <section className="w-[10rem] flex flex-col mx-auto mb-2">
+          <div className=" w-[10rem] h-[10rem] rounded-full">
+            <img
+              src={
+                userDetails?.profilepic &&
+                userDetails?.profilepic !== "profilepic"
+                  ? userDetails?.profilepic
+                  : dummy
+              }
+              alt="profile pic"
+              className="w-full h-[10rem] rounded-full object-cover"
+            />
+          </div>
+
+          <h3 className="text-center text-gray-500 text-base uppercase mt-7">
             {userDetails?.name}
           </h3>
           {isEdit && (

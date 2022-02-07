@@ -11,6 +11,7 @@ export default function AddUserToGroup({
   addMoreUserToGroup,
   closeAddMoreUserToGroup,
   groupName,
+  handleAddMoreUserToGroup,
 }) {
   return (
     <div>
@@ -46,7 +47,7 @@ export default function AddUserToGroup({
             <div> */}
             <button
               className="bg-orange-cus-1 text-center text-white  w-full mt-4 py-3 "
-              onClick={closeAddMoreUserToGroup}
+              onClick={handleAddMoreUserToGroup}
             >
               Add user
             </button>

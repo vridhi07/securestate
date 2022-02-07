@@ -6,6 +6,7 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import SingleGroupCLient from "./SingleGroupCLient";
+import { useRef } from "react";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -50,12 +51,13 @@ export default function CustomizedAccordions({
   anchorEl,
   handleMenuOpen,
   handleMenuClose,
-  groupId,
+  groupIdRef,
   handleOpenAddMoreUserToGroup,
   openDeleteModal,
   handleDeleteGroup,
 }) {
   const { group_name, user_id } = users;
+  // const id = useRef(null);
 
   return (
     <div className="my-3 flex items-center  relative">
@@ -98,13 +100,15 @@ export default function CustomizedAccordions({
           <div className="flex gap-2 items-center">
             <button
               className="px-3 bg-orange-cus-1 text-white py-2 rounded-md"
-              onClick={() => handleOpenAddMoreUserToGroup(groupId, group_name)}
+              onClick={() =>
+                handleOpenAddMoreUserToGroup(groupIdRef, group_name)
+              }
             >
               Add User
             </button>
             <button
               className="px-3 bg-red-400 text-white py-2 rounded-md"
-              onClick={() => handleDeleteGroup(groupId)}
+              onClick={() => handleDeleteGroup(groupIdRef)}
             >
               Delete Group
             </button>

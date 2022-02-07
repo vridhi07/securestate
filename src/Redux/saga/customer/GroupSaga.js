@@ -34,6 +34,21 @@ export function* addUserToGroup(action) {
   }
 }
 
+export function* addMoreUserToGroupSaga(action) {
+  try {
+    const { id, data } = action.payload;
+    // console.log(action.payload);
+    let response = yield call(axios.post, CONFIG.addMoreUserToGroup, data);
+    if (response && response.data?.status === 1) {
+      yield put(actions.addMoreUserToGroupSuccess(response?.data?.data));
+      yield put(actions.getGroupListRequest({ id }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.addMoreUserToGroupError(error?.response?.data?.message));
+  }
+}
+
 export function* deleteUserFromGroup(action) {
   try {
     const { id, groupId, userId } = action.payload;

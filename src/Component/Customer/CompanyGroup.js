@@ -79,7 +79,7 @@ const CompanyGroup = () => {
   // console.log(selectedId, "userId");
   // console.log(groupId, "groupId");
   const handleOpenAddMoreUserToGroup = (id, name) => {
-    console.log(id, name);
+    // console.log(id, name);
     setGroupId(id);
     setGroupName(name);
     setAddMoreUserToGroup(true);
@@ -93,6 +93,16 @@ const CompanyGroup = () => {
     setPersonName([]);
   };
 
+  const handleAddMoreUserToGroup = () => {
+    // console.log("added");
+    const data = {
+      groupId: groupId,
+      userId: [...item],
+    };
+    dispatch(actions.addMoreUserToGroupRequest({ id: company_id, data }));
+    closeAddMoreUserToGroup();
+  };
+
   const openDeleteModal = () => {
     setIsDeleteModal(true);
     handleMenuClose();
@@ -103,7 +113,7 @@ const CompanyGroup = () => {
   };
 
   const handleDelete = () => {
-    console.log("deleted");
+    // console.log("deleted");
     dispatch(
       actions.deleteUserFromGroupRequest({
         id: company_id,
@@ -424,7 +434,7 @@ const CompanyGroup = () => {
                       handleMenuOpen={handleMenuOpen}
                       openDeleteModal={openDeleteModal}
                       handleMenuClose={handleMenuClose}
-                      groupId={item._id}
+                      groupIdRef={item._id}
                       group_name={item.group_name}
                       handleOpenAddMoreUserToGroup={
                         handleOpenAddMoreUserToGroup
@@ -459,6 +469,7 @@ const CompanyGroup = () => {
         selectedNames={item}
         closeAddMoreUserToGroup={closeAddMoreUserToGroup}
         groupName={groupName}
+        handleAddMoreUserToGroup={handleAddMoreUserToGroup}
       />
       <DeleteModal
         isDeleteModalOpen={isDeleteModalOpen}

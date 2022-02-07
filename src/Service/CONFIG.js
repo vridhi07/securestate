@@ -28,4 +28,5 @@ export const CONFIG = {
   addUserToGroup: "company/addusertogroup",
   deleteUserFromGroup: "company/deleteUser",
   deleteGroup: "company/deleteGroup",
+  addMoreUserToGroup: "company/addNewUserToGroup",
 };
