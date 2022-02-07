@@ -273,6 +273,15 @@ export const addUserToGroupError = createAction(
   actions.ADD_USER_TO_GROUP_ERROR
 );
 
+export const sendEmailReplyRequest = createAction(actions.SEND_REPLY_REQUEST);
+
+export const sendEmailReplySuccess = createAction(actions.SEND_REPLY_SUCCESS);
+
+export const sendEmailReplyError = createAction(actions.SEND_REPLY_ERROR);
+
+export const readEmailRequest = createAction(actions.READ_MAIL_REQUEST);
+export const readEmailSuccess = createAction(actions.READ_MAIL_SUCCESS);
+export const readEmailError = createAction(actions.READ_MAIL_ERROR);
 export const deleteUserFromGroupRequest = createAction(
   actions.DELETE_USER_FROM_GROUP_REQUEST
 );

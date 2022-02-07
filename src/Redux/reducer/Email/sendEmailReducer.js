@@ -18,7 +18,6 @@ const sendEmailReducer = (state = initialState, action) => {
         ErrorMessage: "",
       };
     case constant.SEND_EMAIL_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         isLoading: false,

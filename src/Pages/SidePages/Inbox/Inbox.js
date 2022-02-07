@@ -17,26 +17,40 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Loader from "../../../Component/Common/Loader";
 import MultipleSelectCheckmarks from "../../../Component/Inbox/ToInfo";
+
 const Inbox = () => {
   const dispatch = useDispatch();
   const [openMail, setOpenMail] = useState([]);
   const [search, setSearch] = useState("");
-  const { email } = useSelector((state) => state?.emails);
-  const { isLoading } = useSelector((state) => state?.emails);
+  const [emailContent, setEmailContent] = useState({
+    subject: "",
+    message: "",
+    file: "",
+  });
+  const { email, isLoading } = useSelector((state) => state?.emails);
+  const emailStatus = useSelector((state) => state.emails);
+  const usersList = useSelector((state) => state.users);
   const [emailData, setEmailData] = useState([]);
-  const [selectData, setSelecData] = useState({
+  const [selectData, setSelectData] = useState({
     sendEmail: "",
     id: "",
   });
-  const [page, setPage] = useState(1);
+  const [selectedEmails, setSelectedEmails] = useState([]);
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
   const [openNewEmail, setOpenNewEmail] = useState(false);
-  // const
-  const emailTo = useRef();
-  const emailSubject = useRef();
-  const emailText = useRef();
+  const [emailReply, sendEmailReply] = useState("");
 
+  useEffect(() => {
+    if (emailStatus?.sendEmailStatus) {
+      setOpenNewEmail(false);
+      setEmailContent({
+        subject: "",
+        message: "",
+        file: "",
+      });
+    }
+  }, [emailStatus]);
   const handleModalClickOpen = () => {
     setOpenNewEmail(true);
   };
@@ -54,26 +68,19 @@ const Inbox = () => {
     setPage(0);
   };
 
-  // console.log(selectData);
   const HandleOpenMail = (item) => {
     setOpenMail(item);
-    setSelecData({ sendEMail: item.to, id: item._id });
+    setSelectData({ sendEMail: item.to, id: item._id });
+    dispatch(action.readEmailRequest({ id: item._id }));
+    sendEmailReply();
   };
 
-  function sendMail() {
-    const data = {
-      to: emailTo.current?.value,
-      subject: emailSubject.current?.value,
-      message: emailText.current?.value,
-      file: "",
-    };
-    dispatch(action.sendEmailRequest(data));
-  }
-
   useEffect(() => {
+    dispatch(action.getUsersRequest());
     dispatch(
       action.getEmailRequest({ perPage: page, pageNumber: rowsPerPage })
     );
+    sendEmailReply();
   }, [rowsPerPage, page]);
 
   useEffect(() => {
@@ -96,11 +103,70 @@ const Inbox = () => {
   if (emailData) {
     filterData = getFilter(emailData, search);
   }
-  console.log(email, "isLoading");
+
+  const handleEmailSubjectChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setEmailContent((val) => {
+      return { ...val, subject: value };
+    });
+  };
+
+  const handleEmailMessageChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setEmailContent((val) => {
+      return { ...val, message: value };
+    });
+  };
+
+  const _handleImageChange = (e) => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      setEmailContent((val) => {
+        return {
+          ...val,
+          file: file,
+        };
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+  const getSelectedEmail = () => {
+    return usersList?.users?.filter((val) => val._id === selectedEmails[0])[0]
+      ?.email;
+  };
+  const formData = new FormData();
+  formData.append("file", emailContent.file);
+  formData.append("to", getSelectedEmail());
+  formData.append("subject", emailContent.subject);
+  formData.append("text", emailContent.message);
+  const _handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const handleSendEmail = () => {
+    dispatch(action.sendEmailRequest(formData));
+  };
+  const sendReply = (e) => {
+    e.preventDefault();
+    dispatch(
+      action.sendEmailReplyRequest({
+        id: selectData.id,
+        data: {
+          text: emailReply,
+        },
+      })
+    );
+  };
   if (isLoading) {
     return <Loader />;
   }
-  // console.log(filterData);
   return (
     <div className="flex flex-col">
       <div className="mt-3 flex justify-between">
@@ -144,6 +210,7 @@ const Inbox = () => {
                       key={item._id}
                       email={item}
                       HandleOpenMail={HandleOpenMail}
+                      selectedEmail={selectData}
                     />
                   );
                 })}
@@ -151,9 +218,13 @@ const Inbox = () => {
           </div>
         </div>
         {openMail.length !== 0 && (
-          <div className="col-span-3 border w-full relative  shadow-xl h-screen rounded-md bg-blue-cus-1">
+          <div className="col-span-3 border w-full relative shadow-xl h-screen rounded-md bg-blue-cus-1">
             <MessageContainer openMail={openMail} />
-            <MessageForm />
+            <MessageForm
+              emailReply={emailReply}
+              sendEmailReply={sendEmailReply}
+              sendReply={sendReply}
+            />
           </div>
         )}
       </div>
@@ -166,7 +237,10 @@ const Inbox = () => {
             To subscribe to this website, please enter your email address here. We
             will send updates occasionally.
           </DialogContentText> */}
-            <MultipleSelectCheckmarks />
+            <MultipleSelectCheckmarks
+              setSelectedEmails={setSelectedEmails}
+              selectedEmails={selectedEmails}
+            />
             <TextField
               margin="dense"
               id="subject"
@@ -174,7 +248,9 @@ const Inbox = () => {
               type="text"
               fullWidth
               variant="standard"
-              ref={emailSubject}
+              value={emailContent.subject}
+              onChange={handleEmailSubjectChange}
+              // ref={emailSubject}
             />
             <TextField
               margin="dense"
@@ -185,15 +261,24 @@ const Inbox = () => {
               rows={8}
               fullWidth
               variant="standard"
+              value={emailContent.message}
+              onChange={handleEmailMessageChange}
             />
           </DialogContent>
           <DialogActions>
             <Button variant="contained" component="label">
-              Upload File
-              <input type="file" hidden />
+              {/* Upload File */}
+              <form onSubmit={(e) => _handleSubmit(e)}>
+                <input
+                  className="fileInput"
+                  type="file"
+                  onChange={(e) => _handleImageChange(e)}
+                />
+              </form>
+              {/* <input type="file" hidden /> */}
             </Button>
             <Button onClick={handleModalClose}>Cancel</Button>
-            <Button onClick={handleModalClose}>Send</Button>
+            <Button onClick={handleSendEmail}>Send</Button>
           </DialogActions>
         </Dialog>
       </div>

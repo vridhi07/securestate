@@ -20,35 +20,32 @@ const MenuProps = {
   },
 };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
 
-export default function MultipleSelectCheckmarks() {
-  const [personName, setPersonName] = React.useState([]);
+export default function MultipleSelectCheckmarks({selectedEmails,setSelectedEmails}) {
+  const userList=useSelector(state=>state.users);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(action.getUsersRequest());
-  }, []);
+  },[]);
   const handleChange = (event) => {
+
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
+    setSelectedEmails(
       typeof value === "string" ? value.split(",") : value
     );
   };
 
+const getUsersNames=(selectedList)=>{ 
+  return userList?.users?.filter(val=>selectedList.includes(val._id))?.map(val=>{
+    if(selectedList.includes(val._id)){
+      return val.email
+    }
+    
+  })
+}
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }} variant="standard" fullWidth>
@@ -57,16 +54,16 @@ export default function MultipleSelectCheckmarks() {
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={personName}
+          value={selectedEmails}
           onChange={handleChange}
-          input={<OutlinedInput label="To" />}
-          renderValue={(selected) => selected.join(", ")}
+          input={<OutlinedInput label="To"/>}
+          renderValue={(selected) => getUsersNames(selected).join(", ")}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+          {userList?.users.map(({_id,email}) => (
+            <MenuItem key={_id} value={_id}>
+              <Checkbox checked={selectedEmails.indexOf(_id) > -1} />
+              <ListItemText primary={email} />
             </MenuItem>
           ))}
         </Select>
