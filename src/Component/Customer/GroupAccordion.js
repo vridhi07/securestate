@@ -50,14 +50,19 @@ export default function CustomizedAccordions({
   anchorEl,
   handleMenuOpen,
   handleMenuClose,
+  groupId,
+  handleOpenAddMoreUserToGroup,
+  openDeleteModal,
+  handleDeleteGroup,
 }) {
   const { group_name, user_id } = users;
 
   return (
-    <div className="my-3 relative">
+    <div className="my-3 flex items-center  relative">
       <Accordion
         expanded={expanded === `panel${index}`}
         onChange={handleChange(`panel${index}`)}
+        sx={{ width: "100%" }}
       >
         <AccordionSummary
           aria-controls="panel1d-content"
@@ -66,10 +71,6 @@ export default function CustomizedAccordions({
           <Typography>{group_name}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <div className="text-right flex w-full justify-end mt-2 test">
-            <button onClick={() => console.log("Hello")}>Add Users</button>
-          </div>
-
           {user_id &&
             user_id.map((item) => {
               // console.log(item);
@@ -80,11 +81,30 @@ export default function CustomizedAccordions({
                   anchorEl={anchorEl}
                   handleMenuOpen={handleMenuOpen}
                   handleMenuClose={handleMenuClose}
+                  openDeleteModal={openDeleteModal}
                 />
               );
             })}
         </AccordionDetails>
       </Accordion>
+      <div>
+        <div className="absolute top-1 right-3  ">
+          <div className="flex gap-2 items-center">
+            <button
+              className="px-3 bg-orange-cus-1 text-white py-2 rounded-md"
+              onClick={() => handleOpenAddMoreUserToGroup(groupId, group_name)}
+            >
+              Add User
+            </button>
+            <button
+              className="px-3 bg-red-400 text-white py-2 rounded-md"
+              onClick={() => handleDeleteGroup(groupId)}
+            >
+              Delete Group
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

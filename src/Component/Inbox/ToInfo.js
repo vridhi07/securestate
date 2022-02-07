@@ -38,7 +38,7 @@ export default function MultipleSelectCheckmarks() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(action.getUsersRequest());
-  });
+  }, []);
   const handleChange = (event) => {
     const {
       target: { value },

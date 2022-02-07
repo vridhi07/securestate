@@ -51,7 +51,11 @@ import { getPentestChatSaga, SendPentestChatSaga } from "./pentest/PentestChat";
 import { GetMailSaga } from "./Mail/MailSaga";
 import { GetInvoiceSaga, addInvoiceSaga } from "./Invoice/InvoiceSaga";
 
-import { GetGroupList, addUserToGroup } from "./customer/GroupSaga";
+import {
+  GetGroupList,
+  addUserToGroup,
+  deleteUserFromGroup,
+} from "./customer/GroupSaga";
 
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
@@ -115,6 +119,7 @@ function* watchAllSaga() {
   // !Customer
   yield takeLatest(actions.getGroupListRequest, GetGroupList);
   yield takeLatest(actions.addUserToGroupRequest, addUserToGroup);
+  yield takeLatest(actions.deleteUserFromGroupRequest, deleteUserFromGroup);
 }
 
 export default function* rootSaga() {
