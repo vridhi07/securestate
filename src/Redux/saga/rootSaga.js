@@ -58,7 +58,10 @@ import {
   deleteGroupSaga,
   addMoreUserToGroupSaga,
 } from "./customer/GroupSaga";
-
+import {
+  AddSubscriptionSaga,
+  getSubscriptionSaga,
+} from "./customer/subsScriptionSaga";
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
   yield takeLatest(actions.SignUpRequest, SignupSaga);
@@ -124,6 +127,9 @@ function* watchAllSaga() {
   yield takeLatest(actions.deleteUserFromGroupRequest, deleteUserFromGroup);
   yield takeLatest(actions.deleteGroupRequest, deleteGroupSaga);
   yield takeLatest(actions.addMoreUserToGroupRequest, addMoreUserToGroupSaga);
+  // *Subscritption
+  yield takeLatest(actions.addSubscriptionRequest, AddSubscriptionSaga);
+  yield takeLatest(actions.getSubscriptionListRequest, getSubscriptionSaga);
 }
 
 export default function* rootSaga() {

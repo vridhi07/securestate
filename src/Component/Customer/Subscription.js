@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import SingleSubscriber from "./SingleSubcriber";
 import AddSubscription from "./AddSubscription";
+import { useSelector, useDispatch } from "react-redux";
+import * as action from "../../Redux/action";
 const Subscription = () => {
+  const dispatch = useDispatch();
+
+  const { selectedCompany } = useSelector((state) => state?.company);
+  const { userDetails } = useSelector((state) => state?.user);
+  const { allAsset } = useSelector((state) => state.Assets);
+  const getCompanyId = (role) => {
+    if (role === "superAdmin") {
+      return selectedCompany;
+    }
+    return userDetails?.company_id._id;
+  };
+  const company_id = getCompanyId(userDetails?.role);
+
   const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
 
   const [subscribeForm, setSubscribeForm] = useState({
@@ -33,7 +48,34 @@ const Subscription = () => {
   };
   const closeSubscription = () => {
     setIsSubscriptionOpen(false);
+    setSubscribeForm({
+      ...subscribeForm,
+      subscription: "",
+      asset: "",
+      start_date: new Date(),
+      end_date: new Date(),
+      monthly_price: "",
+      comments: "",
+    });
   };
+
+  const submitSubscription = (e) => {
+    e.preventDefault();
+    const data = {
+      ...subscribeForm,
+      company_id,
+    };
+    console.log(data);
+    dispatch(action.addSubscriptionRequest({ data, company_id }));
+    closeSubscription();
+  };
+
+  useEffect(() => {
+    if (company_id) {
+      dispatch(action.getSubscriptionListRequest(company_id));
+    }
+  }, [company_id]);
+
   return (
     <div className="mt-[5rem] mb-5">
       <header className="flex justify-between items-center min-w-[400px]  pl-[2.5%] ">
@@ -72,6 +114,8 @@ const Subscription = () => {
         subscribeForm={subscribeForm}
         handleSubscribeForm={handleSubscribeForm}
         handleDate={handleDate}
+        submitSubscription={submitSubscription}
+        allAsset={allAsset}
       />
     </div>
   );

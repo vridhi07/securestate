@@ -296,3 +296,24 @@ export const addMoreUserToGroupSuccess = createAction(
 export const addMoreUserToGroupError = createAction(
   actions.ADD_MORE_USER_TO_GROUP_ERROR
 );
+
+// *SUBSCRIPTION
+export const addSubscriptionRequest = createAction(
+  actions.ADD_SUBSCRIPTION_REQUEST
+);
+export const addSubscriptionSuccess = createAction(
+  actions.ADD_SUBSCRIPTION_SUCCESS
+);
+export const addSubscriptionError = createAction(
+  actions.ADD_SUBSCRIPTION_ERROR
+);
+
+export const getSubscriptionListRequest = createAction(
+  actions.GET_SUBSCRIPTION_LIST_REQUEST
+);
+export const getSubscriptionListSuccess = createAction(
+  actions.GET_SUBSCRIPTION_LIST_SUCCESS
+);
+export const getSubscriptionListError = createAction(
+  actions.GET_SUBSCRIPTION_LIST_ERROR
+);
