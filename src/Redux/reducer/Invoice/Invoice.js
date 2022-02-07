@@ -2,7 +2,7 @@ import * as constant from "../../constant";
 const initialState = {
   isLoading: false,
   isError: false,
-  invoice: [],
+  invoiceData: [],
   Message: "",
   ErrorMessage: "",
 };
@@ -23,7 +23,7 @@ const InvoiceReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        invoice: action.payload,
+        invoiceData: action.payload,
         Message: "",
         ErrorMessage: "",
       };

@@ -65,7 +65,7 @@ const Subscription = () => {
       ...subscribeForm,
       company_id,
     };
-    console.log(data);
+    // console.log(data);
     dispatch(action.addSubscriptionRequest({ data, company_id }));
     closeSubscription();
   };

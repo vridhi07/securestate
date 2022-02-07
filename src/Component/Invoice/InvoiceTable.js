@@ -9,6 +9,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DownloadIcon from "@mui/icons-material/Download";
+import moment from "moment";
 const columns = [
   { id: "Invoice", label: "Invoice", minWidth: 170, align: "left" },
 
@@ -36,10 +37,10 @@ const columns = [
   },
 ];
 
-export default function StickyHeadTable() {
+export default function InvoiceTable({ invoiceData = [] }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
+  console.log(invoiceData);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -67,16 +68,18 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[1, 2, 3, 4, 5].map((row) => {
+            {invoiceData.map((item, index) => {
               return (
-                <TableRow hover key={row}>
-                  <TableCell align="left">Pentest Title #{row}</TableCell>
-                  <TableCell align="left">$XX.XX</TableCell>
-                  <TableCell align="left">12/12/2022</TableCell>
+                <TableRow hover key={item?._id}>
+                  <TableCell align="left">{item?.invoice}</TableCell>
+                  <TableCell align="left">${item.total}</TableCell>
+                  <TableCell align="left">
+                    {moment(item._createdAt).format("l")}
+                  </TableCell>
                   <TableCell align="center">
-                    <button>
+                    <a href={item?.file} download>
                       <DownloadIcon sx={{ color: "#F67A32" }} />
-                    </button>
+                    </a>
                   </TableCell>
                   <TableCell align="center">
                     <button>
