@@ -55,6 +55,7 @@ import {
   GetGroupList,
   addUserToGroup,
   deleteUserFromGroup,
+  deleteGroupSaga,
 } from "./customer/GroupSaga";
 
 function* watchAllSaga() {
@@ -120,6 +121,7 @@ function* watchAllSaga() {
   yield takeLatest(actions.getGroupListRequest, GetGroupList);
   yield takeLatest(actions.addUserToGroupRequest, addUserToGroup);
   yield takeLatest(actions.deleteUserFromGroupRequest, deleteUserFromGroup);
+  yield takeLatest(actions.deleteGroupRequest, deleteGroupSaga);
 }
 
 export default function* rootSaga() {

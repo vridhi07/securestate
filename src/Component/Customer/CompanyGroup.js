@@ -9,6 +9,7 @@ import AddUserToGroup from "./AddUserToGroup";
 import * as actions from "../../Redux/action";
 import GroupAccordion from "./GroupAccordion";
 import AddMoreUserToGroup from "./AddMoreUserToGroup";
+import GroupDeleteModal from "./GroupDeleteModal";
 const CompanyGroup = () => {
   const dispatch = useDispatch();
   const companyDetails = useSelector(
@@ -60,12 +61,19 @@ const CompanyGroup = () => {
 
   const closeIsDeleteGroupOpen = () => {
     setIsDeleteGroupOpen();
+    setGroupId(null);
   };
 
   const handleDeleteGroup = (id) => {
     console.log(id, "GroupId");
     setGroupId(id);
     openIsDeleteGroupOpen();
+  };
+
+  const DeleteGroup = () => {
+    console.log("deleted", groupId);
+    dispatch(actions.deleteGroupRequest({ groupId: groupId, id: company_id }));
+    closeIsDeleteGroupOpen();
   };
 
   // console.log(selectedId, "userId");
@@ -456,6 +464,11 @@ const CompanyGroup = () => {
         isDeleteModalOpen={isDeleteModalOpen}
         handleDelete={handleDelete}
         closeDeleteModal={closeDeleteModal}
+      />
+      <GroupDeleteModal
+        isDeleteGroupOpen={isDeleteGroupOpen}
+        closeIsDeleteGroupOpen={closeIsDeleteGroupOpen}
+        DeleteGroup={DeleteGroup}
       />
     </div>
   );

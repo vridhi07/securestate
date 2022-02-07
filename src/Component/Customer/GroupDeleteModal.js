@@ -4,13 +4,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
 export default function DeleteModal({
-  isDeleteModalOpen,
-  closeDeleteModal,
-  handleDelete,
+  isDeleteGroupOpen,
+  closeIsDeleteGroupOpen,
+  DeleteGroup,
 }) {
   return (
     <div>
-      <Dialog open={isDeleteModalOpen}>
+      <Dialog open={isDeleteGroupOpen}>
         <DialogTitle sx={{ px: 5, py: 5, mt: 4 }}>
           Are you sure you want to delete ?
         </DialogTitle>
@@ -18,13 +18,13 @@ export default function DeleteModal({
           <div className="flex justify-between items-center py-3 px-5">
             <button
               className="transition-all text-lg text-white bg-yes-btn hover:bg-red-400 tracking-widest rounded-md px-4 py-2"
-              onClick={handleDelete}
+              onClick={DeleteGroup}
             >
               Yes
             </button>
             <button
               className="transition-all text-lg text-white bg-no-btn hover:bg-green-400 tracking-widest rounded-md px-5 py-2 "
-              onClick={closeDeleteModal}
+              onClick={closeIsDeleteGroupOpen}
             >
               NO
             </button>

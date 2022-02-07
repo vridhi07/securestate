@@ -23,8 +23,11 @@ export default function AddUserToGroup({
             <CloseIcon />
           </button>
           <div className="flex flex-col justify-center items-center">
-            <header className="px-20">
-              <h4>{groupName}</h4>
+            <header className="px-20 text-center">
+              <h4 className="text-lg font-semibold capitalize">
+                Add User to Group
+              </h4>
+              <h4 className="text-lg font-bold capitalize">{groupName}</h4>
             </header>
             <div>
               <MulitSelect

@@ -282,3 +282,7 @@ export const deleteUserFromGroupSuccess = createAction(
 export const deleteUserFromGroupError = createAction(
   actions.DELETE_USER_FROM_GROUP_ERROR
 );
+
+export const deleteGroupRequest = createAction(actions.DELETE_GROUP_REQUEST);
+export const deleteGroupSuccess = createAction(actions.DELETE_GROUP_SUCCESS);
+export const deleteGroupError = createAction(actions.DELETE_GROUP_ERROR);

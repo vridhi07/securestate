@@ -68,7 +68,13 @@ export default function CustomizedAccordions({
           aria-controls="panel1d-content"
           id={`panel1d-header-${index}`}
         >
-          <Typography>{group_name}</Typography>
+          <Typography
+            sx={{ textTransform: "capitalize" }}
+            variant="h5"
+            component={"h2"}
+          >
+            {group_name}
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           {user_id &&
@@ -88,7 +94,7 @@ export default function CustomizedAccordions({
         </AccordionDetails>
       </Accordion>
       <div>
-        <div className="absolute top-1 right-3  ">
+        <div className="absolute top-2 right-3  ">
           <div className="flex gap-2 items-center">
             <button
               className="px-3 bg-orange-cus-1 text-white py-2 rounded-md"

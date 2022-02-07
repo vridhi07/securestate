@@ -27,4 +27,5 @@ export const CONFIG = {
   getGroupList: "company/groupList",
   addUserToGroup: "company/addusertogroup",
   deleteUserFromGroup: "company/deleteUser",
+  deleteGroup: "company/deleteGroup",
 };

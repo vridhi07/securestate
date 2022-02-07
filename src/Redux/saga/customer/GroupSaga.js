@@ -50,3 +50,20 @@ export function* deleteUserFromGroup(action) {
     yield put(actions.deleteUserFromGroupError(error?.response?.data?.message));
   }
 }
+
+export function* deleteGroupSaga(action) {
+  try {
+    const { id, groupId } = action.payload;
+    // console.log(action.payload);
+    let response = yield call(axios.delete, CONFIG.deleteGroup, {
+      data: { groupId },
+    });
+    if (response && response.data?.status === 1) {
+      yield put(actions.deleteGroupSuccess("Successfully Deleted"));
+      yield put(actions.getGroupListRequest({ id }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.deleteUserFromGroupError(error?.response?.data?.message));
+  }
+}
