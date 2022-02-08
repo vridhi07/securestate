@@ -239,7 +239,7 @@ const AssetsIndex = () => {
   return (
     <div className="mt-8 ">
       <div className="w-full rounded-lg shadow-sm bg-white pl-3 py-6 ">
-        <div className="max-w-md test">
+        <div className="max-w-lg">
           <FilterOption />
         </div>
       </div>
