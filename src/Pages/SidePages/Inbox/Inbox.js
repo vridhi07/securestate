@@ -138,8 +138,8 @@ const Inbox = () => {
     reader.readAsDataURL(file);
   };
   const getSelectedEmail = () => {
-    return usersList?.users?.filter((val) => val._id === selectedEmails[0])[0]
-      ?.email;
+    return usersList?.users?.filter((val) => selectedEmails.includes(val._id)).map(val=>val.email)
+      
   };
   const formData = new FormData();
   formData.append("file", emailContent.file);
@@ -164,6 +164,7 @@ const Inbox = () => {
       })
     );
   };
+
   if (isLoading) {
     return <Loader />;
   }
@@ -204,7 +205,6 @@ const Inbox = () => {
             <div className="messageWrapper flex flex-col  px-3">
               {filterData.length > 0 &&
                 filterData.map((item) => {
-                  // console.log(item);
                   return (
                     <EmailContainer
                       key={item._id}
@@ -233,10 +233,6 @@ const Inbox = () => {
         <Dialog open={openNewEmail} onClose={handleModalClose}>
           <DialogTitle>New Email </DialogTitle>
           <DialogContent>
-            {/* <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText> */}
             <MultipleSelectCheckmarks
               setSelectedEmails={setSelectedEmails}
               selectedEmails={selectedEmails}
@@ -250,7 +246,6 @@ const Inbox = () => {
               variant="standard"
               value={emailContent.subject}
               onChange={handleEmailSubjectChange}
-              // ref={emailSubject}
             />
             <TextField
               margin="dense"
@@ -275,7 +270,6 @@ const Inbox = () => {
                   onChange={(e) => _handleImageChange(e)}
                 />
               </form>
-              {/* <input type="file" hidden /> */}
             </Button>
             <Button onClick={handleModalClose}>Cancel</Button>
             <Button onClick={handleSendEmail}>Send</Button>
