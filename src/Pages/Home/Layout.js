@@ -297,13 +297,14 @@ export default function MiniDrawer() {
           }}
         >
           {sideBarData &&
-            sideBarData.map((item) => (
+            sideBarData.map((item, index) => (
               <NavLink
                 className={`flex justify-center  items-center ${
                   item.path === newPathname && "bg-[#FCE4D7] rounded-md "
                 } ${open && "mx-3"}`}
                 key={item.path}
                 to={item.path}
+                // onClick={()=>index}
               >
                 <ListItem button>
                   <ListItemIcon>

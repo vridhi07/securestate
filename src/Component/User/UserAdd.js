@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
 export default function UserAdd({
   handleClose,
   isUserAddOpen,
@@ -17,6 +18,18 @@ export default function UserAdd({
   getCompanyId,
 }) {
   const { company, firstName, lastName, role, title, email, phone } = userForm;
+  const { userDetails } = useSelector((state) => state?.user);
+
+  const getRole = (role) => {
+    if (role === "superAdmin") {
+      return true;
+    }
+    return false;
+  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  const roles = getRole(userDetails?.role);
   return (
     <div>
       <Dialog open={isUserAddOpen} onClose={handleClose}>
@@ -29,29 +42,56 @@ export default function UserAdd({
               <CloseIcon />
             </button>
             <form onSubmit={handleSubmit}>
-              <FormControl fullWidth sx={{ mt: 2 }}>
-                <InputLabel id="userCompany">Company</InputLabel>
-                <Select
-                  labelId="userCompany"
-                  id="userCompany"
-                  value={company}
-                  label="Company"
-                  size="small"
-                  name="company"
-                  onChange={handleUserFormInput}
-                >
-                  {companyDetails &&
-                    companyDetails.map((item) => (
+              {roles ? (
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                  <InputLabel id="userCompany">Company</InputLabel>
+                  <Select
+                    labelId="userCompany"
+                    id="userCompany"
+                    value={company}
+                    label="Company"
+                    size="small"
+                    name="company"
+                    onChange={handleUserFormInput}
+                  >
+                    {companyDetails &&
+                      companyDetails.map((item) => (
+                        <MenuItem
+                          value={item?.company_name}
+                          key={item?._id}
+                          onClick={() => getCompanyId(item?._id)}
+                        >
+                          {item?.company_name}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
+              ) : (
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                  <InputLabel id="userCompany">Company</InputLabel>
+                  <Select
+                    labelId="userCompany"
+                    id="userCompany"
+                    value={userDetails?.company_id.company_name}
+                    label="Company"
+                    size="small"
+                    name="company"
+                    onChange={handleUserFormInput}
+                  >
+                    {userDetails?.company_id.company_name && (
                       <MenuItem
-                        value={item}
-                        key={item?._id}
-                        onClick={() => getCompanyId(item?._id)}
+                        value={userDetails?.company_id.company_name}
+                        onClick={() =>
+                          getCompanyId(userDetails?.company_id._id)
+                        }
                       >
-                        {item?.company_name}
+                        {userDetails?.company_id.company_name}
                       </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
+                    )}
+                  </Select>
+                </FormControl>
+              )}
+
               <FormControl fullWidth sx={{ mt: 1 }}>
                 <TextField
                   autoFocus

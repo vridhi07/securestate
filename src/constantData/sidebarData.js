@@ -83,37 +83,44 @@ export const clientSidebar = [
     path: "dashboard",
     linkName: "DASHBOARD",
     icon: <HomeIcon sx={color} />,
+    icon2: <HomeIcon sx={color2} />,
   },
   {
     path: "assets",
     linkName: "ASSETS",
     icon: <FileCopyIcon sx={color} />,
+    icon2: <FileCopyIcon sx={color2} />,
   },
   {
     path: "pentests",
     linkName: "PENTEST",
     icon: <AnalyticsIcon sx={color} />,
+    icon2: <AnalyticsIcon sx={color2} />,
   },
   {
     path: "inbox",
     linkName: "INBOX",
     icon: <InboxIcon sx={color} />,
+    icon2: <InboxIcon sx={color2} />,
   },
 
   {
     path: "invoices",
     linkName: "INVOICES",
     icon: <MonetizationOnIcon sx={color} />,
+    icon2: <MonetizationOnIcon sx={color2} />,
   },
   {
     path: "profile",
     linkName: "PROFILE",
     icon: <GroupIcon sx={color} />,
+    icon2: <GroupIcon sx={color2} />,
   },
   {
     path: "settings",
     linkName: "SETTINGS",
     icon: <SettingsIcon sx={color} />,
+    icon2: <SettingsIcon sx={color2} />,
   },
 ];
 
