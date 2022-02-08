@@ -16,7 +16,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import SearchIcon from "@mui/icons-material/Search";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { sidebarData } from "../../constantData/sidebarData";
@@ -26,7 +26,7 @@ import Loader from "../../Component/Common/Loader";
 // import { getRole } from "../../Service/localStorage";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../Redux/action/index";
-import { getAuthToken } from "../../Service/localStorage";
+import dummyProfilePic from "../../constantData/images/dummyProfilePic.jpg";
 import IsOnlinePage from "../../Component/Common/IsOnline";
 import * as Roles from "../../constantData/Roles";
 const drawerWidth = 270;
@@ -221,28 +221,39 @@ export default function MiniDrawer() {
               </div>
             ) : (
               <div className="flex justify-center items-center">
-                <header className="max-h-12 overflow-hidden">
-                  <h4 className="text-orange-cus-1 uppercase text-left tracking-widest  text-xl">
-                    {userDetails?.user_name}
-                  </h4>
-                </header>
-                <div
-                  id="person"
-                  onClick={handleUserMenu}
-                  className="h-11 mx-4 w-11 overflow-x-hidden rounded-full border border-gray-600 grid place-content-center cursor-pointer"
-                >
-                  <PersonIcon />
+                <div id="person" className="h-12 w-12 mx-4  rounded-full ">
+                  <img
+                    src={
+                      userDetails?.profilepic &&
+                      userDetails?.profilepic !== "profilepic"
+                        ? userDetails?.profilepic
+                        : dummyProfilePic
+                    }
+                    className="w-full h-12 rounded-full object-cover"
+                    alt="profile"
+                  />
                 </div>
+                <header
+                  className="max-h-12 flex items-center overflow-hidden cursor-pointer"
+                  onClick={handleUserMenu}
+                >
+                  <h4 className="text-orange-cus-1 uppercase text-left tracking-widest  text-xl">
+                    {userDetails?.name}
+                  </h4>
+                  <span>
+                    <KeyboardArrowDownIcon />
+                  </span>
+                </header>
                 <Menu
                   id="basic-menu"
                   anchorEl={userMenu}
                   anchorOrigin={{
                     vertical: "bottom",
-                    horizontal: "left",
+                    horizontal: "center",
                   }}
                   transformOrigin={{
                     vertical: "top",
-                    horizontal: "center",
+                    horizontal: "left",
                   }}
                   open={menuOpen}
                   onClose={handleCloseUserMenu}
@@ -295,7 +306,9 @@ export default function MiniDrawer() {
                 to={item.path}
               >
                 <ListItem button>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemIcon>
+                    {item.path === newPathname ? item.icon2 : item.icon}
+                  </ListItemIcon>
                   <ListItemText
                     primary={item.linkName}
                     sx={{

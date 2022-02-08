@@ -36,8 +36,10 @@ const AssetTabs = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <div className="xl:mx-56 md:mx-44 sm:mx-36 mx-12">
-        <FilterOption />
+      <div className="w-full rounded-lg shadow-sm bg-white pl-7 py-10 ">
+        <div className="max-w-lg">
+          <FilterOption />
+        </div>
       </div>
       <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
         <div className="mt-4 flex  flex-col w-full mx-auto ">

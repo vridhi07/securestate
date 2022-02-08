@@ -138,8 +138,9 @@ const Inbox = () => {
     reader.readAsDataURL(file);
   };
   const getSelectedEmail = () => {
-    return usersList?.users?.filter((val) => selectedEmails.includes(val._id)).map(val=>val.email)
-      
+    return usersList?.users
+      ?.filter((val) => selectedEmails.includes(val._id))
+      .map((val) => val.email);
   };
   const formData = new FormData();
   formData.append("file", emailContent.file);
@@ -171,7 +172,7 @@ const Inbox = () => {
   return (
     <div className="flex flex-col">
       <div className="mt-3 flex justify-between">
-        <div className="border px-1 border-gray-600  h-11 w-52  rounded-3xl flex items-center justify-start">
+        <div className="border bg-white px-1 border-gray-600  h-11 w-52  rounded-3xl flex items-center justify-start">
           <SearchIcon />
           <input
             type="text"
@@ -199,8 +200,8 @@ const Inbox = () => {
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-6 mt-3">
-        <div className="col-span-3 ">
+      <div className="grid grid-cols-6 mt-3 ">
+        <div className="col-span-3 bg-white ">
           <div className=" h-screen overflow-y-auto">
             <div className="messageWrapper flex flex-col  px-3">
               {filterData.length > 0 &&

@@ -1,7 +1,7 @@
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
 // import IconButton from "@mui/material/IconButton";
 import Dialog from "@mui/material/Dialog";
-
+import AddIcon from "@mui/icons-material/Add";
 import { useEffect, useState, useRef } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -117,7 +117,15 @@ const AssetsIndex = () => {
       id,
       status: newStatus,
     };
-    dispatch(action.UpdateAssetRequest(newData));
+    console.log(status);
+    console.log(newData);
+    dispatch(
+      action.UpdateAssetRequest({
+        editData: newData,
+        company_id,
+        assetPageNumber,
+      })
+    );
   };
 
   //* switch on edit
@@ -224,41 +232,43 @@ const AssetsIndex = () => {
   // const handleSwitch = () => {
   //   inputTag.current.checked;
   // };
-  const handleSwitchAssets = (assetId, assetStatus) => {
-    // console.log(assetId, assetStatus, "==1q222323");
-    const editData = {
-      id: assetId,
-      status: assetStatus === true ? "INACTIVE" : "ACTIVE",
-    };
-    console.log(editData);
-    dispatch(
-      action.UpdateAssetRequest({ editData, company_id, assetPageNumber })
-    );
-  };
+  // !we may need laater
+  // const handleSwitchAssets = (assetId, assetStatus) => {
+  //   // console.log(assetId, assetStatus, "==1q222323");
+  //   const editData = {
+  //     id: assetId,
+  //     status: assetStatus === true ? "INACTIVE" : "ACTIVE",
+  //   };
+  //   console.log(editData);
+  //   dispatch(
+  //     action.UpdateAssetRequest({ editData, company_id, assetPageNumber })
+  //   );
+  // };
   // console.log(assetsList, "===8888");
   return (
     <div className="mt-8 ">
-      <div className="w-full rounded-lg shadow-sm bg-white pl-3 py-6 ">
+      <div className="w-full rounded-lg shadow-sm bg-white pl-7 py-10 ">
         <div className="max-w-lg">
           <FilterOption />
         </div>
       </div>
       <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
         <div className="flex justify-between items-center w-full ">
-          <h4 className="text-orange-cus-1 tracking-wide  text-6xl">Assets</h4>
+          <h4 className="text-orange-cus-1 tracking-wide  text-4xl">Assets</h4>
           <div className="flex flex-col items-start justify-end">
             <button
               onClick={handleClickOpen}
-              className={`bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm`}
+              className={`bg-gray-cus tracking-wide  text-gray-300 py-2 px-6 capitalize rounded-md`}
             >
-              add asset
+              <span>
+                <AddIcon />
+              </span>
+              <span> add asset</span>
             </button>
           </div>
         </div>
         <div
-          className={`mt-4 min-w-[400px] flex-col justify-between items-center w-full ${
-            !isLoading && "border - 2"
-          }  h-3/5 `}
+          className={`mt-4 min-w-[400px] flex-col justify-between items-center w-full   h-3/5 `}
         >
           {/* <div className="w-full flex items-center text-gray-500 border-b-2 pl-8 pr-2 hover:bg-slate-100 ">
             <div className="w-[72%] sm:w-[76%] md:[79%] lg:w-[85%] flex justify-between py-4">
@@ -280,7 +290,7 @@ const AssetsIndex = () => {
                   openDeleteModal={openDeleteModal}
                   handleEdit={handleEdit}
                   anchorEl={anchorEl}
-                  handleSwitchAssets={handleSwitchAssets}
+                  // handleSwitchAssets={handleSwitchAssets}
                 />
               );
             })
@@ -293,6 +303,7 @@ const AssetsIndex = () => {
                   variant="outlined"
                   onChange={handleAssetPageNumber}
                   color="primary"
+                  // sx={{ color: "red" }}
                   page={assetPageNumber}
                 />
               </Stack>

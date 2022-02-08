@@ -69,6 +69,7 @@ export function* DeleteAssetSaga(action) {
 export function* UpdateAssetSaga(action) {
   try {
     const { editData, company_id, assetPageNumber } = action.payload;
+    console.log(company_id, assetPageNumber);
     let response = yield call(axios.put, CONFIG.updateAsset, editData);
     // console.log(response, "iiiiiii");
 
