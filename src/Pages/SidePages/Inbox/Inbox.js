@@ -35,6 +35,7 @@ const Inbox = () => {
     sendEmail: "",
     id: "",
   });
+  const currentUser=useSelector((state=>state.user?.userDetails))
   const [selectedEmails, setSelectedEmails] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -162,6 +163,7 @@ const Inbox = () => {
         data: {
           text: emailReply,
         },
+        email:currentUser.email
       })
     );
   };
