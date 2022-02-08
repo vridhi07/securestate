@@ -24,9 +24,27 @@ const DoubleCircle = ({ isSelected }) => {
 
 const EmailContainer = ({ email = [], HandleOpenMail, selectedEmail }) => {
   const { _id, from, to, subject, text, read, attachments } = email;
+  const getDateAndTime = (emailDetail) => {
+    let data = {
+      date: "",
+      time: "",
+    };
+    if (emailDetail?.reply?.length > 0) {
+      let dateAndTimeDetail =
+        emailDetail.reply[emailDetail.reply.length - 1].repliedAt;
+      data["date"] = new Date(dateAndTimeDetail).toLocaleDateString();
+      data["time"] = new Date(dateAndTimeDetail).toLocaleTimeString("en-US");
+    } else {
+      let dateAndTimeDetail = email?.createdAt;
+      data["date"] = new Date(dateAndTimeDetail).toLocaleDateString();
+      data["time"] = new Date(dateAndTimeDetail).toLocaleTimeString("en-US");
+    }
+    return data;
+  };
+
   return (
     <article
-      className={` cursor-pointer pt-2 ${ !read && "bg-blue-cus-1"}`}
+      className={` cursor-pointer pt-2 ${!read && "bg-blue-cus-1"}`}
       onClick={() => HandleOpenMail(email)}
     >
       <header className="flex justify-between items-center">
@@ -35,7 +53,9 @@ const EmailContainer = ({ email = [], HandleOpenMail, selectedEmail }) => {
           <h2 className="ml-1 font-bold text-lg-cus ">{from}</h2>
         </section>
         <section className="flex justify-start items-center md:mr-10  ">
-          <span className="text-gray-cus-6 text-base ">1 min ago</span>
+          <span className="text-gray-cus-6 text-base ">
+            {`${getDateAndTime(email).date} ${getDateAndTime(email).time}`}
+          </span>
           <span>
             <ChevronRightOutlinedIcon sx={{ color: "#9C8E96" }} />
           </span>
