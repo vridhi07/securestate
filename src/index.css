@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-[#F3F2FA];
+}
+
 .page-height {
   height: calc(100vh - 6rem);
 }

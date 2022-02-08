@@ -38,6 +38,7 @@ const openedMixin = (theme) => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
+  background: "#F27931",
 });
 
 const closedMixin = (theme) => ({
@@ -50,6 +51,7 @@ const closedMixin = (theme) => ({
   [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(9)} + 1px)`,
   },
+  background: "#F27931",
 });
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -258,7 +260,13 @@ export default function MiniDrawer() {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer
+        // style={{ backgroundColor: "red !important" }}
+        // sx={{ backgroundColor: "red !important" }}
+
+        variant="permanent"
+        open={open}
+      >
         <DrawerHeader>
           <button onClick={handleDrawerClose}>
             <MenuIcon sx={{ color: "white", fontSize: "2rem" }} />
@@ -268,45 +276,21 @@ export default function MiniDrawer() {
           </div>
         </DrawerHeader>
         <Divider />
-        <div
-          className={`${
-            open
-              ? " px-4 bg-gray-cus-2  pt-4"
-              : " px-4 pb-3 transition-all hover:bg-gray-hover  bg-orange-cus-2  pt-4 "
-          } hover:cursor-pointer flex justify-center items-center`}
-          onClick={handleDrawerOpen}
-        >
-          {open ? (
-            <div className="border flex items-center">
-              <span>
-                <SearchIcon sx={{ color: "#F67A32", ml: 0.9 }} />
-              </span>
-              <input
-                type="text"
-                className=" border-0 focus:bg-none focus:outline-none focus:ring-0 bg-gray-cus-2  placeholder:text-orange-cus-1 py-2 pl-3"
-                placeholder="Search..."
-              />
-            </div>
-          ) : (
-            <button className="md:mr-3 mr-3">
-              <SearchIcon className=" text-2xl text-orange-cus-1" />
-            </button>
-          )}
-        </div>
+
         <List
           sx={{
-            ...(open === true && { background: "#F9F9F9" }),
-            ...(open === false && { background: "#FEF8F5" }),
+            // ...(open === true && { background: "#F9F9F9" }),
+            // ...(open === false && { background: "#FEF8F5" }),
             // ...(sideBarData === "client" && { height: "100vh" }),
-            paddingTop: 0,
+            paddingTop: 2,
           }}
         >
           {sideBarData &&
             sideBarData.map((item) => (
               <NavLink
-                className={`flex ${
-                  item.path === newPathname && "bg-slate-300"
-                }`}
+                className={`flex justify-center  items-center ${
+                  item.path === newPathname && "bg-[#FCE4D7] rounded-md "
+                } ${open && "mx-3"}`}
                 key={item.path}
                 to={item.path}
               >
@@ -314,15 +298,27 @@ export default function MiniDrawer() {
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText
                     primary={item.linkName}
-                    sx={{ color: "#F67A32" }}
+                    sx={{
+                      color: "white",
+                      ...(item.path === newPathname && { color: "#565658" }),
+                    }}
                   />
                 </ListItem>
               </NavLink>
             ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          backgroundColor: "#F3F2FA",
+          minHeight: "100vh",
+        }}
+      >
         <Toolbar />
+
         <Outlet />
       </Box>
     </Box>

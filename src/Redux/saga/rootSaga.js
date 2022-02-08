@@ -48,7 +48,12 @@ import {
 } from "./pentest/FindingsSaga";
 
 import { getPentestChatSaga, SendPentestChatSaga } from "./pentest/PentestChat";
-import { GetMailSaga,SendMailSaga,MailReplySaga ,ReadmMailSaga} from "./Mail/MailSaga";
+import {
+  GetMailSaga,
+  SendMailSaga,
+  MailReplySaga,
+  ReadmMailSaga,
+} from "./Mail/MailSaga";
 import { GetInvoiceSaga, addInvoiceSaga } from "./Invoice/InvoiceSaga";
 
 import {
@@ -121,15 +126,17 @@ function* watchAllSaga() {
   yield takeLatest(actions.updateCompanyDetailsRequest, UpdateCompanyDetails);
   // ! Invoice
   yield takeLatest(actions.getInvoiceRequest, GetInvoiceSaga);
+  yield takeLatest(actions.addInvoiceRequest, addInvoiceSaga);
+
   // !Customer
   yield takeLatest(actions.getGroupListRequest, GetGroupList);
   yield takeLatest(actions.addUserToGroupRequest, addUserToGroup);
-//send Email
+  //send Email
   yield takeLatest(actions.sendEmailRequest, SendMailSaga);
-  yield takeLatest(actions.sendEmailReplyRequest,  MailReplySaga);
- //read Email
- yield takeLatest(actions.readEmailRequest,ReadmMailSaga)
- 
+  yield takeLatest(actions.sendEmailReplyRequest, MailReplySaga);
+  //read Email
+  yield takeLatest(actions.readEmailRequest, ReadmMailSaga);
+
   yield takeLatest(actions.deleteUserFromGroupRequest, deleteUserFromGroup);
   yield takeLatest(actions.deleteGroupRequest, deleteGroupSaga);
   yield takeLatest(actions.addMoreUserToGroupRequest, addMoreUserToGroupSaga);

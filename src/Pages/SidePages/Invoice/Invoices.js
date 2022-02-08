@@ -21,7 +21,7 @@ const Invoices = () => {
     setOpen(true);
   };
   const company_id = getCompanyId(userDetails?.role);
-  console.log(company_id);
+  // console.log(company_id);
   const [open, setOpen] = useState(false);
   const [formInput, setFormInput] = useState({
     invoice: "",
@@ -30,6 +30,21 @@ const Invoices = () => {
     status: "",
     attachData: "",
   });
+  const [page, setPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  // console.log(invoiceData);
+  console.log(page, "page");
+  console.log(rowsPerPage, "page");
+  const handleChangePage = (event, newPage) => {
+    console.log(newPage);
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(1);
+  };
+
   const getDate = (newValue) => {
     setFormInput({ ...formInput, dueDate: newValue });
   };
@@ -59,8 +74,8 @@ const Invoices = () => {
   };
 
   useEffect(() => {
-    dispatch(action.getInvoiceRequest(company_id));
-  }, [company_id]);
+    dispatch(action.getInvoiceRequest({ company_id, page, rowsPerPage }));
+  }, [company_id, page, rowsPerPage]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -101,7 +116,13 @@ const Invoices = () => {
         </button>
       </div>
       <div className="px-[5%]">
-        <InvoiceTable invoiceData={invoiceData} />
+        <InvoiceTable
+          invoiceData={invoiceData}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          handleChangePage={handleChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+        />
       </div>
       <InvoiceModal
         open={open}

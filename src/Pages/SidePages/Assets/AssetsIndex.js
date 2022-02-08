@@ -238,8 +238,10 @@ const AssetsIndex = () => {
   // console.log(assetsList, "===8888");
   return (
     <div className="mt-8 ">
-      <div className="max-w-2xl mx-auto">
-        <FilterOption />
+      <div className="w-full rounded-lg shadow-sm bg-white pl-3 py-6 ">
+        <div className="max-w-md test">
+          <FilterOption />
+        </div>
       </div>
       <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
         <div className="flex justify-between items-center w-full ">

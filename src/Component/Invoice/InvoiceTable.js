@@ -37,19 +37,13 @@ const columns = [
   },
 ];
 
-export default function InvoiceTable({ invoiceData = [] }) {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  console.log(invoiceData);
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
+export default function InvoiceTable({
+  invoiceData = [],
+  page,
+  rowsPerPage,
+  handleChangePage,
+  handleChangeRowsPerPage,
+}) {
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -93,9 +87,9 @@ export default function InvoiceTable({ invoiceData = [] }) {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 15]}
+        // rowsPerPageOptions={[5, 10, 15]}
         component="div"
-        count={10}
+        count={100}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

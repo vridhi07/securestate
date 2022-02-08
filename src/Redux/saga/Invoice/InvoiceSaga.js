@@ -5,9 +5,10 @@ import * as actions from "../../action/index";
 
 export function* GetInvoiceSaga(action) {
   try {
+    const { company_id, page, rowsPerPage } = action.payload;
     let response = yield call(
       axios.get,
-      `${CONFIG.getInvoice}/${action.payload}/5/1`
+      `${CONFIG.getInvoice}/${company_id}/${rowsPerPage}/${page}`
     );
     if (response && response.data?.status === 1) {
       yield put(actions.getInvoiceSuccess(response.data.data));
