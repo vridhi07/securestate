@@ -88,7 +88,7 @@ const Invoices = () => {
     data.append("total", totalAmount);
     data.append("status", status);
     data.append("company_id", company_id);
-
+    console.log(data);
     dispatch(action.addInvoiceRequest(data));
 
     setFormInput({

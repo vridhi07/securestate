@@ -34,6 +34,8 @@ export const CONFIG = {
   addMoreUserToGroup: "company/addNewUserToGroup",
   addSubscription: "company/newsubscription",
   getSubscription: "company/subscriptionList",
-  allPentestWithCompany: "/pentest/getAllpentests?companyId=",
-  allHackerWithCompany: "/user/getAllHackers?companyId=",
+  allPentestWithCompany: "pentest/getAllpentests?companyId=",
+  allHackerWithCompany: "user/getAllHackers?companyId=",
+  addWallet: "wallet/addWalletDetailsForPentest",
+  getWallet: "wallet/getWalletDetailsForPentest",
 };

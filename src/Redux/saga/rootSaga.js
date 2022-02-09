@@ -71,6 +71,8 @@ import {
 import {
   AllPentestWithCompany,
   allHackerWithCompany,
+  addWalletSaga,
+  getWalletSaga,
 } from "./wallet/WalletSaga";
 
 function* watchAllSaga() {
@@ -152,6 +154,9 @@ function* watchAllSaga() {
   // !Wallet
   yield takeLatest(actions.allPentestWithCompanyRequest, AllPentestWithCompany);
   yield takeLatest(actions.allHackerWithCompanyRequest, allHackerWithCompany);
+
+  yield takeLatest(actions.addWalletRequest, addWalletSaga);
+  yield takeLatest(actions.getWalletRequest, getWalletSaga);
 }
 
 export default function* rootSaga() {

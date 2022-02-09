@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,6 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import * as action from "../../Redux/action";
+import { useSelector, useDispatch } from "react-redux";
 const columns = [
   { id: "Pentest", label: "Pentest", minWidth: 170, align: "left" },
   {
@@ -31,10 +33,12 @@ const columns = [
   },
 ];
 
-export default function StickyHeadTable() {
+export default function StickyHeadTable({ hackerId }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
+  const dispatch = useDispatch();
+  const { walletDetails } = useSelector((state) => state?.wallet);
+  console.log(walletDetails);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -43,7 +47,12 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  useEffect(() => {
+    if (hackerId) {
+      console.log("I was called");
+      dispatch(action.getWalletRequest({ hackerId }));
+    }
+  }, [hackerId]);
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -62,22 +71,21 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[1, 2, 3].map((row) => {
-              return (
-                <TableRow hover key={row}>
-                  <TableCell align="left">Pentest Title #{row}</TableCell>
-                  <TableCell align="left">$$</TableCell>
-                  <TableCell align="left">
-                    {row === 2 ? "pending payment" : "paid"}
-                  </TableCell>
-                  <TableCell align="center">
-                    <button>
-                      <MoreVertIcon />
-                    </button>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+            {walletDetails &&
+              walletDetails.map((item) => {
+                return (
+                  <TableRow hover key={item._id}>
+                    <TableCell align="left">{item?.pentestId?.title}</TableCell>
+                    <TableCell align="left">{item?.award}</TableCell>
+                    <TableCell align="left">{item?.status}</TableCell>
+                    <TableCell align="center">
+                      <button>
+                        <MoreVertIcon />
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>

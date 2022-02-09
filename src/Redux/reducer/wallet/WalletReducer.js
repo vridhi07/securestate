@@ -5,6 +5,7 @@ const initialState = {
   isError: false,
   AllPentest: [],
   allHacker: [],
+  walletDetails: [],
   Message: "",
 };
 
@@ -52,6 +53,30 @@ const WalletReducer = (state = initialState, action) => {
       };
 
     case actions.ALL_HACKER_WITH_COMPANY_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        Message: action.payload,
+      };
+    case actions.GET_WALLET_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        Message: "",
+      };
+
+    case actions.GET_WALLET_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        walletDetails: action.payload,
+        Message: "",
+      };
+
+    case actions.GET_WALLET_ERROR:
       return {
         ...state,
         isLoading: false,

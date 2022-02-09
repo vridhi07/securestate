@@ -128,6 +128,7 @@ const Wallet = () => {
         userId: hackerId,
       };
       console.log(data);
+      dispatch(action.addWalletRequest({ data, hackerId }));
       closeIsWalletOpen();
     }
   };
@@ -148,32 +149,39 @@ const Wallet = () => {
     return () => clearTimeout(time);
   }, [isError.msg]);
 
+  useEffect(() => {
+    if (allHacker) {
+      setHackerId(allHacker[0]?._id);
+    }
+  }, [allHacker]);
+  // console.log(allHacker[0]?._id);
   return (
     <div>
       <div className="w-full rounded-lg shadow-sm bg-white pl-7 py-10 ">
         <div className="max-w-lg">
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Security Research Role
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={hackerId}
-              label="Security Research Role"
-              onChange={(e) => setHackerId(e.target.value)}
-              required
-            >
-              {allHacker &&
-                allHacker.map((item) => {
+          {hackerId && (
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                Security Research Role
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={hackerId}
+                label="Security Research Role"
+                onChange={(e) => setHackerId(e.target.value)}
+                required
+              >
+                {allHacker.map((item) => {
                   return (
                     <MenuItem key={item._id} value={item._id}>
                       {item.user_name}
                     </MenuItem>
                   );
                 })}
-            </Select>
-          </FormControl>
+              </Select>
+            </FormControl>
+          )}
         </div>
       </div>
       <div className="mt-4  px-[5%]">
@@ -223,7 +231,7 @@ const Wallet = () => {
         </div>
       </div>
       <div className="px-[5%] mt-3 mb-4">
-        <WalletTable />
+        <WalletTable hackerId={hackerId} />
       </div>
       <AddTotal
         isTotalOpen={isTotalOpen}

@@ -42,3 +42,34 @@ export function* allHackerWithCompany(action) {
     );
   }
 }
+
+export function* getWalletSaga(action) {
+  try {
+    const { hackerId } = action.payload;
+    let response = yield call(axios.get, `${CONFIG.getWallet}/${hackerId}/5/1`);
+
+    if (response && response?.data?.status === 1) {
+      // console.log(response.data);
+      yield put(actions.getWalletSuccess(response?.data?.data));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.addWalletError(error?.response?.data?.message));
+  }
+}
+
+export function* addWalletSaga(action) {
+  try {
+    const { data, hackerId } = action.payload;
+    let response = yield call(axios.post, `${CONFIG.addWallet}`, data);
+
+    if (response && response?.data?.status === 1) {
+      // console.log(response.data);
+      yield put(actions.addWalletSuccess("success"));
+      yield put(actions.getWalletRequest({ hackerId }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.addWalletError(error?.response?.data?.message));
+  }
+}

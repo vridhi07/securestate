@@ -120,7 +120,8 @@ export default function AlertDialog({
           <div className="flex items-start justify-between w-full mt-5">
             <div className="flex flex-col">
               <button
-                onClick={handleClose}
+                // onClick={handleClose}
+                type="submit"
                 className="px-5 py-2 bg-orange-cus-1 text-white mb-3 "
               >
                 Add Invoice
