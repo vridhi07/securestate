@@ -20,32 +20,32 @@ const MenuProps = {
   },
 };
 
-
-export default function MultipleSelectCheckmarks({selectedEmails,setSelectedEmails}) {
-  const userList=useSelector(state=>state.users);
+export default function MultipleSelectCheckmarks({
+  selectedEmails,
+  setSelectedEmails,
+}) {
+  const userList = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(action.getUsersRequest());
-  },[]);
+  }, []);
   const handleChange = (event) => {
-
     const {
       target: { value },
     } = event;
-    setSelectedEmails(
-      typeof value === "string" ? value.split(",") : value
-    );
+    setSelectedEmails(typeof value === "string" ? value.split(",") : value);
   };
 
-const getUsersNames=(selectedList)=>{ 
-  return userList?.users?.filter(val=>selectedList.includes(val._id))?.map(val=>{
-    if(selectedList.includes(val._id)){
-      return val.email
-    }
-    
-  })
-}
+  const getUsersNames = (selectedList) => {
+    return userList?.users
+      ?.filter((val) => selectedList.includes(val._id))
+      ?.map((val) => {
+        if (selectedList.includes(val._id)) {
+          return val.email;
+        }
+      });
+  };
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }} variant="standard" fullWidth>
@@ -56,11 +56,11 @@ const getUsersNames=(selectedList)=>{
           multiple
           value={selectedEmails}
           onChange={handleChange}
-          input={<OutlinedInput label="To"/>}
+          input={<OutlinedInput label="To" />}
           renderValue={(selected) => getUsersNames(selected).join(", ")}
           MenuProps={MenuProps}
         >
-          {userList?.users.map(({_id,email}) => (
+          {userList?.users.map(({ _id, email }) => (
             <MenuItem key={_id} value={_id}>
               <Checkbox checked={selectedEmails.indexOf(_id) > -1} />
               <ListItemText primary={email} />

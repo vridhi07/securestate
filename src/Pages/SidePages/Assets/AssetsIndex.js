@@ -1,5 +1,6 @@
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
 // import IconButton from "@mui/material/IconButton";
+// import { makeStyles } from "@mui/styles";
 import Dialog from "@mui/material/Dialog";
 import AddIcon from "@mui/icons-material/Add";
 import { useEffect, useState, useRef } from "react";
@@ -13,8 +14,8 @@ import DeleteModal from "../../../Component/Common/DeleteModal";
 import * as action from "../../../Redux/action/index";
 import { useDispatch, useSelector } from "react-redux";
 import AssetList from "../../../Component/Asset/AssetList";
+
 const AssetsIndex = () => {
-  // const updateAssetStatus = useSelector((state) => state.)
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [assetForm, setAssetForm] = useState({
@@ -302,8 +303,11 @@ const AssetsIndex = () => {
                   count={Asset?.totalPage}
                   variant="outlined"
                   onChange={handleAssetPageNumber}
-                  // color="orange"
-                  // sx={{ color: "red" }}
+                  sx={{
+                    "& .Mui-selected": {
+                      backgroundColor: "#F27931 !important",
+                    },
+                  }}
                   page={assetPageNumber}
                  style={{Color: "orange"}}
                 />

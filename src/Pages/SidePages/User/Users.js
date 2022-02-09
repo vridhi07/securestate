@@ -16,7 +16,7 @@ const Users = () => {
     email: "",
     phone: "",
   });
-  const [companyId, setCompanyId] = useState(null);
+  const [companyIds, setCompanyId] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedId, setSelected] = useState(null);
   const dispatch = useDispatch();
@@ -58,11 +58,17 @@ const Users = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    const { company, firstName, lastName, role, title, email, phone } =
-      userForm;
-    e.preventDefault();
+  const { userDetails } = useSelector((state) => state?.user);
 
+  const handleSubmit = (e) => {
+    const { firstName, lastName, role, title, email, phone } = userForm;
+    e.preventDefault();
+    let companyId;
+    if (userDetails?.role === "superAdmin") {
+      companyId = companyIds;
+    } else {
+      companyId = userDetails?.company_id._id;
+    }
     let data = {
       fname: firstName,
       lname: lastName,
@@ -96,7 +102,7 @@ const Users = () => {
         <form className="grid justify-center items-center">
           <div
             className="flex justify-end items-center border border-gray-600 
-          py-0.5 pr-2 rounded-3xl
+          py-0.5 pr-2 rounded-3xl bg-white
           "
           >
             <SearchIcon sx={{ ml: "0.5rem", mt: "0.2rem" }} />

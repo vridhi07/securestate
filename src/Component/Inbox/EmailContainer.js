@@ -3,11 +3,6 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import ChevronRightOutlinedIcon from "@mui/icons-material/ChevronRightOutlined";
-const AngleAttachFileIcon = () => {
-  return (
-    <AttachFileIcon sx={{ transform: "rotate(45deg)", color: "#CCCCCC" }} />
-  );
-};
 
 const DoubleCircle = ({ isSelected }) => {
   return (
@@ -51,6 +46,7 @@ const EmailContainer = ({ email = [], HandleOpenMail, selectedEmail }) => {
         <section className="flex justify-start items-center">
           <DoubleCircle isSelected={selectedEmail?.id === _id} />
           <h2 className="ml-1 font-bold text-lg-cus ">{from}</h2>
+         
         </section>
         <section className="flex justify-start items-center md:mr-10  ">
           <span className="text-gray-cus-6 text-base ">
@@ -61,8 +57,12 @@ const EmailContainer = ({ email = [], HandleOpenMail, selectedEmail }) => {
           </span>
         </section>
       </header>
-      <section className="md:mr-14 mt-1  pb-3 md:ml-5 ">
+      <section className="md:mr-14 mt-1  pb-3 md:ml-04 ">
+        <span className="flex">
+       {attachments?.length>0 && <AttachFileIcon/> } 
         <h3 className="text-xs-cus font-bold ">{subject}</h3>
+        </span>
+       
         <p className="text-justify max-w-md text-xs-cus font-normal text-gray-cus-6">
           {text.substring(0, 105)}
         </p>
