@@ -1,12 +1,13 @@
 import HomeIcon from "@mui/icons-material/Home";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import GroupIcon from "@mui/icons-material/Group";
+import PersonIcon from '@mui/icons-material/Person';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import PeopleIcon from '@mui/icons-material/People';
+import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from "@mui/icons-material/Settings";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import ImageIcon from "@mui/icons-material/Image";
-import ContactPageIcon from "@mui/icons-material/ContactPage";
-import AnalyticsIcon from "@mui/icons-material/Analytics";
+import InboxRoundedIcon from '@mui/icons-material/InboxRounded';
 const color = {
   fontSize: "1.5rem",
   color: "#FFFFFF",
@@ -25,50 +26,50 @@ export const adminSidebar = [
   {
     path: "assets",
     linkName: "ASSETS",
-    icon: <FileCopyIcon sx={color} />,
-    icon2: <FileCopyIcon sx={color2} />,
+    icon: <CurrencyExchangeIcon sx={color} />,
+    icon2: <CurrencyExchangeIcon sx={color2} />,
   },
   {
     path: "pentests",
     linkName: "PENTEST",
-    icon: <AnalyticsIcon sx={color} />,
-    icon2: <AnalyticsIcon sx={color2} />,
+    icon: <FactCheckIcon sx={color} />,
+    icon2: <FactCheckIcon sx={color2} />,
   },
   {
     path: "inbox",
     linkName: "INBOX",
-    icon: <InboxIcon sx={color} />,
-    icon2: <InboxIcon sx={color2} />,
+    icon: <InboxRoundedIcon sx={color} />,
+    icon2: <InboxRoundedIcon sx={color2} />,
   },
   {
     path: "customer",
     linkName: "CUSTOMER",
-    icon: <ImageIcon sx={color} />,
-    icon2: <ImageIcon sx={color2} />,
+    icon: <PersonIcon sx={color} />,
+    icon2: <PersonIcon sx={color2} />,
   },
   {
     path: "users",
     linkName: "USERS",
-    icon: <ContactPageIcon sx={color} />,
-    icon2: <ContactPageIcon sx={color2} />,
+    icon: <PeopleIcon sx={color} />,
+    icon2: <PeopleIcon sx={color2} />,
   },
   {
     path: "wallet",
     linkName: "WALLET",
-    icon: <MonetizationOnIcon sx={color} />,
-    icon2: <MonetizationOnIcon sx={color2} />,
+    icon: <AccountBalanceWalletIcon sx={color} />,
+    icon2: <AccountBalanceWalletIcon sx={color2} />,
   },
   {
     path: "invoices",
     linkName: "INVOICES",
-    icon: <MonetizationOnIcon sx={color} />,
-    icon2: <MonetizationOnIcon sx={color2} />,
+    icon: <DescriptionIcon sx={color} />,
+    icon2: <DescriptionIcon sx={color2} />,
   },
   {
     path: "profile",
     linkName: "PROFILE",
-    icon: <GroupIcon sx={color} />,
-    icon2: <GroupIcon sx={color2} />,
+    icon: <PersonIcon sx={color} />,
+    icon2: <PersonIcon sx={color2} />,
   },
   {
     path: "settings",
@@ -87,33 +88,33 @@ export const clientSidebar = [
   {
     path: "assets",
     linkName: "ASSETS",
-    icon: <FileCopyIcon sx={color} />,
+    icon: <CurrencyExchangeIcon sx={color} />,
   },
   {
     path: "pentests",
     linkName: "PENTEST",
-    icon: <AnalyticsIcon sx={color} />,
+    icon: <FactCheckIcon sx={color} />,
   },
   {
     path: "inbox",
     linkName: "INBOX",
-    icon: <InboxIcon sx={color} />,
+    icon: <InboxRoundedIcon sx={color} />,
   },
 
   {
     path: "invoices",
     linkName: "INVOICES",
-    icon: <MonetizationOnIcon sx={color} />,
+    icon: <PersonIcon sx={color} />,
   },
   {
     path: "profile",
     linkName: "PROFILE",
-    icon: <GroupIcon sx={color} />,
+    icon: <PeopleIcon sx={color} />,
   },
   {
     path: "settings",
     linkName: "SETTINGS",
-    icon: <SettingsIcon sx={color} />,
+    icon: <AccountBalanceWalletIcon sx={color} />,
   },
 ];
 

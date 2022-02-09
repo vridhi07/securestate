@@ -302,9 +302,10 @@ const AssetsIndex = () => {
                   count={Asset?.totalPage}
                   variant="outlined"
                   onChange={handleAssetPageNumber}
-                  color="primary"
+                  // color="orange"
                   // sx={{ color: "red" }}
                   page={assetPageNumber}
+                 style={{Color: "orange"}}
                 />
               </Stack>
             </div>
