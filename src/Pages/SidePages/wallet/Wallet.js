@@ -5,9 +5,23 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import SettingsIcon from "@mui/icons-material/Settings";
 import WalletTable from "../../../Component/Wallet/WalletTable";
+import AddTotal from "../../../Component/Wallet/AddTotal";
 const Wallet = () => {
   const [age, setAge] = useState("");
+  const [isTotalOpen, setIsTotalOpen] = useState(false);
+  const [totalData, setTotalData] = useState({
+    totalEarned: "",
+    reputationScore: "",
+    pentestCompleted: "",
+  });
 
+  const openTotalModal = () => {
+    setIsTotalOpen(true);
+  };
+
+  const closeTotalModal = () => {
+    setIsTotalOpen(false);
+  };
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -38,36 +52,28 @@ const Wallet = () => {
       </div>
       <div className="mt-4  px-[5%]">
         <div className="min-w-[500px] overflow-x-auto">
-          <div className="grid grid-cols-9 gap-x-2 items-center">
+          <div className="w-full flex justify-end items-center mb-3">
+            <button
+              onClick={openTotalModal}
+              className="py-3 px-7 bg-primary-btn rounded-md text-white tracking-wider "
+            >
+              Add
+            </button>
+          </div>
+          <div className="grid grid-cols-9 gap-x-2 items-center test di">
             <div className="col-span-3  text-center">
-              <div className="flex justify-end items-center">
-                <button>
-                  <SettingsIcon sx={{ color: "#9F9F9F" }} />
-                </button>
-              </div>
-
               <div className="max-w-[250px] ">
                 <h1 className="text-8xl mt-2">$XX</h1>
                 <h4 className="text-2xl">Total Earned</h4>
               </div>
             </div>
             <div className="col-span-3  text-center relative">
-              <div className="flex justify-end items-center">
-                <button>
-                  <SettingsIcon sx={{ color: "#9F9F9F" }} />
-                </button>
-              </div>
               <h1 className="text-8xl mt-2">X</h1>
               <h4 className="text-2xl">Reputation Score</h4>
             </div>
             <div className="col-span-3   text-center relative">
-              <div className="flex justify-end items-center">
-                <button>
-                  <SettingsIcon sx={{ color: "#9F9F9F" }} />
-                </button>
-              </div>
               <h1 className="text-8xl mt-2">XX</h1>
-              <h4 className="text-2xl">Total Earned</h4>
+              <h4 className="text-2xl">Pentest Completed</h4>
             </div>
           </div>
         </div>
@@ -86,6 +92,7 @@ const Wallet = () => {
       <div className="px-[5%] mt-3 mb-4">
         <WalletTable />
       </div>
+      <AddTotal isTotalOpen={isTotalOpen} closeTotalModal={closeTotalModal} />
     </div>
   );
 };

@@ -24,6 +24,7 @@ module.exports = {
         "yes-btn": "#F8B3B0",
         "no-btn": "#AEDD94",
         "primary-clr": "#F3F2FA",
+        "primary-btn": "#606060",
       },
       screens: {
         xs: "370px",

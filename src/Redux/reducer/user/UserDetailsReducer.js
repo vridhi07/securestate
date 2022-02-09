@@ -5,6 +5,7 @@ const initialState = {
   isSuccess: false,
   isError: false,
   userDetails: [],
+  userRole: "",
   Message: "",
 };
 
@@ -26,6 +27,7 @@ const UserDetailsReducer = (state = initialState, action) => {
         isSuccess: true,
         isError: false,
         userDetails: action.payload,
+        userRole: action.payload.role,
         Message: "",
       };
 
