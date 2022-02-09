@@ -3,17 +3,61 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import SettingsIcon from "@mui/icons-material/Settings";
+// import SettingsIcon from "@mui/icons-material/Settings";
 import WalletTable from "../../../Component/Wallet/WalletTable";
 import AddTotal from "../../../Component/Wallet/AddTotal";
+import AddWallet from "../../../Component/Wallet/AddWallet";
+import { useSelector } from "react-redux";
 const Wallet = () => {
   const [age, setAge] = useState("");
   const [isTotalOpen, setIsTotalOpen] = useState(false);
+
+  const [isWalletOpen, setIsWalletOpen] = useState(false);
+
   const [totalData, setTotalData] = useState({
     totalEarned: "",
     reputationScore: "",
     pentestCompleted: "",
   });
+
+  const [walletDetail, setWalletDetail] = useState({
+    pentest: "",
+    award: "",
+    status: "",
+    hackerId: "",
+  });
+  // !Redux
+  const { selectedCompany } = useSelector((state) => state?.company);
+  const { userDetails, userRole } = useSelector((state) => state?.user);
+  // * Functions
+
+  const getCompanyId = (role) => {
+    if (role === "superAdmin") {
+      return selectedCompany;
+    }
+    return userDetails?.company_id._id;
+  };
+
+  //* COMPANY ID
+  const company_id = getCompanyId(userRole);
+  console.log(company_id);
+  const handleTotalChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setTotalData({ ...totalData, [name]: value });
+  };
+
+  const handleWalletChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setWalletDetail({ ...walletDetail, [name]: value });
+  };
+  const openIsWalletOpen = () => {
+    setIsWalletOpen(true);
+  };
+  const closeIsWalletOpen = () => {
+    setIsWalletOpen(false);
+  };
 
   const openTotalModal = () => {
     setIsTotalOpen(true);
@@ -21,10 +65,23 @@ const Wallet = () => {
 
   const closeTotalModal = () => {
     setIsTotalOpen(false);
+    setTotalData({
+      ...totalData,
+      totalEarned: "",
+      reputationScore: "",
+      pentestCompleted: "",
+    });
   };
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  const submitTotal = (e) => {
+    e.preventDefault();
+    console.log(totalData);
+    closeTotalModal();
+  };
+
   return (
     <div>
       <div className=" max-w-2xl mx-auto">
@@ -52,15 +109,21 @@ const Wallet = () => {
       </div>
       <div className="mt-4  px-[5%]">
         <div className="min-w-[500px] overflow-x-auto">
-          <div className="w-full flex justify-end items-center mb-3">
+          <div className="w-full flex justify-end items-center gap-3 mb-3">
             <button
               onClick={openTotalModal}
-              className="py-3 px-7 bg-primary-btn rounded-md text-white tracking-wider "
+              className="px-10 py-2 bg-primary-btn rounded-md text-white tracking-wider "
+            >
+              Edit
+            </button>
+            <button
+              onClick={openTotalModal}
+              className="px-10 py-2 bg-primary-btn rounded-md text-white tracking-wider "
             >
               Add
             </button>
           </div>
-          <div className="grid grid-cols-9 gap-x-2 items-center test di">
+          <div className="grid grid-cols-9 gap-x-2 items-center">
             <div className="col-span-3  text-center">
               <div className="max-w-[250px] ">
                 <h1 className="text-8xl mt-2">$XX</h1>
@@ -83,7 +146,8 @@ const Wallet = () => {
         <div className="pr-3">
           <button
             type="button"
-            className=" px-10 py-2 bg-[#F7F6F6] text-[#454545] border border-black tracking-wider"
+            className=" px-10 py-2 bg-primary-btn text-white rounded-md  tracking-wider"
+            onClick={openIsWalletOpen}
           >
             Add
           </button>
@@ -92,7 +156,20 @@ const Wallet = () => {
       <div className="px-[5%] mt-3 mb-4">
         <WalletTable />
       </div>
-      <AddTotal isTotalOpen={isTotalOpen} closeTotalModal={closeTotalModal} />
+      <AddTotal
+        isTotalOpen={isTotalOpen}
+        closeTotalModal={closeTotalModal}
+        totalData={totalData}
+        handleTotalChange={handleTotalChange}
+        submitTotal={submitTotal}
+      />
+      <AddWallet
+        isWalletOpen={isWalletOpen}
+        openIsWalletOpen={openIsWalletOpen}
+        closeIsWalletOpen={closeIsWalletOpen}
+        handleWalletChange={handleWalletChange}
+        walletDetail={walletDetail}
+      />
     </div>
   );
 };

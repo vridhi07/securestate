@@ -2,15 +2,20 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import CloseIcon from "@mui/icons-material/Close";
-export default function AddTotal({ isTotalOpen, closeTotalModal }) {
-  const open = true;
+export default function AddTotal({
+  isWalletOpen,
+  walletDetail,
+  closeIsWalletOpen,
+  handleWalletChange,
+}) {
+  const { pentest, award, status, hackerId } = walletDetail;
   return (
     <div>
-      <Dialog open={open}>
+      <Dialog open={isWalletOpen}>
         <form className="px-16 py-8 relative">
           <button
             type="button"
-            // onClick={closeTotalModal}
+            onClick={closeIsWalletOpen}
             className="absolute top-4 right-4"
           >
             <CloseIcon />
