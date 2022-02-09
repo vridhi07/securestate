@@ -67,6 +67,12 @@ import {
   AddSubscriptionSaga,
   getSubscriptionSaga,
 } from "./customer/subsScriptionSaga";
+
+import {
+  AllPentestWithCompany,
+  allHackerWithCompany,
+} from "./wallet/WalletSaga";
+
 function* watchAllSaga() {
   yield takeLatest(actions.LoginRequest, LoginSaga);
   yield takeLatest(actions.SignUpRequest, SignupSaga);
@@ -143,6 +149,9 @@ function* watchAllSaga() {
   // *Subscritption
   yield takeLatest(actions.addSubscriptionRequest, AddSubscriptionSaga);
   yield takeLatest(actions.getSubscriptionListRequest, getSubscriptionSaga);
+  // !Wallet
+  yield takeLatest(actions.allPentestWithCompanyRequest, AllPentestWithCompany);
+  yield takeLatest(actions.allHackerWithCompanyRequest, allHackerWithCompany);
 }
 
 export default function* rootSaga() {

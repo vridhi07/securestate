@@ -53,9 +53,9 @@ export default function AddTotal({
           <section className="grid grid-cols-4 gap-8 my-4">
             <div className="md:col-span-2 col-span-4">
               <TextField
-                name="pentestCompleted"
+                name="test_completed"
                 id="AssetName"
-                label="Pentest Completed"
+                label="Test Completed"
                 variant="outlined"
                 size="medium"
                 inputProps={{ maxLength: 80 }}

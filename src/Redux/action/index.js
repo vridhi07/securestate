@@ -327,9 +327,28 @@ export const getSubscriptionListError = createAction(
   actions.GET_SUBSCRIPTION_LIST_ERROR
 );
 
+//Update Reply locally
 
-//Update Reply locally 
+export const updateReplyRequest = createAction(actions.UPDATE_REPLY_REQUEST);
 
-export const updateReplyRequest=createAction(
-  actions.UPDATE_REPLY_REQUEST
-)
+// ! WALLET
+
+export const allPentestWithCompanyRequest = createAction(
+  actions.ALL_PENTEST_WITH_COMPANY_REQUEST
+);
+export const allPentestWithCompanySuccess = createAction(
+  actions.ALL_PENTEST_WITH_COMPANY_SUCCESS
+);
+export const allPentestWithCompanyError = createAction(
+  actions.ALL_PENTEST_WITH_COMPANY_ERROR
+);
+
+export const allHackerWithCompanyRequest = createAction(
+  actions.ALL_HACKER_WITH_COMPANY_REQUEST
+);
+export const allHackerWithCompanySuccess = createAction(
+  actions.ALL_HACKER_WITH_COMPANY_SUCCESS
+);
+export const allHackerWithCompanyError = createAction(
+  actions.ALL_HACKER_WITH_COMPANY_ERROR
+);
