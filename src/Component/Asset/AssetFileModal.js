@@ -101,7 +101,6 @@ export default function FormDialog({
             <div>
               {file &&
                 file.map((item, i) => {
-                  // console.log(item);
                   return (
                     <div key={i} className="flex justify-between my-3">
                       <div>

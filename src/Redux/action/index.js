@@ -326,10 +326,3 @@ export const getSubscriptionListSuccess = createAction(
 export const getSubscriptionListError = createAction(
   actions.GET_SUBSCRIPTION_LIST_ERROR
 );
-
-
-//Update Reply locally 
-
-export const updateReplyRequest=createAction(
-  actions.UPDATE_REPLY_REQUEST
-)

@@ -1,6 +1,6 @@
 import GrayButton from "../Common/GrayButton";
 
-const MessageForm = ({ emailReply, sendReply, sendEmailReply }) => {
+const MessageForm = ({ emailReply, sendReply, sendEmailReply ,isReplying=false}) => {
   return (
     <form
       className="absolute bottom-0 left-0 w-full bg-white rounded-bl-lg rounded-br-lg py-2"
@@ -17,7 +17,7 @@ const MessageForm = ({ emailReply, sendReply, sendEmailReply }) => {
       <div className="w-full flex justify-between">
         <div></div>
         <GrayButton className="mr-3" type="submit">
-          send
+          { isReplying ?'Loading...':'Send'}
         </GrayButton>
       </div>
     </form>
