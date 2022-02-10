@@ -10,8 +10,8 @@ import InboxRoundedIcon from "@mui/icons-material/InboxRounded";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 // import ImageIcon from "@mui/icons-material/Image";
 // import ContactPageIcon from "@mui/icons-material/ContactPage";
-import AnalyticsIcon from "@mui/icons-material/Analytics";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
+// import AnalyticsIcon from "@mui/icons-material/Analytics";
+// import FileCopyIcon from "@mui/icons-material/FileCopy";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import GroupIcon from "@mui/icons-material/Group";
 import * as roles from "./Roles";
@@ -96,6 +96,12 @@ export const clientSidebar = [
   {
     path: "assets",
     linkName: "ASSETS",
+    icon: <CurrencyExchangeIcon sx={color} />,
+    icon2: <CurrencyExchangeIcon sx={color2} />,
+  },
+  {
+    path: "pentests",
+    linkName: "PENTEST",
     icon: <FactCheckIcon sx={color} />,
     icon2: <FactCheckIcon sx={color2} />,
   },
@@ -136,14 +142,14 @@ export const hacker = [
   {
     path: "assets",
     linkName: "ASSETS",
-    icon: <FileCopyIcon sx={color} />,
-    icon2: <FileCopyIcon sx={color2} />,
+    icon: <CurrencyExchangeIcon sx={color} />,
+    icon2: <CurrencyExchangeIcon sx={color2} />,
   },
   {
     path: "pentests",
     linkName: "PENTEST",
-    icon: <AnalyticsIcon sx={color} />,
-    icon2: <AnalyticsIcon sx={color2} />,
+    icon: <FactCheckIcon sx={color} />,
+    icon2: <FactCheckIcon sx={color2} />,
   },
   {
     path: "inbox",

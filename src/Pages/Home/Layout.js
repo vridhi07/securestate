@@ -137,8 +137,9 @@ export default function MiniDrawer() {
       dispatch(actions.CompanyRequest());
     }
   }, [userDetails?.role]);
-  let newPathname = pathname.split("").slice(1).join("");
-  // console.log(newPathname);
+  // let newPathname = pathname.split("").slice(1).join("");
+  let newPathname = pathname.split("/").splice(1, 1).join();
+  console.log(newPathname);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
