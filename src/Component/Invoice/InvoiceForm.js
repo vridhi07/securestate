@@ -22,12 +22,17 @@ export default function AlertDialog({
   getDate,
   removeAttachData,
   handleSubmit,
-  // newrole,
-  // setNewrole,
+  user_id,
+  getUserId,
   handleSelect,
-  users
+  personName,
 }) {
   const { invoice, totalAmount, dueDate, status, attachData } = formInput;
+  const { users } = useSelector((state) => state?.users);
+  let newUser;
+  if (users) {
+    newUser = users.filter((item) => item?.user_id === user_id);
+  }
   return (
     <div>
       <Dialog
@@ -50,28 +55,35 @@ export default function AlertDialog({
             <CloseIcon />
           </button>
           <h2 className="text-xl font-semibold mb-9">Add Invoice</h2>
+
           <FormControl fullWidth>
             <InputLabel id="status">User</InputLabel>
             <Select
               labelId="status"
               id="role"
               name="role"
-              // value={users.name}
               label="Status"
-              onChange={()=>{
-                handleSelect()}}
+              value={personName}
+              onChange={handleSelect}
               required
             >
               {users &&
                 users
-                  .filter((newrole) => newrole.role === "Client")
-                  .map((newrole, index) => {
-                    return <MenuItem
-                    value={newrole.name}
-                  key={newrole._id}>{newrole?.name}</MenuItem>;
+                  .filter((newUser) => newUser.role === "Client")
+                  .map((newUser, index) => {
+                    return (
+                      <MenuItem
+                        value={newUser.name}
+                        key={newUser._id}
+                        onClick={() => getUserId(newUser?._id)}
+                      >
+                        {newUser?.name}
+                      </MenuItem>
+                    );
                   })}
             </Select>
           </FormControl>
+
           <section className="grid grid-cols-4 gap-8 my-2">
             <div className="md:col-span-2 col-span-4">
               <FormControl fullWidth>
@@ -105,8 +117,7 @@ export default function AlertDialog({
               </FormControl>
             </div>
           </section>
-          {/* <div className="w-full mb-3  "></div>
-          <div className="w-full mb-3  "></div> */}
+        
           <section className="grid grid-cols-4 gap-8 my-2">
             <div className="md:col-span-2 col-span-4">
               <LocalizationProvider

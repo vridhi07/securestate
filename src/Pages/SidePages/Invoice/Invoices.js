@@ -11,6 +11,28 @@ const Invoices = () => {
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
   const { invoiceData } = useSelector((state) => state?.Invoice);
+  const { users } = useSelector((state) => state?.users);
+
+  // Client user id data
+  const getUserId = (role) => {
+    if (role === "Client"){
+      return users ;
+    }
+    return users?.user_id;
+  }
+  const user_id = getUserId(users?.role);
+
+// get company id
+const [personName, setPersonName] = useState([]);
+const handleSelect = (event) => {
+  const {
+    target: { value },
+  } = event;
+  setPersonName(
+    // On autofill we get a stringified value.
+    typeof value === "string" ? value.split(",") : value
+  );
+};
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
@@ -49,21 +71,15 @@ const Invoices = () => {
     setFormInput({ ...formInput, dueDate: newValue });
   };
   // GET USER CLIENT
-  // const { users } = useSelector((state) => state?.users);
-  // // const newUser  = users && users.map(item=>item.role === 'client')
-  // // console.log(newUser);
-  // // const dispatch = useDispatch();
-  // const [newrole, setNewrole] = useState({
-  //   role: " ",
-  // });
-  // useEffect(() => {
-  //   dispatch(action.getUsersRequest());
-  // }, []);
+  // console.log(newUser);
+  const [newrole, setNewrole] = useState({
+    role: " ",
+  });
+  useEffect(() => {
+    dispatch(action.getUsersRequest());
+  }, []);
 
-  // const handleSelect = (e) => {
-  //   setNewrole(e.target.value);
-  // };
-  // console.log(formInput.attachData);
+  console.log(formInput.attachData);
   const handleFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -103,8 +119,7 @@ const Invoices = () => {
     data.append("total", totalAmount);
     data.append("status", status);
     data.append("company_id", company_id);
-
-    data.append("user_id", newrole_id);
+    data.append("user_id", user_id);
     console.log("I am called");
     setFormInput({
       ...formInput,
@@ -113,7 +128,7 @@ const Invoices = () => {
       dueDate: new Date(),
       status: "",
       attachData: "",
-      role: "",
+      user_id : " ",
     });
     // handleClose();
   };
@@ -149,10 +164,11 @@ const Invoices = () => {
         getDate={getDate}
         removeAttachData={removeAttachData}
         handleSubmit={handleSubmit}
-        newrole={newrole}
-        setNewrole={setNewrole}
-        handleSelect={handleSelect}
-        users = {users}
+        getUserId = {getUserId}
+        handleSelect = {handleSelect}
+        personName = {personName}
+        setPersonName = {setPersonName}
+        user_id = {user_id}
       />
     </div>
   );

@@ -96,7 +96,7 @@ export const clientSidebar = [
     icon: <FactCheckIcon sx={color} />,
     icon2: <FactCheckIcon sx={color2} />,
   },
-  {
+  
   {
     path: "inbox",
     linkName: "INBOX",
@@ -130,12 +130,12 @@ export const hacker = [
     icon: <HomeIcon sx={color} />,
     icon2: <HomeIcon sx={color2} />,
   },
-  {
-    path: "assets",
-    linkName: "ASSETS",
-    icon: <FileCopyIcon sx={color} />,
-    icon2: <FileCopyIcon sx={color2} />,
-  },
+  // {
+  //   path: "assets",
+  //   linkName: "ASSETS",
+  //   icon: <FileCopyIcon sx={color} />,
+  //   icon2: <FileCopyIcon sx={color2} />,
+  // },
   {
     path: "pentests",
     linkName: "PENTEST",
@@ -149,18 +149,18 @@ export const hacker = [
     icon2: <InboxIcon sx={color2} />,
   },
 
-  {
-    path: "wallet",
-    linkName: "WALLET",
-    icon: <MonetizationOnIcon sx={color} />,
-    icon2: <MonetizationOnIcon sx={color2} />,
-  },
-  {
-    path: "profile",
-    linkName: "PROFILE",
-    icon: <GroupIcon sx={color} />,
-    icon2: <GroupIcon sx={color2} />,
-  },
+  // {
+  //   path: "wallet",
+  //   linkName: "WALLET",
+  //   icon: <MonetizationOnIcon sx={color} />,
+  //   icon2: <MonetizationOnIcon sx={color2} />,
+  // },
+  // {
+  //   path: "profile",
+  //   linkName: "PROFILE",
+  //   icon: <GroupIcon sx={color} />,
+  //   icon2: <GroupIcon sx={color2} />,
+  // },
   {
     path: "settings",
     linkName: "SETTINGS",
