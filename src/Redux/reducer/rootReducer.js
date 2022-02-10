@@ -17,6 +17,7 @@ import EmailReducer from "./Email/emailReducer";
 import InvoiceReducer from "./Invoice/Invoice";
 import GroupUserListReducer from "./customer/GroupReducer";
 import GetSubscriptionReducer from "./customer/SubscriptionReducer";
+import WalletReducer from "./wallet/WalletReducer";
 const rootReducer = combineReducers({
   Login: LoginReducer,
   Signup: SignupReducer,
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   Invoice: InvoiceReducer,
   GroupUserList: GroupUserListReducer,
   subscriber: GetSubscriptionReducer,
+  wallet: WalletReducer,
 });
 
 export default rootReducer;
