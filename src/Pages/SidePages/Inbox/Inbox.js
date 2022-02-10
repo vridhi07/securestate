@@ -35,7 +35,8 @@ const Inbox = () => {
     sendEmail: "",
     id: "",
   });
-  const currentUser=useSelector((state=>state.user?.userDetails))
+ 
+  const currentUser = useSelector((state) => state.user?.userDetails);
   const [selectedEmails, setSelectedEmails] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -52,6 +53,15 @@ const Inbox = () => {
       });
     }
   }, [emailStatus]);
+
+  useEffect(() => {
+    if (openMail._id) {
+      setOpenMail(
+        emailStatus.email.filter((val) => val._id === openMail._id)[0]
+      );
+    }
+  }, [emailStatus.emailReplyStatus]);
+
   const handleModalClickOpen = () => {
     setOpenNewEmail(true);
   };
@@ -163,11 +173,15 @@ const Inbox = () => {
         data: {
           text: emailReply,
         },
-        email:currentUser.email
+
+
+
+        email: currentUser.email,
+
       })
     );
   };
-
+console.log(emailStatus.emailreplyLoader,'=========')
   if (isLoading) {
     return <Loader />;
   }
@@ -227,6 +241,7 @@ const Inbox = () => {
               emailReply={emailReply}
               sendEmailReply={sendEmailReply}
               sendReply={sendReply}
+              isReplying={emailStatus?.emailreplyLoader}
             />
           </div>
         )}

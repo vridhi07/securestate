@@ -21,6 +21,7 @@ export function* GetInvoiceSaga(action) {
 export function* addInvoiceSaga(action) {
 console.log('hello');
   try {
+    console.log("hello");
     let response = yield call(axios.post, CONFIG.addInvoice, action.payload);
     if (response && response.data?.status === 1) {
       yield put(actions.addInvoiceSuccess('SUCCESS'));

@@ -7,6 +7,11 @@ import PeopleIcon from '@mui/icons-material/People';
 import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from "@mui/icons-material/Settings";
 import InboxRoundedIcon from '@mui/icons-material/InboxRounded';
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import ImageIcon from "@mui/icons-material/Image";
+import ContactPageIcon from "@mui/icons-material/ContactPage";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
+import * as roles from "./Roles";
 const color = {
   fontSize: "1.5rem",
   color: "#FFFFFF",
@@ -90,8 +95,8 @@ export const clientSidebar = [
     linkName: "ASSETS",
     icon: <FactCheckIcon sx={color} />,
     icon2: <FactCheckIcon sx={color2} />,
-
   },
+  {
   {
     path: "inbox",
     linkName: "INBOX",
@@ -118,17 +123,62 @@ export const clientSidebar = [
   },
 ];
 
+export const hacker = [
+  {
+    path: "dashboard",
+    linkName: "DASHBOARD",
+    icon: <HomeIcon sx={color} />,
+    icon2: <HomeIcon sx={color2} />,
+  },
+  {
+    path: "assets",
+    linkName: "ASSETS",
+    icon: <FileCopyIcon sx={color} />,
+    icon2: <FileCopyIcon sx={color2} />,
+  },
+  {
+    path: "pentests",
+    linkName: "PENTEST",
+    icon: <AnalyticsIcon sx={color} />,
+    icon2: <AnalyticsIcon sx={color2} />,
+  },
+  {
+    path: "inbox",
+    linkName: "INBOX",
+    icon: <InboxIcon sx={color} />,
+    icon2: <InboxIcon sx={color2} />,
+  },
+
+  {
+    path: "wallet",
+    linkName: "WALLET",
+    icon: <MonetizationOnIcon sx={color} />,
+    icon2: <MonetizationOnIcon sx={color2} />,
+  },
+  {
+    path: "profile",
+    linkName: "PROFILE",
+    icon: <GroupIcon sx={color} />,
+    icon2: <GroupIcon sx={color2} />,
+  },
+  {
+    path: "settings",
+    linkName: "SETTINGS",
+    icon: <SettingsIcon sx={color} />,
+    icon2: <SettingsIcon sx={color2} />,
+  },
+];
 export const sidebarData = (role) => {
-  if (role === "admin") {
+  if (role === roles.admin) {
     return adminSidebar;
   }
-  if (role === "superAdmin") {
+  if (role === roles.superAdmin) {
     return adminSidebar;
   }
-  if (role === "client") {
+  if (role === roles.client) {
     return clientSidebar;
   }
-  if (role === "hacker") {
-    return clientSidebar;
+  if (role === roles.hacker) {
+    return hacker;
   }
 };
