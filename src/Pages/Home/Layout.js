@@ -29,6 +29,7 @@ import * as actions from "../../Redux/action/index";
 import dummyProfilePic from "../../constantData/images/dummyProfilePic.jpg";
 import IsOnlinePage from "../../Component/Common/IsOnline";
 import * as Roles from "../../constantData/Roles";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 const drawerWidth = 270;
 // console.log(getRole());
 const openedMixin = (theme) => ({
@@ -179,7 +180,7 @@ export default function MiniDrawer() {
     return <IsOnlinePage />;
   }
   const sideBarData = sidebarData(userDetails?.role);
-
+  const loading = false;
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -195,7 +196,7 @@ export default function MiniDrawer() {
             className={
               open
                 ? "bg-white"
-                : "sm:w-16.6 w-15  flex h-16 items-center justify-center bg-orange-500"
+                : "w-15 bg-orange-cus-1  flex h-16 items-center justify-center sm:w-[4.57rem]"
             }
           >
             <IconButton
@@ -215,7 +216,7 @@ export default function MiniDrawer() {
             </IconButton>
           </div>
           <div className="ml-auto">
-            {isLoading ? (
+            {loading ? (
               <div className="mr-3">
                 <CircularProgress />
               </div>
@@ -279,14 +280,13 @@ export default function MiniDrawer() {
         open={open}
       >
         <DrawerHeader elevation={0}>
-          <button onClick={handleDrawerClose}>
-            <MenuIcon sx={{ color: "white", fontSize: "2rem" }} />
+          <button
+            onClick={handleDrawerClose}
+            className="rounded-full bg-[#F59B64] px-[0.5rem] py-[0.5rem]"
+          >
+            <ArrowBackIosNewIcon sx={{ color: "white", fontSize: "1.5rem" }} />
           </button>
-          <div className="object-fill pr-12">
-            <img src={logoImage} alt="logo" className="h-12 w-32" />
-          </div>
         </DrawerHeader>
-        <Divider />
 
         <List
           sx={{
@@ -296,6 +296,12 @@ export default function MiniDrawer() {
             paddingTop: 2,
           }}
         >
+          {open && (
+            <div className="mb-3 flex w-full items-center justify-center object-cover">
+              <img src={logoImage} alt="logo" className=" h-20 w-[230px]" />
+            </div>
+          )}
+
           {sideBarData &&
             sideBarData.map((item, index) => (
               <NavLink
