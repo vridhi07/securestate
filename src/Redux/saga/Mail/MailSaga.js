@@ -33,6 +33,9 @@ export function* MailReplySaga(action) {
   try {
     let response = yield call(axios.post, `${CONFIG.sendReply}/${action.payload.id}`, {...action?.payload.data});
     if (response && response.data?.status === 1) {
+
+      yield put(actions.sendEmailReplySuccess(response?.data));
+      yield put(actions.updateReplyRequest({id:action.payload.id,text:{...action?.payload.data},from:action?.payload.email,repliedAt:new Date()}))
       yield put(actions.sendEmailReplySuccess(response?.data?.data));
     }
   } catch (error) {

@@ -1,5 +1,7 @@
 import * as constant from "../../constant";
+import {updatedReply} from './replyUtil'
 import { getUpdatedEmails, getUpdatedReadStatus } from "./emailUtil";
+
 const initialState = {
   isLoading: false,
   isError: false,
@@ -8,6 +10,7 @@ const initialState = {
   ErrorMessage: "",
   sendEmailLoader: false,
 };
+
 
 const EmailReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -80,6 +83,16 @@ const EmailReducer = (state = initialState, action) => {
         email: getUpdatedReadStatus(state.email, action.payload.id),
         messageReadStatus: action.payload.response,
       };
+
+      // case constant.UPDATE_REPLY_REQUEST:
+      //   console.log(action.payload,'action reply')
+      //   return{
+      //     ...state,
+      //     emails:{
+      //       ...state.emails,
+      //       emailsss:updatedReply(state?.emails.email)
+      //     }
+      //   }
     default:
       return state;
   }
