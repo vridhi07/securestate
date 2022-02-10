@@ -48,6 +48,21 @@ const Invoices = () => {
   const getDate = (newValue) => {
     setFormInput({ ...formInput, dueDate: newValue });
   };
+  // GET USER CLIENT
+  // const { users } = useSelector((state) => state?.users);
+  // // const newUser  = users && users.map(item=>item.role === 'client')
+  // // console.log(newUser);
+  // // const dispatch = useDispatch();
+  // const [newrole, setNewrole] = useState({
+  //   role: " ",
+  // });
+  // useEffect(() => {
+  //   dispatch(action.getUsersRequest());
+  // }, []);
+
+  // const handleSelect = (e) => {
+  //   setNewrole(e.target.value);
+  // };
   // console.log(formInput.attachData);
   const handleFormInput = (e) => {
     let name = e.target.name;
@@ -88,9 +103,9 @@ const Invoices = () => {
     data.append("total", totalAmount);
     data.append("status", status);
     data.append("company_id", company_id);
-
+    data.append("user_id", newrole_id);
+    console.log("I am called");
     dispatch(action.addInvoiceRequest(data));
-
     setFormInput({
       ...formInput,
       invoice: "",
@@ -98,8 +113,9 @@ const Invoices = () => {
       dueDate: new Date(),
       status: "",
       attachData: "",
+      role: "",
     });
-    handleClose();
+    // handleClose();
   };
   return (
     <div>
@@ -133,6 +149,10 @@ const Invoices = () => {
         getDate={getDate}
         removeAttachData={removeAttachData}
         handleSubmit={handleSubmit}
+        newrole={newrole}
+        setNewrole={setNewrole}
+        handleSelect={handleSelect}
+        users = {users}
       />
     </div>
   );

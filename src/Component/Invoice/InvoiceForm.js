@@ -1,4 +1,5 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -21,6 +22,10 @@ export default function AlertDialog({
   getDate,
   removeAttachData,
   handleSubmit,
+  // newrole,
+  // setNewrole,
+  handleSelect,
+  users
 }) {
   const { invoice, totalAmount, dueDate, status, attachData } = formInput;
   return (
@@ -45,6 +50,28 @@ export default function AlertDialog({
             <CloseIcon />
           </button>
           <h2 className="text-xl font-semibold mb-9">Add Invoice</h2>
+          <FormControl fullWidth>
+            <InputLabel id="status">User</InputLabel>
+            <Select
+              labelId="status"
+              id="role"
+              name="role"
+              // value={users.name}
+              label="Status"
+              onChange={()=>{
+                handleSelect()}}
+              required
+            >
+              {users &&
+                users
+                  .filter((newrole) => newrole.role === "Client")
+                  .map((newrole, index) => {
+                    return <MenuItem
+                    value={newrole.name}
+                  key={newrole._id}>{newrole?.name}</MenuItem>;
+                  })}
+            </Select>
+          </FormControl>
           <section className="grid grid-cols-4 gap-8 my-2">
             <div className="md:col-span-2 col-span-4">
               <FormControl fullWidth>
@@ -120,7 +147,8 @@ export default function AlertDialog({
           <div className="flex items-start justify-between w-full mt-5">
             <div className="flex flex-col">
               <button
-                onClick={handleClose}
+                // onClick={handleClose}
+                type="submit"
                 className="px-5 py-2 bg-orange-cus-1 text-white mb-3 "
               >
                 Add Invoice

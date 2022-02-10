@@ -19,9 +19,16 @@ const columns = [
     minWidth: 170,
     align: "left",
   },
+
   {
     id: "Due Date",
     label: "Due Date",
+    minWidth: 170,
+    align: "left",
+  },
+  {
+    id: "status",
+    label: "Status",
     minWidth: 170,
     align: "left",
   },
@@ -67,6 +74,7 @@ export default function InvoiceTable({
                 <TableRow hover key={item?._id}>
                   <TableCell align="left">{item?.invoice}</TableCell>
                   <TableCell align="left">${item.total}</TableCell>
+                  <TableCell align="left">{item?.status}</TableCell>
                   <TableCell align="left">
                     {moment(item._createdAt).format("l")}
                   </TableCell>

@@ -19,10 +19,11 @@ export function* GetInvoiceSaga(action) {
   }
 }
 export function* addInvoiceSaga(action) {
+console.log('hello');
   try {
     let response = yield call(axios.post, CONFIG.addInvoice, action.payload);
     if (response && response.data?.status === 1) {
-      yield put(actions.addInvoiceSuccess(response.data.data));
+      yield put(actions.addInvoiceSuccess('SUCCESS'));
     }
   } catch (error) {
     // console.log(error.response.data.message);
