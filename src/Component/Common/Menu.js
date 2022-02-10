@@ -1,43 +1,54 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
-export default function BasicMenu({menuList}) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+import * as React from "react";
+import Popover from "@mui/material/Popover";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import Paper from "@mui/material/Paper";
+export default function BasicPopover({
+  anchorEl,
+  handleMenuClose,
+  handleEdit,
+  openDeleteModal,
+  showEdit,
+}) {
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
+  const id = open ? "asset_edit_popover" : undefined;
+  // console.log(showEdit);
   return (
     <div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        <MoreVertIcon className='text-gray-600' />
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
+      <Popover
+        id={id}
         open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
+        anchorEl={anchorEl}
+        onClose={handleMenuClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
         }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        autoFocus={false}
+        elevation={0}
       >
-        {menuList?.map((value, index)=>(
-          <MenuItem key={index} onClick={handleClose}>{value}</MenuItem>
-        ))}
-      </Menu>
+        <Paper sx={{ width: "10rem", borderRadius: 3 }} elevation={0}>
+          {showEdit && (
+            <button
+              className="m-0 flex w-full  items-center justify-between border  bg-[#AEDD94] px-1 py-2 text-left tracking-wider hover:bg-green-300 "
+              onClick={handleEdit}
+            >
+              <span>Edit</span>
+              <ArrowRightIcon />
+            </button>
+          )}
+          <button
+            className="m-0 flex w-full  items-center justify-between bg-[#F8B3B0]  px-1 py-2 text-left tracking-wider  hover:bg-red-300"
+            onClick={openDeleteModal}
+          >
+            <span>Delete</span>
+            {!showEdit && <ArrowRightIcon />}
+          </button>
+        </Paper>
+      </Popover>
     </div>
   );
 }

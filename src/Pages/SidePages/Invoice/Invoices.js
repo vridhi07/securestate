@@ -39,9 +39,7 @@ const Invoices = () => {
     msg: "",
     status: false,
   });
-  // console.log(invoiceData);
-  // console.log(page, "page");
-  // console.log(rowsPerPage, "page");
+
   const handleChangePage = (event, newPage) => {
     console.log(newPage);
     setPage(newPage);
@@ -149,6 +147,7 @@ const Invoices = () => {
           rowsPerPage={rowsPerPage}
           handleChangePage={handleChangePage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
+          company_id={company_id}
         />
       </div>
       <InvoiceModal

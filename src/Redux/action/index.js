@@ -258,6 +258,14 @@ export const addInvoiceRequest = createAction(actions.ADD_INVOICE_REQUEST);
 export const addInvoiceSuccess = createAction(actions.ADD_INVOICE_SUCCESS);
 export const addInvoiceError = createAction(actions.ADD_INVOICE_ERROR);
 
+export const deleteInvoiceRequest = createAction(
+  actions.DELETE_INVOICE_REQUEST
+);
+export const deleteInvoiceSuccess = createAction(
+  actions.DELETE_INVOICE_SUCCESS
+);
+export const deleteInvoiceError = createAction(actions.DELETE_INVOICE_ERROR);
+
 // !Customer
 // * Group
 export const getGroupListRequest = createAction(actions.GET_GROUP_LIST_REQUEST);

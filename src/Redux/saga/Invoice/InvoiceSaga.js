@@ -23,11 +23,26 @@ export function* addInvoiceSaga(action) {
     const { data, company_id, page, rowsPerPage } = action.payload;
     let response = yield call(axios.post, CONFIG.addInvoice, data);
     if (response && response.data?.status === 1) {
-      yield put(actions.addInvoiceSuccess("success"));
+      yield put(actions.addInvoiceSuccess("successfully added"));
       yield put(actions.getInvoiceRequest({ company_id, page, rowsPerPage }));
     }
   } catch (error) {
     // console.log(error.response.data.message);
     yield put(actions.addInvoiceError(error.response?.data?.message));
+  }
+}
+export function* deleteInvoicesSaga(action) {
+  try {
+    const { data, company_id, page, rowsPerPage } = action.payload;
+    let response = yield call(axios.delete, CONFIG.deleteInvoice, {
+      data: { invoiceId: data },
+    });
+    if (response && response.data?.status === 1) {
+      yield put(actions.deleteInvoiceSuccess("successfully Deleted"));
+      yield put(actions.getInvoiceRequest({ company_id, page, rowsPerPage }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.deleteInvoiceError(error.response?.data?.message));
   }
 }

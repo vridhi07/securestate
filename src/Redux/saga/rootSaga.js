@@ -12,35 +12,44 @@ import {
 
 import { GetHistorySaga, AddHistoryAction } from "./Asset/HistorySaga";
 import { GetSBOMSaga, AddSBOMSaga, deleteSbomSaga } from "./Asset/SbomSaga";
+
 import {
   AddFilesSaga,
   GetFilesSaga,
   DeleteFileSaga,
 } from "./Asset/AssetFilesSaga";
+
 import {
   AssetDetailsSaga,
   UpdateAssetDetailsSaga,
 } from "./Asset/AssetDetailsSaga";
+
 import {
   GetCompanySaga,
   AddCompanySaga,
   GetCompanyByIdSaga,
   UpdateCompanyDetails,
 } from "./company/CompanySaga";
+
 import { GetUserDetails, updateUserSaga } from "./user/UserSaga";
+
 import { GetUsersSaga, AddUsersSaga, DeleteUserSaga } from "./user/UsersSaga";
+
 import {
   GetPentestSaga,
   AddPentestSaga,
   DeletePentestSaga,
   UpdatePentestSaga,
 } from "./pentest/PentestSaga";
+
 import { PentestTabSaga } from "./pentest/PentestTabsSaga";
+
 import {
   AddScopeSaga,
   UpdateScopeSaga,
   deleteScopeSaga,
 } from "./pentest/ScopePentestSaga";
+
 import {
   AddPentestFindings,
   deleteFindings,
@@ -48,13 +57,19 @@ import {
 } from "./pentest/FindingsSaga";
 
 import { getPentestChatSaga, SendPentestChatSaga } from "./pentest/PentestChat";
+
 import {
   GetMailSaga,
   SendMailSaga,
   MailReplySaga,
   ReadmMailSaga,
 } from "./Mail/MailSaga";
-import { GetInvoiceSaga, addInvoiceSaga } from "./Invoice/InvoiceSaga";
+
+import {
+  GetInvoiceSaga,
+  addInvoiceSaga,
+  deleteInvoicesSaga,
+} from "./Invoice/InvoiceSaga";
 
 import {
   GetGroupList,
@@ -63,6 +78,7 @@ import {
   deleteGroupSaga,
   addMoreUserToGroupSaga,
 } from "./customer/GroupSaga";
+
 import {
   AddSubscriptionSaga,
   getSubscriptionSaga,
@@ -135,6 +151,7 @@ function* watchAllSaga() {
   // ! Invoice
   yield takeLatest(actions.getInvoiceRequest, GetInvoiceSaga);
   yield takeLatest(actions.addInvoiceRequest, addInvoiceSaga);
+  yield takeLatest(actions.deleteInvoiceRequest, deleteInvoicesSaga);
 
   // !Customer
   yield takeLatest(actions.getGroupListRequest, GetGroupList);
