@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../../Component/Common/Loader";
 import dummy from "../../../constantData/images/dummyProfile.webp";
 import * as action from "../../../Redux/action";
-
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import SaveAsIcon from "@mui/icons-material/SaveAs";
 const Profile = () => {
   const state = useSelector((state) => state);
   const { userDetails, isLoading } = state?.user;
@@ -109,9 +111,9 @@ const Profile = () => {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col px-2  py-2 max-w-md mx-auto">
-        <section className="w-[10rem] flex flex-col mx-auto mb-2">
-          <div className=" w-[10rem] h-[10rem] rounded-full">
+      <div className=" relative mx-auto mt-11 max-w-xl px-7 py-7 ">
+        <div className=" absolute top-1 left-12  h-[7rem] w-[7rem] rounded-full">
+          <div className="relative">
             <img
               src={
                 userDetails?.profilepic &&
@@ -120,35 +122,86 @@ const Profile = () => {
                   : dummy
               }
               alt="profile pic"
-              className="w-full h-[10rem] rounded-full object-cover"
+              className={`h-[7rem] w-full rounded-full object-cover  ${
+                isEdit && "opacity-70"
+              }`}
             />
+            {isEdit && (
+              <div className="absolute top-[31%] left-[30%] z-10">
+                <form onSubmit={(e) => _handleSubmit(e)}>
+                  <label htmlFor="file" className="cursor-pointer">
+                    <PhotoCameraIcon
+                      sx={{ color: "white", fontSize: "3rem" }}
+                    />
+                  </label>
+                  <input
+                    className="hidden"
+                    type="file"
+                    id="file"
+                    onChange={(e) => _handleImageChange(e)}
+                  />
+                </form>
+              </div>
+            )}
           </div>
-
-          <h3 className="text-center text-gray-500 text-base uppercase mt-7">
+        </div>
+        <section className=" ml-[27%]  flex w-[73%]">
+          <h3 className="mt-7 text-center text-lg font-semibold capitalize text-gray-600">
             {userDetails?.name}
           </h3>
-          {isEdit && (
-            <div className="">
-              <form onSubmit={(e) => _handleSubmit(e)}>
-                <input
-                  className="fileInput"
-                  type="file"
-                  onChange={(e) => _handleImageChange(e)}
-                />
-              </form>
+          <div className="mt-4 ml-auto flex items-center">
+            <div
+              className="mr-[5%] cursor-pointer rounded-md bg-[#565656] px-5 py-2 text-white "
+              type="button"
+              onClick={openEdit}
+            >
+              {isEdit ? (
+                <span className="flex items-center gap-2">
+                  <span className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
+                    <SaveAsIcon
+                      sx={{
+                        color: "white",
+                        fontSize: "1rem",
+                      }}
+                    />
+                  </span>
+                  <span>Save</span>
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <span className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
+                    <ModeEditIcon
+                      sx={{
+                        color: "white",
+                        fontSize: "1rem",
+                      }}
+                    />
+                  </span>
+                  <span>Edit</span>
+                </span>
+              )}
             </div>
-          )}
+            {isEdit && (
+              <button
+                className="rounded-md bg-slate-300 px-6 py-2 text-gray-500"
+                type="button"
+                onClick={cancelEdit}
+              >
+                Cancel
+              </button>
+            )}
+          </div>
         </section>
-        <form className="m-6   px-[2%] text-left mt-8 ">
+        <form className="  rounded-md bg-white px-10 py-14 text-left shadow-sm ">
           <div className="flex items-center">
             <label htmlFor="name" className="mr-8">
-              Name
+              Name:
             </label>
-            <div className="border">
+            <div className=" border-b border-gray-500">
               {isEdit ? (
                 <input
                   type="text"
-                  className="focus:outline-none px-3 py-2  w-[300px]  "
+                  className=" w-[300px] px-3  pt-2 focus:outline-none "
                   value={profileForm.name}
                   name="name"
                   id="name"
@@ -157,22 +210,20 @@ const Profile = () => {
                   readOnly={isEdit ? false : true}
                 />
               ) : (
-                <div className="w-[300px] px-3 py-2 px ">
-                  {userDetails?.name}
-                </div>
+                <div className=" w-[300px] px-3 pt-2 ">{userDetails?.name}</div>
               )}
             </div>
           </div>
           <div className="mt-3 flex items-center   ">
             <label htmlFor="email" className="mr-9">
-              Email
+              Email:
             </label>
 
-            <div className="border">
+            <div className="border-b border-gray-500">
               {isEdit ? (
                 <input
                   type="text"
-                  className="focus:outline-none px-3 py-2  w-[300px]"
+                  className="w-[300px] px-3 pt-2  focus:outline-none"
                   value={profileForm.email}
                   name="email"
                   id="email"
@@ -180,7 +231,7 @@ const Profile = () => {
                   readOnly={isEdit ? false : true}
                 />
               ) : (
-                <div className="w-[300px] px-3 py-2 px ">
+                <div className="px w-[300px] px-3 pt-2 ">
                   {userDetails?.email}
                 </div>
               )}
@@ -189,14 +240,14 @@ const Profile = () => {
           {userDetails?.role !== "superAdmin" && (
             <div className="mt-3 flex items-center ">
               <label htmlFor="company" className="mr-2">
-                Company
+                Company:
               </label>
 
-              <div className="border">
+              <div className="border-b border-gray-500">
                 {isEdit ? (
                   <input
                     type="text"
-                    className="focus:outline-none px-3 py-2  w-[300px]"
+                    className="w-[300px] px-3 pt-2  focus:outline-none"
                     value={profileForm.company}
                     name="company"
                     id="company"
@@ -204,7 +255,7 @@ const Profile = () => {
                     readOnly={isEdit ? false : true}
                   />
                 ) : (
-                  <div className="w-[300px] px-3 py-2 px ">
+                  <div className="px w-[300px] px-3 pt-2 ">
                     {userDetails?.company_id.company_name}
                   </div>
                 )}
@@ -214,14 +265,14 @@ const Profile = () => {
 
           <div className="mt-3  flex items-center ">
             <label htmlFor="phone" className="mr-8">
-              Phone
+              Phone:
             </label>
 
-            <div className="border">
+            <div className="border-b border-gray-500">
               {isEdit ? (
                 <input
                   type="text"
-                  className="focus:outline-none px-3 py-2  w-[300px]"
+                  className="w-[300px] px-3 pt-2  focus:outline-none"
                   value={profileForm.phone}
                   name="phone"
                   id="phone"
@@ -229,7 +280,7 @@ const Profile = () => {
                   readOnly={isEdit ? false : true}
                 />
               ) : (
-                <div className="w-[300px] px-3 py-2 px ">
+                <div className="px w-[300px] px-3 pt-2 ">
                   {userDetails?.phone}
                 </div>
               )}
@@ -237,14 +288,14 @@ const Profile = () => {
           </div>
           <div className="mt-3 flex items-center ">
             <label htmlFor="location" className="mr-4">
-              Location
+              Location:
             </label>
 
-            <div className="border">
+            <div className="border-b border-gray-500">
               {isEdit ? (
                 <input
                   type="text"
-                  className="focus:outline-none px-3 py-2  w-[300px]"
+                  className="w-[300px] px-3 pt-2  focus:outline-none"
                   value={profileForm.location}
                   name="location"
                   id="location"
@@ -252,29 +303,11 @@ const Profile = () => {
                   readOnly={isEdit ? false : true}
                 />
               ) : (
-                <div className="w-[300px] px-3 py-2 px ">
+                <div className="px w-[300px] px-3 pt-2 ">
                   {userDetails?.location}
                 </div>
               )}
             </div>
-          </div>
-          <div className="mt-4 flex items-center">
-            <button
-              className="px-8 py-2 bg-slate-300 text-gray-500 mr-[5%]"
-              type="button"
-              onClick={openEdit}
-            >
-              {isEdit ? "Save" : "Edit"}
-            </button>
-            {isEdit && (
-              <button
-                className="px-8 py-2 bg-slate-300 text-gray-500"
-                type="button"
-                onClick={cancelEdit}
-              >
-                Cancel
-              </button>
-            )}
           </div>
         </form>
       </div>
