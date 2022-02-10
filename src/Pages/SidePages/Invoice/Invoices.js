@@ -33,7 +33,7 @@ const Invoices = () => {
     attachData: "",
     client: "",
   });
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   // console.log(invoiceData);
   console.log(page, "page");
