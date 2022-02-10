@@ -3,6 +3,7 @@ import ProfileTable from "../../../Component/User/UserTable";
 import UserAdd from "../../../Component/User/UserAdd";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import UserAlert from "../../../Component/User/UserAlert";
 import * as action from "../../../Redux/action";
 const Users = () => {
   const [profileSearch, setProfileSearch] = useState("");
@@ -20,7 +21,9 @@ const Users = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedId, setSelected] = useState(null);
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state?.users);
+  const { users, isLoading, isError, Message } = useSelector(
+    (state) => state?.users
+  );
   const { companyDetails } = useSelector((state) => state?.company);
   // console.log(companyDetails);
   const openDeleteModal = (id) => {
@@ -96,19 +99,22 @@ const Users = () => {
   useEffect(() => {
     dispatch(action.getUsersRequest());
   }, []);
+
   return (
     <div>
-      <section className="mt-8  md:mr-28 flex items-center justify-between md:justify-end">
-        <form className="grid justify-center items-center">
+      <div className="text-center">{isError && <UserAlert />}</div>
+
+      <section className="mt-8  flex items-center justify-between md:mr-28 md:justify-end">
+        <form className="grid items-center justify-center">
           <div
-            className="flex justify-end items-center border border-gray-600 
-          py-0.5 pr-2 rounded-3xl bg-white
+            className="flex items-center justify-end rounded-3xl border 
+          border-gray-600 bg-white py-0.5 pr-2
           "
           >
             <SearchIcon sx={{ ml: "0.5rem", mt: "0.2rem" }} />
             <input
               type="search"
-              className="py-1 px-1 focus:outline-none bg-clip-padding placeholder:text-gray-600 border-0 focus:bg-none  focus:ring-0"
+              className="border-0 bg-clip-padding py-1 px-1 placeholder:text-gray-600 focus:bg-none focus:outline-none  focus:ring-0"
               placeholder="Search"
               value={profileSearch}
               onChange={(e) => setProfileSearch(e.target.value)}
@@ -118,12 +124,13 @@ const Users = () => {
 
         <button
           onClick={handleClickOpen}
-          className=" px-7 py-2 text-white tracking-wider bg-orange-cus-1 rounded-md md:ml-4 "
+          className=" bg-orange-cus-1 rounded-md px-7 py-2 tracking-wider text-white md:ml-4 "
+          disabled={isLoading}
         >
           New User
         </button>
       </section>
-      <div className="w-full mt-8">
+      <div className="mt-8 w-full">
         <ProfileTable
           users={users}
           openDeleteModal={openDeleteModal}

@@ -49,7 +49,7 @@ export default function AlertDialog({
             <CloseIcon />
           </button>
           <h2 className="mb-9 text-xl font-semibold">Add Invoice</h2>
-          <section className="my-2 grid grid-cols-4 gap-8">
+          <section className="mt-2 mb-3 grid grid-cols-4 gap-8 ">
             <div className="col-span-4 ">
               <FormControl fullWidth>
                 <InputLabel id="client">Select client</InputLabel>
