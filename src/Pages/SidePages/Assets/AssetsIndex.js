@@ -309,6 +309,7 @@ const AssetsIndex = () => {
                     },
                   }}
                   page={assetPageNumber}
+                 style={{Color: "orange"}}
                 />
               </Stack>
             </div>

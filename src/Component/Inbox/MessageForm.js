@@ -1,5 +1,4 @@
 import GrayButton from "../Common/GrayButton";
-
 const MessageForm = ({ emailReply, sendReply, sendEmailReply ,isReplying=false}) => {
   return (
     <form
@@ -15,8 +14,9 @@ const MessageForm = ({ emailReply, sendReply, sendEmailReply ,isReplying=false})
         onChange={(e) => sendEmailReply(e.target.value)}
       ></textarea>
       <div className="w-full flex justify-between">
-        <div></div>
+      
         <GrayButton className="mr-3" type="submit">
+          send
           { isReplying ?'Loading...':'Send'}
         </GrayButton>
       </div>
