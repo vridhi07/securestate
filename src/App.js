@@ -33,7 +33,7 @@ import {
 import defaultAxios from "./Service/defaultAxios";
 import { response } from "./Service/defaultAxios";
 defaultAxios();
-response();
+// response();
 function App() {
   return (
     <Routes>
