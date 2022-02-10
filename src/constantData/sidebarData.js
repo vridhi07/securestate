@@ -1,16 +1,19 @@
 import HomeIcon from "@mui/icons-material/Home";
-import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
-import FactCheckIcon from '@mui/icons-material/FactCheck';
-import PersonIcon from '@mui/icons-material/Person';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import PeopleIcon from '@mui/icons-material/People';
-import DescriptionIcon from '@mui/icons-material/Description';
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import FactCheckIcon from "@mui/icons-material/FactCheck";
+import PersonIcon from "@mui/icons-material/Person";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import PeopleIcon from "@mui/icons-material/People";
+import DescriptionIcon from "@mui/icons-material/Description";
 import SettingsIcon from "@mui/icons-material/Settings";
-import InboxRoundedIcon from '@mui/icons-material/InboxRounded';
+import InboxRoundedIcon from "@mui/icons-material/InboxRounded";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import ImageIcon from "@mui/icons-material/Image";
-import ContactPageIcon from "@mui/icons-material/ContactPage";
+// import ImageIcon from "@mui/icons-material/Image";
+// import ContactPageIcon from "@mui/icons-material/ContactPage";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import GroupIcon from "@mui/icons-material/Group";
 import * as roles from "./Roles";
 const color = {
   fontSize: "1.5rem",
@@ -96,7 +99,6 @@ export const clientSidebar = [
     icon: <FactCheckIcon sx={color} />,
     icon2: <FactCheckIcon sx={color2} />,
   },
-  
   {
     path: "inbox",
     linkName: "INBOX",

@@ -27,7 +27,7 @@ console.log('hello');
       yield put(actions.addInvoiceSuccess('SUCCESS'));
     }
   } catch (error) {
-    // console.log(error.response.data.message);
+     console.log(error , "error");
     yield put(actions.addInvoiceError(error.response.data.message));
   }
 }

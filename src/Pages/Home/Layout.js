@@ -181,12 +181,12 @@ export default function MiniDrawer() {
   const sideBarData = sidebarData(userDetails?.role);
 
   return (
-    <Box sx={{ display: "flex", background: "white" }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} elevation={0}>
         <Toolbar
           sx={{
-            background: "white",
+            background: "#F3F2FA",
             color: "black",
             paddingLeft: "0 !important",
           }}
@@ -195,7 +195,7 @@ export default function MiniDrawer() {
             className={
               open
                 ? "bg-white"
-                : "h-16 sm:w-16.6  w-15 bg-orange-500 flex justify-center items-center"
+                : "sm:w-16.6 w-15  flex h-16 items-center justify-center bg-orange-500"
             }
           >
             <IconButton
@@ -220,8 +220,8 @@ export default function MiniDrawer() {
                 <CircularProgress />
               </div>
             ) : (
-              <div className="flex justify-center items-center">
-                <div id="person" className="h-12 w-12 mx-4  rounded-full ">
+              <div className="flex items-center justify-center">
+                <div id="person" className="mx-4 h-12 w-12  rounded-full ">
                   <img
                     src={
                       userDetails?.profilepic &&
@@ -229,15 +229,15 @@ export default function MiniDrawer() {
                         ? userDetails?.profilepic
                         : dummyProfilePic
                     }
-                    className="w-full h-12 rounded-full object-cover"
+                    className="h-12 w-full rounded-full object-cover"
                     alt="profile"
                   />
                 </div>
                 <header
-                  className="max-h-12 flex items-center overflow-hidden cursor-pointer"
+                  className="flex max-h-12 cursor-pointer items-center overflow-hidden"
                   onClick={handleUserMenu}
                 >
-                  <h4 className="text-orange-cus-1 uppercase text-left tracking-widest  text-xl">
+                  <h4 className="text-orange-cus-1 text-left text-xl uppercase  tracking-widest">
                     {userDetails?.name}
                   </h4>
                   <span>
@@ -278,11 +278,11 @@ export default function MiniDrawer() {
         variant="permanent"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader elevation={0}>
           <button onClick={handleDrawerClose}>
             <MenuIcon sx={{ color: "white", fontSize: "2rem" }} />
           </button>
-          <div className="pr-12 object-fill">
+          <div className="object-fill pr-12">
             <img src={logoImage} alt="logo" className="h-12 w-32" />
           </div>
         </DrawerHeader>
@@ -299,8 +299,8 @@ export default function MiniDrawer() {
           {sideBarData &&
             sideBarData.map((item, index) => (
               <NavLink
-                className={`flex justify-center  items-center ${
-                  item.path === newPathname && "bg-[#FCE4D7] rounded-md "
+                className={`flex items-center  justify-center ${
+                  item.path === newPathname && "rounded-md bg-[#FCE4D7] "
                 } ${open && "mx-3"}`}
                 key={item.path}
                 to={item.path}
