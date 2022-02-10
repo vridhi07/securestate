@@ -11,6 +11,8 @@ const Invoices = () => {
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
   const { invoiceData } = useSelector((state) => state?.Invoice);
+  const { users } = useSelector((state) => state.users);
+  console.log(users);
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
@@ -29,6 +31,7 @@ const Invoices = () => {
     dueDate: new Date(),
     status: "",
     attachData: "",
+    client: "",
   });
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -73,13 +76,10 @@ const Invoices = () => {
     setFormInput({ ...formInput, attachData: "" });
   };
 
-  useEffect(() => {
-    dispatch(action.getInvoiceRequest({ company_id, page, rowsPerPage }));
-  }, [company_id, page, rowsPerPage]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { invoice, totalAmount, dueDate, status, attachData } = formInput;
+    const { invoice, totalAmount, dueDate, status, attachData, client } =
+      formInput;
     const data = new FormData();
     if (attachData) {
       data.append("file", attachData, attachData.name);
@@ -88,8 +88,10 @@ const Invoices = () => {
     data.append("total", totalAmount);
     data.append("status", status);
     data.append("company_id", company_id);
-    console.log(data);
-    dispatch(action.addInvoiceRequest(data));
+    data.append("user_id", client);
+    data.append("due_date", dueDate);
+    // console.log(data);
+    dispatch(action.addInvoiceRequest({ data, company_id, page, rowsPerPage }));
 
     setFormInput({
       ...formInput,
@@ -98,18 +100,28 @@ const Invoices = () => {
       dueDate: new Date(),
       status: "",
       attachData: "",
+      client: "",
     });
     handleClose();
   };
+
+  useEffect(() => {
+    dispatch(action.getInvoiceRequest({ company_id, page, rowsPerPage }));
+  }, [company_id, page, rowsPerPage]);
+
+  useEffect(() => {
+    dispatch(action.getUsersRequest());
+  }, []);
+
   return (
     <div>
-      <div className="max-w-xl mx-auto mt-4 mb-8">
+      <div className="mx-auto mt-4 mb-8 max-w-xl">
         <FilterOption />
       </div>
-      <div className="w-full px-[5%] flex justify-between my-3 ">
+      <div className="my-3 flex w-full justify-between px-[5%] ">
         <h2 className="text-[1.5rem]">Invoices</h2>
         <button
-          className="px-7 py-2 bg-orange-cus-1 text-white rounded-md"
+          className="bg-orange-cus-1 rounded-md px-7 py-2 text-white"
           onClick={handleClickOpen}
         >
           Add Invoice
@@ -133,6 +145,7 @@ const Invoices = () => {
         getDate={getDate}
         removeAttachData={removeAttachData}
         handleSubmit={handleSubmit}
+        users={users}
       />
     </div>
   );

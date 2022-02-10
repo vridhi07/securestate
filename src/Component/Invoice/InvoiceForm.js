@@ -21,8 +21,12 @@ export default function AlertDialog({
   getDate,
   removeAttachData,
   handleSubmit,
+  users = [],
 }) {
-  const { invoice, totalAmount, dueDate, status, attachData } = formInput;
+  const { invoice, totalAmount, dueDate, status, attachData, client } =
+    formInput;
+  const newUser = users.filter((item) => item.role === "client");
+
   return (
     <div>
       <Dialog
@@ -34,7 +38,7 @@ export default function AlertDialog({
       >
         <form
           autoComplete="off"
-          className="flex flex-col justify-center items-center px-5 sm:px-20 py-10 relative"
+          className="relative  items-center justify-center px-5 py-10 sm:px-20"
           onSubmit={handleSubmit}
         >
           <button
@@ -44,9 +48,32 @@ export default function AlertDialog({
           >
             <CloseIcon />
           </button>
-          <h2 className="text-xl font-semibold mb-9">Add Invoice</h2>
-          <section className="grid grid-cols-4 gap-8 my-2">
-            <div className="md:col-span-2 col-span-4">
+          <h2 className="mb-9 text-xl font-semibold">Add Invoice</h2>
+          <section className="my-2 grid grid-cols-4 gap-8">
+            <div className="col-span-4 ">
+              <FormControl fullWidth>
+                <InputLabel id="client">Select client</InputLabel>
+                <Select
+                  labelId="client"
+                  id="client"
+                  name="client"
+                  value={client}
+                  label="Select client"
+                  onChange={handleFormInput}
+                  required
+                >
+                  {newUser &&
+                    newUser.map((item) => (
+                      <MenuItem key={item._id} value={item._id}>
+                        {item.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </div>
+          </section>
+          <section className="my-2 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
               <FormControl fullWidth>
                 <TextField
                   id="invoice"
@@ -60,7 +87,7 @@ export default function AlertDialog({
                 />
               </FormControl>
             </div>
-            <div className="md:col-span-2 col-span-4">
+            <div className="col-span-4 md:col-span-2">
               <FormControl fullWidth>
                 <InputLabel htmlFor="Total-amount">Total</InputLabel>
                 <OutlinedInput
@@ -80,8 +107,8 @@ export default function AlertDialog({
           </section>
           {/* <div className="w-full mb-3  "></div>
           <div className="w-full mb-3  "></div> */}
-          <section className="grid grid-cols-4 gap-8 my-2">
-            <div className="md:col-span-2 col-span-4">
+          <section className="my-2 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
               <LocalizationProvider
                 dateAdapter={AdapterDateFns}
                 sx={{ width: "100%" }}
@@ -96,7 +123,7 @@ export default function AlertDialog({
                 />
               </LocalizationProvider>
             </div>
-            <div className="md:col-span-2 col-span-4">
+            <div className="col-span-4 md:col-span-2">
               <FormControl fullWidth>
                 <InputLabel id="status">Status</InputLabel>
                 <Select
@@ -117,19 +144,19 @@ export default function AlertDialog({
           </section>
           {/* <div className="w-full mb-3"></div>
           <div className="w-full mb-3"></div> */}
-          <div className="flex items-start justify-between w-full mt-5">
+          <div className="mt-5 flex w-full items-start justify-between">
             <div className="flex flex-col">
               <button
                 // onClick={handleClose}
                 type="submit"
-                className="px-5 py-2 bg-orange-cus-1 text-white mb-3 "
+                className="bg-orange-cus-1 mb-3 px-5 py-2 text-white "
               >
                 Add Invoice
               </button>
               <button
                 type="button"
                 onClick={handleClose}
-                className="px-5 py-2 bg-orange-cus-1 text-white mb-3 "
+                className="bg-orange-cus-1 mb-3 px-5 py-2 text-white "
               >
                 Cancel
               </button>
@@ -137,7 +164,7 @@ export default function AlertDialog({
             <div className="ml-2">
               <label
                 htmlFor="file"
-                className="flex  px-5 py-2 bg-orange-cus-1 text-white mb-3 hover:cursor-pointer "
+                className="bg-orange-cus-1  mb-3 flex px-5 py-2 text-white hover:cursor-pointer "
               >
                 <AttachFileIcon />
                 Attach file
@@ -154,7 +181,7 @@ export default function AlertDialog({
             </div>
           </div>
           {attachData && (
-            <div className="flex w-full mt-3 justify-between">
+            <div className="mt-3 flex w-full justify-between">
               <p>{attachData.name}</p>
 
               <button type="button" onClick={removeAttachData}>

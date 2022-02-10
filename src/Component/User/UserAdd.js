@@ -135,11 +135,9 @@ export default function UserAdd({
                   name="role"
                   onChange={handleUserFormInput}
                 >
-                  <MenuItem value={"Admin"}>Admin</MenuItem>
-                  <MenuItem value={"Client"}>Client</MenuItem>
-                  <MenuItem value={"Security Researcher"}>
-                    Security Researcher
-                  </MenuItem>
+                  <MenuItem value={"admin"}>Admin</MenuItem>
+                  <MenuItem value={"client"}>Client</MenuItem>
+                  <MenuItem value={"hacker"}>Security Researcher</MenuItem>
                 </Select>
               </FormControl>
               <FormControl fullWidth sx={{ mt: 1 }}>
@@ -190,10 +188,10 @@ export default function UserAdd({
                   onChange={handleUserFormInput}
                 />
               </FormControl>
-              <div className="flex flex-col justify-center items-center mt-3 mb-4">
+              <div className="mt-3 mb-4 flex flex-col items-center justify-center">
                 <button
                   type="submit"
-                  className=" px-[4.5rem] py-2 text-white tracking-wider bg-orange-cus-1 rounded-md  "
+                  className=" bg-orange-cus-1 rounded-md px-[4.5rem] py-2 tracking-wider text-white  "
                 >
                   Save
                 </button>
