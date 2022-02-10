@@ -12,7 +12,7 @@ const Invoices = () => {
   const { userDetails } = useSelector((state) => state?.user);
   const { invoiceData } = useSelector((state) => state?.Invoice);
   const { users } = useSelector((state) => state.users);
-  console.log(users);
+  // console.log(users);
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
@@ -35,9 +35,13 @@ const Invoices = () => {
   });
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [alert, setAlert] = useState({
+    msg: "",
+    status: false,
+  });
   // console.log(invoiceData);
-  console.log(page, "page");
-  console.log(rowsPerPage, "page");
+  // console.log(page, "page");
+  // console.log(rowsPerPage, "page");
   const handleChangePage = (event, newPage) => {
     console.log(newPage);
     setPage(newPage);
@@ -81,28 +85,39 @@ const Invoices = () => {
     const { invoice, totalAmount, dueDate, status, attachData, client } =
       formInput;
     const data = new FormData();
+
+    if (!attachData) {
+      setAlert({
+        ...alert,
+        msg: "Please Select an attached file",
+        status: true,
+      });
+    }
     if (attachData) {
       data.append("file", attachData, attachData.name);
-    }
-    data.append("invoice", invoice);
-    data.append("total", totalAmount);
-    data.append("status", status);
-    data.append("company_id", company_id);
-    data.append("user_id", client);
-    data.append("due_date", dueDate);
-    // console.log(data);
-    dispatch(action.addInvoiceRequest({ data, company_id, page, rowsPerPage }));
+      data.append("invoice", invoice);
+      data.append("total", totalAmount);
+      data.append("status", status);
+      data.append("company_id", company_id);
+      data.append("user_id", client);
+      data.append("due_date", dueDate);
+      dispatch(
+        action.addInvoiceRequest({ data, company_id, page, rowsPerPage })
+      );
 
-    setFormInput({
-      ...formInput,
-      invoice: "",
-      totalAmount: "",
-      dueDate: new Date(),
-      status: "",
-      attachData: "",
-      client: "",
-    });
-    handleClose();
+      setFormInput({
+        ...formInput,
+        invoice: "",
+        totalAmount: "",
+        dueDate: new Date(),
+        status: "",
+        attachData: "",
+        client: "",
+      });
+      handleClose();
+    }
+
+    // console.log(data);
   };
 
   useEffect(() => {
@@ -146,6 +161,8 @@ const Invoices = () => {
         removeAttachData={removeAttachData}
         handleSubmit={handleSubmit}
         users={users}
+        alert={alert}
+        setAlert={setAlert}
       />
     </div>
   );

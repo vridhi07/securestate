@@ -192,29 +192,31 @@ export default function MiniDrawer() {
             paddingLeft: "0 !important",
           }}
         >
-          <div
-            className={
-              open
-                ? "bg-white"
-                : "w-15 bg-orange-cus-1  flex h-16 items-center justify-center sm:w-[4.57rem]"
-            }
-          >
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{
-                // marginRight: "36px",
-                ...(open && { display: "none" }),
-                paddingLeft: "1rem",
-                color: "white",
-              }}
-              disableRipple
+          {!open && (
+            <div
+              className={
+                open
+                  ? "bg-white"
+                  : "w-15 bg-orange-cus-1  flex h-16 items-center justify-center sm:w-[4.57rem]"
+              }
             >
-              <MenuIcon sx={{ fontSize: "2rem" }} />
-            </IconButton>
-          </div>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{
+                  // marginRight: "36px",
+                  // ...(open && { display: "none" }),
+                  paddingLeft: "1rem",
+                  color: "white",
+                }}
+                disableRipple
+              >
+                <MenuIcon sx={{ fontSize: "2rem" }} />
+              </IconButton>
+            </div>
+          )}
           <div className="ml-auto">
             {loading ? (
               <div className="mr-3">

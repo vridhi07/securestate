@@ -12,7 +12,23 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuItem from "@mui/material/MenuItem";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import Select from "@mui/material/Select";
+import Alert from "@mui/material/Alert";
 // import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import { useEffect } from "react";
+const Alerts = ({ alert, setAlert }) => {
+  useEffect(() => {
+    let timeout = setTimeout(() => {
+      setAlert({ ...alert, msg: "", status: false });
+    }, 3000);
+    return () => clearTimeout(timeout);
+  }, [alert.msg]);
+
+  return (
+    <Alert severity="error" size="small">
+      {alert.msg}
+    </Alert>
+  );
+};
 export default function AlertDialog({
   open,
   handleClose,
@@ -22,6 +38,8 @@ export default function AlertDialog({
   removeAttachData,
   handleSubmit,
   users = [],
+  alert,
+  setAlert,
 }) {
   const { invoice, totalAmount, dueDate, status, attachData, client } =
     formInput;
@@ -34,7 +52,6 @@ export default function AlertDialog({
         // onClose={handleClose}
         aria-labelledby="Invoice-Form-Modal"
         aria-describedby="alert-dialog-description"
-        sx={{ height: 500 }}
       >
         <form
           autoComplete="off"
@@ -48,7 +65,9 @@ export default function AlertDialog({
           >
             <CloseIcon />
           </button>
-          <h2 className="mb-9 text-xl font-semibold">Add Invoice</h2>
+
+          <h2 className="mb-5 text-xl font-semibold">Add Invoice</h2>
+          {alert.status && <Alerts alert={alert} setAlert={setAlert} />}
           <section className="mt-2 mb-3 grid grid-cols-4 gap-8 ">
             <div className="col-span-4 ">
               <FormControl fullWidth>
@@ -88,6 +107,25 @@ export default function AlertDialog({
               </FormControl>
             </div>
             <div className="col-span-4 md:col-span-2">
+              <LocalizationProvider
+                dateAdapter={AdapterDateFns}
+                sx={{ width: "100%" }}
+              >
+                <DesktopDatePicker
+                  label="Due Date"
+                  value={dueDate}
+                  minDate={new Date()}
+                  onChange={getDate}
+                  renderInput={(params) => <TextField {...params} />}
+                  sx={{ width: "100%" }}
+                />
+              </LocalizationProvider>
+            </div>
+          </section>
+          {/* <div className="w-full mb-3  "></div>
+          <div className="w-full mb-3  "></div> */}
+          <section className="my-2 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
               <FormControl fullWidth>
                 <InputLabel htmlFor="Total-amount">Total</InputLabel>
                 <OutlinedInput
@@ -103,25 +141,6 @@ export default function AlertDialog({
                   required
                 />
               </FormControl>
-            </div>
-          </section>
-          {/* <div className="w-full mb-3  "></div>
-          <div className="w-full mb-3  "></div> */}
-          <section className="my-2 grid grid-cols-4 gap-8">
-            <div className="col-span-4 md:col-span-2">
-              <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                sx={{ width: "100%" }}
-              >
-                <DesktopDatePicker
-                  label="Due Date"
-                  value={dueDate}
-                  minDate={new Date()}
-                  onChange={getDate}
-                  renderInput={(params) => <TextField {...params} />}
-                  sx={{ width: "100%" }}
-                />
-              </LocalizationProvider>
             </div>
             <div className="col-span-4 md:col-span-2">
               <FormControl fullWidth>
