@@ -117,7 +117,7 @@ const Wallet = () => {
     const data = {
       totalEarned: totalData.totalEarned,
       totalPentest: totalData.pentestCompleted,
-      reputationScore: totalData.reputationScore,
+      totalHours: totalData.reputationScore,
       userId: hackerId,
     };
     dispatch(action.addWalletTotalRequest({ data, hackerId: hackerId }));
@@ -213,13 +213,13 @@ const Wallet = () => {
           <div className="mb-3 flex w-full items-center justify-end gap-3">
             <button
               onClick={handleEdit}
-              className="rounded-md bg-primary-btn px-10 py-2 tracking-wider text-white "
+              className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
             >
               Edit
             </button>
             <button
               onClick={openTotalModal}
-              className="rounded-md bg-primary-btn px-10 py-2 tracking-wider text-white "
+              className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
             >
               Add
             </button>
@@ -241,8 +241,8 @@ const Wallet = () => {
                 <h4 className="text-2xl">Reputation Score</h4>
               </div>
               <div className="relative   col-span-3 text-center">
-                <h1 className="mt-2 text-3xl">{walletTotals?.totalPentest}</h1>
-                <h4 className="text-2xl">Pentest Hour</h4>
+                <h1 className="mt-2 text-3xl">{walletTotals?.totalHours}</h1>
+                <h4 className="text-2xl">Total Hours</h4>
               </div>
             </div>
           )}
@@ -253,7 +253,7 @@ const Wallet = () => {
         <div className="pr-3">
           <button
             type="button"
-            className=" rounded-md bg-primary-btn px-10 py-2 tracking-wider  text-white"
+            className=" bg-primary-btn rounded-md px-10 py-2 tracking-wider  text-white"
             onClick={openIsWalletOpen}
           >
             Add

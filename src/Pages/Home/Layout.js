@@ -198,7 +198,7 @@ export default function MiniDrawer() {
               className={
                 open
                   ? "bg-white"
-                  : "flex h-16  w-15 items-center justify-center bg-orange-cus-1 sm:w-[4.57rem]"
+                  : "w-15 bg-orange-cus-1  flex h-16 items-center justify-center sm:w-[4.57rem]"
               }
             >
               <IconButton
@@ -241,7 +241,7 @@ export default function MiniDrawer() {
                   className="flex max-h-12 cursor-pointer items-center overflow-hidden"
                   onClick={handleUserMenu}
                 >
-                  <h4 className="text-left text-xl uppercase tracking-widest  text-orange-cus-1">
+                  <h4 className="text-orange-cus-1 text-left text-xl uppercase  tracking-widest">
                     {userDetails?.name}
                   </h4>
                   <span>
@@ -300,7 +300,7 @@ export default function MiniDrawer() {
           }}
         >
           {open && (
-            <div className="mb-3 flex w-full items-center justify-center object-cover">
+            <div className=" mb-3 flex w-full items-center justify-center object-cover">
               <img src={logoImage} alt="logo" className=" h-20 w-[230px]" />
             </div>
           )}

@@ -69,6 +69,7 @@ import {
   GetInvoiceSaga,
   addInvoiceSaga,
   deleteInvoicesSaga,
+  getInvoiceUserId,
 } from "./Invoice/InvoiceSaga";
 
 import {
@@ -154,6 +155,7 @@ function* watchAllSaga() {
   yield takeLatest(actions.getInvoiceRequest, GetInvoiceSaga);
   yield takeLatest(actions.addInvoiceRequest, addInvoiceSaga);
   yield takeLatest(actions.deleteInvoiceRequest, deleteInvoicesSaga);
+  yield takeLatest(actions.getInvoiceUserIdRequest, getInvoiceUserId);
 
   // !Customer
   yield takeLatest(actions.getGroupListRequest, GetGroupList);

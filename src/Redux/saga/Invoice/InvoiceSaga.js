@@ -46,3 +46,19 @@ export function* deleteInvoicesSaga(action) {
     yield put(actions.deleteInvoiceError(error.response?.data?.message));
   }
 }
+export function* getInvoiceUserId(action) {
+  try {
+    const { userId, page, rowsPerPage } = action.payload;
+    let response = yield call(
+      axios.get,
+      `${CONFIG.getInvoiceUserId}/${userId}/${rowsPerPage}/${page}`
+    );
+    if (response && response.data?.status === 1) {
+      yield put(actions.getInvoiceUserIdSuccess(response?.data?.data));
+      // yield put(actions.getInvoiceRequest({ company_id, page, rowsPerPage }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.getInvoiceUserIdError(error.response?.data?.message));
+  }
+}

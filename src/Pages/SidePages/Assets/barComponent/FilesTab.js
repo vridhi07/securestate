@@ -9,6 +9,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import DeleteModal from "../../../../Component/Common/DeleteModal";
 import moment from "moment";
+import AddIcon from "@mui/icons-material/Add";
 const FilesTab = () => {
   //* React States
   const dispatch = useDispatch();
@@ -122,18 +123,19 @@ const FilesTab = () => {
   }, [filesPageNumber, AddMessage]);
 
   return (
-    <div className="w-full flex flex-col mx-auto">
-      <section className="flex mb-3 items-center justify-end">
+    <div className="mx-auto flex w-full flex-col">
+      <section className="mb-3 flex items-center justify-end">
         <button
-          className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm
+          className="bg-gray-cus flex items-center gap-1  rounded-md py-2 px-5 capitalize tracking-wide text-gray-300
          "
           onClick={openFileModal}
         >
-          Upload Files
+          <AddIcon />
+          <span>Upload Files</span>
         </button>
       </section>
       <form className="flex items-center justify-end"></form>
-      <section className="grid grid-cols-12 justify-center items-center text-center font-bold text-gray-text-3  uppercase">
+      <section className="text-gray-text-3 grid grid-cols-12 items-center justify-center text-center font-bold  uppercase">
         <div className="col-span-3 ">
           <h4>File</h4>
         </div>
@@ -146,9 +148,9 @@ const FilesTab = () => {
         <div className="col-span-2 ">Remove</div>
       </section>
       <div
-        className={`w-full mt-3 ${
+        className={`mt-3 w-full ${
           !isLoading && "border"
-        }border border-gray-400 text-gray-text-4 border-t-0`}
+        }border text-gray-text-4 border-t-0 border-gray-400`}
       >
         {isLoading ? (
           <Loader />
@@ -158,14 +160,14 @@ const FilesTab = () => {
             return (
               <article
                 key={item._id}
-                className={`py-5 grid grid-cols-12 items-center justify-center w-full border text-center px-3 `}
+                className={`grid w-full grid-cols-12 items-center justify-center border py-5 px-3 text-center `}
               >
                 <div className="col-span-3 ml-7">
                   <a
                     href={item.file}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className=" underline text-sky-400 text-center md:mr-10"
+                    className=" text-center text-sky-400 underline md:mr-10"
                   >
                     {item.file_name}
                   </a>
@@ -190,7 +192,7 @@ const FilesTab = () => {
         )}
       </div>
       {assetFiles?.total > 1 && (
-        <div className="pb-5 mt-4">
+        <div className="mt-4 pb-5">
           <Stack spacing={2}>
             <Pagination
               count={assetFiles?.total}

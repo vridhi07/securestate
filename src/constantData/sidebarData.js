@@ -115,8 +115,8 @@ export const clientSidebar = [
   {
     path: "invoices",
     linkName: "INVOICES",
-    icon: <PersonIcon sx={color} />,
-    icon2: <PersonIcon sx={color2} />,
+    icon: <DescriptionIcon sx={color} />,
+    icon2: <DescriptionIcon sx={color2} />,
   },
   {
     path: "profile",

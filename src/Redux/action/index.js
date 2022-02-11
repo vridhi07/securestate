@@ -266,6 +266,15 @@ export const deleteInvoiceSuccess = createAction(
 );
 export const deleteInvoiceError = createAction(actions.DELETE_INVOICE_ERROR);
 
+export const getInvoiceUserIdRequest = createAction(
+  actions.GET_INVOICE_USER_ID_REQUEST
+);
+export const getInvoiceUserIdSuccess = createAction(
+  actions.GET_INVOICE_USER_ID_SUCCESS
+);
+export const getInvoiceUserIdError = createAction(
+  actions.GET_INVOICE_USER_ID_ERROR
+);
 // !Customer
 // * Group
 export const getGroupListRequest = createAction(actions.GET_GROUP_LIST_REQUEST);

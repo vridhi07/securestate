@@ -35,6 +35,7 @@ export const CONFIG = {
   getInvoice: "invoice/invoiceList",
   addInvoice: "invoice/addInvoice",
   deleteInvoice: "invoice/deleteInvoice",
+  getInvoiceUserId: "invoice/invoiceListWithUserId",
   //! Customer
   getGroupList: "company/groupList",
   addUserToGroup: "company/addusertogroup",

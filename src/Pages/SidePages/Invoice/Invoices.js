@@ -128,7 +128,19 @@ const Invoices = () => {
     if (userRole === roles.admin || userRole === roles.superAdmin) {
       dispatch(action.getUsersRequest());
     }
-  }, []);
+  }, [userRole]);
+
+  useEffect(() => {
+    if (userRole === roles.client && userDetails?._id) {
+      dispatch(
+        action.getInvoiceUserIdRequest({
+          userId: userDetails?._id,
+          page,
+          rowsPerPage,
+        })
+      );
+    }
+  }, [page, rowsPerPage, userDetails?._id]);
 
   return (
     <div>
