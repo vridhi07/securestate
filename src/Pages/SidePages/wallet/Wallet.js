@@ -226,20 +226,23 @@ const Wallet = () => {
       </div>
       <div className="mt-4  px-[5%]">
         <div className="min-w-[500px] overflow-x-auto">
-          <div className="mb-3 flex w-full items-center justify-end gap-3">
-            <button
-              onClick={handleEdit}
-              className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
-            >
-              Edit
-            </button>
-            <button
-              onClick={openTotalModal}
-              className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
-            >
-              Add
-            </button>
-          </div>
+          {selectOption && (
+            <div className="mb-3 flex w-full items-center justify-end gap-3">
+              <button
+                onClick={handleEdit}
+                className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
+              >
+                Edit
+              </button>
+              <button
+                onClick={openTotalModal}
+                className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
+              >
+                Add
+              </button>
+            </div>
+          )}
+
           {walletTotals && (
             <div className="grid grid-cols-9 items-center gap-x-2">
               <div className="col-span-3  text-center">
@@ -264,18 +267,20 @@ const Wallet = () => {
           )}
         </div>
       </div>
-
-      <div className="mt-8 flex items-center justify-end px-[5%]">
-        <div className="pr-3">
-          <button
-            type="button"
-            className=" bg-primary-btn rounded-md px-10 py-2 tracking-wider  text-white"
-            onClick={openIsWalletOpen}
-          >
-            Add
-          </button>
+      {selectOption && (
+        <div className="mt-8 flex items-center justify-end px-[5%]">
+          <div className="pr-3">
+            <button
+              type="button"
+              className=" bg-primary-btn rounded-md px-10 py-2 tracking-wider  text-white"
+              onClick={openIsWalletOpen}
+            >
+              Add
+            </button>
+          </div>
         </div>
-      </div>
+      )}
+
       <div className="mt-3 mb-4 px-[5%]">
         <WalletTable hackerId={hackerId} />
       </div>
