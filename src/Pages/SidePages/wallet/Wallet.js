@@ -3,11 +3,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import SettingsIcon from "@mui/icons-material/Settings";
+// import SettingsIcon from "@mui/icons-material/Settings";
 import WalletTable from "../../../Component/Wallet/WalletTable";
 import AddTotal from "../../../Component/Wallet/AddTotal";
 import AddWallet from "../../../Component/Wallet/AddWallet";
-
+import FilterOption from "../../../Component/Common/FilterOption";
 import { useSelector, useDispatch } from "react-redux";
 import * as roles from "../../../constantData/Roles";
 import * as action from "../../../Redux/action";
@@ -17,10 +17,6 @@ const Wallet = () => {
 
   const [isWalletOpen, setIsWalletOpen] = useState(false);
 
-  const [isError, setIsError] = useState({
-    formStatus: false,
-    msg: "",
-  });
   const [totalData, setTotalData] = useState({
     totalEarned: "",
     reputationScore: "",
@@ -34,6 +30,7 @@ const Wallet = () => {
   });
 
   const [hackerId, setHackerId] = useState("");
+  console.log(hackerId);
   // const [inputValue, setInputValue] = useState("");
   // console.log(value);
   // !Redux
@@ -41,22 +38,19 @@ const Wallet = () => {
   // const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails, userRole } = useSelector((state) => state?.user);
   const { AllPentest, allHacker } = useSelector((state) => state.wallet);
+  const { selectedCompany } = useSelector((state) => state?.company);
   // * Functions
-
-  // const getCompanyId = (role) => {
-  //   if (role === "superAdmin") {
-  //     return selectedCompany;
-  //   }
-  //   return userDetails?.company_id?._id;
-  // };
 
   //* COMPANY ID
   // const company_id = getCompanyId(userRole);
-  let company_id;
-  if (userRole === roles.admin) {
-    company_id = userDetails?.company_id?._id;
-  }
+  const getCompanyId = (role) => {
+    if (role === "superAdmin") {
+      return selectedCompany;
+    }
+    return userDetails?.company_id._id;
+  };
 
+  const company_id = getCompanyId(userRole);
   // console.log(company_id);
   const handleTotalChange = (e) => {
     let name = e.target.name;
@@ -109,17 +103,18 @@ const Wallet = () => {
   const submitTotal = (e) => {
     e.preventDefault();
     console.log(totalData);
+    const data = {
+      totalEarned: totalData.totalEarned,
+      totalPentest: totalData.pentestCompleted,
+      reputationScore: totalData.reputationScore,
+      userId: hackerId,
+    };
+    dispatch(action.addWalletTotalRequest({ data, hackerId: hackerId }));
     closeTotalModal();
   };
   const onSubmitWallet = (e) => {
     e.preventDefault();
-    if (!hackerId) {
-      setIsError({
-        ...isError,
-        formStatus: true,
-        msg: "Please select security Researcher",
-      });
-    }
+
     if (hackerId) {
       const data = {
         pentestId: walletDetail.pentest,
@@ -135,31 +130,49 @@ const Wallet = () => {
 
   // call pentest for admin
   useEffect(() => {
-    if (userRole === roles.admin) {
+    if (company_id) {
       dispatch(action.allPentestWithCompanyRequest({ company_id }));
       dispatch(action.allHackerWithCompanyRequest({ company_id }));
     }
-  }, [userRole]);
+  }, [company_id]);
 
   useEffect(() => {
-    const time = setTimeout(() => {
-      setIsError({ ...isError, formStatus: false, msg: "" });
-    }, 4000);
-
-    return () => clearTimeout(time);
-  }, [isError.msg]);
-
-  useEffect(() => {
-    if (allHacker) {
+    if (
+      userRole === roles.admin ||
+      (userRole === roles.superAdmin && allHacker)
+    ) {
       setHackerId(allHacker[0]?._id);
+    } else if (userRole === roles.hacker && userDetails?._id) {
+      setHackerId(userDetails?._id);
     }
-  }, [allHacker]);
+  }, [allHacker, company_id, userRole]);
+
+  useEffect(() => {
+    if (hackerId) {
+      dispatch(action.getWalletTotalRequest({ hackerId }));
+    }
+  }, [hackerId]);
+
   // console.log(allHacker[0]?._id);
+  const getSelectOption = (role) => {
+    if (role === roles.admin || role === roles.superAdmin) {
+      return true;
+    }
+    return false;
+  };
+
+  let selectOption;
+  if (userRole) {
+    selectOption = getSelectOption(userRole);
+  }
   return (
     <div>
       <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
-        <div className="max-w-lg">
-          {hackerId && (
+        <div className="flex max-w-lg gap-3">
+          <div className="w-full">
+            <FilterOption />
+          </div>
+          {selectOption && hackerId && (
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">
                 Security Research Role
@@ -189,13 +202,13 @@ const Wallet = () => {
           <div className="mb-3 flex w-full items-center justify-end gap-3">
             <button
               onClick={openTotalModal}
-              className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
+              className="rounded-md bg-primary-btn px-10 py-2 tracking-wider text-white "
             >
               Edit
             </button>
             <button
               onClick={openTotalModal}
-              className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
+              className="rounded-md bg-primary-btn px-10 py-2 tracking-wider text-white "
             >
               Add
             </button>
@@ -223,7 +236,7 @@ const Wallet = () => {
         <div className="pr-3">
           <button
             type="button"
-            className=" bg-primary-btn rounded-md px-10 py-2 tracking-wider  text-white"
+            className=" rounded-md bg-primary-btn px-10 py-2 tracking-wider  text-white"
             onClick={openIsWalletOpen}
           >
             Add
@@ -248,7 +261,7 @@ const Wallet = () => {
         walletDetail={walletDetail}
         onSubmitWallet={onSubmitWallet}
         AllPentest={AllPentest}
-        isError={isError}
+        // isError={isError}
       />
     </div>
   );

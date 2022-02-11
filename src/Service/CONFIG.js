@@ -48,4 +48,6 @@ export const CONFIG = {
   allHackerWithCompany: "user/getAllHackers?companyId=",
   addWallet: "wallet/addWalletDetailsForPentest",
   getWallet: "wallet/getWalletDetailsForPentest",
+  getWalletTotal: "wallet/getWalletTotalDetails",
+  addWalletTotal: "wallet/addWalletTotalDetails",
 };

@@ -139,7 +139,7 @@ export default function MiniDrawer() {
   }, [userDetails?.role]);
   // let newPathname = pathname.split("").slice(1).join("");
   let newPathname = pathname.split("/").splice(1, 1).join();
-  console.log(newPathname);
+  // console.log(newPathname);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -198,7 +198,7 @@ export default function MiniDrawer() {
               className={
                 open
                   ? "bg-white"
-                  : "w-15 bg-orange-cus-1  flex h-16 items-center justify-center sm:w-[4.57rem]"
+                  : "flex h-16  w-15 items-center justify-center bg-orange-cus-1 sm:w-[4.57rem]"
               }
             >
               <IconButton
@@ -241,7 +241,7 @@ export default function MiniDrawer() {
                   className="flex max-h-12 cursor-pointer items-center overflow-hidden"
                   onClick={handleUserMenu}
                 >
-                  <h4 className="text-orange-cus-1 text-left text-xl uppercase  tracking-widest">
+                  <h4 className="text-left text-xl uppercase tracking-widest  text-orange-cus-1">
                     {userDetails?.name}
                   </h4>
                   <span>

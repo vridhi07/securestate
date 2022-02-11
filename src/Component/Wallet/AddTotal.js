@@ -14,7 +14,7 @@ export default function AddTotal({
   return (
     <div>
       <Dialog open={isTotalOpen}>
-        <form className="px-16 py-8 relative" onSubmit={submitTotal}>
+        <form className="relative px-16 py-8" onSubmit={submitTotal}>
           <button
             type="button"
             onClick={closeTotalModal}
@@ -22,8 +22,8 @@ export default function AddTotal({
           >
             <CloseIcon />
           </button>
-          <section className="grid grid-cols-4 gap-8 my-2">
-            <div className="md:col-span-2 col-span-4">
+          <section className="my-2 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
               <TextField
                 name="totalEarned"
                 id="AssetName"
@@ -36,7 +36,7 @@ export default function AddTotal({
                 required
               />
             </div>
-            <div className="md:col-span-2 col-span-4">
+            <div className="col-span-4 md:col-span-2">
               <TextField
                 name="reputationScore"
                 id="AssetName"
@@ -50,11 +50,11 @@ export default function AddTotal({
               />
             </div>
           </section>
-          <section className="grid grid-cols-4 gap-8 my-4">
-            <div className="md:col-span-2 col-span-4">
+          <section className="my-4 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
               <TextField
-                name="test_completed"
-                id="AssetName"
+                name="pentestCompleted"
+                id="pentestCompleted"
                 label="Test Completed"
                 variant="outlined"
                 size="medium"
@@ -64,12 +64,12 @@ export default function AddTotal({
                 required
               />
             </div>
-            <div className="md:col-span-2 col-span-4"></div>
+            <div className="col-span-4 md:col-span-2"></div>
           </section>
           <div className="w-full ">
             <button
               type="submit"
-              className="px-14 py-3 bg-primary-btn tracking-wide rounded-md"
+              className="rounded-md bg-primary-btn px-14 py-3 tracking-wide"
             >
               Submit
             </button>
