@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector} from "react-redux";
+import {  useDispatch, useSelector} from "react-redux";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -13,6 +13,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuItem from "@mui/material/MenuItem";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import Select from "@mui/material/Select";
+import * as action from "../../Redux/action";
+
 // import AdapterDateFns from "@mui/lab/AdapterDateFns";
 export default function AlertDialog({
   open,
@@ -33,6 +35,7 @@ export default function AlertDialog({
   if (users) {
     newUser = users.filter((item) => item?.user_id === user_id);
   }
+
   return (
     <div>
       <Dialog
@@ -71,6 +74,7 @@ export default function AlertDialog({
                 users
                   .filter((newUser) => newUser.role === "Client")
                   .map((newUser, index) => {
+                    console.log(newUser, "user")
                     return (
                       <MenuItem
                         value={newUser.name}

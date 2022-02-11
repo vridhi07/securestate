@@ -32,6 +32,14 @@ const handleSelect = (event) => {
     typeof value === "string" ? value.split(",") : value
   );
 };
+// const dispatch = useDispatch();
+useEffect(() => {
+  dispatch(action.getUsersRequest());
+  setPersonName(" ");
+}, []);
+
+
+
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
@@ -69,14 +77,8 @@ const handleSelect = (event) => {
   const getDate = (newValue) => {
     setFormInput({ ...formInput, dueDate: newValue });
   };
-  // GET USER CLIENT
-  // console.log(newUser);
-  const [newrole, setNewrole] = useState({
-    role: " ",
-  });
-  useEffect(() => {
-    dispatch(action.getUsersRequest());
-  }, []);
+  
+
 
   console.log(formInput.attachData);
   const handleFormInput = (e) => {
@@ -108,6 +110,7 @@ const handleSelect = (event) => {
   }, [company_id, page, rowsPerPage]);
 
   const handleSubmit = (e) => {
+    console.log("hello")
     e.preventDefault();
     const { invoice, totalAmount, dueDate, status, attachData } = formInput;
     const data = new FormData();
@@ -119,6 +122,8 @@ const handleSelect = (event) => {
     data.append("status", status);
     data.append("company_id", company_id);
     data.append("user_id", user_id);
+    // console.log(data);
+    // dispatch(action.addInvoiceRequest(data));
     console.log("I am called");
     setFormInput({
       ...formInput,
