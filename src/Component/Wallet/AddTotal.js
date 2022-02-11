@@ -8,6 +8,7 @@ export default function AddTotal({
   totalData,
   handleTotalChange,
   submitTotal,
+  isTotalEdit,
 }) {
   const { totalEarned, reputationScore, pentestCompleted } = totalData;
 
@@ -71,7 +72,7 @@ export default function AddTotal({
               type="submit"
               className="rounded-md bg-primary-btn px-14 py-3 tracking-wide"
             >
-              Submit
+              {isTotalEdit ? "Save" : "Submit"}
             </button>
           </div>
         </form>
