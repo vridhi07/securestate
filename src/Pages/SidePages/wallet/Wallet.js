@@ -242,7 +242,7 @@ const Wallet = () => {
               </div>
               <div className="relative   col-span-3 text-center">
                 <h1 className="mt-2 text-3xl">{walletTotals?.totalPentest}</h1>
-                <h4 className="text-2xl">Pentest Completed</h4>
+                <h4 className="text-2xl">Pentest Hour</h4>
               </div>
             </div>
           )}

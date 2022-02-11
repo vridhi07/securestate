@@ -15,7 +15,7 @@ export default function AddTotal({
   AllPentest = [],
   // isError,
 }) {
-  const { pentest, award, status, hackerId } = walletDetail;
+  const { pentest, award, status } = walletDetail;
   return (
     <div>
       <Dialog open={isWalletOpen}>
@@ -96,7 +96,6 @@ export default function AddTotal({
                   label="Status"
                   name="status"
                   id="status"
-                  label="Status"
                   variant="outlined"
                   size="medium"
                 >
