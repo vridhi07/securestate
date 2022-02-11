@@ -51,4 +51,5 @@ export const CONFIG = {
   getWallet: "wallet/getWalletDetailsForPentest",
   getWalletTotal: "wallet/getWalletTotalDetails",
   addWalletTotal: "wallet/addWalletTotalDetails",
+  editWalletTotal: "wallet/updateWalletTotalDetails",
 };

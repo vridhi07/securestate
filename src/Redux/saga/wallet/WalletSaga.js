@@ -109,3 +109,19 @@ export function* addWalletTotalSaga(action) {
     yield put(actions.addWalletTotalSuccess(error?.response?.data?.message));
   }
 }
+export function* editWalletTotalSaga(action) {
+  try {
+    const { data, hackerId } = action.payload;
+    // console.log(data, "data", hackerId, "hackerId");
+    let response = yield call(axios.put, `${CONFIG.editWalletTotal}`, data);
+
+    if (response && response?.data?.status === 1) {
+      console.log(response.data);
+      yield put(actions.editWalletTotalSuccess("Success"));
+      yield put(actions.getWalletTotalRequest({ hackerId }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.editWalletTotalError(error?.response?.data?.message));
+  }
+}

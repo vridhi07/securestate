@@ -394,3 +394,13 @@ export const addWalletTotalSuccess = createAction(
   actions.ADD_WALLET_TOTAL_SUCCESS
 );
 export const addWalletTotalError = createAction(actions.ADD_WALLET_TOTAL_ERROR);
+
+export const editWalletTotalRequest = createAction(
+  actions.EDIT_WALLET_TOTAL_REQUEST
+);
+export const editWalletTotalSuccess = createAction(
+  actions.EDIT_WALLET_TOTAL_SUCCESS
+);
+export const editWalletTotalError = createAction(
+  actions.EDIT_WALLET_TOTAL_ERROR
+);

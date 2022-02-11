@@ -92,6 +92,7 @@ import {
   getWalletSaga,
   getWalletTotalSaga,
   addWalletTotalSaga,
+  editWalletTotalSaga,
 } from "./wallet/WalletSaga";
 
 function* watchAllSaga() {
@@ -156,6 +157,7 @@ function* watchAllSaga() {
   yield takeLatest(actions.addInvoiceRequest, addInvoiceSaga);
   yield takeLatest(actions.deleteInvoiceRequest, deleteInvoicesSaga);
   yield takeLatest(actions.getInvoiceUserIdRequest, getInvoiceUserId);
+  yield takeLatest(actions.editWalletTotalRequest, editWalletTotalSaga);
 
   // !Customer
   yield takeLatest(actions.getGroupListRequest, GetGroupList);

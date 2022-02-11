@@ -33,7 +33,7 @@ const Wallet = () => {
   const [hackerId, setHackerId] = useState("");
   console.log(hackerId);
   // const [inputValue, setInputValue] = useState("");
-  // console.log(value);
+  console.log(isTotalEdit);
   // !Redux
   const dispatch = useDispatch();
   // const { selectedCompany } = useSelector((state) => state?.company);
@@ -92,6 +92,9 @@ const Wallet = () => {
 
   const closeTotalModal = () => {
     setIsTotalOpen(false);
+    if (isTotalEdit) {
+      setIsTotalEdit(false);
+    }
     setTotalData({
       ...totalData,
       totalEarned: "",
@@ -106,7 +109,7 @@ const Wallet = () => {
       ...totalData,
       totalEarned: walletTotals?.totalEarned,
       reputationScore: walletTotals?.reputationScore,
-      pentestCompleted: walletTotals?.totalPentest,
+      pentestCompleted: walletTotals?.totalHours,
     });
     openTotalModal();
   };
@@ -114,14 +117,27 @@ const Wallet = () => {
   const submitTotal = (e) => {
     e.preventDefault();
     console.log(totalData);
-    const data = {
-      totalEarned: totalData.totalEarned,
-      totalPentest: totalData.pentestCompleted,
-      totalHours: totalData.reputationScore,
-      userId: hackerId,
-    };
-    dispatch(action.addWalletTotalRequest({ data, hackerId: hackerId }));
+    if (!isTotalEdit) {
+      const data = {
+        totalEarned: totalData.totalEarned,
+        totalHours: totalData.pentestCompleted,
+        reputationScore: totalData.reputationScore,
+        userId: hackerId,
+      };
+      dispatch(action.addWalletTotalRequest({ data, hackerId: hackerId }));
+    }
+    // reputationScore;
+    if (isTotalEdit) {
+      const data = {
+        totalEarned: totalData.totalEarned,
+        totalHours: totalData.pentestCompleted,
+        reputationScore: totalData.reputationScore,
+        id: walletTotals?._id,
+      };
+      dispatch(action.editWalletTotalRequest({ data, hackerId: hackerId }));
+    }
     closeTotalModal();
+    // setIsTotalEdit(false);
   };
   const onSubmitWallet = (e) => {
     e.preventDefault();
