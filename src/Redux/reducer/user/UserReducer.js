@@ -33,7 +33,33 @@ const UsersReducer = (state = initialState, action) => {
         isError: true,
         Message: action.payload,
       };
-
+    case actions.ADD_USERS_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        Message: action.payload,
+      };
+    case actions.ADD_USERS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        Message: "",
+      };
+    case actions.ADD_USERS_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        Message: action.payload,
+      };
+    case actions.RESET_USERS_ALERT:
+      return {
+        ...state,
+        isError: false,
+        Message: "",
+      };
     default:
       return state;
   }

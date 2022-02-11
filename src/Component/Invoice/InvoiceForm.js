@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+
 import {  useDispatch, useSelector} from "react-redux";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -13,9 +13,23 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuItem from "@mui/material/MenuItem";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import Select from "@mui/material/Select";
-import * as action from "../../Redux/action";
-
+import Alert from "@mui/material/Alert";
 // import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import { useEffect } from "react";
+const Alerts = ({ alert, setAlert }) => {
+  useEffect(() => {
+    let timeout = setTimeout(() => {
+      setAlert({ ...alert, msg: "", status: false });
+    }, 3000);
+    return () => clearTimeout(timeout);
+  }, [alert.msg]);
+
+  return (
+    <Alert severity="error" size="small">
+      {alert.msg}
+    </Alert>
+  );
+};
 export default function AlertDialog({
   open,
   handleClose,
@@ -24,17 +38,13 @@ export default function AlertDialog({
   getDate,
   removeAttachData,
   handleSubmit,
-  user_id,
-  getUserId,
-  handleSelect,
-  personName,
+  users = [],
+  alert,
+  setAlert,
 }) {
-  const { invoice, totalAmount, dueDate, status, attachData } = formInput;
-  const { users } = useSelector((state) => state?.users);
-  let newUser;
-  if (users) {
-    newUser = users.filter((item) => item?.user_id === user_id);
-  }
+  const { invoice, totalAmount, dueDate, status, attachData, client } =
+    formInput;
+  const newUser = users.filter((item) => item.role === "client");
 
   return (
     <div>
@@ -43,11 +53,10 @@ export default function AlertDialog({
         // onClose={handleClose}
         aria-labelledby="Invoice-Form-Modal"
         aria-describedby="alert-dialog-description"
-        sx={{ height: 500 }}
       >
         <form
           autoComplete="off"
-          className="flex flex-col justify-center items-center px-5 sm:px-20 py-10 relative"
+          className="relative  items-center justify-center px-5 py-10 sm:px-20"
           onSubmit={handleSubmit}
         >
           <button
@@ -57,39 +66,34 @@ export default function AlertDialog({
           >
             <CloseIcon />
           </button>
-          <h2 className="text-xl font-semibold mb-9">Add Invoice</h2>
 
-          <FormControl fullWidth>
-            <InputLabel id="status">User</InputLabel>
-            <Select
-              labelId="status"
-              id="role"
-              name="role"
-              label="Status"
-              value={personName}
-              onChange={handleSelect}
-              required
-            >
-              {users &&
-                users
-                  .filter((newUser) => newUser.role === "Client")
-                  .map((newUser, index) => {
-                    console.log(newUser, "user")
-                    return (
-                      <MenuItem
-                        value={newUser.name}
-                        key={newUser._id}
-                        onClick={() => getUserId(newUser?._id)}
-                      >
-                        {newUser?.name}
+          <h2 className="mb-5 text-xl font-semibold">Add Invoice</h2>
+          {alert.status && <Alerts alert={alert} setAlert={setAlert} />}
+          <section className="mt-2 mb-3 grid grid-cols-4 gap-8 ">
+            <div className="col-span-4 ">
+              <FormControl fullWidth>
+                <InputLabel id="client">Select client</InputLabel>
+                <Select
+                  labelId="client"
+                  id="client"
+                  name="client"
+                  value={client}
+                  label="Select client"
+                  onChange={handleFormInput}
+                  required
+                >
+                  {newUser &&
+                    newUser.map((item) => (
+                      <MenuItem key={item._id} value={item._id}>
+                        {item.name}
                       </MenuItem>
-                    );
-                  })}
-            </Select>
-          </FormControl>
-
-          <section className="grid grid-cols-4 gap-8 my-2">
-            <div className="md:col-span-2 col-span-4">
+                    ))}
+                </Select>
+              </FormControl>
+            </div>
+          </section>
+          <section className="my-2 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
               <FormControl fullWidth>
                 <TextField
                   id="invoice"
@@ -103,7 +107,26 @@ export default function AlertDialog({
                 />
               </FormControl>
             </div>
-            <div className="md:col-span-2 col-span-4">
+            <div className="col-span-4 md:col-span-2">
+              <LocalizationProvider
+                dateAdapter={AdapterDateFns}
+                sx={{ width: "100%" }}
+              >
+                <DesktopDatePicker
+                  label="Due Date"
+                  value={dueDate}
+                  minDate={new Date()}
+                  onChange={getDate}
+                  renderInput={(params) => <TextField {...params} />}
+                  sx={{ width: "100%" }}
+                />
+              </LocalizationProvider>
+            </div>
+          </section>
+          {/* <div className="w-full mb-3  "></div>
+          <div className="w-full mb-3  "></div> */}
+          <section className="my-2 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
               <FormControl fullWidth>
                 <InputLabel htmlFor="Total-amount">Total</InputLabel>
                 <OutlinedInput
@@ -120,25 +143,7 @@ export default function AlertDialog({
                 />
               </FormControl>
             </div>
-          </section>
-        
-          <section className="grid grid-cols-4 gap-8 my-2">
-            <div className="md:col-span-2 col-span-4">
-              <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                sx={{ width: "100%" }}
-              >
-                <DesktopDatePicker
-                  label="Due Date"
-                  value={dueDate}
-                  minDate={new Date()}
-                  onChange={getDate}
-                  renderInput={(params) => <TextField {...params} />}
-                  sx={{ width: "100%" }}
-                />
-              </LocalizationProvider>
-            </div>
-            <div className="md:col-span-2 col-span-4">
+            <div className="col-span-4 md:col-span-2">
               <FormControl fullWidth>
                 <InputLabel id="status">Status</InputLabel>
                 <Select
@@ -159,19 +164,19 @@ export default function AlertDialog({
           </section>
           {/* <div className="w-full mb-3"></div>
           <div className="w-full mb-3"></div> */}
-          <div className="flex items-start justify-between w-full mt-5">
+          <div className="mt-5 flex w-full items-start justify-between">
             <div className="flex flex-col">
               <button
                 // onClick={handleClose}
                 type="submit"
-                className="px-5 py-2 bg-orange-cus-1 text-white mb-3 "
+                className="bg-orange-cus-1 mb-3 px-5 py-2 text-white "
               >
                 Add Invoice
               </button>
               <button
                 type="button"
                 onClick={handleClose}
-                className="px-5 py-2 bg-orange-cus-1 text-white mb-3 "
+                className="bg-orange-cus-1 mb-3 px-5 py-2 text-white "
               >
                 Cancel
               </button>
@@ -179,7 +184,7 @@ export default function AlertDialog({
             <div className="ml-2">
               <label
                 htmlFor="file"
-                className="flex  px-5 py-2 bg-orange-cus-1 text-white mb-3 hover:cursor-pointer "
+                className="bg-orange-cus-1  mb-3 flex px-5 py-2 text-white hover:cursor-pointer "
               >
                 <AttachFileIcon />
                 Attach file
@@ -196,7 +201,7 @@ export default function AlertDialog({
             </div>
           </div>
           {attachData && (
-            <div className="flex w-full mt-3 justify-between">
+            <div className="mt-3 flex w-full justify-between">
               <p>{attachData.name}</p>
 
               <button type="button" onClick={removeAttachData}>

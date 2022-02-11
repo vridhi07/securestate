@@ -11,7 +11,7 @@ export function* GetInvoiceSaga(action) {
       `${CONFIG.getInvoice}/${company_id}/${rowsPerPage}/${page}`
     );
     if (response && response.data?.status === 1) {
-      yield put(actions.getInvoiceSuccess(response.data.data));
+      yield put(actions.getInvoiceSuccess(response?.data?.data));
     }
   } catch (error) {
     // console.log(error.response.data.message);
@@ -21,13 +21,29 @@ export function* GetInvoiceSaga(action) {
 export function* addInvoiceSaga(action) {
 console.log('hello');
   try {
-    console.log("hello");
-    let response = yield call(axios.post, CONFIG.addInvoice, action.payload);
+    const { data, company_id, page, rowsPerPage } = action.payload;
+    let response = yield call(axios.post, CONFIG.addInvoice, data);
     if (response && response.data?.status === 1) {
-      yield put(actions.addInvoiceSuccess('SUCCESS'));
+      yield put(actions.addInvoiceSuccess("successfully added"));
+      yield put(actions.getInvoiceRequest({ company_id, page, rowsPerPage }));
     }
   } catch (error) {
-     console.log(error , "error");
-    yield put(actions.addInvoiceError(error.response.data.message));
+    // console.log(error.response.data.message);
+    yield put(actions.addInvoiceError(error.response?.data?.message));
+  }
+}
+export function* deleteInvoicesSaga(action) {
+  try {
+    const { data, company_id, page, rowsPerPage } = action.payload;
+    let response = yield call(axios.delete, CONFIG.deleteInvoice, {
+      data: { invoiceId: data },
+    });
+    if (response && response.data?.status === 1) {
+      yield put(actions.deleteInvoiceSuccess("successfully Deleted"));
+      yield put(actions.getInvoiceRequest({ company_id, page, rowsPerPage }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.deleteInvoiceError(error.response?.data?.message));
   }
 }

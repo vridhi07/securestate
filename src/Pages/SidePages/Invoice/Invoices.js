@@ -11,35 +11,8 @@ const Invoices = () => {
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
   const { invoiceData } = useSelector((state) => state?.Invoice);
-  const { users } = useSelector((state) => state?.users);
-
-  // Client user id data
-  const getUserId = (role) => {
-    if (role === "Client"){
-      return users ;
-    }
-    return users?.user_id;
-  }
-  const user_id = getUserId(users?.role);
-
-// get company id
-const [personName, setPersonName] = useState([]);
-const handleSelect = (event) => {
-  const {
-    target: { value },
-  } = event;
-  setPersonName(
-    typeof value === "string" ? value.split(",") : value
-  );
-};
-// const dispatch = useDispatch();
-useEffect(() => {
-  dispatch(action.getUsersRequest());
-  setPersonName(" ");
-}, []);
-
-
-
+  const { users } = useSelector((state) => state.users);
+  // console.log(users);
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
@@ -58,12 +31,15 @@ useEffect(() => {
     dueDate: new Date(),
     status: "",
     attachData: "",
+    client: "",
   });
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  // console.log(invoiceData);
-  console.log(page, "page");
-  console.log(rowsPerPage, "page");
+  const [alert, setAlert] = useState({
+    msg: "",
+    status: false,
+  });
+
   const handleChangePage = (event, newPage) => {
     console.log(newPage);
     setPage(newPage);
@@ -105,46 +81,61 @@ useEffect(() => {
     setFormInput({ ...formInput, attachData: "" });
   };
 
+  const handleSubmit = (e) => {
+    console.log("hello")
+    e.preventDefault();
+    const { invoice, totalAmount, dueDate, status, attachData, client } =
+      formInput;
+    const data = new FormData();
+
+    if (!attachData) {
+      setAlert({
+        ...alert,
+        msg: "Please Select an attached file",
+        status: true,
+      });
+    }
+    if (attachData) {
+      data.append("file", attachData, attachData.name);
+      data.append("invoice", invoice);
+      data.append("total", totalAmount);
+      data.append("status", status);
+      data.append("company_id", company_id);
+      data.append("user_id", client);
+      data.append("due_date", dueDate);
+      dispatch(
+        action.addInvoiceRequest({ data, company_id, page, rowsPerPage })
+      );
+      setFormInput({
+        ...formInput,
+        invoice: "",
+        totalAmount: "",
+        dueDate: new Date(),
+        status: "",
+        attachData: "",
+        client: "",
+      });
+      handleClose();
+    }
+    // console.log(data);
+  };
   useEffect(() => {
     dispatch(action.getInvoiceRequest({ company_id, page, rowsPerPage }));
   }, [company_id, page, rowsPerPage]);
 
-  const handleSubmit = (e) => {
-    console.log("hello")
-    e.preventDefault();
-    const { invoice, totalAmount, dueDate, status, attachData } = formInput;
-    const data = new FormData();
-    if (attachData) {
-      data.append("file", attachData, attachData.name);
-    }
-    data.append("invoice", invoice);
-    data.append("total", totalAmount);
-    data.append("status", status);
-    data.append("company_id", company_id);
-    data.append("user_id", user_id);
-    // console.log(data);
-    // dispatch(action.addInvoiceRequest(data));
-    console.log("I am called");
-    setFormInput({
-      ...formInput,
-      invoice: "",
-      totalAmount: "",
-      dueDate: new Date(),
-      status: "",
-      attachData: "",
-      user_id : " ",
-    });
-    // handleClose();
-  };
+  useEffect(() => {
+    dispatch(action.getUsersRequest());
+  }, []);
+
   return (
     <div>
-      <div className="max-w-xl mx-auto mt-4 mb-8">
+      <div className="mx-auto mt-4 mb-8 max-w-xl">
         <FilterOption />
       </div>
-      <div className="w-full px-[5%] flex justify-between my-3 ">
+      <div className="my-3 flex w-full justify-between px-[5%] ">
         <h2 className="text-[1.5rem]">Invoices</h2>
         <button
-          className="px-7 py-2 bg-orange-cus-1 text-white rounded-md"
+          className="bg-orange-cus-1 rounded-md px-7 py-2 text-white"
           onClick={handleClickOpen}
         >
           Add Invoice
@@ -157,6 +148,7 @@ useEffect(() => {
           rowsPerPage={rowsPerPage}
           handleChangePage={handleChangePage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
+          company_id={company_id}
         />
       </div>
       <InvoiceModal
@@ -168,11 +160,9 @@ useEffect(() => {
         getDate={getDate}
         removeAttachData={removeAttachData}
         handleSubmit={handleSubmit}
-        getUserId = {getUserId}
-        handleSelect = {handleSelect}
-        personName = {personName}
-        setPersonName = {setPersonName}
-        user_id = {user_id}
+        users={users}
+        alert={alert}
+        setAlert={setAlert}
       />
     </div>
   );

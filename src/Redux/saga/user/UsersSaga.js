@@ -27,8 +27,8 @@ export function* AddUsersSaga(action) {
       yield put(actions.getUsersRequest());
     }
   } catch (error) {
-    // console.log(error.response.data.message);
-    yield put(actions.addUsersError(error?.response?.data?.message));
+    console.log(error.response?.data);
+    yield put(actions.addUsersError(error.response?.data?.message));
   }
 }
 

@@ -157,7 +157,7 @@ const Wallet = () => {
   // console.log(allHacker[0]?._id);
   return (
     <div>
-      <div className="w-full rounded-lg shadow-sm bg-white pl-7 py-10 ">
+      <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
         <div className="max-w-lg">
           {hackerId && (
             <FormControl fullWidth>
@@ -186,51 +186,51 @@ const Wallet = () => {
       </div>
       <div className="mt-4  px-[5%]">
         <div className="min-w-[500px] overflow-x-auto">
-          <div className="w-full flex justify-end items-center gap-3 mb-3">
+          <div className="mb-3 flex w-full items-center justify-end gap-3">
             <button
               onClick={openTotalModal}
-              className="px-10 py-2 bg-primary-btn rounded-md text-white tracking-wider "
+              className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
             >
               Edit
             </button>
             <button
               onClick={openTotalModal}
-              className="px-10 py-2 bg-primary-btn rounded-md text-white tracking-wider "
+              className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
             >
               Add
             </button>
           </div>
-          <div className="grid grid-cols-9 gap-x-2 items-center">
+          <div className="grid grid-cols-9 items-center gap-x-2">
             <div className="col-span-3  text-center">
               <div className="max-w-[250px] ">
-                <h1 className="text-8xl mt-2">$XX</h1>
+                <h1 className="mt-2 text-8xl">$XX</h1>
                 <h4 className="text-2xl">Total Earned</h4>
               </div>
             </div>
-            <div className="col-span-3  text-center relative">
-              <h1 className="text-8xl mt-2">X</h1>
+            <div className="relative  col-span-3 text-center">
+              <h1 className="mt-2 text-8xl">X</h1>
               <h4 className="text-2xl">Reputation Score</h4>
             </div>
-            <div className="col-span-3   text-center relative">
-              <h1 className="text-8xl mt-2">XX</h1>
+            <div className="relative   col-span-3 text-center">
+              <h1 className="mt-2 text-8xl">XX</h1>
               <h4 className="text-2xl">Pentest Completed</h4>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-end mt-8 px-[5%]">
+      <div className="mt-8 flex items-center justify-end px-[5%]">
         <div className="pr-3">
           <button
             type="button"
-            className=" px-10 py-2 bg-primary-btn text-white rounded-md  tracking-wider"
+            className=" bg-primary-btn rounded-md px-10 py-2 tracking-wider  text-white"
             onClick={openIsWalletOpen}
           >
             Add
           </button>
         </div>
       </div>
-      <div className="px-[5%] mt-3 mb-4">
+      <div className="mt-3 mb-4 px-[5%]">
         <WalletTable hackerId={hackerId} />
       </div>
       <AddTotal
