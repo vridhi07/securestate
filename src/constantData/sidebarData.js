@@ -105,7 +105,6 @@ export const clientSidebar = [
     icon: <FactCheckIcon sx={color} />,
     icon2: <FactCheckIcon sx={color2} />,
   },
-
   {
     path: "inbox",
     linkName: "INBOX",

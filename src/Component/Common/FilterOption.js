@@ -10,11 +10,8 @@ import { useEffect } from "react";
 
 const FilterOption = () => {
   const state = useSelector((state) => state);
-
   const dispatch = useDispatch();
-
   const { companyDetails, selectedName } = state?.company;
-
   const { userDetails } = state?.user;
 
   const handleChange = (e) => {
