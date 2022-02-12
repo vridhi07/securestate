@@ -1,7 +1,7 @@
 import axios from "axios";
 const Prod = process.env.REACT_APP_PROD;
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
-console.log(Prod);
+// console.log(Prod);
 const defaultAxios = () => {
   axios.interceptors.request.use((request) => {
     const token = localStorage.getItem("token");
