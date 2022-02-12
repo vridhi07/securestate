@@ -53,7 +53,10 @@ const Invoices = () => {
   const getDate = (newValue) => {
     setFormInput({ ...formInput, dueDate: newValue });
   };
-  // console.log(formInput.attachData);
+  
+
+
+  console.log(formInput.attachData);
   const handleFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -79,6 +82,7 @@ const Invoices = () => {
   };
 
   const handleSubmit = (e) => {
+    console.log("hello")
     e.preventDefault();
     const { invoice, totalAmount, dueDate, status, attachData, client } =
       formInput;
@@ -102,7 +106,6 @@ const Invoices = () => {
       dispatch(
         action.addInvoiceRequest({ data, company_id, page, rowsPerPage })
       );
-
       setFormInput({
         ...formInput,
         invoice: "",
@@ -114,10 +117,8 @@ const Invoices = () => {
       });
       handleClose();
     }
-
     // console.log(data);
   };
-
   useEffect(() => {
     if (userRole === roles.admin || userRole === roles.superAdmin) {
       dispatch(action.getInvoiceRequest({ company_id, page, rowsPerPage }));

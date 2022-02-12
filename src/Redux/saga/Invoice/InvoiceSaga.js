@@ -19,6 +19,7 @@ export function* GetInvoiceSaga(action) {
   }
 }
 export function* addInvoiceSaga(action) {
+console.log('hello');
   try {
     const { data, company_id, page, rowsPerPage } = action.payload;
     let response = yield call(axios.post, CONFIG.addInvoice, data);
