@@ -65,11 +65,19 @@ const Profile = () => {
       phone: userDetails?.phone,
       location: userDetails?.location,
     });
-    if (isEdit) {
-      dispatch(action.updateUserRequest(formData));
-      setIsEdit(false);
-    }
   };
+
+
+    const saveEdit = () => {
+      console.log ("abcd")
+     
+      if (isEdit) {
+        dispatch(action.updateUserRequest(formData));
+        setIsEdit(false);
+      }
+    }
+
+  
 
   useEffect(() => {
     if (isEdit) {
@@ -152,38 +160,31 @@ const Profile = () => {
           </h3>
           <div className="mt-4 ml-auto flex items-center">
             <div
-              className="mr-[5%] cursor-pointer rounded-md bg-[#565656] px-5 py-2 text-white "
-              type="button"
+             
               onClick={openEdit}
             >
-              {setIsEdit && (
-   <span className="flex items-center gap-2">
-   <span className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
-     <ModeEditIcon
-       sx={{
-         color: "white",
-         fontSize: "1rem",
-       }}
-     />
-   </span>
-   <span>Edit</span>
- </span>
-              )}
-              
-              {/* {isEdit ? (
-                <span className="flex items-center gap-2">
+              {
+                isEdit ? (
+                  <div></div>
+                ):(
+                   <div className="mr-[5%] cursor-pointer rounded-md bg-[#565656] px-5 py-2 text-white ">
+                  <span className="flex items-center gap-2">
                   <span className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
-                    <SaveAsIcon
+                   <ModeEditIcon
                       sx={{
                         color: "white",
                         fontSize: "1rem",
                       }}
                     />
+                   
                   </span>
-                  <span>Save</span>
+                  <span  >Edit</span>
                 </span>
-              ) : (
-             
+                   </div>
+                )
+              }
+              {/* {SetisEdit && (
+  
               )} */}
             </div>
          
@@ -253,7 +254,7 @@ const Profile = () => {
                   />
                 ) : (
                   <div className="px w-[300px] px-3 pt-2 ">
-                    {userDetails?.company_id.company_name}
+                    {userDetails?.company_id?.company_name}
                   </div>
                 )}
               </div>
@@ -311,7 +312,7 @@ const Profile = () => {
     <div>
           {isEdit && (
               <button
-                className="rounded-md bg-slate-300 px-6 py-2 text-gray-500"
+                className="rounded-md bg-[#CBD5E1] px-6 py-2 text-black-500"
                 type="button"
                 onClick={cancelEdit}
                 sx = {{".bg-slate-300 " :{
@@ -325,19 +326,17 @@ const Profile = () => {
           </div>
        <div>
        {isEdit && (
-                <span className="flex items-center gap-2">
-                  <span className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
+                <span   onClick = {saveEdit} className="rounded-md flex items-center gap-2 bg-[#F67A32] py-[0.55rem] px-[0.55rem] mx-2">
+                  <span   className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
                     <SaveAsIcon
                       sx={{
                         color: "white",
                         fontSize: "1rem",
-                        border: "2 solid transparent"
                       }}
                     />
                   </span>
                   <span>Save</span>
-                </span>
-                   )} 
+                </span>  )} 
        </div>
         </Box>
         
