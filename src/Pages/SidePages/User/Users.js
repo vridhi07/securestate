@@ -20,12 +20,17 @@ const Users = () => {
   const [companyIds, setCompanyId] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedId, setSelected] = useState(null);
+  const [newUsers, setNewUsers] = useState([]);
+
+  // !Redux
   const dispatch = useDispatch();
   const { users, isLoading, isError, Message } = useSelector(
     (state) => state?.users
   );
   const { companyDetails } = useSelector((state) => state?.company);
+  const { userDetails } = useSelector((state) => state?.user);
   // console.log(companyDetails);
+  // ! Functions
   const openDeleteModal = (id) => {
     setIsDeleteModalOpen(true);
     // console.log(id);
@@ -61,8 +66,6 @@ const Users = () => {
     });
   };
 
-  const { userDetails } = useSelector((state) => state?.user);
-
   const handleSubmit = (e) => {
     const { firstName, lastName, role, title, email, phone } = userForm;
     e.preventDefault();
@@ -96,10 +99,30 @@ const Users = () => {
     closeDeleteModal();
   };
 
+  const getFilteredUser = (data, search) => {
+    let temData = [...data];
+    if (search) {
+      temData = temData.filter((item) => {
+        return item.role.toLowerCase().startsWith(search);
+      });
+    }
+    return temData;
+  };
+
+  let filteredData;
+  if (newUsers) {
+    filteredData = getFilteredUser(newUsers, profileSearch);
+  }
+  console.log(filteredData);
   useEffect(() => {
     dispatch(action.getUsersRequest());
   }, []);
 
+  useEffect(() => {
+    if (users) {
+      setNewUsers([...users]);
+    }
+  }, [users]);
   return (
     <div>
       <div className="text-center">{isError && <UserAlert />}</div>
@@ -124,7 +147,7 @@ const Users = () => {
 
         <button
           onClick={handleClickOpen}
-          className=" bg-orange-cus-1 rounded-md px-7 py-2 tracking-wider text-white md:ml-4 "
+          className=" rounded-md bg-orange-cus-1 px-7 py-2 tracking-wider text-white md:ml-4 "
           disabled={isLoading}
         >
           New User
@@ -132,7 +155,7 @@ const Users = () => {
       </section>
       <div className="mt-8 w-full">
         <ProfileTable
-          users={users}
+          users={filteredData}
           openDeleteModal={openDeleteModal}
           handleDelete={handleDelete}
           isDeleteModalOpen={isDeleteModalOpen}
