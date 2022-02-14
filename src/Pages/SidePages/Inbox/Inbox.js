@@ -35,7 +35,7 @@ const Inbox = () => {
     sendEmail: "",
     id: "",
   });
-  // console.log(selectData);
+  console.log(selectData);
   const currentUser = useSelector((state) => state.user?.userDetails);
   const [selectedEmails, setSelectedEmails] = useState([]);
   const [page, setPage] = useState(0);
@@ -153,7 +153,7 @@ const Inbox = () => {
       ?.filter((val) => selectedEmails.includes(val._id))
       .map((val) => val.email);
   };
-  console.log(getSelectedEmail());
+  // console.log(getSelectedEmail());
   const formData = new FormData();
   formData.append("file", emailContent.file);
   formData.append("to", getSelectedEmail());
@@ -207,7 +207,7 @@ const Inbox = () => {
           />
         </div>
         <div className="mr-2 md:mr-8">
-          <button className="bg-orange-cus-1 grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none shadow-lg duration-300  ease-in hover:shadow-xl">
+          <button className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300  ease-in hover:shadow-xl">
             <div className="duration-300 ease-in hover:rotate-90 ">
               <AddIcon onClick={handleModalClickOpen} sx={{ color: "white" }} />
             </div>
@@ -233,7 +233,7 @@ const Inbox = () => {
           </div>
         </div>
         {openMail.length !== 0 && (
-          <div className="bg-blue-cus-1 relative col-span-3 h-screen w-full rounded-md border shadow-xl">
+          <div className="relative col-span-3 h-screen w-full rounded-md border bg-blue-cus-1 shadow-xl">
             <MessageContainer openMail={openMail} />
             <MessageForm
               emailReply={emailReply}
