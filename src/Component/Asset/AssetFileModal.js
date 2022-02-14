@@ -1,5 +1,5 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import pdfImage from "../../constantData/images/pdf_image.png";
@@ -33,7 +33,7 @@ export default function FormDialog({
     <div>
       <Dialog open={isFileModalOpen} maxWidth={"lg"}>
         <form
-          className="px-5 md:px-16  pt-6 pb-10  flex flex-col"
+          className="flex flex-col  px-5 pt-6  pb-10 md:px-16"
           onSubmit={handleSubmit}
         >
           <button
@@ -43,7 +43,7 @@ export default function FormDialog({
           >
             <CloseIcon />
           </button>
-          <h2 className="text-center my-4 text-lg text-gray-700 font-bold ">
+          <h2 className="my-4 text-center text-lg font-bold text-gray-700 ">
             Files
           </h2>
           <TextField
@@ -79,7 +79,7 @@ export default function FormDialog({
 
           <div className="mt-3">
             <div
-              className="flex flex-col justify-center items-center m-0 w-[400px] h-[150px] border-2 border-dashed border-gray-500 "
+              className="m-0 flex h-[150px] w-[400px] flex-col items-center justify-center border-2 border-dashed border-gray-500 "
               onDragOver={dragOver}
               onDragEnter={dragEnter}
               onDragLeave={dragLeave}
@@ -102,19 +102,19 @@ export default function FormDialog({
               {file &&
                 file.map((item, i) => {
                   return (
-                    <div key={i} className="flex justify-between my-3">
+                    <div key={i} className="my-3 flex justify-between">
                       <div>
                         {item[0].type === "application/pdf" ? (
                           <img
                             src={pdfImage}
                             alt="pdf image"
-                            className="w-5 h-5"
+                            className="h-5 w-5"
                           />
                         ) : (
                           <img
                             src={URL.createObjectURL(item[0])}
                             alt="pdf image"
-                            className="w-5 h-5"
+                            className="h-5 w-5"
                           />
                         )}
                       </div>
@@ -132,16 +132,16 @@ export default function FormDialog({
                 })}
             </div>
           </div>
-          <div className="flex justify-between items-center mt-5">
+          <div className="mt-5 flex items-center justify-between">
             <button
               type="submit"
-              className="px-5 py-2 bg-[#606060] text-white rounded-md"
+              className="rounded-md bg-[#606060] px-5 py-2 text-white"
             >
               Submit
             </button>
             <button
               type="button"
-              className="px-5 py-2 bg-[#606060] text-white rounded-md"
+              className="rounded-md bg-[#606060] px-5 py-2 text-white"
               onClick={closeFileModal}
             >
               Cancel

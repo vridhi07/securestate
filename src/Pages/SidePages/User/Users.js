@@ -106,6 +106,11 @@ const Users = () => {
         return item.role.toLowerCase().startsWith(search);
       });
     }
+    // if (temData.length === 0) {
+    //   temData = [...newUsers].filter((item) => {
+    //     return item.name.toLowerCase().startsWith(search);
+    //   });
+    // }
     return temData;
   };
 

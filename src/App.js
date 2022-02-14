@@ -43,9 +43,8 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Home />} />
       <Route
-        path="/"
         element={
           <PrivateRoute>
             <Layout />
@@ -53,7 +52,7 @@ function App() {
         }
       >
         <Route
-          path="dashboard"
+          path="/dashboard"
           element={
             <Suspense fallback={<>...</>}>
               <Dashboard />
@@ -61,7 +60,7 @@ function App() {
           }
         />
         <Route
-          path="assets"
+          path="/assets"
           element={
             <Suspense fallback={<>...</>}>
               <Assets />
@@ -91,7 +90,7 @@ function App() {
           </Route>
         </Route>
         <Route
-          path="pentests"
+          path="/pentests"
           element={
             <Suspense fallback={<>...</>}>
               <Pentests />
@@ -107,7 +106,7 @@ function App() {
           </Route>
         </Route>
         <Route
-          path="inbox"
+          path="/inbox"
           element={
             <Suspense fallback={<>...</>}>
               <Inbox />
@@ -115,7 +114,7 @@ function App() {
           }
         />
         <Route
-          path="customer"
+          path="/customer"
           element={
             <AdminPrivateRoute>
               <Suspense fallback={<>...</>}>
@@ -125,7 +124,7 @@ function App() {
           }
         />
         <Route
-          path="users"
+          path="/users"
           element={
             <AdminPrivateRoute>
               <Suspense fallback={<>...</>}>
@@ -135,7 +134,7 @@ function App() {
           }
         />
         <Route
-          path="wallet"
+          path="/wallet"
           element={
             <WalletPrivateRoute>
               <Suspense fallback={<>...</>}>
@@ -145,7 +144,7 @@ function App() {
           }
         />
         <Route
-          path="invoices"
+          path="/invoices"
           element={
             <InvoicePrivateRoute>
               <Suspense fallback={<>...</>}>
@@ -155,14 +154,14 @@ function App() {
           }
         />
         <Route
-          path="profile"
+          path="/profile"
           element={
             <Suspense fallback={<>...</>}>
               <Profile />
             </Suspense>
           }
         />
-        <Route path="settings" element={<Settings />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
