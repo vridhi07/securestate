@@ -16,6 +16,7 @@ const MessageForm = ({
         className="h-20 w-full resize-none px-2 py-2 focus:outline-none"
         placeholder="Message user"
         value={emailReply}
+        required
         onChange={(e) => sendEmailReply(e.target.value)}
       ></textarea>
       <div className="flex w-full justify-between">
