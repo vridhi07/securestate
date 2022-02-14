@@ -17,14 +17,14 @@ export default function AddUserToGroup({
   return (
     <div>
       <Dialog open={isAddUserGroupOpen}>
-        <div className="py-8 px-5 relative">
+        <div className="relative py-8 px-5">
           <button
             className="absolute top-3 right-3"
             onClick={closeAddUserToGroup}
           >
             <CloseIcon />
           </button>
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col items-center justify-center">
             <header className="px-20">
               <h4>Add User to Company Group</h4>
             </header>
@@ -48,13 +48,13 @@ export default function AddUserToGroup({
               />
             </div>
           </div>
-          <section className="mx-6 flex justify-center items-center">
+          <section className="mx-6 flex items-center justify-center">
             {/* <div>
               <button>Add New User</button>
             </div>
             <div> */}
             <button
-              className="bg-orange-cus-1 text-center text-white  w-full mt-4 py-3 "
+              className="mt-4 w-full bg-orange-cus-1  py-3 text-center text-white "
               onClick={addUserToCompany}
             >
               Add user
