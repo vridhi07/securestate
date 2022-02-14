@@ -248,7 +248,8 @@ const CompanyGroup = () => {
     );
     setIsCompanyDetailsEdit(false);
   };
-  const addUserToCompany = () => {
+  const addUserToCompany = (e) => {
+    e.preventDefault();
     const data = {
       group_name: groupName,
       companyId: company_id,
@@ -275,10 +276,10 @@ const CompanyGroup = () => {
   }
   // console.log(groupData);
   return (
-    <div className=" gap-y-[300%] grid grid-cols-10 gap-x-4 h-20">
+    <div className=" grid h-20 grid-cols-10 gap-y-[300%] gap-x-4">
       {/* Company Info */}
       <div className=" col-span-10 lg:col-span-4 lg:mt-[3.8rem]">
-        <div className="grid grid-cols-7 h-32">
+        <div className="grid h-32 grid-cols-7">
           <div className="col-span-6 ">
             <form
               className="py-2 px-4 pr-8"
@@ -291,7 +292,7 @@ const CompanyGroup = () => {
                   name="company_name"
                   value={CompanyInfo.company_name}
                   onChange={handleCompanyInfo}
-                  className="border border-gray-600 rounded-md px-2 py-1 outline-none"
+                  className="rounded-md border border-gray-600 px-2 py-1 outline-none"
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
@@ -305,7 +306,7 @@ const CompanyGroup = () => {
                   name="location"
                   value={CompanyInfo.location}
                   onChange={handleCompanyInfo}
-                  className="border border-gray-600 rounded-md px-2 py-1 outline-none"
+                  className="rounded-md border border-gray-600 px-2 py-1 outline-none"
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
@@ -318,7 +319,7 @@ const CompanyGroup = () => {
                   name="website"
                   value={CompanyInfo.website}
                   onChange={handleCompanyInfo}
-                  className="border border-gray-600 rounded-md px-2 py-1 outline-none"
+                  className="rounded-md border border-gray-600 px-2 py-1 outline-none"
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
@@ -331,7 +332,7 @@ const CompanyGroup = () => {
                   name="main_poc"
                   value={CompanyInfo.main_poc}
                   onChange={handleCompanyInfo}
-                  className="border border-gray-600 rounded-md px-2 py-1 outline-none"
+                  className="rounded-md border border-gray-600 px-2 py-1 outline-none"
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
@@ -344,7 +345,7 @@ const CompanyGroup = () => {
                   name="main_poc_email"
                   value={CompanyInfo.main_poc_email}
                   onChange={handleCompanyInfo}
-                  className="border border-gray-600 rounded-md px-2 py-1 outline-none"
+                  className="rounded-md border border-gray-600 px-2 py-1 outline-none"
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
@@ -357,7 +358,7 @@ const CompanyGroup = () => {
                   name="main_poc_phone"
                   value={CompanyInfo.main_poc_phone}
                   onChange={handleCompanyInfo}
-                  className="border border-gray-600 rounded-md px-2 py-1 outline-none"
+                  className="rounded-md border border-gray-600 px-2 py-1 outline-none"
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
@@ -368,13 +369,13 @@ const CompanyGroup = () => {
               {isCompanyDetailsEdit && (
                 <div className="mt-3">
                   <button
-                    className="px-4 py-2 bg-slate-400 text-gray-700 mr-3 rounded-md"
+                    className="mr-3 rounded-md bg-slate-400 px-4 py-2 text-gray-700"
                     type="submit"
                   >
                     save
                   </button>
                   <button
-                    className="px-4 py-2 bg-slate-400 text-gray-700 rounded-md  "
+                    className="rounded-md bg-slate-400 px-4 py-2 text-gray-700  "
                     onClick={cancelCompanyDetailsEdit}
                   >
                     cancel
@@ -392,24 +393,24 @@ const CompanyGroup = () => {
       </div>
       {/* Company Info End */}
       <div className="  col-span-10 lg:col-span-6">
-        <div className="mt-3 flex justify-between items-center">
+        <div className="mt-3 flex items-center justify-between">
           <header>
-            <h2 className="font-bold text-lg text-gray-700">Company Group</h2>
+            <h2 className="text-lg font-bold text-gray-700">Company Group</h2>
           </header>
           <div className="flex items-center">
-            <div className="border px-1 border-gray-600  h-11 w-52  rounded-3xl flex items-center justify-start">
+            <div className="flex h-11 w-52  items-center justify-start  rounded-3xl border border-gray-600 px-1">
               <SearchIcon />
               <input
                 type="text"
                 placeholder="Search"
-                className="w-full py-1 pl-2  rounded-3xl border-0 focus:bg-none focus:outline-none focus:ring-0"
+                className="w-full rounded-3xl border-0  py-1 pl-2 focus:bg-none focus:outline-none focus:ring-0"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <div className="md:mr-8 mr-2 ml-[3%]">
+            <div className="mr-2 ml-[3%] md:mr-8">
               <button
-                className="w-12 h-12 ease-in duration-300 border-none rounded-full bg-orange-cus-1 grid place-content-center shadow-lg  cursor-pointer hover:shadow-xl"
+                className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300  ease-in hover:shadow-xl"
                 onClick={openAddUserToGroup}
               >
                 <AddIcon sx={{ color: "white" }} />
@@ -417,8 +418,8 @@ const CompanyGroup = () => {
             </div>
           </div>
         </div>
-        <div className=" mt-3  border border-gray-700 px-1 py-2 h-[317px] overflow-y-auto">
-          <div className="min-h-[100%] flex flex-col py-2 ">
+        <div className=" mt-3  h-[317px] overflow-y-auto border border-gray-700 px-1 py-2">
+          <div className="flex min-h-[100%] flex-col py-2 ">
             {groupData.length === 0 ? (
               <div> No Group </div>
             ) : (

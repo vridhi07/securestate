@@ -48,6 +48,7 @@ export default function MultipleSelectCheckmarks({
           input={<OutlinedInput label="Select User" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
+          required
         >
           {newUser &&
             newUser.map((item) => (

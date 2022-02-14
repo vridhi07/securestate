@@ -17,9 +17,10 @@ export default function AddUserToGroup({
   return (
     <div>
       <Dialog open={isAddUserGroupOpen}>
-        <div className="relative py-8 px-5">
+        <form className="relative py-8 px-5" onSubmit={addUserToCompany}>
           <button
             className="absolute top-3 right-3"
+            type="button"
             onClick={closeAddUserToGroup}
           >
             <CloseIcon />
@@ -37,6 +38,7 @@ export default function AddUserToGroup({
                   fullWidth
                   value={groupName}
                   onChange={(e) => setGroupName(e.target.value)}
+                  required
                 />
               </div>
               <MulitSelect
@@ -54,14 +56,15 @@ export default function AddUserToGroup({
             </div>
             <div> */}
             <button
+              type="submit"
               className="mt-4 w-full bg-orange-cus-1  py-3 text-center text-white "
-              onClick={addUserToCompany}
+              // onClick={addUserToCompany}
             >
               Add user
             </button>
             {/* </div> */}
           </section>
-        </div>
+        </form>
       </Dialog>
     </div>
   );
