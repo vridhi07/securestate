@@ -5,6 +5,7 @@ import { Priority, Status } from "../../../../constantData/AssestTabInfo";
 import { AssetType } from "../../../../constantData/addAssetInfo";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+// import EditIcon from "@mui/icons-material/Edit";
 import * as action from "../../../../Redux/action";
 import {
   TextField,
@@ -84,7 +85,7 @@ const Details = () => {
           > */}
           {isEdit && (
             <button
-              className="bg-gray-cus mr-3  rounded-sm py-2 px-8 capitalize tracking-wide text-gray-300
+              className="mr-3 rounded-sm  bg-gray-cus py-2 px-8 capitalize tracking-wide text-gray-300
           "
               type="button"
               onClick={submit}
@@ -94,7 +95,7 @@ const Details = () => {
           )}
 
           <button
-            className="bg-gray-cus rounded-sm  py-2 px-8 capitalize tracking-wide text-gray-300
+            className="rounded-sm bg-gray-cus  py-2 px-8 capitalize tracking-wide text-gray-300
           "
             type="button"
             onClick={handleEdit}

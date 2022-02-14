@@ -15,6 +15,7 @@ import Loader from "../../../../Component/Common/PentestLoader";
 import DeleteModal from "../../../../Component/Common/DeleteModal";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import AddIcon from "@mui/icons-material/Add";
 import * as action from "../../../../Redux/action/index";
 export default function SBOMTab() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -136,15 +137,16 @@ export default function SBOMTab() {
   }, [SboMPageNumber, addMessage]);
 
   return (
-    <div className="w-full flex flex-col mx-auto">
-      <section className="flex mb-3 items-center justify-end">
+    <div className="mx-auto flex w-full flex-col">
+      <section className="mb-3 flex items-center justify-end">
         <button
-          className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm
+          className=" rounded-md bg-gray-cus  py-2 px-5 capitalize tracking-wide text-gray-300
          "
           onClick={openModal}
           disabled={addLoading}
         >
-          add component
+          <AddIcon />
+          <span> add component</span>
         </button>
       </section>
       <div className="mb-10">
@@ -204,7 +206,7 @@ export default function SBOMTab() {
               </Table>
             </TableContainer>
             {sbomDetails?.totalPage > 1 && (
-              <div className="pb-5 mt-4">
+              <div className="mt-4 pb-5">
                 <Stack spacing={2}>
                   <Pagination
                     count={sbomDetails?.totalPage}
