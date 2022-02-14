@@ -105,10 +105,10 @@ export default function FormDialog({
                     <div key={i} className="my-3 flex justify-between">
                       <div>
                         {item[0].type === "application/pdf" ? (
-                          <img
-                            src={pdfImage}
-                            alt="pdf image"
-                            className="h-5 w-5"
+                          <iframe
+                            src={URL.createObjectURL(item[0])}
+                            // alt="pdf image"
+                            className="h-6 w-14"
                           />
                         ) : (
                           <img
