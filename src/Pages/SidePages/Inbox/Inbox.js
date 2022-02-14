@@ -35,14 +35,14 @@ const Inbox = () => {
     sendEmail: "",
     id: "",
   });
-  console.log(selectData);
+  // console.log(selectData);
   const currentUser = useSelector((state) => state.user?.userDetails);
   const [selectedEmails, setSelectedEmails] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [openNewEmail, setOpenNewEmail] = useState(false);
   const [emailReply, sendEmailReply] = useState("");
-
+  console.log(emailReply);
   useEffect(() => {
     if (emailStatus?.sendEmailStatus) {
       setOpenNewEmail(false);
@@ -178,6 +178,7 @@ const Inbox = () => {
         email: currentUser.email,
       })
     );
+    sendEmailReply("");
   };
   // console.log(emailStatus.emailreplyLoader,'=========')
   if (isLoading) {
