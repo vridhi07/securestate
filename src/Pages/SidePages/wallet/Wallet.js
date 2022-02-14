@@ -31,7 +31,9 @@ const Wallet = () => {
 
   const [isTotalEdit, setIsTotalEdit] = useState(false);
   const [hackerId, setHackerId] = useState("");
-  console.log(hackerId);
+  // console.log(hackerId);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   // const [inputValue, setInputValue] = useState("");
   console.log(isTotalEdit);
   // !Redux
@@ -55,6 +57,16 @@ const Wallet = () => {
 
   const company_id = getCompanyId(userRole);
   // console.log(company_id);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   const handleTotalChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -150,7 +162,7 @@ const Wallet = () => {
         userId: hackerId,
       };
       console.log(data);
-      dispatch(action.addWalletRequest({ data, hackerId }));
+      dispatch(action.addWalletRequest({ data, hackerId, page, rowsPerPage }));
       closeIsWalletOpen();
     }
   };
@@ -282,7 +294,13 @@ const Wallet = () => {
       )}
 
       <div className="mt-3 mb-4 px-[5%]">
-        <WalletTable hackerId={hackerId} />
+        <WalletTable
+          hackerId={hackerId}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          handleChangePage={handleChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+        />
       </div>
       <AddTotal
         isTotalOpen={isTotalOpen}

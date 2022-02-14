@@ -41,7 +41,8 @@ module.exports = {
         "lg-cus": "1.063rem",
       },
       backgroundImage: {
-        dragAndDrop: "url('./constantData/images/H0xdb.png')",
+        // dragAndDrop: "url('./constantData/images/H0xdb.png')",
+        lockAndChain: "url('./constantData/images/locksandChain.jpeg')",
       },
       backgroundSize: {
         50: "400px",

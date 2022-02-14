@@ -17,7 +17,7 @@ export default function FormDialog({
   return (
     <div>
       <Dialog open={isHistoryOpen}>
-        <form className="px-5 py-2 md:px-20 relative" onSubmit={handleSubmit}>
+        <form className="relative px-5 py-2 md:px-20" onSubmit={handleSubmit}>
           <button
             type="button"
             onClick={closeHistoryModal}
@@ -25,7 +25,7 @@ export default function FormDialog({
           >
             <CloseIcon />
           </button>
-          <h2 className="mb-3 py-3 font-bold text-gray-700 text-lg text-center">
+          <h2 className="mb-3 py-3 text-center text-lg font-bold text-gray-700">
             Add Event
           </h2>
           <TextField
@@ -66,16 +66,16 @@ export default function FormDialog({
             onChange={handleEventChange}
             sx={{ mb: 3 }}
           />
-          <div className="flex items-center justify-between my-4">
+          <div className="my-4 flex items-center justify-between">
             <button
               type="submit"
-              className="px-7 py-2 bg-[#606060] tracking-wider rounded-md"
+              className="rounded-md bg-[#606060] px-7 py-2 tracking-wider"
             >
               Add
             </button>
             <button
               type="button"
-              className="px-4 py-2 bg-[#606060] tracking-wider rounded-md"
+              className="rounded-md bg-[#606060] px-4 py-2 tracking-wider"
               onClick={closeHistoryModal}
             >
               Cancel

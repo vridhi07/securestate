@@ -26,33 +26,39 @@ const columns = [
     align: "left",
     format: (value) => value.toLocaleString("en-US"),
   },
-  {
-    id: "editOrDelete",
-    minWidth: 50,
-    align: "center",
-  },
+  // {
+  //   id: "editOrDelete",
+  //   minWidth: 50,
+  //   align: "center",
+  // },
 ];
 
-export default function StickyHeadTable({ hackerId }) {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+export default function StickyHeadTable({
+  hackerId,
+  page,
+  rowsPerPage,
+  handleChangePage,
+  handleChangeRowsPerPage,
+}) {
+  // const [page, setPage] = useState(0);
+  // const [rowsPerPage, setRowsPerPage] = useState(5);
   const dispatch = useDispatch();
   const { walletDetails } = useSelector((state) => state?.wallet);
-  // console.log(walletDetails);
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  // // console.log(walletDetails);
+  // const handleChangePage = (event, newPage) => {
+  //   setPage(newPage);
+  // };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
   useEffect(() => {
     if (hackerId) {
       console.log("I was called");
-      dispatch(action.getWalletRequest({ hackerId }));
+      dispatch(action.getWalletRequest({ hackerId, page, rowsPerPage }));
     }
-  }, [hackerId]);
+  }, [hackerId, page, rowsPerPage]);
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -78,11 +84,11 @@ export default function StickyHeadTable({ hackerId }) {
                     <TableCell align="left">{item?.pentestId?.title}</TableCell>
                     <TableCell align="left">{item?.award}</TableCell>
                     <TableCell align="left">{item?.status}</TableCell>
-                    <TableCell align="center">
+                    {/* <TableCell align="center">
                       <button>
                         <MoreVertIcon />
                       </button>
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 );
               })}
@@ -92,7 +98,7 @@ export default function StickyHeadTable({ hackerId }) {
       <TablePagination
         rowsPerPageOptions={[5, 10, 15]}
         component="div"
-        count={10}
+        count={100}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

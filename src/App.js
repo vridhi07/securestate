@@ -44,6 +44,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/" element={<Home />} />
+      <Route path="*" element={<ErrorPage />} />
       <Route
         element={
           <PrivateRoute>
@@ -162,7 +163,6 @@ function App() {
           }
         />
         <Route path="/settings" element={<Settings />} />
-        <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
   );

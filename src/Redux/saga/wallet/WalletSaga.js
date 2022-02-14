@@ -45,8 +45,11 @@ export function* allHackerWithCompany(action) {
 
 export function* getWalletSaga(action) {
   try {
-    const { hackerId } = action.payload;
-    let response = yield call(axios.get, `${CONFIG.getWallet}/${hackerId}/5/1`);
+    const { hackerId, page, rowsPerPage } = action.payload;
+    let response = yield call(
+      axios.get,
+      `${CONFIG.getWallet}/${hackerId}/${rowsPerPage}/${page}`
+    );
 
     if (response && response?.data?.status === 1) {
       // console.log(response.data);
@@ -60,13 +63,13 @@ export function* getWalletSaga(action) {
 
 export function* addWalletSaga(action) {
   try {
-    const { data, hackerId } = action.payload;
+    const { data, hackerId, page, rowsPerPage } = action.payload;
     let response = yield call(axios.post, `${CONFIG.addWallet}`, data);
 
     if (response && response?.data?.status === 1) {
       // console.log(response.data);
       yield put(actions.addWalletSuccess("success"));
-      yield put(actions.getWalletRequest({ hackerId }));
+      yield put(actions.getWalletRequest({ hackerId, page, rowsPerPage }));
     }
   } catch (error) {
     // console.log(error.response.data.message);
