@@ -73,3 +73,55 @@ export function* addWalletSaga(action) {
     yield put(actions.addWalletError(error?.response?.data?.message));
   }
 }
+
+export function* getWalletTotalSaga(action) {
+  try {
+    const { hackerId } = action.payload;
+    let response = yield call(
+      axios.get,
+      `${CONFIG.getWalletTotal}/${hackerId}`
+    );
+
+    if (response && response?.data?.status === 1) {
+      // console.log(response.data);
+      yield put(actions.getWalletTotalSuccess(response?.data?.data));
+      // yield put(actions.getWalletRequest({ hackerId }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.getWalletTotalError(error?.response?.data?.message));
+  }
+}
+
+export function* addWalletTotalSaga(action) {
+  try {
+    const { data, hackerId } = action.payload;
+    console.log(data, "data", hackerId, "hackerId");
+    let response = yield call(axios.post, `${CONFIG.addWalletTotal}`, data);
+
+    if (response && response?.data?.status === 1) {
+      // console.log(response.data);
+      yield put(actions.addWalletTotalSuccess("Success"));
+      yield put(actions.getWalletTotalRequest({ hackerId }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.addWalletTotalSuccess(error?.response?.data?.message));
+  }
+}
+export function* editWalletTotalSaga(action) {
+  try {
+    const { data, hackerId } = action.payload;
+    // console.log(data, "data", hackerId, "hackerId");
+    let response = yield call(axios.put, `${CONFIG.editWalletTotal}`, data);
+
+    if (response && response?.data?.status === 1) {
+      console.log(response.data);
+      yield put(actions.editWalletTotalSuccess("Success"));
+      yield put(actions.getWalletTotalRequest({ hackerId }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.editWalletTotalError(error?.response?.data?.message));
+  }
+}

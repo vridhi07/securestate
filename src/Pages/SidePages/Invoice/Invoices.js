@@ -4,12 +4,12 @@ import FilterOption from "../../../Component/Common/FilterOption";
 import InvoiceModal from "../../../Component/Invoice/InvoiceForm";
 import * as action from "../../../Redux/action";
 import { useDispatch, useSelector } from "react-redux";
-
+import * as roles from "../../../constantData/Roles";
 const Invoices = () => {
   const dispatch = useDispatch();
 
   const { selectedCompany } = useSelector((state) => state?.company);
-  const { userDetails } = useSelector((state) => state?.user);
+  const { userDetails, userRole } = useSelector((state) => state?.user);
   const { invoiceData } = useSelector((state) => state?.Invoice);
   const { users } = useSelector((state) => state.users);
   // console.log(users);
@@ -120,12 +120,28 @@ const Invoices = () => {
     // console.log(data);
   };
   useEffect(() => {
-    dispatch(action.getInvoiceRequest({ company_id, page, rowsPerPage }));
-  }, [company_id, page, rowsPerPage]);
+    if (userRole === roles.admin || userRole === roles.superAdmin) {
+      dispatch(action.getInvoiceRequest({ company_id, page, rowsPerPage }));
+    }
+  }, [company_id, page, rowsPerPage, userRole]);
 
   useEffect(() => {
-    dispatch(action.getUsersRequest());
-  }, []);
+    if (userRole === roles.admin || userRole === roles.superAdmin) {
+      dispatch(action.getUsersRequest());
+    }
+  }, [userRole]);
+
+  useEffect(() => {
+    if (userRole === roles.client && userDetails?._id) {
+      dispatch(
+        action.getInvoiceUserIdRequest({
+          userId: userDetails?._id,
+          page,
+          rowsPerPage,
+        })
+      );
+    }
+  }, [page, rowsPerPage, userDetails?._id]);
 
   return (
     <div>
@@ -134,12 +150,14 @@ const Invoices = () => {
       </div>
       <div className="my-3 flex w-full justify-between px-[5%] ">
         <h2 className="text-[1.5rem]">Invoices</h2>
-        <button
-          className="bg-orange-cus-1 rounded-md px-7 py-2 text-white"
-          onClick={handleClickOpen}
-        >
-          Add Invoice
-        </button>
+        {userRole === roles.admin || userRole === roles.superAdmin ? (
+          <button
+            className="bg-orange-cus-1 rounded-md px-7 py-2 text-white"
+            onClick={handleClickOpen}
+          >
+            Add Invoice
+          </button>
+        ) : null}
       </div>
       <div className="px-[5%]">
         <InvoiceTable

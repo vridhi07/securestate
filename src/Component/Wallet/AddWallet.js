@@ -13,14 +13,14 @@ export default function AddTotal({
   handleWalletChange,
   onSubmitWallet,
   AllPentest = [],
-  isError,
+  // isError,
 }) {
-  const { pentest, award, status, hackerId } = walletDetail;
+  const { pentest, award, status } = walletDetail;
   return (
     <div>
       <Dialog open={isWalletOpen}>
         <form
-          className="px-16 py-8 relative"
+          className="relative px-16 py-8"
           onSubmit={onSubmitWallet}
           autoComplete="off"
         >
@@ -31,10 +31,10 @@ export default function AddTotal({
           >
             <CloseIcon />
           </button>
-          {isError.formStatus && (
+          {/* {isError.formStatus && (
             <p className="text-center text-red-500">{isError.msg}</p>
-          )}
-          <section className="grid grid-cols-4 gap-8 my-2">
+          )} */}
+          <section className="my-2 grid grid-cols-4 gap-8">
             <div className=" col-span-4">
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Pentest</InputLabel>
@@ -58,8 +58,8 @@ export default function AddTotal({
               </FormControl>
             </div>
           </section>
-          <section className="grid grid-cols-4 gap-8 my-4">
-            <div className="md:col-span-2 col-span-4">
+          <section className="my-4 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
               <TextField
                 name="award"
                 id="award"
@@ -72,7 +72,7 @@ export default function AddTotal({
                 required
               />
             </div>
-            <div className="md:col-span-2 col-span-4">
+            <div className="col-span-4 md:col-span-2">
               {/* <TextField
                 name="status"
                 id="status"
@@ -96,7 +96,6 @@ export default function AddTotal({
                   label="Status"
                   name="status"
                   id="status"
-                  label="Status"
                   variant="outlined"
                   size="medium"
                 >
@@ -109,7 +108,7 @@ export default function AddTotal({
           <div className="w-full ">
             <button
               type="submit"
-              className="px-14 py-3 bg-primary-btn tracking-wide rounded-md"
+              className="rounded-md bg-primary-btn px-14 py-3 tracking-wide"
             >
               Submit
             </button>

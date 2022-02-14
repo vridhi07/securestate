@@ -38,7 +38,7 @@ export default function StickyHeadTable({ hackerId }) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const dispatch = useDispatch();
   const { walletDetails } = useSelector((state) => state?.wallet);
-  console.log(walletDetails);
+  // console.log(walletDetails);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

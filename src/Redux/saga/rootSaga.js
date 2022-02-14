@@ -69,6 +69,7 @@ import {
   GetInvoiceSaga,
   addInvoiceSaga,
   deleteInvoicesSaga,
+  getInvoiceUserId,
 } from "./Invoice/InvoiceSaga";
 
 import {
@@ -89,6 +90,9 @@ import {
   allHackerWithCompany,
   addWalletSaga,
   getWalletSaga,
+  getWalletTotalSaga,
+  addWalletTotalSaga,
+  editWalletTotalSaga,
 } from "./wallet/WalletSaga";
 
 function* watchAllSaga() {
@@ -152,6 +156,8 @@ function* watchAllSaga() {
   yield takeLatest(actions.getInvoiceRequest, GetInvoiceSaga);
   yield takeLatest(actions.addInvoiceRequest, addInvoiceSaga);
   yield takeLatest(actions.deleteInvoiceRequest, deleteInvoicesSaga);
+  yield takeLatest(actions.getInvoiceUserIdRequest, getInvoiceUserId);
+  yield takeLatest(actions.editWalletTotalRequest, editWalletTotalSaga);
 
   // !Customer
   yield takeLatest(actions.getGroupListRequest, GetGroupList);
@@ -174,6 +180,8 @@ function* watchAllSaga() {
 
   yield takeLatest(actions.addWalletRequest, addWalletSaga);
   yield takeLatest(actions.getWalletRequest, getWalletSaga);
+  yield takeLatest(actions.getWalletTotalRequest, getWalletTotalSaga);
+  yield takeLatest(actions.addWalletTotalRequest, addWalletTotalSaga);
 }
 
 export default function* rootSaga() {

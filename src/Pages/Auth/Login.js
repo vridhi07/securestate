@@ -25,13 +25,13 @@ const Login = () => {
     e.preventDefault();
     if (formInputs.userName && formInputs.password) {
       const payload = {
-        userName: formInputs.userName,
+        userName: formInputs.userName.trim(),
         password: formInputs.password,
       };
       dispatch(LoginRequest(payload));
     }
   };
-
+  // console.log(`'${formInputs.userName.trim()}'`);
   const handleFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -39,11 +39,11 @@ const Login = () => {
   };
 
   return (
-    <main className="bg-gradient-to-tr authPageHeigth h-screen from-orange-200 to-orange-500">
-      <div className="w-95.5 grid grid-cols-10 mx-auto ">
+    <main className="authPageHeigth h-screen bg-gradient-to-tr from-orange-200 to-orange-500">
+      <div className="w-95.5 mx-auto grid grid-cols-10 ">
         <div className="col-span-10 md:col-span-6">
-          <div className="grid justify-center items-center">
-            <h1 className="text-white md:pt-44 md:text-8xl text-6xl pt-4">
+          <div className="grid items-center justify-center">
+            <h1 className="pt-4 text-6xl text-white md:pt-44 md:text-8xl">
               Secure <br />
               State .IC
             </h1>
@@ -52,10 +52,10 @@ const Login = () => {
         <div className="col-span-10 md:col-span-4">
           <section
             id="login"
-            className=" py-4 md:py-32 flex flex-col justify-center  max-w-md mx-auto"
+            className=" mx-auto flex max-w-md flex-col justify-center  py-4 md:py-32"
           >
-            <div className="p-6 bg-sky-100 rounded shadow-md">
-              <div className="flex flex-col items-center justify-center text-4xl font-black text-sky-900 m-3">
+            <div className="rounded bg-sky-100 p-6 shadow-md">
+              <div className="m-3 flex flex-col items-center justify-center text-4xl font-black text-sky-900">
                 <h1 className="tracking-wide">Log In</h1>
                 {loginStatus.isError.status && (
                   <div>
@@ -71,10 +71,10 @@ const Login = () => {
                 <section>
                   <label className="text-sm font-medium">Username</label>
                   <input
-                    className="mb-3  py-1.5
-          mt-1 block w-full px-2  border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
-          focus:outline-none
+                    className="mb-3  mt-1
+          block w-full rounded-md border  border-gray-300 py-1.5 px-2 text-sm placeholder-gray-400 shadow-sm
           focus:border-sky-500
+          focus:outline-none
           focus:ring-1
           focus:ring-sky-500
           focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
@@ -90,10 +90,10 @@ const Login = () => {
                   <label className="text-sm font-medium">Password</label>
                   {isHiddenPass ? (
                     <input
-                      className="mb-3 px-2 py-1.5
-          mt-1 block w-full border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
-          focus:outline-none
+                      className="mb-3 mt-1 block
+          w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm placeholder-gray-400 shadow-sm
           focus:border-sky-500
+          focus:outline-none
           focus:ring-1
           focus:ring-sky-500
           focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
@@ -106,10 +106,10 @@ const Login = () => {
                     />
                   ) : (
                     <input
-                      className="mb-3 px-2 py-1.5
-          mt-1 block w-full border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
-          focus:outline-none
+                      className="mb-3 mt-1 block
+          w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm placeholder-gray-400 shadow-sm
           focus:border-sky-500
+          focus:outline-none
           focus:ring-1
           focus:ring-sky-500
           focus:invalid:border-blue-500 focus:invalid:ring-blue-500"
@@ -134,7 +134,7 @@ const Login = () => {
                   </button>
                 </section>
                 <button
-                  className="px-4 py-1.5 rounded-md shadow-lg bg-sky-600 font-medium text-gray-100 block hover:bg-sky-700 transition duration-300"
+                  className="block rounded-md bg-sky-600 px-4 py-1.5 font-medium text-gray-100 shadow-lg transition duration-300 hover:bg-sky-700"
                   type="submit"
                   disabled={loginStatus.isLoading}
                 >

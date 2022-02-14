@@ -35,6 +35,7 @@ export const CONFIG = {
   getInvoice: "invoice/invoiceList",
   addInvoice: "invoice/addInvoice",
   deleteInvoice: "invoice/deleteInvoice",
+  getInvoiceUserId: "invoice/invoiceListWithUserId",
   //! Customer
   getGroupList: "company/groupList",
   addUserToGroup: "company/addusertogroup",
@@ -48,4 +49,7 @@ export const CONFIG = {
   allHackerWithCompany: "user/getAllHackers?companyId=",
   addWallet: "wallet/addWalletDetailsForPentest",
   getWallet: "wallet/getWalletDetailsForPentest",
+  getWalletTotal: "wallet/getWalletTotalDetails",
+  addWalletTotal: "wallet/addWalletTotalDetails",
+  editWalletTotal: "wallet/updateWalletTotalDetails",
 };

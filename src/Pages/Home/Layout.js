@@ -139,7 +139,7 @@ export default function MiniDrawer() {
   }, [userDetails?.role]);
   // let newPathname = pathname.split("").slice(1).join("");
   let newPathname = pathname.split("/").splice(1, 1).join();
-  console.log(newPathname);
+  // console.log(newPathname);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -300,7 +300,7 @@ export default function MiniDrawer() {
           }}
         >
           {open && (
-            <div className="mb-3 flex w-full items-center justify-center object-cover">
+            <div className=" mb-3 flex w-full items-center justify-center object-cover">
               <img src={logoImage} alt="logo" className=" h-20 w-[230px]" />
             </div>
           )}

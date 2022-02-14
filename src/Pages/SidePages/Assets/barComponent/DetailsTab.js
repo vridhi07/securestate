@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Priority, Status } from "../../../../constantData/AssestTabInfo";
+// import ModeEditIcon from "@mui/icons-material/ModeEdit";
 // import { AssetType } from "../../../constantData/addAssetInfo";
 import { AssetType } from "../../../../constantData/addAssetInfo";
 import { useLocation } from "react-router-dom";
@@ -72,8 +73,8 @@ const Details = () => {
   // console.log(assetForm?.assetType);
   // console.log(AssetType);
   return (
-    <div className="mt-2   flex flex-col  w-full  text-center  ">
-      <section className="flex items-center  mb-3 justify-end">
+    <div className="mt-2   flex w-full  flex-col  text-center  ">
+      <section className="mb-3 flex  items-center justify-end">
         <div className="flex items-center">
           {/* <button
             className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm
@@ -83,7 +84,7 @@ const Details = () => {
           > */}
           {isEdit && (
             <button
-              className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm mr-3
+              className="bg-gray-cus mr-3  rounded-sm py-2 px-8 capitalize tracking-wide text-gray-300
           "
               type="button"
               onClick={submit}
@@ -93,7 +94,7 @@ const Details = () => {
           )}
 
           <button
-            className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm
+            className="bg-gray-cus rounded-sm  py-2 px-8 capitalize tracking-wide text-gray-300
           "
             type="button"
             onClick={handleEdit}
@@ -106,8 +107,8 @@ const Details = () => {
         <Loader />
       ) : (
         <form className="flex flex-col">
-          <section className="flex  lg:w-2/4  lg:mx-auto sm:w-2/3 sm:mx-auto items-center">
-            <div className="w-full mr-4">
+          <section className="flex  items-center  sm:mx-auto sm:w-2/3 lg:mx-auto lg:w-2/4">
+            <div className="mr-4 w-full">
               <TextField
                 label="Name"
                 variant="outlined"
@@ -146,8 +147,8 @@ const Details = () => {
               </FormControl>
             </div>
           </section>
-          <section className="flex lg:w-2/4  lg:mx-auto sm:w-2/3 sm:mx-auto  mt-4 items-center ">
-            <div className=" w-[50%] mr-4">
+          <section className="mt-4 flex  items-center sm:mx-auto sm:w-2/3  lg:mx-auto lg:w-2/4 ">
+            <div className=" mr-4 w-[50%]">
               <FormControl fullWidth>
                 <InputLabel id="assetType">Asset Type</InputLabel>
                 {/* {console.log(assetForm?.assetType, "9009090909")} */}
@@ -203,7 +204,7 @@ const Details = () => {
             </div>
           </section>
 
-          <section className="mt-8 flex flex-col lg:w-2/4 sm:w-2/3 sm:mx-auto lg:mx-auto items-center ">
+          <section className="mt-8 flex flex-col items-center sm:mx-auto sm:w-2/3 lg:mx-auto lg:w-2/4 ">
             <TextField
               label="Additional Details (Frameworks,Backend,Frontend,DB,APIs etc.)"
               variant="outlined"
@@ -222,7 +223,7 @@ const Details = () => {
             />
           </section>
 
-          <section className="mt-4 flex flex-col lg:w-2/4  sm:w-2/3 sm:mx-auto lg:mx-auto  items-center ">
+          <section className="mt-4 flex flex-col items-center  sm:mx-auto sm:w-2/3 lg:mx-auto  lg:w-2/4 ">
             <TextField
               id="outlined-basic"
               label="Terms & Condition"
