@@ -168,7 +168,7 @@ const FilesTab = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className=" text-center text-sky-400 underline md:mr-10"
-                    download
+                    // download
                   >
                     {item.file_name}
                   </a>
