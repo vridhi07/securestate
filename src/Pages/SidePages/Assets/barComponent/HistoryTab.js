@@ -86,61 +86,59 @@ const HistoryTab = () => {
         <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
       </div>
 
-      <div className=" mx-auto max-w-4xl">
-        <section className=" grid w-full grid-cols-10 items-center justify-center border-b-2 border-orange-cus-1 text-center  font-bold  uppercase text-gray-text-3">
-          <div className="col-span-3 ">
-            <h4>Date</h4>
-          </div>
-          <div className="col-span-3 ">
-            <h4>Event</h4>
-          </div>
-          <div className="col-span-4 text-left">
-            <h4>Activity Description</h4>
-          </div>
-        </section>
-
-        <div className="mb-10 max-w-4xl">
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <div>
-              <div className=" text-gray-text-4">
-                {historyDetails?.data &&
-                  historyDetails?.data.map((item, index) => {
-                    return (
-                      <article
-                        key={item._id}
-                        className={`grid grid-cols-10 items-center justify-center rounded-sm py-2 px-2 text-center ${
-                          index % 2 == 0 && "bg-white"
-                        }`}
-                      >
-                        <div className="col-span-3 ">
-                          {moment(item.date).format("l")}
-                        </div>
-                        <div className="col-span-3 ">{item.event}</div>
-                        <div className=" col-span-4 max-w-[373px]  overflow-x-hidden pr-2  text-left ">
-                          {item.activity_description}
-                        </div>
-                      </article>
-                    );
-                  })}
-              </div>
-              {historyDetails?.total > 1 && (
-                <div className="mt-4 pb-5">
-                  <Stack spacing={2}>
-                    <Pagination
-                      count={historyDetails?.total}
-                      variant="outlined"
-                      onChange={handleHistoryPageNumber}
-                      color="primary"
-                      page={historyPageNumber}
-                    />
-                  </Stack>
-                </div>
-              )}
-            </div>
-          )}
+      <section className=" grid grid-cols-10 items-center justify-center border-b-2 border-orange-cus-1 text-center font-bold  uppercase  text-gray-text-3 md:mx-16">
+        <div className="col-span-3 ">
+          <h4>Date</h4>
         </div>
+        <div className="col-span-3 ">
+          <h4>Event</h4>
+        </div>
+        <div className="col-span-4 text-left">
+          <h4>Activity Description</h4>
+        </div>
+      </section>
+
+      <div className="mb-10 ">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div>
+            <div className=" text-gray-text-4">
+              {historyDetails?.data &&
+                historyDetails?.data.map((item, index) => {
+                  return (
+                    <article
+                      key={item._id}
+                      className={`grid grid-cols-10 items-center justify-center rounded-sm py-2 px-2 text-center md:mx-16 ${
+                        index % 2 == 0 && "bg-white"
+                      }`}
+                    >
+                      <div className="col-span-3 ">
+                        {moment(item.date).format("l")}
+                      </div>
+                      <div className="col-span-3 ">{item.event}</div>
+                      <div className=" col-span-4 max-w-[373px]  overflow-x-hidden pr-2  text-left ">
+                        {item.activity_description}
+                      </div>
+                    </article>
+                  );
+                })}
+            </div>
+            {historyDetails?.total > 1 && (
+              <div className="mt-4 pb-5">
+                <Stack spacing={2}>
+                  <Pagination
+                    count={historyDetails?.total}
+                    variant="outlined"
+                    onChange={handleHistoryPageNumber}
+                    color="primary"
+                    page={historyPageNumber}
+                  />
+                </Stack>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <HistoryForm

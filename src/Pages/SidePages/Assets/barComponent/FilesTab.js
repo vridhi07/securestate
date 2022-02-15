@@ -138,7 +138,7 @@ const FilesTab = () => {
         <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
       </div>
 
-      <section className="grid grid-cols-10 items-center  justify-center border-solid border-orange-600 text-center  font-bold uppercase  text-gray-text-3">
+      <section className=" grid grid-cols-10 items-center justify-center border-b-2 border-b-orange-cus-1 py-2 text-center  font-bold uppercase text-gray-text-3  md:mx-16">
         <div className="col-span-2 ">
           <h4>File</h4>
         </div>
@@ -150,20 +150,18 @@ const FilesTab = () => {
         </div>
         <div className="col-span-2 ">Remove</div>
       </section>
-      <div
-        className={`mt-3 w-full ${
-          !isLoading && "border"
-        }border border-t-0 border-gray-400 text-gray-text-4`}
-      >
+      <div>
         {isLoading ? (
           <Loader />
         ) : (
           assetFiles?.data &&
-          assetFiles?.data?.map((item) => {
+          assetFiles?.data?.map((item, index) => {
             return (
               <article
                 key={item._id}
-                className={`grid w-full grid-cols-10 items-center justify-center border py-2 px-3 text-center `}
+                className={`grid grid-cols-10 items-center justify-center rounded-sm  py-2 px-3 text-center md:mx-16 ${
+                  index % 2 === 0 && "bg-white"
+                } `}
               >
                 <div className="col-span-2 ml-7">
                   <a

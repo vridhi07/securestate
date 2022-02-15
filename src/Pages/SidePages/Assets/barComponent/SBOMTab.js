@@ -169,9 +169,13 @@ export default function SBOMTab() {
                     <TableCell colSpan={3}>COMPONENT</TableCell>
                     <TableCell colSpan={2}>LICENSE</TableCell>
                     <TableCell>CVE</TableCell>
-                    <TableCell align="right">UNIQUE IDENTIFIER</TableCell>
+                    <TableCell>UNIQUE IDENTIFIER</TableCell>
                     <TableCell>VERSION</TableCell>
-                    <TableCell align="right">SBOM AUTHOR</TableCell>
+                    <TableCell
+                    //  align="right"
+                    >
+                      SBOM AUTHOR
+                    </TableCell>
                     <TableCell align="right">Remove</TableCell>
                   </TableRow>
                 </TableHead>
@@ -225,7 +229,7 @@ export default function SBOMTab() {
                           {item.cve}
                         </TableCell>
                         <TableCell
-                          align="center"
+                          // align="center"
                           style={{
                             maxWidth: "200px",
                             // border: "2px solid red",
@@ -244,7 +248,7 @@ export default function SBOMTab() {
                           {item.version}
                         </TableCell>
                         <TableCell
-                          align="right"
+                          // align="right"
                           style={{
                             maxWidth: "150px",
                             // border: "2px solid red",
