@@ -83,7 +83,7 @@ const HistoryTab = () => {
         </button>
       </section>
       <div className="md:absolute md:top-4 md:left-0">
-        <h4>Asset</h4>
+        <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
       </div>
       <section className="grid grid-cols-10 items-center justify-center text-center font-bold uppercase  text-gray-text-3 ">
         <div className="col-span-3 ">

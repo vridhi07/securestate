@@ -150,7 +150,7 @@ export default function SBOMTab() {
         </button>
       </section>
       <div className="md:absolute md:top-4 md:left-0">
-        <h4>Asset</h4>
+        <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
       </div>
       <div className="mb-10">
         {isLoading ? (
