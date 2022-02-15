@@ -5,9 +5,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CloseIcon from "@mui/icons-material/Close";
-import { ThemeProvider } from "@mui/material/styles";
-import { InputTheme } from "../../Theme/InputTheme";
-import Dialog from "@mui/material/Dialog";
 export default function AssetModal({
   handleClose,
   assetForm,
