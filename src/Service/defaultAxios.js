@@ -5,7 +5,9 @@ axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 const defaultAxios = () => {
   axios.interceptors.request.use((request) => {
     const token = localStorage.getItem("token");
-    request.headers.authorization = `Bearer ${token}`;
+    if (token) {
+      request.headers.authorization = `Bearer ${token}`;
+    }
 
     return request;
   });
@@ -14,7 +16,7 @@ const defaultAxios = () => {
       // Any status code that lie within the range of 2xx cause this function to trigger
       // Do something with response data
       if (Prod === "dev") {
-        console.log(response.status);
+        console.log(response);
       }
       return response;
     },
@@ -30,5 +32,5 @@ const defaultAxios = () => {
   );
 };
 
-export const response = () => {};
+// export const response = () => {};
 export default defaultAxios;
