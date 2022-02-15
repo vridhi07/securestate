@@ -85,6 +85,7 @@ const HistoryTab = () => {
       <div className="md:absolute md:top-4 md:left-0">
         <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
       </div>
+
       <div className=" mx-auto max-w-4xl">
         <section className=" grid w-full grid-cols-10 items-center justify-center border-b-2 border-orange-cus-1 text-center  font-bold  uppercase text-gray-text-3">
           <div className="col-span-3 ">
