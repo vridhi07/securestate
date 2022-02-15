@@ -5,6 +5,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CloseIcon from "@mui/icons-material/Close";
+import { ThemeProvider } from "@mui/material/styles";
+import { InputTheme } from "../../Theme/InputTheme";
+import Dialog from "@mui/material/Dialog";
 export default function AssetModal({
   handleClose,
   assetForm,
@@ -23,18 +26,19 @@ export default function AssetModal({
   } = assetForm;
 
   return (
-    <form className="px-10 pt-10 pb-12 relative" onSubmit={handleSubmitAsset}>
-      <button
+<ThemeProvider theme={InputTheme}>
+ <form className="pb-5 relative" onSubmit={handleSubmitAsset}>    
+    <header className="flex justify-between  bg-orange-cus-1 h-12 px-5 py-3">
+    <h4 className="text-xl text-white  text-center font-semibold mb-8">
+          {isEdit ? "Edit Asset" : "New Asset"}
+        </h4>
+        <button
         type="button"
         onClick={handleClose}
         className="absolute top-4 right-4"
       >
-        <CloseIcon />
+        <CloseIcon  sx={{ color: "white" }} />
       </button>
-      <header className="mb-3">
-        <h2 className="text-center text-2xl font-bold tracking-wider">
-          {isEdit ? "Edit Asset" : "New Asset"}
-        </h2>
       </header>
 
       <section className="grid grid-cols-4 gap-8 my-2">
@@ -174,5 +178,6 @@ export default function AssetModal({
         </button>
       </div>
     </form>
+</ThemeProvider>
   );
 }
