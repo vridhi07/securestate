@@ -23,7 +23,11 @@ export default function SBOMModalForm({
   return (
     <div>
       <Dialog open={isModalOpen} onClose={closeModal}>
-        <form autoComplete="off" onSubmit={handleSubmit}>
+        <form
+          autoComplete="off"
+          className="bg-primary-clr"
+          onSubmit={handleSubmit}
+        >
           <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
             <h2 className="text-center text-lg font-bold ">Add Component</h2>
             <button
@@ -47,6 +51,7 @@ export default function SBOMModalForm({
                     onChange={handleComponentForm}
                     fullWidth
                     required
+                    sx={{ bgcolor: "white" }}
                   />
                 </div>
               </div>
@@ -61,6 +66,7 @@ export default function SBOMModalForm({
                     onChange={handleComponentForm}
                     fullWidth
                     required
+                    sx={{ bgcolor: "white" }}
                   />
                 </div>
               </div>
@@ -77,6 +83,7 @@ export default function SBOMModalForm({
                     onChange={handleComponentForm}
                     fullWidth
                     required
+                    sx={{ bgcolor: "white" }}
                   />
                 </div>
               </div>
@@ -91,6 +98,7 @@ export default function SBOMModalForm({
                     onChange={handleComponentForm}
                     fullWidth
                     required
+                    sx={{ bgcolor: "white" }}
                   />
                 </div>
               </div>
@@ -107,6 +115,7 @@ export default function SBOMModalForm({
                     onChange={handleComponentForm}
                     fullWidth
                     required
+                    sx={{ bgcolor: "white" }}
                   />
                 </div>
               </div>
@@ -121,6 +130,7 @@ export default function SBOMModalForm({
                     onChange={handleComponentForm}
                     fullWidth
                     required
+                    sx={{ bgcolor: "white" }}
                   />
                 </div>
               </div>
@@ -137,6 +147,7 @@ export default function SBOMModalForm({
                     onChange={handleComponentForm}
                     fullWidth
                     required
+                    sx={{ bgcolor: "white" }}
                   />
                 </div>
               </div>

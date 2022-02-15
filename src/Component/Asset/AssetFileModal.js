@@ -103,7 +103,7 @@ export default function FormDialog({
                 <p>Drag & Drop files here or click to upload</p>
               </div>
               <div>
-                {file && <h4>Uploaded file</h4>}
+                {file.length > 0 && <h4 className="mt-2">Uploaded file</h4>}
                 {file &&
                   file.map((item, i) => {
                     return (
@@ -119,7 +119,7 @@ export default function FormDialog({
                             <img
                               src={URL.createObjectURL(item[0])}
                               alt="pdf image"
-                              className="h-5 w-5"
+                              className="h-8 w-8 object-cover"
                             />
                           )}
                         </div>
