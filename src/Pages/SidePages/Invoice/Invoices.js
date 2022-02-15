@@ -143,8 +143,10 @@ const Invoices = () => {
 
   return (
     <div>
-      <div className="mx-auto mt-4 mb-8 max-w-xl">
-        <FilterOption />
+      <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
+        <div className="max-w-lg">
+          <FilterOption />
+        </div>
       </div>
       <div className="my-3 flex w-full justify-between px-[5%] ">
         <h2 className="text-[1.5rem]">Invoices</h2>

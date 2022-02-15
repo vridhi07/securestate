@@ -53,19 +53,20 @@ const Customer = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-4xl mt-4  flex flex-col lg:flex-row  items-start lg:items-center justify-start  mx-auto  ">
-        <div className="w-[100%] lg:w-[80%] min-w-[300px]">
+      <div className=" relative   mt-4  w-full rounded-lg bg-white py-10 ">
+        <div className=" max-w-lg pl-7">
           <FilterOption />
         </div>
-        <div className="lg:ml-auto h-[2rem] mt-3 lg:mt-0 flex justify-center items-center ">
+        <div className="pl-7 md:absolute md:top-8 md:right-2  md:pl-0 ">
           <button
-            className=" py-2 px-4  bg-[#EBEBEB] border rounded-lg "
+            className="mt-3 rounded-lg border bg-[#EBEBEB] py-2 px-4   "
             onClick={openCustomerForm}
           >
             New Company
           </button>
         </div>
       </div>
+
       {/* <MultipleSelectChip /> */}
       <div className="mt-6  mb-6 h-[759px] lg:h-[392px]">
         <CompanyGroup />
