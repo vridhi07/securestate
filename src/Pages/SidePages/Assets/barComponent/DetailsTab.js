@@ -90,7 +90,7 @@ const Details = () => {
           )}
 
           <button
-            className="rounded-sm bg-gray-cus  py-2 px-8 capitalize tracking-wide text-gray-300
+            className="bg-gray-cus  py-2 px-8 capitalize tracking-wide text-gray-300  rounded-md
           "
             type="button"
             onClick={handleEdit}
@@ -120,6 +120,8 @@ const Details = () => {
                 value={assetForm?.assetName}
                 onChange={handleChange}
                 disabled={isEdit ? false : true}
+                className="bg-white"
+
               />
             </div>
             <div className="w-full">
@@ -134,6 +136,7 @@ const Details = () => {
                   value={assetForm?.priority}
                   onChange={handleChange}
                   disabled={isEdit ? false : true}
+                  className="bg-white"
                 >
                   {Priority.map((item) => {
                     return (
@@ -163,6 +166,7 @@ const Details = () => {
                     value={assetForm?.assetType}
                     onChange={handleChange}
                     disabled={isEdit ? false : true}
+                    className="bg-white"
                   >
                     {AssetType.map((item) => {
                       // console.log(item);
@@ -190,6 +194,7 @@ const Details = () => {
                   onChange={handleChange}
                   // defaultValue={assetForm?.assetStatus}
                   value={assetForm?.status}
+                  className="bg-white"
                 >
                   {Status.map((item) => {
                     return (
@@ -214,6 +219,7 @@ const Details = () => {
               rows={5}
               name="additionalINfo"
               id="additionalINfo"
+              className="bg-white"
               // value={""}
               // defaultValue={assetForm?.additionalINfo}
               value={assetForm?.additionalINfo}
@@ -237,6 +243,7 @@ const Details = () => {
               onChange={handleChange}
               value={assetForm?.termsAndConditions}
               disabled={isEdit ? false : true}
+              className="bg-white"
             />
           </section>
         </form>

@@ -137,73 +137,62 @@ const FilesTab = () => {
       <div className=" md:absolute md:top-4 md:left-0">
         <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
       </div>
-      {/* <form className="flex items-center justify-end"></form> */}
-      <div className=" test mx-auto max-w-4xl">
-        <section className="grid grid-cols-12 items-center justify-center text-center font-bold uppercase  text-gray-text-3">
-          <div className="col-span-3 ">
-            <h4>File</h4>
-          </div>
-          <div className="col-span-3 ">
-            <h4>date uploaded</h4>
-          </div>
-          <div className="col-span-4 ">
-            <h4>document description</h4>
-          </div>
-          <div className="col-span-2 ">Remove</div>
-        </section>
-        <div className={`mt-3 w-full text-gray-text-4`}>
-          {isLoading ? (
-            <Loader />
-          ) : (
-            assetFiles?.data &&
-            assetFiles?.data?.map((item) => {
-              return (
-                <article
-                  key={item._id}
-                  className={`grid w-full grid-cols-12 items-center justify-center border py-5 px-3 text-center `}
-                >
-                  <div className="col-span-3 ml-7">
-                    <a
-                      href={item.file}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className=" text-center text-sky-400 underline md:mr-10"
-                      // download
-                    >
-                      {item.file_name}
-                    </a>
-                  </div>
-                  <div className="col-span-3">
-                    <p> {moment(item.createdAt).format("l")}</p>
-                  </div>
-                  <div className="col-span-4  min-w-[352px]">
-                    <p>{item.description}</p>
-                  </div>
-                  <div className="col-span-2">
-                    <IconButton
-                      color="error"
-                      onClick={() => openDeleteModal(item._id)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </div>
-                </article>
-              );
-            })
-          )}
+      <form className="flex items-center justify-end"></form>
+      <section className="border-bottom-width: 10px; grid grid-cols-12 items-center  justify-center border-solid border-orange-600 text-center  font-bold uppercase  text-gray-text-3">
+        <div className="col-span-3 ">
+          <h4>File</h4>
         </div>
-        {assetFiles?.total > 1 && (
-          <div className="mt-4 pb-5">
-            <Stack spacing={2}>
-              <Pagination
-                count={assetFiles?.total}
-                variant="outlined"
-                onChange={handleFilesPageNumber}
-                color="primary"
-                page={filesPageNumber}
-              />
-            </Stack>
-          </div>
+        <div className="col-span-3 ">
+          <h4>date uploaded</h4>
+        </div>
+        <div className="col-span-4 ">
+          <h4>document description</h4>
+        </div>
+        <div className="col-span-2 ">Remove</div>
+      </section>
+      <div
+        className={`mt-3 w-full ${
+          !isLoading && "border"
+        }border border-t-0 border-gray-400 text-gray-text-4`}
+      >
+        {isLoading ? (
+          <Loader />
+        ) : (
+          assetFiles?.data &&
+          assetFiles?.data?.map((item) => {
+            return (
+              <article
+                key={item._id}
+                className={`grid w-full grid-cols-12 items-center justify-center border py-5 px-3 text-center `}
+              >
+                <div className="col-span-3 ml-7">
+                  <a
+                    href={item.file}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className=" text-center md:mr-10"
+                    // download
+                  >
+                    {item.file_name}
+                  </a>
+                </div>
+                <div className="col-span-3">
+                  <p> {moment(item.createdAt).format("l")}</p>
+                </div>
+                <div className="col-span-4">
+                  <p>{item.description}</p>
+                </div>
+                <div className="col-span-2">
+                  <IconButton
+                    color="error"
+                    onClick={() => openDeleteModal(item._id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </div>
+              </article>
+            );
+          })
         )}
       </div>
 

@@ -174,6 +174,8 @@ export default function MiniDrawer() {
       navigate("/home");
     }
   }, [token]);
+
+  
   if (isLoading) {
     return <Loader />;
   }
