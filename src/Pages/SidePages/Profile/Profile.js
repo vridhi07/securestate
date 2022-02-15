@@ -314,7 +314,7 @@ const Profile = () => {
             {isEdit && (
               <span
                 onClick={saveEdit}
-                className="mx-2 flex items-center gap-2 rounded-md bg-[#F67A32] py-[0.55rem] px-[0.55rem] hover:cursor-pointer"
+                className="mx-2 flex  items-center gap-2 rounded-md bg-[#F67A32] py-[0.55rem] px-[0.55rem] hover:cursor-pointer"
               >
                 <span className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
                   <SaveAsIcon
