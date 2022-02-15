@@ -40,7 +40,7 @@ const Wallet = () => {
   const dispatch = useDispatch();
   // const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails, userRole } = useSelector((state) => state?.user);
-  const { AllPentest, allHacker, walletTotals } = useSelector(
+  const { AllPentest, allHacker, walletTotals, isLoading } = useSelector(
     (state) => state.wallet
   );
   const { selectedCompany } = useSelector((state) => state?.company);
@@ -223,6 +223,7 @@ const Wallet = () => {
                 label="Security Research Role"
                 onChange={(e) => setHackerId(e.target.value)}
                 required
+                disabled={isLoading}
               >
                 {allHacker.map((item) => {
                   return (
@@ -242,13 +243,15 @@ const Wallet = () => {
             <div className="mb-3 flex w-full items-center justify-end gap-3">
               <button
                 onClick={handleEdit}
-                className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
+                className="rounded-md bg-primary-btn px-10 py-2 tracking-wider text-white "
+                disabled={isLoading}
               >
                 Edit
               </button>
               <button
                 onClick={openTotalModal}
-                className="bg-primary-btn rounded-md px-10 py-2 tracking-wider text-white "
+                className="rounded-md bg-primary-btn px-10 py-2 tracking-wider text-white "
+                disabled={isLoading}
               >
                 Add
               </button>
@@ -284,8 +287,9 @@ const Wallet = () => {
           <div className="pr-3">
             <button
               type="button"
-              className=" bg-primary-btn rounded-md px-10 py-2 tracking-wider  text-white"
+              className=" rounded-md bg-primary-btn px-10 py-2 tracking-wider  text-white"
               onClick={openIsWalletOpen}
+              disabled={isLoading}
             >
               Add
             </button>
