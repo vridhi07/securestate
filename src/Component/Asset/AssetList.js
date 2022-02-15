@@ -12,6 +12,7 @@ const AssetList = ({
   handleEdit,
   anchorEl,
   openDeleteModal,
+  updateLoading,
   // handleSwitchAssets,
 }) => {
   const { asset_name, asset_type, status, _id: id } = item;
@@ -27,10 +28,10 @@ const AssetList = ({
   // };
   return (
     <div
-      className="w-full  rounded-md my-3 bg-white flex items-center text-gray-500  pl-8 pr-2  "
+      className="my-3  flex w-full items-center rounded-md bg-white pl-8  pr-2 text-gray-500  "
       key={id}
     >
-      <div className="w-[95%] flex justify-between   items-center  md:pr-3  py-1 ">
+      <div className="flex w-[95%] items-center   justify-between  py-1  md:pr-3 ">
         <div>
           <h4>{asset_name}</h4>
           <p>{asset_type}</p>
@@ -39,7 +40,7 @@ const AssetList = ({
           <div className="mr-5">
             <p
               onClick={() => navigate(`${id}/details`, { state: { id } })}
-              className="text-sky-600 hover:cursor-pointer hover:text-sky-700 underline  "
+              className="text-sky-600 underline hover:cursor-pointer hover:text-sky-700  "
             >
               Details
             </p>
@@ -55,13 +56,13 @@ const AssetList = ({
           /> */}
           <span
             type="button"
-            className={` text-white rounded-sm tracking-wider cursor-pointer ${
+            className={` cursor-pointer rounded-sm tracking-wider text-white ${
               status === "ACTIVE"
-                ? "bg-[#89CF4B] text-white px-4 py-2 rounded-md"
-                : "bg-[#EF4431] text-white px-2 py-2 rounded-md"
+                ? "rounded-md bg-[#89CF4B] px-4 py-2 text-white"
+                : "rounded-md bg-[#EF4431] px-2 py-2 text-white"
             }`}
             onClick={() => handleStatus(status, id)}
-            // disabled={updateLoading}
+            disabled={updateLoading}
           >
             {status}
           </span>
