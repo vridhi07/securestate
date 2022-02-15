@@ -32,7 +32,7 @@ const AssetList = ({
       key={id}
     >
       <div className="flex w-[95%] items-center   justify-between  py-1  md:pr-3 ">
-        <div>
+        <div className=" max-w-[460px] overflow-hidden">
           <h4>{asset_name}</h4>
           <p>{asset_type}</p>
         </div>

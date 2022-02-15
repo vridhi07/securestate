@@ -116,7 +116,9 @@ const HistoryTab = () => {
                       <div className="col-span-3 ">
                         {moment(item.date).format("l")}
                       </div>
-                      <div className="col-span-3 ">{item.event}</div>
+                      <div className="col-span-3 max-w-[290px] overflow-hidden ">
+                        {item.event}
+                      </div>
                       <div className=" col-span-4 max-w-[373px]  overflow-x-hidden pr-2  text-left ">
                         {item.activity_description}
                       </div>
