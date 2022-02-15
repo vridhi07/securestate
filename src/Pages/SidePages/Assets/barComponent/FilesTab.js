@@ -169,7 +169,7 @@ const FilesTab = () => {
                     href={item.file}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className=" text-center text-sky-500 underline md:mr-10"
+                    className=" text-center  md:mr-10"
                     // download
                   >
                     {item.file_name}

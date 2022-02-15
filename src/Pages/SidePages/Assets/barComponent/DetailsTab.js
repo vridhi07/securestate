@@ -14,6 +14,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import Loader from "../../../../Component/Common/PentestLoader";
 const Details = () => {
   const {
@@ -90,12 +91,21 @@ const Details = () => {
           )}
 
           <button
-            className="rounded-md  bg-gray-cus py-2 px-8 capitalize tracking-wide  text-gray-300
+            className="flex items-center rounded-md  bg-gray-cus py-2 px-6 capitalize tracking-wide  text-gray-300
           "
             type="button"
             onClick={handleEdit}
           >
-            {isEdit ? "cancel" : "edit asset"}
+            {isEdit ? (
+              "cancel"
+            ) : (
+              <span className="flex items-center">
+                <span className="mr-1">
+                  <EditIcon />
+                </span>
+                <span>edit asset</span>
+              </span>
+            )}
           </button>
         </div>
       </section>
