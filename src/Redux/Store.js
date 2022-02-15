@@ -16,3 +16,6 @@ const store = createStore(
 );
 sagaMiddleware.run(rootSaga);
 export default store;
+
+// (Prod !== "production" &&
+//   typeof window !== "undefined" &&
