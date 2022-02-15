@@ -25,7 +25,7 @@ export default function AssetModal({
   return (
     <form onSubmit={handleSubmitAsset}>
       <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
-        <h2 className="text-center text-2xl font-bold tracking-wider">
+        <h2 className="text-center text-2xl font-bold tracking-wider rounded-md">
           {isEdit ? "Edit Asset" : "New Asset"}
         </h2>
         <button type="button" onClick={handleClose}>

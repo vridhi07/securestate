@@ -76,16 +76,11 @@ const Details = () => {
   return (
     <div className="mt-2   flex w-full  flex-col  text-center  ">
       <section className="mb-3 flex  items-center justify-end">
-        <div className="flex items-center">
-          {/* <button
-            className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm
-          "
-            type="button"
-            onClick={submit}
-          > */}
+        <div className="flex items-center md:absolute md:top-4 md:right-0">
           {isEdit && (
             <button
               className="mr-3 rounded-sm  bg-gray-cus py-2 px-8 capitalize tracking-wide text-gray-300
+              
           "
               type="button"
               onClick={submit}
@@ -95,7 +90,7 @@ const Details = () => {
           )}
 
           <button
-            className="rounded-sm bg-gray-cus  py-2 px-8 capitalize tracking-wide text-gray-300
+            className="bg-gray-cus  py-2 px-8 capitalize tracking-wide text-gray-300  rounded-md
           "
             type="button"
             onClick={handleEdit}
@@ -104,6 +99,9 @@ const Details = () => {
           </button>
         </div>
       </section>
+      <div className="md:absolute md:top-4 md:left-0">
+        <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
+      </div>
       {isLoading ? (
         <Loader />
       ) : (

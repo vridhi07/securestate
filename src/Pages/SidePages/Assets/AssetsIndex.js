@@ -35,7 +35,9 @@ const AssetsIndex = () => {
   const [assetsList, setAssetsList] = useState([]);
   // const [check, setChecked] = useState(false);
   // * Redux data
-  const { Asset, isLoading, Message } = useSelector((state) => state.Assets);
+  const { Asset, isLoading, updateLoading } = useSelector(
+    (state) => state.Assets
+  );
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails } = useSelector((state) => state?.user);
 
@@ -248,18 +250,19 @@ const AssetsIndex = () => {
   // console.log(assetsList, "===8888");
   return (
     <div className="mt-8 ">
-      <div className="w-full rounded-lg shadow-sm bg-white pl-7 py-10 ">
+      <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
         <div className="max-w-lg">
           <FilterOption />
         </div>
       </div>
-      <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
-        <div className="flex justify-between items-center w-full ">
-          <h4 className="text-orange-cus-1 tracking-wide  text-4xl">Assets</h4>
+      <section className="mx-auto mt-8 mb-4 flex  w-95.5 flex-col">
+        <div className="flex w-full items-center justify-between ">
+          <h4 className="text-4xl tracking-wide  text-orange-cus-1">Assets</h4>
           <div className="flex flex-col items-start justify-end">
             <button
               onClick={handleClickOpen}
-              className={`bg-gray-cus tracking-wide  text-gray-300 py-2 px-6 capitalize rounded-md`}
+              className={`rounded-md bg-gray-cus  py-2 px-6 capitalize tracking-wide text-gray-300`}
+              disabled={isLoading}
             >
               <span>
                 <AddIcon />
@@ -269,7 +272,7 @@ const AssetsIndex = () => {
           </div>
         </div>
         <div
-          className={`mt-4 min-w-[400px] flex-col justify-between items-center w-full   h-3/5 `}
+          className={`mt-4 h-3/5 w-full min-w-[400px] flex-col items-center   justify-between `}
         >
           {/* <div className="w-full flex items-center text-gray-500 border-b-2 pl-8 pr-2 hover:bg-slate-100 ">
             <div className="w-[72%] sm:w-[76%] md:[79%] lg:w-[85%] flex justify-between py-4">
@@ -291,6 +294,7 @@ const AssetsIndex = () => {
                   openDeleteModal={openDeleteModal}
                   handleEdit={handleEdit}
                   anchorEl={anchorEl}
+                  updateLoading={updateLoading}
                   // handleSwitchAssets={handleSwitchAssets}
                 />
               );
@@ -309,7 +313,7 @@ const AssetsIndex = () => {
                     },
                   }}
                   page={assetPageNumber}
-                 style={{Color: "orange"}}
+                  style={{ Color: "orange" }}
                 />
               </Stack>
             </div>

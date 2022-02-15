@@ -26,7 +26,10 @@ const defaultAxios = () => {
       if (Prod === "dev") {
         console.log(error.response.status);
       }
-
+      if (error.response.status === 403) {
+        localStorage.removeItem("token");
+        window.location.replace("/");
+      }
       return Promise.reject(error);
     }
   );

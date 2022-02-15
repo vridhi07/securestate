@@ -124,9 +124,9 @@ const FilesTab = () => {
 
   return (
     <div className="mx-auto flex w-full flex-col">
-      <section className="mb-3 flex items-center justify-end">
+      <section className="mb-3 flex items-center justify-end md:absolute md:top-4 md:right-0">
         <button
-          className="bg-gray-cus flex items-center gap-1  rounded-md py-2 px-5 capitalize tracking-wide text-gray-300
+          className="flex items-center gap-1 rounded-md  bg-gray-cus py-2 px-5 capitalize tracking-wide text-gray-300 
          "
           onClick={openFileModal}
         >
@@ -134,8 +134,11 @@ const FilesTab = () => {
           <span>Upload Files</span>
         </button>
       </section>
+      <div className=" md:absolute md:top-4 md:left-0">
+        <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
+      </div>
       <form className="flex items-center justify-end"></form>
-      <section className="text-gray-text-3 grid grid-cols-12 items-center justify-center text-center font-bold  uppercase">
+      <section className="grid grid-cols-12 items-center justify-center text-center  border-solid border-bottom-width: 10px; border-orange-600  font-bold uppercase  text-gray-text-3">
         <div className="col-span-3 ">
           <h4>File</h4>
         </div>
@@ -150,7 +153,7 @@ const FilesTab = () => {
       <div
         className={`mt-3 w-full ${
           !isLoading && "border"
-        }border text-gray-text-4 border-t-0 border-gray-400`}
+        }border border-t-0 border-gray-400 text-gray-text-4`}
       >
         {isLoading ? (
           <Loader />
@@ -167,7 +170,7 @@ const FilesTab = () => {
                     href={item.file}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className=" text-center text-sky-400 underline md:mr-10"
+                    className=" text-center md:mr-10"
                     // download
                   >
                     {item.file_name}

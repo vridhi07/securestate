@@ -6,7 +6,7 @@ import * as action from "../../../Redux/action";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import SaveAsIcon from "@mui/icons-material/SaveAs";
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 const Profile = () => {
   const state = useSelector((state) => state);
   const { userDetails, isLoading } = state?.user;
@@ -67,17 +67,14 @@ const Profile = () => {
     });
   };
 
+  const saveEdit = () => {
+    console.log("abcd");
 
-    const saveEdit = () => {
-      console.log ("abcd")
-     
-      if (isEdit) {
-        dispatch(action.updateUserRequest(formData));
-        setIsEdit(false);
-      }
+    if (isEdit) {
+      dispatch(action.updateUserRequest(formData));
+      setIsEdit(false);
     }
-
-  
+  };
 
   useEffect(() => {
     if (isEdit) {
@@ -159,35 +156,28 @@ const Profile = () => {
             {userDetails?.name}
           </h3>
           <div className="mt-4 ml-auto flex items-center">
-            <div
-             
-              onClick={openEdit}
-            >
-              {
-                isEdit ? (
-                  <div></div>
-                ):(
-                   <div className="mr-[5%] cursor-pointer rounded-md bg-[#565656] px-5 py-2 text-white ">
+            <div onClick={openEdit}>
+              {isEdit ? (
+                <div></div>
+              ) : (
+                <div className="mr-[5%] cursor-pointer rounded-md bg-[#565656] px-5 py-2 text-white ">
                   <span className="flex items-center gap-2">
-                  <span className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
-                   <ModeEditIcon
-                      sx={{
-                        color: "white",
-                        fontSize: "1rem",
-                      }}
-                    />
-                   
+                    <span className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
+                      <ModeEditIcon
+                        sx={{
+                          color: "white",
+                          fontSize: "1rem",
+                        }}
+                      />
+                    </span>
+                    <span>Edit</span>
                   </span>
-                  <span  >Edit</span>
-                </span>
-                   </div>
-                )
-              }
+                </div>
+              )}
               {/* {SetisEdit && (
   
               )} */}
             </div>
-         
           </div>
         </section>
         <form className="  rounded-md bg-white px-10 py-14 text-left shadow-sm ">
@@ -308,38 +298,37 @@ const Profile = () => {
             </div>
           </div>
         </form>
-        <Box sx={{ display: 'flex', padding : 1}}>
-    <div>
-          {isEdit && (
+        <Box sx={{ display: "flex", padding: 1 }}>
+          <div>
+            {isEdit && (
               <button
-                className="rounded-md bg-[#CBD5E1] px-6 py-2 text-black-500"
+                className="text-black-500 rounded-md bg-[#CBD5E1] px-6 py-2"
                 type="button"
                 onClick={cancelEdit}
-                sx = {{".bg-slate-300 " :{
-                      backgroundColor: "#F27931 !important",
-    color: "black !important",
-                }}}
               >
                 Cancel
               </button>
             )}
           </div>
-       <div>
-       {isEdit && (
-                <span   onClick = {saveEdit} className="rounded-md flex items-center gap-2 bg-[#F67A32] py-[0.55rem] px-[0.55rem] mx-2">
-                  <span   className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
-                    <SaveAsIcon
-                      sx={{
-                        color: "white",
-                        fontSize: "1rem",
-                      }}
-                    />
-                  </span>
-                  <span>Save</span>
-                </span>  )} 
-       </div>
+          <div>
+            {isEdit && (
+              <span
+                onClick={saveEdit}
+                className="mx-2 flex  items-center gap-2 rounded-md bg-[#F67A32] py-[0.55rem] px-[0.55rem] hover:cursor-pointer"
+              >
+                <span className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
+                  <SaveAsIcon
+                    sx={{
+                      color: "white",
+                      fontSize: "1rem",
+                    }}
+                  />
+                </span>
+                <span>Save</span>
+              </span>
+            )}
+          </div>
         </Box>
-        
       </div>
     </div>
   );

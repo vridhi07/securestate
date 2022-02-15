@@ -138,7 +138,7 @@ export default function SBOMTab() {
 
   return (
     <div className="mx-auto flex w-full flex-col">
-      <section className="mb-3 flex items-center justify-end">
+      <section className="mb-3 flex items-center justify-end md:absolute md:top-4 md:right-0">
         <button
           className=" rounded-md bg-gray-cus  py-2 px-5 capitalize tracking-wide text-gray-300
          "
@@ -149,6 +149,9 @@ export default function SBOMTab() {
           <span> add component</span>
         </button>
       </section>
+      <div className="md:absolute md:top-4 md:left-0">
+        <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
+      </div>
       <div className="mb-10">
         {isLoading ? (
           <Loader />

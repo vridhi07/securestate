@@ -93,7 +93,7 @@ const AssetReducer = (state = initialState, action) => {
         Message: "",
         isSuccess: false,
         isError: false,
-        updateLoading: false,
+        updateLoading: true,
       };
     case actions.UPDATE_ASSET_SUCCESS:
       return {
