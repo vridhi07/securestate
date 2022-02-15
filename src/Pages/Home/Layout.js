@@ -102,7 +102,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer() {
   // const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [userMenu, setUserMenu] = useState(null);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -175,7 +175,6 @@ export default function MiniDrawer() {
     }
   }, [token]);
 
-  
   if (isLoading) {
     return <Loader />;
   }
@@ -200,7 +199,7 @@ export default function MiniDrawer() {
               className={
                 open
                   ? "bg-white"
-                  : "w-15 bg-orange-cus-1  flex h-16 items-center justify-center sm:w-[4.57rem]"
+                  : "flex h-16  w-15 items-center justify-center bg-orange-cus-1 sm:w-[4.57rem]"
               }
             >
               <IconButton
@@ -243,7 +242,7 @@ export default function MiniDrawer() {
                   className="flex max-h-12 cursor-pointer items-center overflow-hidden"
                   onClick={handleUserMenu}
                 >
-                  <h4 className="text-orange-cus-1 text-left text-xl uppercase  tracking-widest">
+                  <h4 className="text-left text-xl uppercase tracking-widest  text-orange-cus-1">
                     {userDetails?.name}
                   </h4>
                   <span>
