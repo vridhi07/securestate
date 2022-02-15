@@ -11,7 +11,7 @@ const Invoices = () => {
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails, userRole } = useSelector((state) => state?.user);
   const { invoiceData } = useSelector((state) => state?.Invoice);
-  const { users } = useSelector((state) => state.users);
+  const { users, isLoading } = useSelector((state) => state.users);
   // console.log(users);
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
@@ -53,8 +53,6 @@ const Invoices = () => {
   const getDate = (newValue) => {
     setFormInput({ ...formInput, dueDate: newValue });
   };
-  
-
 
   console.log(formInput.attachData);
   const handleFormInput = (e) => {
@@ -82,7 +80,7 @@ const Invoices = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log("hello")
+    console.log("hello");
     e.preventDefault();
     const { invoice, totalAmount, dueDate, status, attachData, client } =
       formInput;
@@ -152,8 +150,9 @@ const Invoices = () => {
         <h2 className="text-[1.5rem]">Invoices</h2>
         {userRole === roles.admin || userRole === roles.superAdmin ? (
           <button
-            className="bg-orange-cus-1 rounded-md px-7 py-2 text-white"
+            className="rounded-md bg-orange-cus-1 px-7 py-2 text-white"
             onClick={handleClickOpen}
+            disabled={isLoading}
           >
             Add Invoice
           </button>
