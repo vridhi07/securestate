@@ -1,5 +1,4 @@
-
-import {  useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -44,6 +43,7 @@ export default function AlertDialog({
 }) {
   const { invoice, totalAmount, dueDate, status, attachData, client } =
     formInput;
+  // console.log(users);
   const newUser = users.filter((item) => item.role === "client");
 
   return (
@@ -169,14 +169,14 @@ export default function AlertDialog({
               <button
                 // onClick={handleClose}
                 type="submit"
-                className="bg-orange-cus-1 mb-3 px-5 py-2 text-white "
+                className="mb-3 bg-orange-cus-1 px-5 py-2 text-white "
               >
                 Add Invoice
               </button>
               <button
                 type="button"
                 onClick={handleClose}
-                className="bg-orange-cus-1 mb-3 px-5 py-2 text-white "
+                className="mb-3 bg-orange-cus-1 px-5 py-2 text-white "
               >
                 Cancel
               </button>
@@ -184,7 +184,7 @@ export default function AlertDialog({
             <div className="ml-2">
               <label
                 htmlFor="file"
-                className="bg-orange-cus-1  mb-3 flex px-5 py-2 text-white hover:cursor-pointer "
+                className="mb-3  flex bg-orange-cus-1 px-5 py-2 text-white hover:cursor-pointer "
               >
                 <AttachFileIcon />
                 Attach file
