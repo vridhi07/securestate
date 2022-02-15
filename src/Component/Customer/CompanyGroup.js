@@ -398,7 +398,7 @@ const CompanyGroup = () => {
             <h2 className="text-lg font-bold text-gray-700">Company Group</h2>
           </header>
           <div className="flex items-center">
-            <div className="flex h-11 w-52  items-center justify-start  rounded-3xl border border-gray-600 px-1">
+            <div className="flex h-11 w-52 items-center  justify-start rounded-3xl  border border-gray-600 bg-white px-1">
               <SearchIcon />
               <input
                 type="text"
