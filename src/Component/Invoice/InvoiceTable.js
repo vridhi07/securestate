@@ -117,7 +117,12 @@ export default function InvoiceTable({
             {invoiceData.map((item, index) => {
               return (
                 <TableRow hover key={item?._id}>
-                  <TableCell align="left">{item?.invoice}</TableCell>
+                  <TableCell
+                    align="left"
+                    style={{ maxWidth: "290px", overflow: "hidden" }}
+                  >
+                    {item?.invoice}
+                  </TableCell>
                   <TableCell align="left">${item.total}</TableCell>
                   <TableCell align="left">{item?.status}</TableCell>
                   <TableCell align="left">
