@@ -80,31 +80,31 @@ const Subscription = () => {
 
   return (
     <div className="mt-[5rem] mb-5">
-      <header className="flex justify-between items-center min-w-[400px]  pl-[2.5%] ">
+      <header className="flex min-w-[400px] items-center justify-between  pl-[2.5%] ">
         <section>
-          <h2 className="font-bold text-lg text-gray-700">Subscriptions</h2>
+          <h2 className="text-lg font-bold text-gray-700">Subscriptions</h2>
         </section>
         <section className="flex items-center">
-          <div className="border px-1 border-gray-600  h-11 w-52  rounded-3xl flex items-center justify-start">
+          <div className="flex h-11 w-52 items-center  justify-start rounded-3xl  border border-gray-600 bg-white px-1">
             <SearchIcon />
             <input
               type="text"
               placeholder="Search"
-              className="w-full py-1 pl-2  rounded-3xl border-0 focus:bg-none focus:outline-none focus:ring-0"
+              className="w-full rounded-3xl border-0  py-1 pl-2 focus:bg-none focus:outline-none focus:ring-0"
             />
           </div>
-          <div className="md:mr-8 mr-2 ml-[3%]">
+          <div className="mr-2 ml-[3%] md:mr-8">
             <button
               onClick={openSubscription}
-              className="w-12 h-12 ease-in duration-300 border-none rounded-full bg-orange-cus-1 grid place-content-center shadow-lg  cursor-pointer hover:shadow-xl"
+              className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300  ease-in hover:shadow-xl"
             >
               <AddIcon sx={{ color: "white" }} />
             </button>
           </div>
         </section>
       </header>
-      <div className="border border-gray-700  mt-3 h-[250px] overflow-y-auto">
-        <div className="min-h-[100%] flex flex-col px-3 py-2">
+      <div className="mt-3 h-[250px]  overflow-y-auto border border-gray-700">
+        <div className="flex min-h-[100%] flex-col px-3 py-2">
           {SubscriptionData &&
             SubscriptionData.map((item) => {
               return <SingleSubscriber key={item._id} subscriber={item} />;
