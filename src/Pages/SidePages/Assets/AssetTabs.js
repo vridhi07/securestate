@@ -36,14 +36,14 @@ const AssetTabs = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <div className="w-full rounded-lg shadow-sm bg-white pl-7 py-10 ">
+      <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
         <div className="max-w-lg">
           <FilterOption />
         </div>
       </div>
-      <section className="mt-8 mb-4 flex flex-col  w-95.5 mx-auto">
-        <div className="mt-4 flex  flex-col w-full mx-auto ">
-          <div className="flex mx-auto">
+      <section className="relative mx-auto mt-8 mb-4  flex w-95.5 flex-col">
+        <div className="mx-auto mt-4  flex w-full flex-col ">
+          <div className="mx-auto flex">
             {navDetails.map((item, index) => {
               const { name, handlePath } = item;
               return (
@@ -63,7 +63,7 @@ const AssetTabs = () => {
             })}
           </div>
         </div>
-        <div className="mt-12">
+        <div className=" mt-12">
           <Outlet />
         </div>
       </section>
