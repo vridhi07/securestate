@@ -26,8 +26,9 @@ export default function BasicPopover({
           horizontal: "right",
         }}
         autoFocus={false}
+        elevation={0}
       >
-        <Paper sx={{ width: "10rem", borderRadius: 0 }}>
+        <Paper elevation={0} sx={{ width: "10rem", borderRadius: 0 }}>
           {/* <button
             className="px-1 py-2 tracking-wider  flex justify-between items-center w-full text-left m-0 border border-black bg-[#AEDD94] hover:bg-green-500 "
             onClick={handleEdit}
@@ -36,7 +37,7 @@ export default function BasicPopover({
             <ArrowRightIcon />
           </button> */}
           <button
-            className="w-full text-left px-1 tracking-wider border-black py-2 m-0 border border-t-0 bg-[#F8B3B0] hover:bg-red-300"
+            className="m-0 w-full border border-t-0 border-black bg-[#F8B3B0] px-1 py-2 text-left tracking-wider hover:bg-red-300"
             onClick={openDeleteModal}
           >
             Remove User
