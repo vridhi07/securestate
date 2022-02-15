@@ -17,6 +17,7 @@ import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import * as action from "../../../../Redux/action/index";
+import { IoTrashOutline } from "react-icons/io5";
 export default function SBOMTab() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
@@ -262,7 +263,7 @@ export default function SBOMTab() {
                             color="error"
                             onClick={() => OpenDeleteSbomModal(item._id)}
                           >
-                            <DeleteIcon />
+                            <IoTrashOutline />
                           </IconButton>
                         </TableCell>
                       </TableRow>

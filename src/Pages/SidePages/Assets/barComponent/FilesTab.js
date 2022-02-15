@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteModal from "../../../../Component/Common/DeleteModal";
 import moment from "moment";
 import AddIcon from "@mui/icons-material/Add";
+import { IoTrashOutline } from "react-icons/io5";
 const FilesTab = () => {
   //* React States
   const dispatch = useDispatch();
@@ -138,19 +139,19 @@ const FilesTab = () => {
         <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
       </div>
 
-      <section className=" grid grid-cols-10 items-center justify-center border-b-2 border-b-orange-cus-1 py-2 text-center  font-bold uppercase text-gray-text-3  md:mx-16">
+      <section className=" grid grid-cols-9 items-center justify-center border-b-2 border-b-orange-cus-1 py-2 text-center  font-bold uppercase text-gray-text-3  md:mx-16">
         <div className="col-span-2 ">
           <h4>File</h4>
         </div>
         <div className="col-span-2 ">
           <h4>date uploaded</h4>
         </div>
-        <div className="col-span-3 ">
+        <div className="col-span-4 ">
           <h4>document description</h4>
         </div>
-        <div className="col-span-2 ">Remove</div>
+        <div className="col-span-1 ">Remove</div>
       </section>
-      <div>
+      <div className="min-w-[400px]">
         {isLoading ? (
           <Loader />
         ) : (
@@ -159,7 +160,7 @@ const FilesTab = () => {
             return (
               <article
                 key={item._id}
-                className={`grid grid-cols-10 items-center justify-center rounded-sm  py-2 px-3 text-center md:mx-16 ${
+                className={`grid grid-cols-9 items-center justify-center rounded-sm  py-2  text-center md:mx-16 ${
                   index % 2 === 0 && "bg-white"
                 } `}
               >
@@ -168,7 +169,7 @@ const FilesTab = () => {
                     href={item.file}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className=" text-center md:mr-10"
+                    className=" text-center text-sky-500 underline md:mr-10"
                     // download
                   >
                     {item.file_name}
@@ -177,15 +178,15 @@ const FilesTab = () => {
                 <div className="col-span-2">
                   <p> {moment(item.createdAt).format("l")}</p>
                 </div>
-                <div className="col-span-3">
+                <div className="col-span-4">
                   <p>{item.description}</p>
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-1">
                   <IconButton
                     color="error"
                     onClick={() => openDeleteModal(item._id)}
                   >
-                    <DeleteIcon />
+                    <IoTrashOutline />
                   </IconButton>
                 </div>
               </article>

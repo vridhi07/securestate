@@ -32,7 +32,10 @@ export default function FormDialog({
   return (
     <div>
       <Dialog open={isFileModalOpen} maxWidth={"lg"}>
-        <form className="flex flex-col  " onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col bg-primary-clr  "
+          onSubmit={handleSubmit}
+        >
           <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
             <h2 className=" text-center text-lg font-bold  ">Files</h2>
             <button
@@ -50,9 +53,10 @@ export default function FormDialog({
               value={fileName}
               onChange={handleChange}
               name="fileName"
-              sx={{ mb: 3 }}
+              sx={{ mb: 3, bgcolor: "white" }}
               fullWidth
               required
+              // sx={{}}
             />
             <TextField
               id="description"
@@ -62,29 +66,31 @@ export default function FormDialog({
               multiline
               rows={3}
               onChange={handleChange}
-              sx={{ mb: 3 }}
+              sx={{ mb: 3, bgcolor: "white" }}
               fullWidth
               required
+              // sx={{ bg: "white" }}
             />
-            <input
+            {/* <input
               id="contained-button-file"
               // multiple
               type="file"
               name="file"
               className="hidden"
               onChange={handleFile}
-            />
+              sx={{ bg: "white" }}
+            /> */}
 
             <div className="mt-3">
               <div
-                className="m-0 flex h-[150px] w-full flex-col items-center justify-center border-2 border-dashed border-gray-500 "
+                className="m-0 flex h-[150px] w-full flex-col items-center justify-center rounded-md border   bg-white "
                 onDragOver={dragOver}
                 onDragEnter={dragEnter}
                 onDragLeave={dragLeave}
                 onDrop={fileDrop}
               >
                 <label htmlFor="file" className="hover:cursor-pointer ">
-                  <UploadFileIcon sx={{ fontSize: "4rem", color: "#606060" }} />
+                  <UploadFileIcon sx={{ fontSize: "4rem", color: "#52CEE1" }} />
                 </label>
 
                 <input
@@ -97,6 +103,7 @@ export default function FormDialog({
                 <p>Drag & Drop files here or click to upload</p>
               </div>
               <div>
+                {file && <h4>Uploaded file</h4>}
                 {file &&
                   file.map((item, i) => {
                     return (

@@ -103,7 +103,7 @@ const HistoryTab = () => {
           <Loader />
         ) : (
           <div>
-            <div className=" text-gray-text-4">
+            <div className="min-w-[400px] text-gray-text-4">
               {historyDetails?.data &&
                 historyDetails?.data.map((item, index) => {
                   return (

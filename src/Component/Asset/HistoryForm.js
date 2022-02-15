@@ -17,7 +17,7 @@ export default function FormDialog({
   return (
     <div>
       <Dialog open={isHistoryOpen}>
-        <form className="" onSubmit={handleSubmit}>
+        <form className="bg-primary-clr" onSubmit={handleSubmit}>
           <header className="py-3text-white flex h-12 w-full items-center justify-between bg-orange-cus-1 px-5 text-white ">
             <h2 className=" text-center text-lg font-bold  ">Add Event</h2>
             <button

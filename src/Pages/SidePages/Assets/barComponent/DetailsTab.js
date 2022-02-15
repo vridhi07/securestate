@@ -90,7 +90,7 @@ const Details = () => {
           )}
 
           <button
-            className="bg-gray-cus  py-2 px-8 capitalize tracking-wide text-gray-300  rounded-md
+            className="rounded-md  bg-gray-cus py-2 px-8 capitalize tracking-wide  text-gray-300
           "
             type="button"
             onClick={handleEdit}
@@ -121,7 +121,6 @@ const Details = () => {
                 onChange={handleChange}
                 disabled={isEdit ? false : true}
                 className="bg-white"
-
               />
             </div>
             <div className="w-full">

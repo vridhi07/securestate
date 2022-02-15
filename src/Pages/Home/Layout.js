@@ -30,7 +30,7 @@ import dummyProfilePic from "../../constantData/images/dummyProfilePic.jpg";
 import IsOnlinePage from "../../Component/Common/IsOnline";
 import * as Roles from "../../constantData/Roles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-const drawerWidth = 270;
+const drawerWidth = 240;
 // console.log(getRole());
 const openedMixin = (theme) => ({
   width: drawerWidth,
