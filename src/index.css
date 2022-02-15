@@ -14,10 +14,10 @@ body {
 }
 /** Asset commponent */
 .nav-Asest-Btn {
-  @apply px-4 py-2 bg-gray-300 text-orange-cus-1 transition-all tracking-wider;
+  @apply bg-gray-300 px-4 py-2 tracking-wider text-orange-cus-1 transition-all;
 }
 .activesBTn {
-  @apply text-white bg-orange-cus-1;
+  @apply bg-orange-cus-1 text-white;
 }
 #navButton:last-child {
   @apply rounded-tr-lg rounded-br-lg;
@@ -26,13 +26,13 @@ body {
 #navButton:first-child {
   @apply rounded-tl-lg rounded-bl-lg;
 }
-#navButton:nth-child(2) {
+/* #navButton:nth-child(2) {
   @apply mr-3;
-}
+} */
 
 /** Asset History */
 .tableAsset {
-  @apply grid grid-cols-10 justify-center items-center text-center border-gray-400 py-3;
+  @apply grid grid-cols-10 items-center justify-center border-gray-400 py-3 text-center;
 }
 
 /****** INBOX   *******/

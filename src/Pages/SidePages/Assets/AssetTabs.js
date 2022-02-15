@@ -41,7 +41,7 @@ const AssetTabs = () => {
           <FilterOption />
         </div>
       </div>
-      <section className="relative mx-auto mt-8 mb-4  flex w-95.5 flex-col">
+      <section className="test relative mx-auto mt-8 mb-4  flex w-full flex-col">
         <div className="mx-auto mt-4  flex w-full flex-col ">
           <div className="mx-auto flex">
             {navDetails.map((item, index) => {
