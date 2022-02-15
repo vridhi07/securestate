@@ -119,11 +119,11 @@ export default function MiniDrawer() {
     setIsOnlineTrue(IsOnline);
   }, [IsOnline]);
   let token = localStorage.getItem("token");
-  useEffect(() => {
-    if (pathname === "/") {
-      navigate("dashboard");
-    }
-  }, [pathname]);
+  // useEffect(() => {
+  //   if (pathname === "/") {
+  //     navigate("dashboard");
+  //   }
+  // }, [pathname]);
 
   useEffect(() => {
     if (token) {
@@ -161,7 +161,7 @@ export default function MiniDrawer() {
     localStorage.clear();
     // window.location.replace("/home");
     handleCloseUserMenu();
-    navigate("./home");
+    navigate("/");
   };
 
   const handleProfileSetting = () => {

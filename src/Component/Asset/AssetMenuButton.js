@@ -26,18 +26,19 @@ export default function BasicPopover({
           vertical: "top",
           horizontal: "right",
         }}
+        elevation={0}
         autoFocus={false}
       >
         <Paper sx={{ width: "10rem", borderRadius: 0 }}>
           <button
-            className="px-1 py-2 tracking-wider  flex justify-between items-center w-full text-left m-0 border border-black bg-[#AEDD94] hover:bg-green-500 "
+            className="m-0 flex w-full  items-center justify-between border border-black bg-[#AEDD94] px-1 py-2 text-left tracking-wider hover:bg-green-500 "
             onClick={handleEdit}
           >
             <span>Edit</span>
             <ArrowRightIcon />
           </button>
           <button
-            className="w-full text-left px-1 tracking-wider border-black py-2 m-0 border border-t-0 bg-[#F8B3B0] hover:bg-red-600"
+            className="m-0 w-full border border-t-0 border-black bg-[#F8B3B0] px-1 py-2 text-left tracking-wider hover:bg-red-600"
             onClick={openDeleteModal}
           >
             Delete

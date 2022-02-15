@@ -23,143 +23,141 @@ export default function SBOMModalForm({
   return (
     <div>
       <Dialog open={isModalOpen} onClose={closeModal}>
-        <form
-          className="px-5 md:px-20 pt-5 pb-10 relative"
-          autoComplete="off"
-          onSubmit={handleSubmit}
-        >
-          <button
-            type="button"
-            className="absolute top3 right-3"
-            onClick={closeModal}
-          >
-            <CloseIcon />
-          </button>
-          <h2 className="text-center py-5 font-bold text-lg text-[#606060] mb-4">
-            Add Component
-          </h2>
-          <section className="grid grid-cols-4 gap-8 my-2">
-            <div className="md:col-span-2 col-span-4">
-              <div className="w-full mb-4">
-                <TextField
-                  id="supplier"
-                  label="Supplier"
-                  variant="outlined"
-                  value={supplier}
-                  name="supplier"
-                  onChange={handleComponentForm}
-                  fullWidth
-                  required
-                />
-              </div>
-            </div>
-            <div className="md:col-span-2 col-span-4">
-              <div className="w-full mb-4">
-                <TextField
-                  id="component"
-                  label="Component"
-                  variant="outlined"
-                  value={component}
-                  name="component"
-                  onChange={handleComponentForm}
-                  fullWidth
-                  required
-                />
-              </div>
-            </div>
-          </section>
-          <section className="grid grid-cols-4 gap-8 my-2">
-            <div className="md:col-span-2 col-span-4">
-              <div className="w-full mb-4">
-                <TextField
-                  id="license"
-                  label="License"
-                  variant="outlined"
-                  value={license}
-                  name="license"
-                  onChange={handleComponentForm}
-                  fullWidth
-                  required
-                />
-              </div>
-            </div>
-            <div className="md:col-span-2 col-span-4">
-              <div className="w-full mb-4">
-                <TextField
-                  id="cve"
-                  label="CVE"
-                  variant="outlined"
-                  value={cve}
-                  name="cve"
-                  onChange={handleComponentForm}
-                  fullWidth
-                  required
-                />
-              </div>
-            </div>
-          </section>
-          <section className="grid grid-cols-4 gap-8 my-2">
-            <div className="md:col-span-2 col-span-4">
-              <div className="w-full mb-4">
-                <TextField
-                  id="uniqueIdentifier"
-                  label="Unique Identifier"
-                  variant="outlined"
-                  value={uniqueIdentifier}
-                  name="uniqueIdentifier"
-                  onChange={handleComponentForm}
-                  fullWidth
-                  required
-                />
-              </div>
-            </div>
-            <div className="md:col-span-2 col-span-4">
-              <div className="w-full mb-4">
-                <TextField
-                  id="version"
-                  label="Version"
-                  variant="outlined"
-                  value={version}
-                  name="version"
-                  onChange={handleComponentForm}
-                  fullWidth
-                  required
-                />
-              </div>
-            </div>
-          </section>
-          <section className="grid grid-cols-4 gap-8 my-2">
-            <div className="md:col-span-2 col-span-4">
-              <div className="w-full mb-4">
-                <TextField
-                  id="sbom_author"
-                  label="SBOM Author"
-                  variant="outlined"
-                  value={sbom_author}
-                  name="sbom_author"
-                  onChange={handleComponentForm}
-                  fullWidth
-                  required
-                />
-              </div>
-            </div>
-            <div className="md:col-span-2 col-span-4"></div>
-          </section>
-
-          <div className="flex items-center justify-between pb-4 mt-5">
-            <button
-              type="submit"
-              className="px-6 py-2 rounded-md tracking-wider text-white bg-[#606060]"
-            >
-              Add
-            </button>
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
+            <h2 className="text-center text-lg font-bold ">Add Component</h2>
             <button
               type="button"
-              className="px-6 py-2 rounded-md tracking-wider text-white bg-[#606060]"
+              // className="top3 absolute right-3"
               onClick={closeModal}
             >
-              cancel
+              <CloseIcon />
             </button>
+          </header>
+          <div className="px-8 py-4">
+            <section className="my-2 grid grid-cols-4 gap-8">
+              <div className="col-span-4 md:col-span-2">
+                <div className="mb-4 w-full">
+                  <TextField
+                    id="supplier"
+                    label="Supplier"
+                    variant="outlined"
+                    value={supplier}
+                    name="supplier"
+                    onChange={handleComponentForm}
+                    fullWidth
+                    required
+                  />
+                </div>
+              </div>
+              <div className="col-span-4 md:col-span-2">
+                <div className="mb-4 w-full">
+                  <TextField
+                    id="component"
+                    label="Component"
+                    variant="outlined"
+                    value={component}
+                    name="component"
+                    onChange={handleComponentForm}
+                    fullWidth
+                    required
+                  />
+                </div>
+              </div>
+            </section>
+            <section className="my-2 grid grid-cols-4 gap-8">
+              <div className="col-span-4 md:col-span-2">
+                <div className="mb-4 w-full">
+                  <TextField
+                    id="license"
+                    label="License"
+                    variant="outlined"
+                    value={license}
+                    name="license"
+                    onChange={handleComponentForm}
+                    fullWidth
+                    required
+                  />
+                </div>
+              </div>
+              <div className="col-span-4 md:col-span-2">
+                <div className="mb-4 w-full">
+                  <TextField
+                    id="cve"
+                    label="CVE"
+                    variant="outlined"
+                    value={cve}
+                    name="cve"
+                    onChange={handleComponentForm}
+                    fullWidth
+                    required
+                  />
+                </div>
+              </div>
+            </section>
+            <section className="my-2 grid grid-cols-4 gap-8">
+              <div className="col-span-4 md:col-span-2">
+                <div className="mb-4 w-full">
+                  <TextField
+                    id="uniqueIdentifier"
+                    label="Unique Identifier"
+                    variant="outlined"
+                    value={uniqueIdentifier}
+                    name="uniqueIdentifier"
+                    onChange={handleComponentForm}
+                    fullWidth
+                    required
+                  />
+                </div>
+              </div>
+              <div className="col-span-4 md:col-span-2">
+                <div className="mb-4 w-full">
+                  <TextField
+                    id="version"
+                    label="Version"
+                    variant="outlined"
+                    value={version}
+                    name="version"
+                    onChange={handleComponentForm}
+                    fullWidth
+                    required
+                  />
+                </div>
+              </div>
+            </section>
+            <section className="my-2 grid grid-cols-4 gap-8">
+              <div className="col-span-4 md:col-span-2">
+                <div className="mb-4 w-full">
+                  <TextField
+                    id="sbom_author"
+                    label="SBOM Author"
+                    variant="outlined"
+                    value={sbom_author}
+                    name="sbom_author"
+                    onChange={handleComponentForm}
+                    fullWidth
+                    required
+                  />
+                </div>
+              </div>
+              <div className="col-span-4 md:col-span-2"></div>
+            </section>
+
+            <div className="mt-5 flex items-center justify-between pb-4">
+              <button
+                type="submit"
+                className="rounded-md bg-[#606060] px-6 py-2 tracking-wider text-white"
+              >
+                Add
+              </button>
+              <button
+                type="button"
+                className="rounded-md bg-[#606060] px-6 py-2 tracking-wider text-white"
+                onClick={closeModal}
+              >
+                cancel
+              </button>
+            </div>
           </div>
         </form>
       </Dialog>

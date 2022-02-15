@@ -53,6 +53,7 @@ export default function UserAdd({
                     size="small"
                     name="company"
                     onChange={handleUserFormInput}
+                    required
                   >
                     {companyDetails &&
                       companyDetails.map((item) => (
@@ -77,6 +78,7 @@ export default function UserAdd({
                     size="small"
                     name="company"
                     onChange={handleUserFormInput}
+                    required
                   >
                     {userDetails?.company_id.company_name && (
                       <MenuItem
@@ -106,6 +108,7 @@ export default function UserAdd({
                   value={firstName}
                   onChange={handleUserFormInput}
                   inputProps={{ maxLength: 15 }}
+                  required
                 />
               </FormControl>
               <FormControl fullWidth sx={{ mt: 1 }}>
@@ -122,6 +125,7 @@ export default function UserAdd({
                   value={lastName}
                   onChange={handleUserFormInput}
                   inputProps={{ maxLength: 15 }}
+                  required
                 />
               </FormControl>
               <FormControl fullWidth sx={{ mt: 1 }}>
@@ -134,6 +138,7 @@ export default function UserAdd({
                   size="small"
                   name="role"
                   onChange={handleUserFormInput}
+                  required
                 >
                   <MenuItem value={"admin"}>Admin</MenuItem>
                   <MenuItem value={"client"}>Client</MenuItem>
@@ -186,12 +191,13 @@ export default function UserAdd({
                   size="small"
                   value={phone}
                   onChange={handleUserFormInput}
+                  required
                 />
               </FormControl>
               <div className="mt-3 mb-4 flex flex-col items-center justify-center">
                 <button
                   type="submit"
-                  className=" bg-orange-cus-1 rounded-md px-[4.5rem] py-2 tracking-wider text-white  "
+                  className=" rounded-md bg-orange-cus-1 px-[4.5rem] py-2 tracking-wider text-white  "
                 >
                   Save
                 </button>

@@ -1,13 +1,17 @@
 export const Priority = ["critical", "high", "medium", "low"];
 export const AssetType = ["Web App", "Mobile App", "API"];
-export const Status = ["In Production", "Sandbox", "ACTIVE", "INACTIVE"];
+export const Status = [
+  // "In Production", "Sandbox",
+  "ACTIVE",
+  "INACTIVE",
+];
 
 export const changeButtonName = (name, onClick) => {
   if (name === "details") {
     return (
       <button
         onClick={onClick}
-        className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm"
+        className="bg-gray-cus rounded-sm  py-2 px-8 capitalize tracking-wide text-gray-300"
       >
         edit asset
       </button>
@@ -17,7 +21,7 @@ export const changeButtonName = (name, onClick) => {
     return (
       <button
         onClick={onClick}
-        className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm"
+        className="bg-gray-cus rounded-sm  py-2 px-8 capitalize tracking-wide text-gray-300"
       >
         History
       </button>
@@ -28,7 +32,7 @@ export const changeButtonName = (name, onClick) => {
       <>
         <label
           htmlFor="assetfiles"
-          className="bg-gray-cus tracking-wide hover:cursor-pointer  text-gray-300 py-2 px-8 capitalize rounded-sm"
+          className="bg-gray-cus rounded-sm py-2  px-8 capitalize tracking-wide text-gray-300 hover:cursor-pointer"
         >
           Upload Files
         </label>
@@ -40,7 +44,7 @@ export const changeButtonName = (name, onClick) => {
     return (
       <button
         onClick={onClick}
-        className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm"
+        className="bg-gray-cus rounded-sm  py-2 px-8 capitalize tracking-wide text-gray-300"
       >
         add component
       </button>

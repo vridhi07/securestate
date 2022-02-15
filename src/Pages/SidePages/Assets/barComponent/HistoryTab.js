@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import * as action from "../../../../Redux/action/index";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import AddIcon from "@mui/icons-material/Add";
 const HistoryTab = () => {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [historyEvent, setHistoryEvent] = useState({
@@ -69,19 +70,20 @@ const HistoryTab = () => {
     dispatch(action.GetHistoryRequest({ pageId, historyPageNumber }));
   }, [historyPageNumber, addMessage]);
   return (
-    <div className="w-full flex flex-col mx-auto">
-      <section className="flex mb-3 items-center justify-end">
+    <div className="mx-auto flex w-full flex-col">
+      <section className="mb-3 flex items-center justify-end">
         <button
-          className="bg-gray-cus tracking-wide  text-gray-300 py-2 px-8 capitalize rounded-sm
+          className="flex items-center gap-1 rounded-md  bg-gray-cus py-2 px-5 capitalize tracking-wide text-gray-300
          "
           onClick={openHistoryModal}
           disabled={addLoading}
         >
-          add event
+          <AddIcon />
+          <span>add event</span>
         </button>
       </section>
 
-      <section className="grid grid-cols-10 justify-center items-center text-center font-bold text-gray-text-3  uppercase ">
+      <section className="grid grid-cols-10 items-center justify-center text-center font-bold uppercase  text-gray-text-3 ">
         <div className="col-span-3 ">
           <h4>Date</h4>
         </div>
@@ -97,7 +99,7 @@ const HistoryTab = () => {
           <Loader />
         ) : (
           <div>
-            <div className=" min-w-[400px] mt-3 border border-gray-400 text-gray-text-4 border-t-0">
+            <div className=" mt-3 min-w-[400px] border border-t-0 border-gray-400 text-gray-text-4">
               {historyDetails?.data &&
                 historyDetails?.data.map((item, index) => {
                   return (
@@ -105,15 +107,15 @@ const HistoryTab = () => {
                       key={item._id}
                       className={`${
                         index === 0
-                          ? "border-t tableAsset"
-                          : " border-t-2 tableAsset"
+                          ? "tableAsset border-t"
+                          : " tableAsset border-t-2"
                       } `}
                     >
                       <div className="col-span-3 ">
                         {moment(item.date).format("l")}
                       </div>
                       <div className="col-span-3 ">{item.event}</div>
-                      <div className="col-span-4 pr-2 ">
+                      <div className=" col-span-4  max-w-[373px] overflow-x-hidden pr-2 ">
                         {item.activity_description}
                       </div>
                     </article>
@@ -121,7 +123,7 @@ const HistoryTab = () => {
                 })}
             </div>
             {historyDetails?.total > 1 && (
-              <div className="pb-5 mt-4">
+              <div className="mt-4 pb-5">
                 <Stack spacing={2}>
                   <Pagination
                     count={historyDetails?.total}

@@ -35,14 +35,14 @@ const Inbox = () => {
     sendEmail: "",
     id: "",
   });
- 
+  // console.log(selectData);
   const currentUser = useSelector((state) => state.user?.userDetails);
   const [selectedEmails, setSelectedEmails] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [openNewEmail, setOpenNewEmail] = useState(false);
   const [emailReply, sendEmailReply] = useState("");
-
+  console.log(emailReply);
   useEffect(() => {
     if (emailStatus?.sendEmailStatus) {
       setOpenNewEmail(false);
@@ -153,6 +153,7 @@ const Inbox = () => {
       ?.filter((val) => selectedEmails.includes(val._id))
       .map((val) => val.email);
   };
+  // console.log(getSelectedEmail());
   const formData = new FormData();
   formData.append("file", emailContent.file);
   formData.append("to", getSelectedEmail());
@@ -174,26 +175,24 @@ const Inbox = () => {
           text: emailReply,
         },
 
-
-
         email: currentUser.email,
-
       })
     );
+    sendEmailReply("");
   };
-console.log(emailStatus.emailreplyLoader,'=========')
+  // console.log(emailStatus.emailreplyLoader,'=========')
   if (isLoading) {
     return <Loader />;
   }
   return (
     <div className="flex flex-col">
       <div className="mt-3 flex justify-between">
-        <div className="border bg-white px-1 border-gray-600  h-11 w-52  rounded-3xl flex items-center justify-start">
+        <div className="flex h-11 w-52 items-center  justify-start rounded-3xl  border border-gray-600 bg-white px-1">
           <SearchIcon />
           <input
             type="text"
             placeholder="Search"
-            className="w-full py-1 pl-2  rounded-3xl border-0 focus:bg-none focus:outline-none focus:ring-0"
+            className="w-full rounded-3xl border-0  py-1 pl-2 focus:bg-none focus:outline-none focus:ring-0"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -208,15 +207,15 @@ console.log(emailStatus.emailreplyLoader,'=========')
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </div>
-        <div className="md:mr-8 mr-2">
-          <button className="w-12 h-12 ease-in duration-300 border-none rounded-full bg-orange-cus-1 grid place-content-center shadow-lg  cursor-pointer hover:shadow-xl">
-            <div className="hover:rotate-90 ease-in duration-300 ">
+        <div className="mr-2 md:mr-8">
+          <button className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300  ease-in hover:shadow-xl">
+            <div className="duration-300 ease-in hover:rotate-90 ">
               <AddIcon onClick={handleModalClickOpen} sx={{ color: "white" }} />
             </div>
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-6 mt-3 ">
+      <div className="mt-3 grid grid-cols-6 ">
         <div className="col-span-3 bg-white ">
           <div className=" h-screen overflow-y-auto">
             <div className="messageWrapper flex flex-col  px-3">
@@ -235,7 +234,7 @@ console.log(emailStatus.emailreplyLoader,'=========')
           </div>
         </div>
         {openMail.length !== 0 && (
-          <div className="col-span-3 border w-full relative shadow-xl h-screen rounded-md bg-blue-cus-1">
+          <div className="relative col-span-3 h-screen w-full rounded-md border bg-blue-cus-1 shadow-xl">
             <MessageContainer openMail={openMail} />
             <MessageForm
               emailReply={emailReply}
