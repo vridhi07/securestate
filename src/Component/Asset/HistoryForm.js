@@ -41,19 +41,21 @@ export default function FormDialog({
                   onChange={handleEventChange}
                   fullWidth
                   required
-                  sx={{ mb: 3 }}
+                  sx={{ mb: 3, bgcolor: "white" }}
                 />
               </div>
-              <div className="col-span-4 md:col-span-2">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DesktopDatePicker
-                    label="Date"
-                    value={date}
-                    minDate={new Date()}
-                    onChange={handleDate}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
+              <div className="col-span-4  md:col-span-2">
+                <div className="bg-white">
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DesktopDatePicker
+                      label="Date"
+                      value={date}
+                      minDate={new Date()}
+                      onChange={handleDate}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
+                </div>
               </div>
             </section>
 
@@ -69,7 +71,7 @@ export default function FormDialog({
               value={description}
               required
               onChange={handleEventChange}
-              sx={{ mb: 3 }}
+              sx={{ mb: 3, bgcolor: "white" }}
             />
             <div className="my-4 flex items-center justify-between">
               <button
