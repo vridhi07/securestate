@@ -164,7 +164,7 @@ const FilesTab = () => {
                   index % 2 === 0 && "bg-white"
                 } `}
               >
-                <div className="col-span-2 ml-7">
+                <div className="col-span-2 ml-7 max-w-[190px]  overflow-hidden ">
                   <a
                     href={item.file}
                     target="_blank"
@@ -178,7 +178,7 @@ const FilesTab = () => {
                 <div className="col-span-2">
                   <p> {moment(item.createdAt).format("l")}</p>
                 </div>
-                <div className="col-span-4">
+                <div className=" col-span-4 max-w-[392px] overflow-hidden text-center">
                   <p>{item.description}</p>
                 </div>
                 <div className="col-span-1">
