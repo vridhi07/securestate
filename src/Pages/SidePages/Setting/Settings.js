@@ -21,19 +21,19 @@ const Settings = () => {
   return (
     <div>
       <header className="text-center">
-        <h2 className="text-gray-700 font-bold text-2xl tracking-widest mt-4">
+        <h2 className="mt-4 text-2xl font-bold tracking-widest text-gray-700">
           Settings
         </h2>
-        <div className="Test mt-20 text-left ml-[10%]">
-          <h2 className="underline text-gray-700 font-bold text-xl  tracking-widest mt-4 ">
+        <div className="Test mt-20 ml-[10%] text-left">
+          <h2 className="mt-4 text-xl font-bold tracking-widest  text-gray-700 underline ">
             Notification
           </h2>
           {/* Container */}
           <section className="mt-3">
-            <div className="w-[11rem] bg-orange-500 relative">
+            <div className="relative w-[11rem] bg-orange-500">
               {/* dropdown Header */}
               <div
-                className=" pl-8 pr-4 py-[0.2em] mb-0   bg-orange-cus-1 flex items-center justify-between text-white hover:cursor-pointer"
+                className=" bg-orange-cus-1 mb-0 flex items-center   justify-between py-[0.2em] pl-8 pr-4 text-white hover:cursor-pointer"
                 onClick={() => setIsNotificationOpen(!isNotificationOpen)}
               >
                 <p>{selectedOption}</p>
@@ -44,8 +44,8 @@ const Settings = () => {
                 )}
               </div>
               {isNotificationOpen && (
-                <div className="m-0 p-0 transition-all absolute top-[2.4rem] left-0 right-0 ">
-                  <ul className="p-0 m-0  w-full border bg-orange-cus-1 text-white ">
+                <div className="absolute top-[2.4rem] left-0 right-0 m-0 p-0 transition-all ">
+                  <ul className="bg-orange-cus-1 m-0  w-full border p-0 text-white ">
                     {notificationOptions.map((item) => {
                       return (
                         <li
@@ -63,16 +63,16 @@ const Settings = () => {
             </div>
           </section>
         </div>
-        <div className="Test mt-20 text-left ml-[10%]">
-          <h2 className="underline text-gray-700 font-bold text-xl  tracking-widest mt-4 ">
+        <div className="Test mt-20 ml-[10%] text-left">
+          <h2 className="mt-4 text-xl font-bold tracking-widest  text-gray-700 underline ">
             Chat Notification
           </h2>
           {/* Container */}
           <section className="mt-3 ">
-            <div className="w-[11rem] bg-orange-500 relative ">
+            <div className="relative w-[11rem] bg-orange-500 ">
               {/* dropdown Header */}
               <div
-                className=" pl-8 pr-4 py-[0.2em] mb-0   bg-orange-cus-1 flex justify-between items-center  text-white hover:cursor-pointer"
+                className=" bg-orange-cus-1 mb-0 flex items-center   justify-between py-[0.2em] pl-8 pr-4  text-white hover:cursor-pointer"
                 onClick={() =>
                   setIsChatNotificationOpen(!isChatNotificationOpen)
                 }
@@ -85,8 +85,8 @@ const Settings = () => {
                 )}
               </div>
               {isChatNotificationOpen && (
-                <div className="m-0 p-0  absolute top-[2.4rem] left-0 right-0">
-                  <ul className="p-0 m-0  w-full border bg-orange-cus-1 text-white ">
+                <div className="absolute top-[2.4rem]  left-0 right-0 m-0 p-0">
+                  <ul className="bg-orange-cus-1 m-0  w-full border p-0 text-white ">
                     {chatNotificationOptions.map((item) => {
                       return (
                         <li
