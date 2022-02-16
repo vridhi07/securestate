@@ -16,7 +16,7 @@ const defaultAxios = () => {
       // Any status code that lie within the range of 2xx cause this function to trigger
       // Do something with response data
       if (Prod === "dev") {
-        console.log(response);
+        // console.log(response);
       }
       return response;
     },
@@ -26,7 +26,7 @@ const defaultAxios = () => {
       if (Prod === "dev") {
         console.log(error.response.status);
       }
-      if (error.response.status === 403) {
+      if (error?.response?.status === 401) {
         localStorage.removeItem("token");
         window.location.replace("/");
       }

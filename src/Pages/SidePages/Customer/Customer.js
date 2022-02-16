@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../Redux/action";
 import { useEffect, useState } from "react";
 import * as action from "../../../Redux/action";
-
+import * as roles from "../../../constantData/Roles";
 const Customer = () => {
   const dispatch = useDispatch();
   const [isCustomerFormOpen, setIsCustomerFormOpen] = useState(false);
@@ -19,12 +19,14 @@ const Customer = () => {
     main_poc_phone: "",
   });
   const addCompanyState = useSelector((state) => state.company);
-
+  const { userRole } = useSelector((state) => state?.user);
+  console.log(userRole);
   useEffect(() => {
     if (addCompanyState?.isCompanySuccess) {
       setIsCustomerFormOpen(false);
     }
   }, [addCompanyState]);
+
   const handleCustomerForm = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -47,6 +49,16 @@ const Customer = () => {
     dispatch(actions.addCompanyRequest({ ...customerForm }));
   };
 
+  const getAccess = (role) => {
+    if (role === roles.superAdmin) {
+      return true;
+    }
+    return false;
+  };
+  let access;
+  if (userRole) {
+    access = getAccess(userRole);
+  }
   useEffect(() => {
     dispatch(action.getUsersRequest());
   }, []);
@@ -57,14 +69,16 @@ const Customer = () => {
         <div className=" max-w-lg pl-7">
           <FilterOption />
         </div>
-        <div className="pl-7 md:absolute md:top-8 md:right-2  md:pl-0 ">
-          <button
-            className="mt-3 rounded-lg border bg-[#EBEBEB] py-2 px-4   "
-            onClick={openCustomerForm}
-          >
-            New Company
-          </button>
-        </div>
+        {access && (
+          <div className="pl-7 md:absolute md:top-8 md:right-2  md:pl-0 ">
+            <button
+              className="mt-3 rounded-lg border bg-[#EBEBEB] py-2 px-4   "
+              onClick={openCustomerForm}
+            >
+              New Company
+            </button>
+          </div>
+        )}
       </div>
 
       {/* <MultipleSelectChip /> */}
