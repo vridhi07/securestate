@@ -9,7 +9,7 @@ export default function NewCustomerForm({
   closeCustomerForm,
   handleCustomerForm,
   customerForm,
-  handleAddCompany
+  handleAddCompany,
 }) {
   const {
     company_name,
@@ -20,14 +20,13 @@ export default function NewCustomerForm({
     main_poc_phone,
   } = customerForm;
 
-
   return (
     <div>
       <Dialog open={isCustomerFormOpen}>
         <form
-          className=" px-5 md:px-20 min-w-[300px] flex flex-col relative pb-7"
+          className=" relative flex min-w-[300px] flex-col px-5 pb-7 md:px-20"
           autoComplete="off"
-          onSubmit={(e)=>handleAddCompany(e)}
+          onSubmit={(e) => handleAddCompany(e)}
         >
           <button
             type="button"
@@ -37,77 +36,93 @@ export default function NewCustomerForm({
             <CloseIcon />
           </button>
           <header className="pt-7 pb-3">
-            <h4 className="text-center text-lg text-gray-700 font-bold">
+            <h4 className="text-center text-lg font-bold text-gray-700">
               Add Company
             </h4>
           </header>
+          <section className="my-2 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
+              <TextField
+                id="company_name"
+                label="Company Name"
+                name="company_name"
+                value={company_name}
+                onChange={handleCustomerForm}
+                variant="outlined"
+                sx={{ mb: 2 }}
+                inputProps={{ maxLength: 50 }}
+              />
+            </div>
+            <div className="col-span-4 md:col-span-2">
+              <TextField
+                id="location"
+                label="Location"
+                name="location"
+                value={location}
+                onChange={handleCustomerForm}
+                variant="outlined"
+                sx={{ mb: 2 }}
+                inputProps={{ maxLength: 50 }}
+              />
+            </div>
+          </section>
+          <section className="my-2 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
+              <TextField
+                id="website"
+                label="Website"
+                name="website"
+                value={website}
+                onChange={handleCustomerForm}
+                variant="outlined"
+                sx={{ mb: 2 }}
+                inputProps={{ maxLength: 50 }}
+              />
+            </div>
+            <div className="col-span-4 md:col-span-2">
+              <TextField
+                id="main_poc"
+                label="Main POC"
+                name="main_poc"
+                value={main_poc}
+                onChange={handleCustomerForm}
+                variant="outlined"
+                sx={{ mb: 2 }}
+                inputProps={{ maxLength: 50 }}
+              />
+            </div>
+          </section>
+          <section className="my-2 grid grid-cols-4 gap-8">
+            <div className="col-span-4 md:col-span-2">
+              <TextField
+                id="main_poc_email"
+                label="Main POC Email"
+                name="main_poc_email"
+                value={main_poc_email}
+                onChange={handleCustomerForm}
+                variant="outlined"
+                sx={{ mb: 2 }}
+                type={"email"}
+                inputProps={{ maxLength: 50 }}
+              />
+            </div>
+            <div className="col-span-4 md:col-span-2">
+              <TextField
+                id="main_poc_phone"
+                label="Main POC Phone"
+                name="main_poc_phone"
+                value={main_poc_phone}
+                onChange={handleCustomerForm}
+                variant="outlined"
+                sx={{ mb: 2 }}
+                type={"tel"}
+              />
+            </div>
+          </section>
 
-          <TextField
-            id="company_name"
-            label="Company Name"
-            name="company_name"
-            value={company_name}
-            onChange={handleCustomerForm}
-            variant="outlined"
-            sx={{ mb: 2 }}
-            inputProps={{ maxLength: 50 }}
-          />
-
-          <TextField
-            id="location"
-            label="Location"
-            name="location"
-            value={location}
-            onChange={handleCustomerForm}
-            variant="outlined"
-            sx={{ mb: 2 }}
-            inputProps={{ maxLength: 50 }}
-          />
-          <TextField
-            id="website"
-            label="Website"
-            name="website"
-            value={website}
-            onChange={handleCustomerForm}
-            variant="outlined"
-            sx={{ mb: 2 }}
-            inputProps={{ maxLength: 50 }}
-          />
-          <TextField
-            id="main_poc"
-            label="Main POC"
-            name="main_poc"
-            value={main_poc}
-            onChange={handleCustomerForm}
-            variant="outlined"
-            sx={{ mb: 2 }}
-            inputProps={{ maxLength: 50 }}
-          />
-          <TextField
-            id="main_poc_email"
-            label="Main POC Email"
-            name="main_poc_email"
-            value={main_poc_email}
-            onChange={handleCustomerForm}
-            variant="outlined"
-            sx={{ mb: 2 }}
-            type={"email"}
-            inputProps={{ maxLength: 50 }}
-          />
-          <TextField
-            id="main_poc_phone"
-            label="Main POC Phone"
-            name="main_poc_phone"
-            value={main_poc_phone}
-            onChange={handleCustomerForm}
-            variant="outlined"
-            sx={{ mb: 2 }}
-            type={"tel"}
-          />
           <button
             type="submit"
-            className=" border border-black rounded-md mt-3 py-2 bg-[#EBEBEB]"
-          
+            className=" mt-3 rounded-md border border-black bg-[#EBEBEB] py-2"
           >
             Add Company
           </button>
