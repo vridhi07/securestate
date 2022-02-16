@@ -36,8 +36,11 @@ const Users = lazy(() => import("./Pages/SidePages/User/Users"));
 const Invoices = lazy(() => import("./Pages/SidePages/Invoice/Invoices"));
 const Wallet = lazy(() => import("./Pages/SidePages/wallet/Wallet"));
 const Profile = lazy(() => import("./Pages/SidePages/Profile/Profile"));
+
+// Axios Interceptor
+
 defaultAxios();
-// response();
+
 function App() {
   return (
     <Routes>

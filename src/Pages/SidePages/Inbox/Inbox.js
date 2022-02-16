@@ -42,7 +42,7 @@ const Inbox = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [openNewEmail, setOpenNewEmail] = useState(false);
   const [emailReply, sendEmailReply] = useState("");
-  console.log(emailReply);
+  // console.log(emailReply);
   useEffect(() => {
     if (emailStatus?.sendEmailStatus) {
       setOpenNewEmail(false);
@@ -208,7 +208,7 @@ const Inbox = () => {
           />
         </div>
         <div className="mr-2 md:mr-8">
-          <button className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300  ease-in hover:shadow-xl">
+          <button className="bg-orange-cus-1 grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none shadow-lg duration-300  ease-in hover:shadow-xl">
             <div className="duration-300 ease-in hover:rotate-90 ">
               <AddIcon onClick={handleModalClickOpen} sx={{ color: "white" }} />
             </div>
@@ -234,7 +234,7 @@ const Inbox = () => {
           </div>
         </div>
         {openMail.length !== 0 && (
-          <div className="relative col-span-3 h-screen w-full rounded-md border bg-blue-cus-1 shadow-xl">
+          <div className="bg-blue-cus-1 relative col-span-3 h-screen w-full rounded-md border shadow-xl">
             <MessageContainer openMail={openMail} />
             <MessageForm
               emailReply={emailReply}
