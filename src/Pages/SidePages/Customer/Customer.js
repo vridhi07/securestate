@@ -24,6 +24,15 @@ const Customer = () => {
   useEffect(() => {
     if (addCompanyState?.isCompanySuccess) {
       setIsCustomerFormOpen(false);
+      setCustomerForm({
+        ...customerForm,
+        company_name: "",
+        location: "",
+        website: "",
+        main_poc: "",
+        main_poc_email: "",
+        main_poc_phone: "",
+      });
     }
   }, [addCompanyState]);
 
@@ -70,7 +79,7 @@ const Customer = () => {
           <FilterOption />
         </div>
         {access && (
-          <div className="pl-7 md:absolute md:top-8 md:right-2  md:pl-0 ">
+          <div className="pl-7 md:absolute md:top-8 md:right-6  md:pl-0 ">
             <button
               className="mt-3 rounded-lg border bg-[#EBEBEB] py-2 px-4   "
               onClick={openCustomerForm}

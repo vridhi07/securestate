@@ -25,7 +25,7 @@ export default function AssetModal({
   return (
     <form onSubmit={handleSubmitAsset}>
       <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
-        <h2 className="text-center text-2xl font-bold tracking-wider rounded-md">
+        <h2 className="rounded-md text-center text-2xl font-bold tracking-wider">
           {isEdit ? "Edit Asset" : "New Asset"}
         </h2>
         <button type="button" onClick={handleClose}>
@@ -88,8 +88,8 @@ export default function AssetModal({
                 onChange={handleAssetForm}
                 required
               >
-                <MenuItem value={"ACTIVE"}>ACTIVE</MenuItem>
-                <MenuItem value={"INACTIVE"}>INACTIVE</MenuItem>
+                <MenuItem value={"active"}>ACTIVE</MenuItem>
+                <MenuItem value={"inactive"}>INACTIVE</MenuItem>
               </Select>
             </FormControl>
           </div>

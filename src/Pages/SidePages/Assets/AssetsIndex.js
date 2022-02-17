@@ -3,7 +3,7 @@
 // import { makeStyles } from "@mui/styles";
 import Dialog from "@mui/material/Dialog";
 import AddIcon from "@mui/icons-material/Add";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Loader from "../../../Component/Common/PentestLoader";
@@ -32,7 +32,7 @@ const AssetsIndex = () => {
   // const [anchorEl, setAnchorEl] = useState(null);
   const [assetPageNumber, setAssetPageNumber] = useState(1);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [assetsList, setAssetsList] = useState([]);
+  // const [assetsList, setAssetsList] = useState([]);
   // const [check, setChecked] = useState(false);
   // * Redux data
   const { Asset, isLoading, updateLoading } = useSelector(
@@ -43,11 +43,11 @@ const AssetsIndex = () => {
 
   // const inputTag = useRef();
 
-  useEffect(() => {
-    if (Asset?.assetData?.length > 0) {
-      setAssetsList([...Asset.assetData]);
-    }
-  }, [Asset.assetData]);
+  // useEffect(() => {
+  //   if (Asset?.assetData?.length > 0) {
+  //     setAssetsList([...Asset.assetData]);
+  //   }
+  // }, [Asset.assetData]);
 
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
@@ -118,13 +118,13 @@ const AssetsIndex = () => {
 
   //* Handle Status
   const handleStatus = (status, id) => {
-    let newStatus = status === "INACTIVE" ? "ACTIVE" : "INACTIVE";
+    let newStatus = status === "inactive" ? "active" : "inactive";
     const newData = {
       id,
       status: newStatus,
     };
-    console.log(status);
-    console.log(newData);
+    // console.log(status);
+    // console.log(newData);
     dispatch(
       action.UpdateAssetRequest({
         editData: newData,
@@ -189,7 +189,7 @@ const AssetsIndex = () => {
         additional_details,
         company_id,
       };
-      console.log(addData);
+      // console.log(addData);
       dispatch(
         action.AddAssetRequest({
           data: addData,
@@ -255,7 +255,8 @@ const AssetsIndex = () => {
   if (userRole) {
     assetAccess = roles.AssetAccess(userRole);
   }
-  console.log(assetAccess);
+  // console.log(assetAccess);
+  // console.log(assetsList);
   return (
     <div className="mt-8 ">
       <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
@@ -293,7 +294,8 @@ const AssetsIndex = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            assetsList?.map((item) => {
+            Asset?.assetData &&
+            Asset?.assetData.map((item) => {
               return (
                 <AssetList
                   key={item._id}

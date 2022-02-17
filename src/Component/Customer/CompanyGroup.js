@@ -297,7 +297,7 @@ const CompanyGroup = () => {
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
                   ref={focusRef}
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   size="small"
                 />
                 <TextField
@@ -310,7 +310,7 @@ const CompanyGroup = () => {
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   size="small"
                 />
                 <TextField
@@ -323,7 +323,7 @@ const CompanyGroup = () => {
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   size="small"
                 />
                 <TextField
@@ -336,7 +336,7 @@ const CompanyGroup = () => {
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   size="small"
                 />
                 <TextField
@@ -349,7 +349,7 @@ const CompanyGroup = () => {
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   size="small"
                 />
                 <TextField
@@ -362,7 +362,7 @@ const CompanyGroup = () => {
                   inputProps={{
                     readOnly: isCompanyDetailsEdit ? false : true,
                   }}
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   size="small"
                 />
               </div>
