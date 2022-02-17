@@ -14,6 +14,8 @@ import moment from "moment";
 import DeleteModal from "../Common/DeleteModal";
 import * as action from "../../Redux/action";
 import { useDispatch } from "react-redux";
+import { IoTrashOutline } from "react-icons/io5";
+import Fab from "@mui/material/Fab";
 const columns = [
   { id: "Invoice", label: "Invoice", minWidth: 170, align: "left" },
 
@@ -59,23 +61,24 @@ export default function InvoiceTable({
   const dispatch = useDispatch();
   //! State ALl the Delete And Edit
   const [selectedId, setSelectedId] = useState(null);
-  const [anchorEl, setAnchorEl] = useState(null);
+  // const [anchorEl, setAnchorEl] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModal] = useState(false);
   //!End Of  State ALl the Delete And Edit
 
   //! function of  ALl the Delete And Edit
-  const openMenu = (e, id) => {
-    setAnchorEl(e.currentTarget);
-    setSelectedId(id);
-  };
+  // const openMenu = (e, id) => {
+  //   setAnchorEl(e.currentTarget);
+  //   setSelectedId(id);
+  // };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleMenuClose = () => {
+  //   setAnchorEl(null);
+  // };
 
-  const openDeleteModal = () => {
+  const openDeleteModal = (id) => {
     setIsDeleteModal(true);
-    handleMenuClose();
+    setSelectedId(id);
+    // handleMenuClose();
   };
 
   const closeDeleteModal = () => {
@@ -134,16 +137,19 @@ export default function InvoiceTable({
                     </a>
                   </TableCell>
                   <TableCell align="center">
-                    <button onClick={(e) => openMenu(e, item?._id)}>
-                      <MoreVertIcon />
-                    </button>
-                    <Menu
+                    <Fab
+                      size="small"
+                      onClick={() => openDeleteModal(item?._id)}
+                    >
+                      <IoTrashOutline className="text-lg text-red-500" />
+                    </Fab>
+                    {/* <Menu
                       anchorEl={anchorEl}
                       handleMenuClose={handleMenuClose}
                       //* New feature to detect whether to show Edit or not
                       showEdit={false}
                       openDeleteModal={openDeleteModal}
-                    />
+                    /> */}
                   </TableCell>
                 </TableRow>
               );

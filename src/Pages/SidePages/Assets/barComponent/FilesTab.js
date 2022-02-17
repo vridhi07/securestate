@@ -5,12 +5,13 @@ import * as action from "../../../../Redux/action/index";
 import AssetFileModal from "../../../../Component/Asset/AssetFileModal";
 import Loader from "../../../../Component/Common/PentestLoader";
 import { useSelector, useDispatch } from "react-redux";
-import DeleteIcon from "@mui/icons-material/Delete";
+// import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import DeleteModal from "../../../../Component/Common/DeleteModal";
 import moment from "moment";
 import AddIcon from "@mui/icons-material/Add";
 import { IoTrashOutline } from "react-icons/io5";
+import * as roles from "../../../../constantData/Roles";
 const FilesTab = () => {
   //* React States
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const FilesTab = () => {
   const { assetFiles, isLoading, addLoading, AddMessage } = useSelector(
     (state) => state?.assetFiles
   );
-
+  const userRole = useSelector((state) => state?.user?.userRole);
   //* Functions
   const handleFilesPageNumber = (e, i) => {
     setFilesPageNumber(i);
@@ -122,19 +123,25 @@ const FilesTab = () => {
   useEffect(() => {
     dispatch(action.getAssetFilesRequest({ assetId, filesPageNumber }));
   }, [filesPageNumber, AddMessage]);
-
+  let assetAccess;
+  if (userRole) {
+    assetAccess = roles.AssetAccess(userRole);
+  }
   return (
     <div className="mx-auto flex w-full flex-col">
-      <section className="mb-3 flex items-center justify-end md:absolute md:top-4 md:right-0">
-        <button
-          className="flex items-center gap-1 rounded-md  bg-gray-cus py-2 px-5 capitalize tracking-wide text-gray-300 
+      {assetAccess && (
+        <section className="mb-3 flex items-center justify-end md:absolute md:top-4 md:right-0">
+          <button
+            className="flex items-center gap-1 rounded-md  bg-gray-cus py-2 px-5 capitalize tracking-wide text-gray-300 
          "
-          onClick={openFileModal}
-        >
-          <AddIcon />
-          <span>Upload Files</span>
-        </button>
-      </section>
+            onClick={openFileModal}
+          >
+            <AddIcon />
+            <span>Upload Files</span>
+          </button>
+        </section>
+      )}
+
       <div className=" md:absolute md:top-4 md:left-0">
         <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
       </div>
@@ -149,7 +156,11 @@ const FilesTab = () => {
         <div className="col-span-4 ">
           <h4>document description</h4>
         </div>
-        <div className="col-span-1 ">Remove</div>
+        {assetAccess ? (
+          <div className="col-span-1 ">Remove</div>
+        ) : (
+          <div className="col-span-1 "></div>
+        )}
       </section>
       <div className="min-w-[400px]">
         {isLoading ? (
@@ -182,12 +193,14 @@ const FilesTab = () => {
                   <p>{item.description}</p>
                 </div>
                 <div className="col-span-1">
-                  <IconButton
-                    color="error"
-                    onClick={() => openDeleteModal(item._id)}
-                  >
-                    <IoTrashOutline />
-                  </IconButton>
+                  {assetAccess && (
+                    <IconButton
+                      color="error"
+                      onClick={() => openDeleteModal(item._id)}
+                    >
+                      <IoTrashOutline />
+                    </IconButton>
+                  )}
                 </div>
               </article>
             );

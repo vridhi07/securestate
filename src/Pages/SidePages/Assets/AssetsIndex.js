@@ -14,7 +14,7 @@ import DeleteModal from "../../../Component/Common/DeleteModal";
 import * as action from "../../../Redux/action/index";
 import { useDispatch, useSelector } from "react-redux";
 import AssetList from "../../../Component/Asset/AssetList";
-
+import * as roles from "../../../constantData/Roles";
 const AssetsIndex = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -39,7 +39,7 @@ const AssetsIndex = () => {
     (state) => state.Assets
   );
   const { selectedCompany } = useSelector((state) => state?.company);
-  const { userDetails } = useSelector((state) => state?.user);
+  const { userDetails, userRole } = useSelector((state) => state?.user);
 
   // const inputTag = useRef();
 
@@ -251,6 +251,11 @@ const AssetsIndex = () => {
   //   );
   // };
   // console.log(assetsList, "===8888");
+  let assetAccess;
+  if (userRole) {
+    assetAccess = roles.AssetAccess(userRole);
+  }
+  console.log(assetAccess);
   return (
     <div className="mt-8 ">
       <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
@@ -262,16 +267,18 @@ const AssetsIndex = () => {
         <div className="flex w-full items-center justify-between ">
           <h4 className="text-4xl tracking-wide  text-orange-cus-1">Assets</h4>
           <div className="flex flex-col items-start justify-end">
-            <button
-              onClick={handleClickOpen}
-              className={`rounded-md bg-gray-cus  py-2 px-6 capitalize tracking-wide text-gray-300`}
-              disabled={isLoading}
-            >
-              <span>
-                <AddIcon />
-              </span>
-              <span> add asset</span>
-            </button>
+            {assetAccess && (
+              <button
+                onClick={handleClickOpen}
+                className={`rounded-md bg-gray-cus  py-2 px-6 capitalize tracking-wide text-gray-300`}
+                disabled={isLoading}
+              >
+                <span>
+                  <AddIcon />
+                </span>
+                <span> add asset</span>
+              </button>
+            )}
           </div>
         </div>
         <div
@@ -299,6 +306,7 @@ const AssetsIndex = () => {
                   // anchorEl={anchorEl}
                   updateLoading={updateLoading}
                   // handleSwitchAssets={handleSwitchAssets}
+                  assetAccess={assetAccess}
                 />
               );
             })
@@ -313,10 +321,11 @@ const AssetsIndex = () => {
                   sx={{
                     "& .Mui-selected": {
                       backgroundColor: "#F27931 !important",
+                      color: "white",
+                      border: "none",
                     },
                   }}
                   page={assetPageNumber}
-                  style={{ Color: "orange" }}
                 />
               </Stack>
             </div>
