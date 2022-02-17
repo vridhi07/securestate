@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import DummyProfile from "../../constantData/images/dummyProfile.webp";
 import DeleteModal from "../Common/DeleteModal";
 import moment from "moment";
+import { IoTrashOutline } from "react-icons/io5";
 export default function SBOMTab({
   users = [],
   openDeleteModal,
@@ -19,7 +20,7 @@ export default function SBOMTab({
   closeDeleteModal,
 }) {
   return (
-    <div className="w-full flex flex-col mx-auto">
+    <div className="mx-auto flex w-full flex-col">
       <TableContainer component={Paper} elevation={0}>
         <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">
           <TableHead>
@@ -80,7 +81,7 @@ export default function SBOMTab({
                         color="error"
                         onClick={() => openDeleteModal(_id)}
                       >
-                        <DeleteIcon />
+                        <IoTrashOutline />
                       </IconButton>
                     </TableCell>
                   </TableRow>

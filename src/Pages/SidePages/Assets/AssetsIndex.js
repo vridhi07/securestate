@@ -29,7 +29,7 @@ const AssetsIndex = () => {
   });
   const [isEdit, setIsEdit] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  const [anchorEl, setAnchorEl] = useState(null);
+  // const [anchorEl, setAnchorEl] = useState(null);
   const [assetPageNumber, setAssetPageNumber] = useState(1);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [assetsList, setAssetsList] = useState([]);
@@ -62,6 +62,7 @@ const AssetsIndex = () => {
   // console.log(company_id);
   const handleClose = () => {
     setOpen(false);
+    setSelectedId(null);
     setAssetForm({
       ...assetForm,
       asset_name: "",
@@ -82,26 +83,28 @@ const AssetsIndex = () => {
   };
 
   //* open editANdDelete PopOver
-  const handleMenuOpen = (e, id) => {
-    setAnchorEl(e.currentTarget);
-    setSelectedId(id);
-  };
+  // const handleMenuOpen = (e, id) => {
+  //   setAnchorEl(e.currentTarget);
+  //   setSelectedId(id);
+  // };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleMenuClose = () => {
+  //   setAnchorEl(null);
+  // };
   const handleAssetPageNumber = (e, i) => {
     setAssetPageNumber(i);
   };
-  const openDeleteModal = () => {
+  const openDeleteModal = (id) => {
+    setSelectedId(id);
     setDeleteModalOpen(true);
-    handleMenuClose();
+    // handleMenuClose();
   };
 
   const closeDeleteModal = () => {
     setDeleteModalOpen(false);
     setSelectedId(null);
   };
+
   const handleDelete = () => {
     dispatch(
       action.DeleteAssetRequest({
@@ -132,8 +135,8 @@ const AssetsIndex = () => {
   };
 
   //* switch on edit
-  const handleEdit = () => {
-    let singleData = Asset?.assetData.find((item) => item._id === selectedId);
+  const handleEdit = (id) => {
+    let singleData = Asset?.assetData.find((item) => item._id === id);
     console.log(singleData);
     const {
       asset_name,
@@ -146,10 +149,10 @@ const AssetsIndex = () => {
     } = singleData;
 
     setIsEdit(true);
-
+    setSelectedId(id);
     handleClickOpen();
 
-    handleMenuClose();
+    // handleMenuClose();
     setAssetForm({
       ...assetForm,
       asset_name,
@@ -288,12 +291,12 @@ const AssetsIndex = () => {
                 <AssetList
                   key={item._id}
                   item={item}
-                  handleMenuOpen={handleMenuOpen}
-                  handleMenuClose={handleMenuClose}
+                  // handleMenuOpen={handleMenuOpen}
+                  // handleMenuClose={handleMenuClose}
                   handleStatus={handleStatus}
                   openDeleteModal={openDeleteModal}
                   handleEdit={handleEdit}
-                  anchorEl={anchorEl}
+                  // anchorEl={anchorEl}
                   updateLoading={updateLoading}
                   // handleSwitchAssets={handleSwitchAssets}
                 />

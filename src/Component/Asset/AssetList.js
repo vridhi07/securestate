@@ -4,13 +4,15 @@ import IconButton from "@mui/material/IconButton";
 import Switch from "@mui/material/Switch";
 import AssetMenuButton from "../Asset/AssetMenuButton";
 import { useNavigate } from "react-router-dom";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { IoTrashOutline } from "react-icons/io5";
 const AssetList = ({
   item = [],
-  handleMenuOpen,
-  handleMenuClose,
+  // handleMenuOpen,
+  // handleMenuClose,
   handleStatus,
   handleEdit,
-  anchorEl,
+  // anchorEl,
   openDeleteModal,
   updateLoading,
   // handleSwitchAssets,
@@ -77,16 +79,19 @@ const AssetList = ({
           /> */}
         </div>
       </div>
-      <div className="w-[2%] text-center">
-        <IconButton onClick={(e) => handleMenuOpen(e, id)}>
-          <MoreVertIcon />
+      <div className="flex  items-center text-center">
+        <IconButton color="success" onClick={() => handleEdit(id)}>
+          <ModeEditOutlineIcon />
         </IconButton>
-        <AssetMenuButton
+        <IconButton color="error" onClick={() => openDeleteModal(id)}>
+          <IoTrashOutline />
+        </IconButton>
+        {/* <AssetMenuButton
           anchorEl={anchorEl}
           handleMenuClose={handleMenuClose}
           handleEdit={handleEdit}
           openDeleteModal={openDeleteModal}
-        />
+        /> */}
       </div>
     </div>
   );
