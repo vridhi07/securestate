@@ -20,6 +20,7 @@ export function* AddCompanySaga(action) {
     let response = yield call(axios.post, CONFIG.addCompany, action.payload);
     if (response && response.data?.status === 1) {
       yield put(actions.addCompanySuccess(response?.data?.data));
+      yield put(actions.CompanyRequest());
     }
   } catch (error) {
     // console.log(error.response.data.message);

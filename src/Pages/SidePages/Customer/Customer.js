@@ -24,6 +24,15 @@ const Customer = () => {
   useEffect(() => {
     if (addCompanyState?.isCompanySuccess) {
       setIsCustomerFormOpen(false);
+      setCustomerForm({
+        ...customerForm,
+        company_name: "",
+        location: "",
+        website: "",
+        main_poc: "",
+        main_poc_email: "",
+        main_poc_phone: "",
+      });
     }
   }, [addCompanyState]);
 
