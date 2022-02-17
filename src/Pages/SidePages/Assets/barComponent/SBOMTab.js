@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import * as action from "../../../../Redux/action/index";
 import { IoTrashOutline } from "react-icons/io5";
+import * as roles from "../../../../constantData/Roles";
 export default function SBOMTab() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
@@ -54,7 +55,7 @@ export default function SBOMTab() {
   const { isLoading, sbomDetails, addLoading, addMessage } = useSelector(
     (state) => state?.sbom
   );
-
+  const userRole = useSelector((state) => state?.user?.userRole);
   // * FUNCTIONS
   const handleComponentForm = (e) => {
     let name = e.target.name;
@@ -136,20 +137,26 @@ export default function SBOMTab() {
   useEffect(() => {
     dispatch(action.GetSBOMRequest({ assetId, SboMPageNumber }));
   }, [SboMPageNumber, addMessage]);
-
+  let assetAccess;
+  if (userRole) {
+    assetAccess = roles.AssetAccess(userRole);
+  }
   return (
     <div className="mx-auto flex w-full flex-col">
-      <section className="mb-3 flex items-center justify-end md:absolute md:top-4 md:right-0">
-        <button
-          className=" rounded-md bg-gray-cus  py-2 px-5 capitalize tracking-wide text-gray-300
+      {assetAccess && (
+        <section className="mb-3 flex items-center justify-end md:absolute md:top-4 md:right-0">
+          <button
+            className=" rounded-md bg-gray-cus  py-2 px-5 capitalize tracking-wide text-gray-300
          "
-          onClick={openModal}
-          disabled={addLoading}
-        >
-          <AddIcon />
-          <span> add component</span>
-        </button>
-      </section>
+            onClick={openModal}
+            disabled={addLoading}
+          >
+            <AddIcon />
+            <span> add component</span>
+          </button>
+        </section>
+      )}
+
       <div className="md:absolute md:top-4 md:left-0">
         <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
       </div>
@@ -177,7 +184,7 @@ export default function SBOMTab() {
                     >
                       SBOM AUTHOR
                     </TableCell>
-                    <TableCell align="right">Remove</TableCell>
+                    {assetAccess && <TableCell align="right">Remove</TableCell>}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -258,14 +265,16 @@ export default function SBOMTab() {
                         >
                           {item.sbom_author}
                         </TableCell>
-                        <TableCell align="right">
-                          <IconButton
-                            color="error"
-                            onClick={() => OpenDeleteSbomModal(item._id)}
-                          >
-                            <IoTrashOutline />
-                          </IconButton>
-                        </TableCell>
+                        {assetAccess && (
+                          <TableCell align="right">
+                            <IconButton
+                              color="error"
+                              onClick={() => OpenDeleteSbomModal(item._id)}
+                            >
+                              <IoTrashOutline />
+                            </IconButton>
+                          </TableCell>
+                        )}
                       </TableRow>
                     ))}
                 </TableBody>

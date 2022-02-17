@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import * as action from "../../../../Redux/action/index";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import * as roles from "../../../../constantData/Roles";
 import AddIcon from "@mui/icons-material/Add";
 const HistoryTab = () => {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
@@ -21,6 +22,7 @@ const HistoryTab = () => {
   const { isLoading, historyDetails, addMessage, addLoading } = useSelector(
     (state) => state?.assetHistory
   );
+  const userRole = useSelector((state) => state?.user?.userRole);
   // console.log(historyDetails);
   const location = useLocation();
   let pageId = location.state.id;
@@ -69,18 +71,24 @@ const HistoryTab = () => {
   useEffect(() => {
     dispatch(action.GetHistoryRequest({ pageId, historyPageNumber }));
   }, [historyPageNumber, addMessage]);
+  let assetAccess;
+  if (userRole) {
+    assetAccess = roles.AssetAccess(userRole);
+  }
   return (
     <div className="mx-auto flex w-full flex-col">
       <section className="mb-3 flex items-center justify-end md:absolute md:top-4 md:right-0">
-        <button
-          className="flex items-center gap-1 rounded-md  bg-gray-cus py-2 px-5 capitalize tracking-wide text-gray-300
+        {assetAccess && (
+          <button
+            className="flex items-center gap-1 rounded-md  bg-gray-cus py-2 px-5 capitalize tracking-wide text-gray-300
          "
-          onClick={openHistoryModal}
-          disabled={addLoading}
-        >
-          <AddIcon />
-          <span>add event</span>
-        </button>
+            onClick={openHistoryModal}
+            disabled={addLoading}
+          >
+            <AddIcon />
+            <span>add event</span>
+          </button>
+        )}
       </section>
       <div className="md:absolute md:top-4 md:left-0">
         <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>

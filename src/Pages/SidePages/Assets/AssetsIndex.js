@@ -14,7 +14,7 @@ import DeleteModal from "../../../Component/Common/DeleteModal";
 import * as action from "../../../Redux/action/index";
 import { useDispatch, useSelector } from "react-redux";
 import AssetList from "../../../Component/Asset/AssetList";
-
+import * as roles from "../../../constantData/Roles";
 const AssetsIndex = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -29,7 +29,7 @@ const AssetsIndex = () => {
   });
   const [isEdit, setIsEdit] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  const [anchorEl, setAnchorEl] = useState(null);
+  // const [anchorEl, setAnchorEl] = useState(null);
   const [assetPageNumber, setAssetPageNumber] = useState(1);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [assetsList, setAssetsList] = useState([]);
@@ -39,7 +39,7 @@ const AssetsIndex = () => {
     (state) => state.Assets
   );
   const { selectedCompany } = useSelector((state) => state?.company);
-  const { userDetails } = useSelector((state) => state?.user);
+  const { userDetails, userRole } = useSelector((state) => state?.user);
 
   // const inputTag = useRef();
 
@@ -62,6 +62,7 @@ const AssetsIndex = () => {
   // console.log(company_id);
   const handleClose = () => {
     setOpen(false);
+    setSelectedId(null);
     setAssetForm({
       ...assetForm,
       asset_name: "",
@@ -82,26 +83,28 @@ const AssetsIndex = () => {
   };
 
   //* open editANdDelete PopOver
-  const handleMenuOpen = (e, id) => {
-    setAnchorEl(e.currentTarget);
-    setSelectedId(id);
-  };
+  // const handleMenuOpen = (e, id) => {
+  //   setAnchorEl(e.currentTarget);
+  //   setSelectedId(id);
+  // };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleMenuClose = () => {
+  //   setAnchorEl(null);
+  // };
   const handleAssetPageNumber = (e, i) => {
     setAssetPageNumber(i);
   };
-  const openDeleteModal = () => {
+  const openDeleteModal = (id) => {
+    setSelectedId(id);
     setDeleteModalOpen(true);
-    handleMenuClose();
+    // handleMenuClose();
   };
 
   const closeDeleteModal = () => {
     setDeleteModalOpen(false);
     setSelectedId(null);
   };
+
   const handleDelete = () => {
     dispatch(
       action.DeleteAssetRequest({
@@ -132,8 +135,8 @@ const AssetsIndex = () => {
   };
 
   //* switch on edit
-  const handleEdit = () => {
-    let singleData = Asset?.assetData.find((item) => item._id === selectedId);
+  const handleEdit = (id) => {
+    let singleData = Asset?.assetData.find((item) => item._id === id);
     console.log(singleData);
     const {
       asset_name,
@@ -146,10 +149,10 @@ const AssetsIndex = () => {
     } = singleData;
 
     setIsEdit(true);
-
+    setSelectedId(id);
     handleClickOpen();
 
-    handleMenuClose();
+    // handleMenuClose();
     setAssetForm({
       ...assetForm,
       asset_name,
@@ -248,6 +251,11 @@ const AssetsIndex = () => {
   //   );
   // };
   // console.log(assetsList, "===8888");
+  let assetAccess;
+  if (userRole) {
+    assetAccess = roles.AssetAccess(userRole);
+  }
+  console.log(assetAccess);
   return (
     <div className="mt-8 ">
       <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
@@ -259,16 +267,18 @@ const AssetsIndex = () => {
         <div className="flex w-full items-center justify-between ">
           <h4 className="text-4xl tracking-wide  text-orange-cus-1">Assets</h4>
           <div className="flex flex-col items-start justify-end">
-            <button
-              onClick={handleClickOpen}
-              className={`rounded-md bg-gray-cus  py-2 px-6 capitalize tracking-wide text-gray-300`}
-              disabled={isLoading}
-            >
-              <span>
-                <AddIcon />
-              </span>
-              <span> add asset</span>
-            </button>
+            {assetAccess && (
+              <button
+                onClick={handleClickOpen}
+                className={`rounded-md bg-gray-cus  py-2 px-6 capitalize tracking-wide text-gray-300`}
+                disabled={isLoading}
+              >
+                <span>
+                  <AddIcon />
+                </span>
+                <span> add asset</span>
+              </button>
+            )}
           </div>
         </div>
         <div
@@ -288,14 +298,15 @@ const AssetsIndex = () => {
                 <AssetList
                   key={item._id}
                   item={item}
-                  handleMenuOpen={handleMenuOpen}
-                  handleMenuClose={handleMenuClose}
+                  // handleMenuOpen={handleMenuOpen}
+                  // handleMenuClose={handleMenuClose}
                   handleStatus={handleStatus}
                   openDeleteModal={openDeleteModal}
                   handleEdit={handleEdit}
-                  anchorEl={anchorEl}
+                  // anchorEl={anchorEl}
                   updateLoading={updateLoading}
                   // handleSwitchAssets={handleSwitchAssets}
+                  assetAccess={assetAccess}
                 />
               );
             })
@@ -310,10 +321,11 @@ const AssetsIndex = () => {
                   sx={{
                     "& .Mui-selected": {
                       backgroundColor: "#F27931 !important",
+                      color: "white",
+                      border: "none",
                     },
                   }}
                   page={assetPageNumber}
-                  style={{ Color: "orange" }}
                 />
               </Stack>
             </div>

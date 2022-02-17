@@ -5,6 +5,7 @@ import { Priority, Status } from "../../../../constantData/AssestTabInfo";
 import { AssetType } from "../../../../constantData/addAssetInfo";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import * as roles from "../../../../constantData/Roles";
 // import EditIcon from "@mui/icons-material/Edit";
 import * as action from "../../../../Redux/action";
 import {
@@ -24,6 +25,7 @@ const Details = () => {
   const { assetDetails, isLoading } = useSelector(
     (state) => state?.assetDetails
   );
+  const userRole = useSelector((state) => state?.user?.userRole);
   const [details, setDetails] = useState();
   const [assetForm, setAssetForm] = useState();
   const [isEdit, setIsEdit] = useState(false);
@@ -74,40 +76,47 @@ const Details = () => {
   // console.log("=====11", assetForm);
   // console.log(assetForm?.assetType);
   // console.log(AssetType);
+  let assetAccess;
+  if (userRole) {
+    assetAccess = roles.AssetAccess(userRole);
+  }
+  // console.log(assetAccess);
   return (
     <div className="mt-2   flex w-full  flex-col  text-center  ">
       <section className="mb-3 flex  items-center justify-end">
-        <div className="flex items-center md:absolute md:top-4 md:right-0">
-          {isEdit && (
-            <button
-              className="mr-3 rounded-sm  bg-gray-cus py-2 px-8 capitalize tracking-wide text-gray-300
+        {assetAccess && (
+          <div className="flex items-center md:absolute md:top-4 md:right-0">
+            {isEdit && (
+              <button
+                className="mr-3 rounded-sm  bg-gray-cus py-2 px-8 capitalize tracking-wide text-gray-300
               
           "
-              type="button"
-              onClick={submit}
-            >
-              Save
-            </button>
-          )}
-
-          <button
-            className="flex items-center rounded-md  bg-gray-cus py-2 px-6 capitalize tracking-wide  text-gray-300
-          "
-            type="button"
-            onClick={handleEdit}
-          >
-            {isEdit ? (
-              "cancel"
-            ) : (
-              <span className="flex items-center">
-                <span className="mr-1">
-                  <EditIcon />
-                </span>
-                <span>edit asset</span>
-              </span>
+                type="button"
+                onClick={submit}
+              >
+                Save
+              </button>
             )}
-          </button>
-        </div>
+
+            <button
+              className="flex items-center rounded-md  bg-gray-cus py-2 px-6 capitalize tracking-wide  text-gray-300
+          "
+              type="button"
+              onClick={handleEdit}
+            >
+              {isEdit ? (
+                "cancel"
+              ) : (
+                <span className="flex items-center">
+                  <span className="mr-1">
+                    <EditIcon />
+                  </span>
+                  <span>edit asset</span>
+                </span>
+              )}
+            </button>
+          </div>
+        )}
       </section>
       <div className="md:absolute md:top-4 md:left-0">
         <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>

@@ -1,25 +1,29 @@
 import React, { useRef, useState } from "react";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import IconButton from "@mui/material/IconButton";
-import Switch from "@mui/material/Switch";
-import AssetMenuButton from "../Asset/AssetMenuButton";
+// import MoreVertIcon from "@mui/icons-material/MoreVert";
+// import IconButton from "@mui/material/IconButton";
+// import Switch from "@mui/material/Switch";
+// import AssetMenuButton from "../Asset/AssetMenuButton";
 import { useNavigate } from "react-router-dom";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { IoTrashOutline } from "react-icons/io5";
+import Fab from "@mui/material/Fab";
 const AssetList = ({
   item = [],
-  handleMenuOpen,
-  handleMenuClose,
+  // handleMenuOpen,
+  // handleMenuClose,
   handleStatus,
   handleEdit,
-  anchorEl,
+  // anchorEl,
   openDeleteModal,
   updateLoading,
   // handleSwitchAssets,
+  assetAccess,
 }) => {
   const { asset_name, asset_type, status, _id: id } = item;
   // let newStatus = status === "INACTIVE" ? false : true;
   // const [check, setCheck] = useState(newStatus);
   // console.log(newStatus);
-
+  // console.log(assetAccess);
   const tag = useRef();
   const navigate = useNavigate();
   // const handleSwitch = () => {
@@ -28,7 +32,7 @@ const AssetList = ({
   // };
   return (
     <div
-      className="my-3  flex w-full items-center rounded-md bg-white pl-8  pr-2 text-gray-500  "
+      className="my-3  flex w-full items-center rounded-md bg-white py-3 pl-8  pr-2 text-gray-500  "
       key={id}
     >
       <div className="flex w-[95%] items-center   justify-between  py-1  md:pr-3 ">
@@ -36,7 +40,26 @@ const AssetList = ({
           <h4>{asset_name}</h4>
           <p>{asset_type}</p>
         </div>
-        <div className="flex items-center justify-start">
+        <div className="flex items-center justify-start gap-4">
+          {assetAccess ? (
+            <div className="flex  items-center gap-4 text-center">
+              <Fab size="small" onClick={() => handleEdit(id)}>
+                <ModeEditOutlineIcon sx={{ color: "green" }} />
+              </Fab>
+              <Fab size="small" onClick={() => openDeleteModal(id)}>
+                <IoTrashOutline className="text-lg text-red-500" />
+              </Fab>
+              {/* <AssetMenuButton
+          anchorEl={anchorEl}
+          handleMenuClose={handleMenuClose}
+          handleEdit={handleEdit}
+          openDeleteModal={openDeleteModal}
+        /> */}
+            </div>
+          ) : (
+            <div></div>
+          )}
+
           <div className="mr-5">
             <p
               onClick={() => navigate(`${id}/details`, { state: { id } })}
@@ -54,18 +77,33 @@ const AssetList = ({
             }
             // inputProps={{ "aria-label": "controlled" }}
           /> */}
-          <span
-            type="button"
-            className={` cursor-pointer rounded-sm tracking-wider text-white ${
-              status === "ACTIVE"
-                ? "rounded-md bg-[#89CF4B] px-4 py-2 text-white"
-                : "rounded-md bg-[#EF4431] px-2 py-2 text-white"
-            }`}
-            onClick={() => handleStatus(status, id)}
-            disabled={updateLoading}
-          >
-            {status}
-          </span>
+          {assetAccess ? (
+            <span
+              type="button"
+              className={` cursor-pointer rounded-sm tracking-wider text-white ${
+                status === "ACTIVE"
+                  ? "rounded-md bg-[#89CF4B] px-4 py-2 text-white"
+                  : "rounded-md bg-[#EF4431] px-2 py-2 text-white"
+              }`}
+              onClick={() => handleStatus(status, id)}
+              disabled={updateLoading}
+            >
+              {status}
+            </span>
+          ) : (
+            <span
+              type="button"
+              className={` rounded-sm tracking-wider text-white ${
+                status === "ACTIVE"
+                  ? "rounded-md bg-[#89CF4B] px-4 py-2 text-white"
+                  : "rounded-md bg-[#EF4431] px-2 py-2 text-white"
+              }`}
+              // onClick={() => handleStatus(status, id)}
+              // disabled={updateLoading}
+            >
+              {status}
+            </span>
+          )}
 
           {/* <input 
             type="checkbox"
@@ -76,17 +114,6 @@ const AssetList = ({
             ref={tag}
           /> */}
         </div>
-      </div>
-      <div className="w-[2%] text-center">
-        <IconButton onClick={(e) => handleMenuOpen(e, id)}>
-          <MoreVertIcon />
-        </IconButton>
-        <AssetMenuButton
-          anchorEl={anchorEl}
-          handleMenuClose={handleMenuClose}
-          handleEdit={handleEdit}
-          openDeleteModal={openDeleteModal}
-        />
       </div>
     </div>
   );
