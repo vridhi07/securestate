@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+// import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
-import Switch from "@mui/material/Switch";
+// import Switch from "@mui/material/Switch";
 import AssetMenuButton from "../Asset/AssetMenuButton";
 import { useNavigate } from "react-router-dom";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { IoTrashOutline } from "react-icons/io5";
+import Fab from "@mui/material/Fab";
 const AssetList = ({
   item = [],
   // handleMenuOpen,
@@ -30,7 +31,7 @@ const AssetList = ({
   // };
   return (
     <div
-      className="my-3  flex w-full items-center rounded-md bg-white pl-8  pr-2 text-gray-500  "
+      className="my-3  flex w-full items-center rounded-md bg-white py-3 pl-8  pr-2 text-gray-500  "
       key={id}
     >
       <div className="flex w-[95%] items-center   justify-between  py-1  md:pr-3 ">
@@ -38,7 +39,21 @@ const AssetList = ({
           <h4>{asset_name}</h4>
           <p>{asset_type}</p>
         </div>
-        <div className="flex items-center justify-start">
+        <div className="flex items-center justify-start gap-4">
+          <div className="flex  items-center gap-4 text-center">
+            <Fab size="small" onClick={() => handleEdit(id)}>
+              <ModeEditOutlineIcon sx={{ color: "green" }} />
+            </Fab>
+            <Fab size="small" onClick={() => openDeleteModal(id)}>
+              <IoTrashOutline className="text-lg text-red-500" />
+            </Fab>
+            {/* <AssetMenuButton
+          anchorEl={anchorEl}
+          handleMenuClose={handleMenuClose}
+          handleEdit={handleEdit}
+          openDeleteModal={openDeleteModal}
+        /> */}
+          </div>
           <div className="mr-5">
             <p
               onClick={() => navigate(`${id}/details`, { state: { id } })}
@@ -78,20 +93,6 @@ const AssetList = ({
             ref={tag}
           /> */}
         </div>
-      </div>
-      <div className="flex  items-center text-center">
-        <IconButton color="success" onClick={() => handleEdit(id)}>
-          <ModeEditOutlineIcon />
-        </IconButton>
-        <IconButton color="error" onClick={() => openDeleteModal(id)}>
-          <IoTrashOutline />
-        </IconButton>
-        {/* <AssetMenuButton
-          anchorEl={anchorEl}
-          handleMenuClose={handleMenuClose}
-          handleEdit={handleEdit}
-          openDeleteModal={openDeleteModal}
-        /> */}
       </div>
     </div>
   );

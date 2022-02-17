@@ -9,12 +9,12 @@ export function* LoginSaga(action) {
     let url = `${process.env.REACT_APP_BASE_URL}user/login`;
 
     let response = yield call(axios.post, `${url}`, action.payload);
-    if (response && response.data?.status === 1) {
-      yield call(setToken, response.data.token);
+    if (response && response?.data?.status === 1) {
+      yield call(setToken, response?.data?.token);
       yield put(LoginSuccess("login success"));
     }
   } catch (error) {
     // console.log(error.response.data.message);
-    yield put(LoginError(error.response.data.message));
+    yield put(LoginError(error?.response?.data?.message));
   }
 }
