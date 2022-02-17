@@ -89,7 +89,7 @@ const AssetList = ({
               onClick={() => handleStatus(status, id)}
               disabled={updateLoading}
             >
-              {status}
+              {status === "inactive" ? "In-active" : status}
             </span>
           ) : (
             <span

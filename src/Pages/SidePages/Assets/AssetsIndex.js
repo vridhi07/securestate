@@ -3,7 +3,7 @@
 // import { makeStyles } from "@mui/styles";
 import Dialog from "@mui/material/Dialog";
 import AddIcon from "@mui/icons-material/Add";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Loader from "../../../Component/Common/PentestLoader";
@@ -118,7 +118,7 @@ const AssetsIndex = () => {
 
   //* Handle Status
   const handleStatus = (status, id) => {
-    let newStatus = status === "INACTIVE" ? "ACTIVE" : "INACTIVE";
+    let newStatus = status === "inactive" ? "active" : "inactive";
     const newData = {
       id,
       status: newStatus,
