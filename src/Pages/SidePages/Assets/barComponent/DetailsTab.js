@@ -214,13 +214,9 @@ const Details = () => {
                   value={assetForm?.status}
                   className="bg-white"
                 >
-                  {Status.map((item) => {
-                    return (
-                      <MenuItem value={item} key={item}>
-                        {item}
-                      </MenuItem>
-                    );
-                  })}
+                  <MenuItem value={"active"}>ACTIVE</MenuItem>
+
+                  <MenuItem value={"inactive"}>INACTIVE</MenuItem>
                 </Select>
               </FormControl>
             </div>

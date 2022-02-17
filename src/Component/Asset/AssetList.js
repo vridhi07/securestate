@@ -20,6 +20,7 @@ const AssetList = ({
   assetAccess,
 }) => {
   const { asset_name, asset_type, status, _id: id } = item;
+  // console.log(item);
   // let newStatus = status === "INACTIVE" ? false : true;
   // const [check, setCheck] = useState(newStatus);
   // console.log(newStatus);
@@ -80,8 +81,8 @@ const AssetList = ({
           {assetAccess ? (
             <span
               type="button"
-              className={` cursor-pointer rounded-sm tracking-wider text-white ${
-                status === "ACTIVE"
+              className={` cursor-pointer rounded-sm capitalize tracking-wider text-white ${
+                status === "active"
                   ? "rounded-md bg-[#89CF4B] px-4 py-2 text-white"
                   : "rounded-md bg-[#EF4431] px-2 py-2 text-white"
               }`}
@@ -94,7 +95,7 @@ const AssetList = ({
             <span
               type="button"
               className={` rounded-sm tracking-wider text-white ${
-                status === "ACTIVE"
+                status === "active"
                   ? "rounded-md bg-[#89CF4B] px-4 py-2 text-white"
                   : "rounded-md bg-[#EF4431] px-2 py-2 text-white"
               }`}
