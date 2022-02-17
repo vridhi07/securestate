@@ -48,7 +48,7 @@ export default function NewCustomerForm({
                   value={company_name}
                   onChange={handleCustomerForm}
                   variant="outlined"
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   inputProps={{ maxLength: 50 }}
                 />
               </div>
@@ -60,7 +60,7 @@ export default function NewCustomerForm({
                   value={location}
                   onChange={handleCustomerForm}
                   variant="outlined"
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   inputProps={{ maxLength: 50 }}
                 />
               </div>
@@ -74,7 +74,7 @@ export default function NewCustomerForm({
                   value={website}
                   onChange={handleCustomerForm}
                   variant="outlined"
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   inputProps={{ maxLength: 50 }}
                 />
               </div>
@@ -86,7 +86,7 @@ export default function NewCustomerForm({
                   value={main_poc}
                   onChange={handleCustomerForm}
                   variant="outlined"
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   inputProps={{ maxLength: 50 }}
                 />
               </div>
@@ -100,7 +100,7 @@ export default function NewCustomerForm({
                   value={main_poc_email}
                   onChange={handleCustomerForm}
                   variant="outlined"
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   type={"email"}
                   inputProps={{ maxLength: 50 }}
                 />
@@ -113,7 +113,7 @@ export default function NewCustomerForm({
                   value={main_poc_phone}
                   onChange={handleCustomerForm}
                   variant="outlined"
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, backgroundColor: "white" }}
                   type={"tel"}
                 />
               </div>
