@@ -48,9 +48,9 @@ export default function CustomizedAccordions({
   handleChange,
   expanded,
   users = [],
-  anchorEl,
-  handleMenuOpen,
-  handleMenuClose,
+  // anchorEl,
+  // handleMenuOpen,
+  // handleMenuClose,
   groupIdRef,
   handleOpenAddMoreUserToGroup,
   openDeleteModal,
@@ -60,7 +60,7 @@ export default function CustomizedAccordions({
   // const id = useRef(null);
 
   return (
-    <div className="my-3 flex items-center  relative">
+    <div className="relative my-3 flex  items-center">
       <Accordion
         expanded={expanded === `panel${index}`}
         onChange={handleChange(`panel${index}`)}
@@ -86,9 +86,9 @@ export default function CustomizedAccordions({
                 <SingleGroupCLient
                   key={item._id}
                   groupUser={item}
-                  anchorEl={anchorEl}
-                  handleMenuOpen={handleMenuOpen}
-                  handleMenuClose={handleMenuClose}
+                  // anchorEl={anchorEl}
+                  // handleMenuOpen={handleMenuOpen}
+                  // handleMenuClose={handleMenuClose}
                   openDeleteModal={openDeleteModal}
                 />
               );
@@ -97,9 +97,9 @@ export default function CustomizedAccordions({
       </Accordion>
       <div>
         <div className="absolute top-2 right-3  ">
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <button
-              className="px-3 bg-orange-cus-1 text-white py-2 rounded-md"
+              className="rounded-md bg-orange-cus-1 px-3 py-2 text-white"
               onClick={() =>
                 handleOpenAddMoreUserToGroup(groupIdRef, group_name)
               }
@@ -107,7 +107,7 @@ export default function CustomizedAccordions({
               Add User
             </button>
             <button
-              className="px-3 bg-red-400 text-white py-2 rounded-md"
+              className="rounded-md bg-red-400 px-3 py-2 text-white"
               onClick={() => handleDeleteGroup(groupIdRef)}
             >
               Delete Group
