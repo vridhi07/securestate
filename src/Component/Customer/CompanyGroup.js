@@ -48,7 +48,7 @@ const CompanyGroup = () => {
   const [search, setSearch] = useState("");
   let [groupUsers, setGroupUsers] = useState([]);
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  // const [anchorEl, setAnchorEl] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModal] = useState(false);
   const [groupId, setGroupId] = useState(null);
@@ -103,9 +103,10 @@ const CompanyGroup = () => {
     closeAddMoreUserToGroup();
   };
 
-  const openDeleteModal = () => {
+  const openDeleteModal = (id) => {
     setIsDeleteModal(true);
-    handleMenuClose();
+    setSelectedId(id);
+    // handleMenuClose();
   };
 
   const closeDeleteModal = () => {
@@ -124,15 +125,15 @@ const CompanyGroup = () => {
     closeDeleteModal();
   };
 
-  const handleMenuOpen = (e, id) => {
-    // consol`e.log(id);
-    setAnchorEl(e.currentTarget);
-    setSelectedId(id);
-  };
+  // const handleMenuOpen = (e, id) => {
+  //   // consol`e.log(id);
+  //   setAnchorEl(e.currentTarget);
+  //   setSelectedId(id);
+  // };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleMenuClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -431,10 +432,10 @@ const CompanyGroup = () => {
                       expanded={expanded}
                       index={index}
                       users={item}
-                      anchorEl={anchorEl}
-                      handleMenuOpen={handleMenuOpen}
+                      // anchorEl={anchorEl}
+                      // handleMenuOpen={handleMenuOpen}
                       openDeleteModal={openDeleteModal}
-                      handleMenuClose={handleMenuClose}
+                      // handleMenuClose={handleMenuClose}
                       groupIdRef={item._id}
                       group_name={item.group_name}
                       handleOpenAddMoreUserToGroup={

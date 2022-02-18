@@ -2,42 +2,47 @@ import React from "react";
 import dummyProfile from "../../constantData/images/blank-profile-picture.png";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteMenu from "./DeleteMenu";
+import { IoTrashOutline } from "react-icons/io5";
+import IconButton from "@mui/material/IconButton";
 const SingleGroupCLient = ({
   groupUser,
-  anchorEl,
-  handleMenuOpen,
-  handleMenuClose,
+  // anchorEl,
+  // handleMenuOpen,
+  // handleMenuClose,
   openDeleteModal,
 }) => {
   // console.log(groupUser);
   return (
-    <div className="w-full flex flex-col  mb-3">
-      <div className="flex items-center w-full ">
-        <div className="w-[5rem] h-[5rem] border border-gray-700">
+    <div className="mb-3 flex w-full  flex-col">
+      <div className="flex w-full items-center ">
+        <div className="h-[5rem] w-[5rem] border border-gray-700">
           <img
             src={dummyProfile}
             alt="profile"
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
           />
         </div>
-        <div className="w-full flex justify-between items-start border border-gray-600 ml-3 h-20 rounded-md px-3 py-1">
+        <div className="ml-3 flex h-20 w-full items-start justify-between rounded-md border border-gray-600 px-3 py-1">
           <div>
             <h4>{groupUser.user_name}</h4>
             <h4>{groupUser.email}</h4>
             <h4>{groupUser.phone}</h4>
           </div>
           <div>
-            <button
-              className="mt-5"
-              onClick={(e) => handleMenuOpen(e, groupUser._id)}
+            {/* <button className="mt-5">
+              <IoTrashOutline />
+            </button> */}
+            <IconButton
+              color="error"
+              onClick={(e) => openDeleteModal(groupUser._id)}
             >
-              <MoreVertIcon />
-            </button>
-            <DeleteMenu
+              <IoTrashOutline />
+            </IconButton>
+            {/* <DeleteMenu
               anchorEl={anchorEl}
               handleMenuClose={handleMenuClose}
               openDeleteModal={openDeleteModal}
-            />
+            /> */}
           </div>
         </div>
       </div>

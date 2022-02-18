@@ -264,7 +264,7 @@ const AssetsIndex = () => {
           <FilterOption />
         </div>
       </div>
-      <section className="mx-auto mt-8 mb-4 flex  w-95.5 flex-col">
+      <section className="  mt-8 mb-4  w-full ">
         <div className="flex w-full items-center justify-between ">
           <h4 className="text-4xl tracking-wide  text-orange-cus-1">Assets</h4>
           <div className="flex flex-col items-start justify-end">

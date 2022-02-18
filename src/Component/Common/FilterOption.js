@@ -28,7 +28,7 @@ const FilterOption = () => {
   let Role = getFilterOPtion(userDetails?.role);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex w-full justify-center">
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Select Company</InputLabel>
         <Select

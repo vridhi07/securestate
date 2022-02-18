@@ -46,7 +46,12 @@ export default function MultipleSelectCheckmarks({
           value={personName}
           onChange={handleNameChange}
           input={<OutlinedInput label="Select User" />}
-          renderValue={(selected) => selected.join(", ")}
+          renderValue={(selected) =>
+            newUser
+              .filter((item) => selected.includes(item._id))
+              .map((record) => record.name)
+              .join(", ")
+          }
           MenuProps={MenuProps}
           required
         >
@@ -54,7 +59,7 @@ export default function MultipleSelectCheckmarks({
             newUser.map((item) => (
               <MenuItem
                 key={item._id}
-                value={item.name}
+                value={item._id}
                 onClick={() => getDetails(item._id)}
               >
                 <Checkbox checked={selectedNames?.indexOf(item._id) > -1} />

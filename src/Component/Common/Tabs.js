@@ -13,14 +13,14 @@ const CustomTabs = () => {
   }, [pathname]);
 
   return (
-    <div className="flex flex-col items-center mt-20">
-      <div className="flex flex-row cursor-pointer rounded-lg">
+    <div className="mt-20 flex flex-col items-center">
+      <div className="flex cursor-pointer flex-row rounded-lg bg-gray-300">
         <div
           onClick={() => navigate(`overview`, { state: { id } })}
-          className={`px-4 py-2 text-sm  rounded-tl-lg rounded-bl-lg  ${
+          className={`rounded-tl-lg rounded-bl-lg  px-4 py-2  text-sm ${
             path === "overview"
               ? "bg-orange-cus-1 text-white"
-              : "bg-gray-100 text-orange-cus-1"
+              : " text-orange-cus-1"
           }`}
         >
           Overview
@@ -30,7 +30,7 @@ const CustomTabs = () => {
           className={`px-4 py-2 text-sm ${
             path === "scope"
               ? "bg-orange-cus-1 text-white"
-              : "bg-gray-100 text-orange-cus-1"
+              : " text-orange-cus-1"
           }`}
         >
           Scope
@@ -40,23 +40,23 @@ const CustomTabs = () => {
           className={`px-4 py-2 text-sm ${
             path === "findings"
               ? "bg-orange-cus-1 text-white"
-              : "bg-gray-100 text-orange-cus-1"
+              : " text-orange-cus-1"
           }`}
         >
           Findings
         </div>
         <div
           onClick={() => navigate(`chat`, { state: { id } })}
-          className={`px-4 py-2 text-sm rounded-tr-lg rounded-br-lg  ${
+          className={`rounded-tr-lg rounded-br-lg px-4 py-2 text-sm  ${
             path === "chat"
               ? "bg-orange-cus-1 text-white"
-              : "bg-gray-100 text-orange-cus-1"
+              : " text-orange-cus-1"
           }`}
         >
           Chat
         </div>
       </div>
-      <div className="h-0.5 w-96 mx-auto bg-gray-cus-6 mt-6"></div>
+      <div className="mx-auto mt-6 h-0.5 w-96 bg-gray-cus-6"></div>
     </div>
   );
 };
