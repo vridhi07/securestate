@@ -143,7 +143,7 @@ const Invoices = () => {
 
   return (
     <div>
-      <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
+      <div className="mx-auto w-[95%] max-w-6xl rounded-lg bg-white py-10 pl-7 shadow-sm ">
         <div className="max-w-lg">
           <FilterOption />
         </div>
@@ -160,7 +160,7 @@ const Invoices = () => {
           </button>
         ) : null}
       </div>
-      <div className="px-[5%]">
+      <div className=" mx-auto w-[95%] max-w-5xl">
         <InvoiceTable
           invoiceData={invoiceData}
           page={page}
