@@ -434,7 +434,7 @@ const CompanyGroup = () => {
                       users={item}
                       // anchorEl={anchorEl}
                       // handleMenuOpen={handleMenuOpen}
-                      // openDeleteModal={openDeleteModal}
+                      openDeleteModal={openDeleteModal}
                       // handleMenuClose={handleMenuClose}
                       groupIdRef={item._id}
                       group_name={item.group_name}
