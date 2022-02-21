@@ -118,7 +118,7 @@ const Subscription = () => {
           </h2>
         </section>
         <section className="flex items-center">
-          <div className="flex h-11 w-52 items-center  justify-start rounded-3xl   bg-white px-1">
+          <div className="flex h-11 w-60 items-center  justify-start rounded-lg bg-white pr-1 pl-4">
             <SearchIcon />
             <input
               type="text"

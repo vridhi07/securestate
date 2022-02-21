@@ -348,7 +348,7 @@ const CompanyGroup = () => {
           </div>
 
           <div>
-            <div className="grid grid-cols-12 gap-4">
+            <div className="mt-3 grid grid-cols-12 gap-4">
               <div className=" col-span-4">
                 <div className=" flex w-full flex-col rounded-md">
                   <label htmlFor="main_poc">Main POC</label>
@@ -424,7 +424,7 @@ const CompanyGroup = () => {
             </h2>
           </header>
           <div className="flex items-center">
-            <div className="flex h-11 w-52 items-center  justify-start rounded-3xl    bg-white px-1">
+            <div className="flex h-11 w-60 items-center  justify-start rounded-lg    bg-white pr-1 pl-4">
               <SearchIcon />
               <input
                 type="text"
@@ -448,7 +448,7 @@ const CompanyGroup = () => {
       {/* Group */}
       <div>
         {groupData.length === 0 ? (
-          <div> No Group </div>
+          <div className="text-center "> No Group </div>
         ) : (
           groupData.map((item, index) => {
             return (
