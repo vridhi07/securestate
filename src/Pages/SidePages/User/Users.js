@@ -134,16 +134,12 @@ const Users = () => {
       <div className="text-center">{isError && <UserAlert />}</div>
 
       <section className="mt-8  flex items-center justify-between md:mr-28 md:justify-end">
-        <form className="grid items-center justify-center">
-          <div
-            className="flex items-center justify-end rounded-3xl border 
-          border-gray-600 bg-white py-0.5 pr-2
-          "
-          >
-            <SearchIcon sx={{ ml: "0.5rem", mt: "0.2rem" }} />
+        <form className="">
+          <div className="flex h-11 w-60 items-center justify-start rounded-lg bg-white pr-1 pl-4">
+            <SearchIcon />
             <input
               type="search"
-              className="border-0 bg-clip-padding py-1 px-1 placeholder:text-gray-600 focus:bg-none focus:outline-none  focus:ring-0"
+              className="w-full rounded-3xl border-0  py-1 pl-2 focus:bg-none focus:outline-none focus:ring-0"
               placeholder="Search"
               value={profileSearch}
               onChange={(e) => setProfileSearch(e.target.value)}
@@ -153,7 +149,7 @@ const Users = () => {
 
         <button
           onClick={handleClickOpen}
-          className=" rounded-md bg-orange-cus-1 px-7 py-2 tracking-wider text-white md:ml-4 "
+          className=" rounded-md bg-orange-cus-1 px-7  py-2 tracking-wider text-white transition-all ease-in-out hover:bg-orange-600 md:ml-4 "
           disabled={isLoading}
         >
           New User

@@ -54,5 +54,5 @@ body {
   border: none
 } */
 .hover {
-  @apply hover:bg-zinc-700;
+  @apply transition-all hover:bg-zinc-500;
 }
