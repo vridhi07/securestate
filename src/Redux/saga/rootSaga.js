@@ -83,6 +83,7 @@ import {
 import {
   AddSubscriptionSaga,
   getSubscriptionSaga,
+  DeleteSubscriptionSaga,
 } from "./customer/subsScriptionSaga";
 
 import {
@@ -174,6 +175,7 @@ function* watchAllSaga() {
   // *Subscritption
   yield takeLatest(actions.addSubscriptionRequest, AddSubscriptionSaga);
   yield takeLatest(actions.getSubscriptionListRequest, getSubscriptionSaga);
+  yield takeLatest(actions.deleteSubscriptionRequest, DeleteSubscriptionSaga);
   // !Wallet
   yield takeLatest(actions.allPentestWithCompanyRequest, AllPentestWithCompany);
   yield takeLatest(actions.allHackerWithCompanyRequest, allHackerWithCompany);

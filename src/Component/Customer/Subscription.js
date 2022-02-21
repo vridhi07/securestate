@@ -45,8 +45,14 @@ const Subscription = () => {
   };
 
   const handleDelete = () => {
-    console.log("deleted");
-    console.log(selectedId);
+    // console.log("deleted");
+    // console.log(selectedId);
+    dispatch(
+      action.deleteSubscriptionRequest({
+        company_id,
+        subscriptionId: selectedId,
+      })
+    );
     closeDeleteModal();
   };
 

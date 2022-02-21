@@ -16,43 +16,38 @@ export default function AddUserToGroup({
   return (
     <div>
       <Dialog open={addMoreUserToGroup}>
-        <div className="py-8 px-5 relative">
-          <button
-            className="absolute top-3 right-3"
-            onClick={closeAddMoreUserToGroup}
-          >
-            <CloseIcon />
-          </button>
-          <div className="flex flex-col justify-center items-center">
-            <header className="px-20 text-center">
-              <h4 className="text-lg font-semibold capitalize">
-                Add User to Group
-              </h4>
-              <h4 className="text-lg font-bold capitalize">{groupName}</h4>
-            </header>
-            <div>
-              <MulitSelect
-                company_id={company_id}
-                personName={personName}
-                handleNameChange={handleNameChange}
-                getDetails={getDetails}
-                selectedNames={selectedNames}
-              />
-            </div>
-          </div>
-          <section className="mx-6 flex justify-center items-center">
-            {/* <div>
+        <div className="bg-primary-clr">
+          <header className="flex items-center justify-between bg-orange-cus-1 px-4 py-3 text-white ">
+            <h4 className="text-lg font-semibold capitalize">
+              Add User to Group {groupName}
+            </h4>
+
+            <button onClick={closeAddMoreUserToGroup}>
+              <CloseIcon />
+            </button>
+          </header>
+          <div className="px-8 py-4">
+            <MulitSelect
+              company_id={company_id}
+              personName={personName}
+              handleNameChange={handleNameChange}
+              getDetails={getDetails}
+              selectedNames={selectedNames}
+            />
+            <section className="mx-6 flex items-center justify-center">
+              {/* <div>
               <button>Add New User</button>
             </div>
             <div> */}
-            <button
-              className="bg-orange-cus-1 text-center text-white  w-full mt-4 py-3 "
-              onClick={handleAddMoreUserToGroup}
-            >
-              Add user
-            </button>
-            {/* </div> */}
-          </section>
+              <button
+                className="mt-4 w-full bg-orange-cus-1  py-3 text-center text-white "
+                onClick={handleAddMoreUserToGroup}
+              >
+                Add user
+              </button>
+              {/* </div> */}
+            </section>
+          </div>
         </div>
       </Dialog>
     </div>
