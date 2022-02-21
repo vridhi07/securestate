@@ -287,8 +287,20 @@ export default function SBOMTab() {
                     count={sbomDetails?.totalPage}
                     variant="outlined"
                     onChange={handleSboMPageNumber}
-                    color="primary"
+                    // color="primary"
                     page={SboMPageNumber}
+                    sx={{
+                      "& .Mui-selected": {
+                        backgroundColor: "#F27931 !important",
+                        color: "white",
+                        border: "none",
+                      },
+                      "& .MuiPaginationItem-page ": {
+                        bgcolor: "#B4AFAF",
+                        color: "white",
+                        border: "none",
+                      },
+                    }}
                   />
                 </Stack>
               </div>

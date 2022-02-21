@@ -326,6 +326,11 @@ const AssetsIndex = () => {
                       color: "white",
                       border: "none",
                     },
+                    "& .MuiPaginationItem-page ": {
+                      bgcolor: "#B4AFAF",
+                      color: "white",
+                      border: "none",
+                    },
                   }}
                   page={assetPageNumber}
                 />

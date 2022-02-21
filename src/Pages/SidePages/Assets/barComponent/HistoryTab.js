@@ -141,8 +141,20 @@ const HistoryTab = () => {
                     count={historyDetails?.total}
                     variant="outlined"
                     onChange={handleHistoryPageNumber}
-                    color="primary"
+                    // color="primary"
                     page={historyPageNumber}
+                    sx={{
+                      "& .Mui-selected": {
+                        backgroundColor: "#F27931 !important",
+                        color: "white",
+                        border: "none",
+                      },
+                      "& .MuiPaginationItem-page ": {
+                        bgcolor: "#B4AFAF",
+                        color: "white",
+                        border: "none",
+                      },
+                    }}
                   />
                 </Stack>
               </div>
