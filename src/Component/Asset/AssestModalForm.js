@@ -140,6 +140,7 @@ export default function AssetModal({
                   bgcolor: "white",
                   "& .MuiOutlinedInput-root": {
                     border: "none",
+                    outline: "none",
                   },
                 }}
               >
@@ -173,7 +174,7 @@ export default function AssetModal({
           </button>
           <button
             type="button"
-            className="rounded-md bg-slate-200 px-4 py-2 text-gray-500"
+            className="hover rounded-md bg-primary-btn px-4 py-2 text-white"
             onClick={handleClose}
           >
             Cancel
