@@ -88,7 +88,7 @@ const Details = () => {
           <div className="flex items-center md:absolute md:top-4 md:right-0">
             {isEdit && (
               <button
-                className="mr-3 rounded-sm  bg-gray-cus py-2 px-8 capitalize tracking-wide text-gray-300
+                className="hover hover  mr-3 rounded-sm bg-gray-cus py-2 px-8 capitalize tracking-wide text-white
               
           "
                 type="button"
@@ -99,7 +99,7 @@ const Details = () => {
             )}
 
             <button
-              className="flex items-center rounded-md  bg-gray-cus py-2 px-6 capitalize tracking-wide  text-gray-300
+              className="hover hover flex  items-center rounded-md bg-gray-cus py-2 px-6  capitalize tracking-wide text-white
           "
               type="button"
               onClick={handleEdit}
@@ -107,7 +107,7 @@ const Details = () => {
               {isEdit ? (
                 "cancel"
               ) : (
-                <span className="flex items-center">
+                <span className="flex items-center text-white">
                   <span className="mr-1">
                     <EditIcon />
                   </span>

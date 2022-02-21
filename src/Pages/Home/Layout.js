@@ -30,7 +30,7 @@ import dummyProfilePic from "../../constantData/images/dummyProfilePic.jpg";
 import IsOnlinePage from "../../Component/Common/IsOnline";
 import * as Roles from "../../constantData/Roles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-const drawerWidth = 240;
+const drawerWidth = 270;
 // console.log(getRole());
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -311,7 +311,7 @@ export default function MiniDrawer() {
               <NavLink
                 className={`flex items-center  justify-center ${
                   item.path === newPathname && "rounded-md bg-[#FCE4D7] "
-                } ${open && "mx-3"}`}
+                } ${open && "mx-3"} `}
                 key={item.path}
                 to={item.path}
                 // onClick={()=>index}
@@ -328,6 +328,11 @@ export default function MiniDrawer() {
                     }}
                   />
                 </ListItem>
+                {item.path === newPathname ? (
+                  <span className="-mr-5 h-12 w-2 bg-[#FCE4D7]"></span>
+                ) : (
+                  <span></span>
+                )}
               </NavLink>
             ))}
         </List>

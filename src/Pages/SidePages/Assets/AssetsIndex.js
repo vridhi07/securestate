@@ -271,7 +271,7 @@ const AssetsIndex = () => {
             {assetAccess && (
               <button
                 onClick={handleClickOpen}
-                className={`rounded-md bg-gray-cus  py-2 px-6 capitalize tracking-wide text-gray-300`}
+                className={`hover rounded-md  bg-gray-cus py-2 px-6 capitalize tracking-wide text-white`}
                 disabled={isLoading}
               >
                 <span>

@@ -146,7 +146,7 @@ export default function SBOMTab() {
       {assetAccess && (
         <section className="mb-3 flex items-center justify-end md:absolute md:top-4 md:right-0">
           <button
-            className=" rounded-md bg-gray-cus  py-2 px-5 capitalize tracking-wide text-gray-300
+            className=" hover rounded-md bg-gray-cus  py-2 px-5 capitalize tracking-wide text-white
          "
             onClick={openModal}
             disabled={addLoading}
