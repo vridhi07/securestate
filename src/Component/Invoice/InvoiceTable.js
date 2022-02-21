@@ -57,7 +57,9 @@ export default function InvoiceTable({
   handleChangePage,
   handleChangeRowsPerPage,
   company_id,
+  totalPage,
 }) {
+  // console.log(totalPage);
   const dispatch = useDispatch();
   //! State ALl the Delete And Edit
   const [selectedId, setSelectedId] = useState(null);
@@ -157,15 +159,18 @@ export default function InvoiceTable({
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        // rowsPerPageOptions={[5, 10, 15]}
-        component="div"
-        count={100}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      {totalPage && (
+        <TablePagination
+          // rowsPerPageOptions={[5, 10, 15]}
+          component="div"
+          count={totalPage}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      )}
+
       <DeleteModal
         isDeleteModalOpen={isDeleteModalOpen}
         closeDeleteModal={closeDeleteModal}
