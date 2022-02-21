@@ -39,7 +39,11 @@ export default function UserAdd({
           </DialogTitle>
           <DialogContent sx={{ width: 400 }}> */}
 
-          <form onSubmit={handleSubmit} className="bg-primary-clr">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-primary-clr"
+            autoComplete="off"
+          >
             <section className="flex items-center justify-between bg-orange-cus-1 py-3 px-3 text-white">
               <h4 className="text-xl font-bold tracking-wider ">Add user</h4>
               <button onClick={handleClose} className="absolute top-3 right-3">
