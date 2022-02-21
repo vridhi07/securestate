@@ -157,13 +157,13 @@ export default function SBOMModalForm({
             <div className="mt-5 flex items-center justify-between pb-4">
               <button
                 type="submit"
-                className="rounded-md bg-[#606060] px-6 py-2 tracking-wider text-white"
+                className="hover rounded-md bg-primary-btn px-6 py-2 tracking-wider text-white"
               >
                 Add
               </button>
               <button
                 type="button"
-                className="rounded-md bg-[#606060] px-6 py-2 tracking-wider text-white"
+                className="hover rounded-md bg-primary-btn px-6 py-2 tracking-wider text-white"
                 onClick={closeModal}
               >
                 cancel

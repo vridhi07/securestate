@@ -152,7 +152,7 @@ const Invoices = () => {
         <h2 className="text-[1.5rem]">Invoices</h2>
         {userRole === roles.admin || userRole === roles.superAdmin ? (
           <button
-            className="rounded-md bg-orange-cus-1 px-7 py-2 text-white"
+            className="rounded-md bg-orange-cus-1 px-7 py-2 text-white transition-all hover:bg-orange-600"
             onClick={handleClickOpen}
             disabled={isLoading}
           >

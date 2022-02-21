@@ -160,7 +160,7 @@ const Profile = () => {
               {isEdit ? (
                 <div></div>
               ) : (
-                <div className="mr-[5%] cursor-pointer rounded-md bg-[#565656] px-5 py-2 text-white ">
+                <div className=" mr-[5%] cursor-pointer rounded-md bg-[#565656] px-5 py-2 text-white ">
                   <span className="flex items-center gap-2">
                     <span className="flex items-center justify-center rounded-full bg-[#737373] py-[0.25rem] px-[0.25rem]">
                       <ModeEditIcon
@@ -189,7 +189,7 @@ const Profile = () => {
               {isEdit ? (
                 <input
                   type="text"
-                  className=" w-[300px] px-3  pt-2 focus:outline-none "
+                  className=" w-[300px] px-3   pt-2 focus:outline-none "
                   value={profileForm.name}
                   name="name"
                   id="name"

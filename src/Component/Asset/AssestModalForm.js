@@ -25,7 +25,7 @@ export default function AssetModal({
   return (
     <form onSubmit={handleSubmitAsset}>
       <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
-        <h2 className="rounded-md text-center text-2xl font-bold tracking-wider">
+        <h2 className="text-center text-2xl font-bold tracking-wider">
           {isEdit ? "Edit Asset" : "New Asset"}
         </h2>
         <button type="button" onClick={handleClose}>
@@ -157,7 +157,7 @@ export default function AssetModal({
         <div className="mt-3 flex items-center justify-between">
           <button
             type="submit"
-            className="rounded-md bg-gray-cus-5 px-14 py-2 tracking-wide text-white"
+            className="hover rounded-md bg-primary-btn px-14 py-2 tracking-wide text-white"
           >
             {isEdit ? "Save" : "Add"}
           </button>
