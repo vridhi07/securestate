@@ -30,7 +30,7 @@ import dummyProfilePic from "../../constantData/images/dummyProfilePic.jpg";
 import IsOnlinePage from "../../Component/Common/IsOnline";
 import * as Roles from "../../constantData/Roles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-const drawerWidth = 270;
+const drawerWidth = 240;
 // console.log(getRole());
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -317,7 +317,12 @@ export default function MiniDrawer() {
                 // onClick={()=>index}
               >
                 <ListItem button>
-                  <ListItemIcon>
+                  <ListItemIcon
+                    sx={{
+                      ...(item.path === newPathname && { pl: 0 }),
+                      ...(item.path !== newPathname && { pl: 1 }),
+                    }}
+                  >
                     {item.path === newPathname ? item.icon2 : item.icon}
                   </ListItemIcon>
                   <ListItemText
