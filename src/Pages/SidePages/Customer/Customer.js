@@ -75,7 +75,7 @@ const Customer = () => {
   return (
     <div className="min-h-screen">
       <div className=" relative   mt-4  w-full rounded-lg bg-white py-10 ">
-        <div className=" max-w-lg pl-7">
+        <div className=" max-w-3xl pl-7">
           <FilterOption />
         </div>
         {access && (
@@ -91,7 +91,7 @@ const Customer = () => {
       </div>
 
       {/* <MultipleSelectChip /> */}
-      <div className="mt-6  mb-6 h-[759px] lg:h-[392px]">
+      <div>
         <CompanyGroup />
       </div>
 

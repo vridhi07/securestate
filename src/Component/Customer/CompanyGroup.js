@@ -169,9 +169,10 @@ const CompanyGroup = () => {
 
   useEffect(() => {
     if (isCompanyDetailsEdit) {
-      const div = focusRef.current;
-      const input = div.children[1].children[0];
+      const input = focusRef.current;
+      // const input = div.children[1].children[0];
       input.focus();
+      // console.log(div);
     }
   }, [isCompanyDetailsEdit]);
 
@@ -277,129 +278,153 @@ const CompanyGroup = () => {
   }
   // console.log(groupData);
   return (
-    <div className=" grid h-20 grid-cols-10 gap-y-[300%] gap-x-4">
+    <div className="mt-2">
       {/* Company Info */}
-      <div className=" col-span-10 lg:col-span-4 lg:mt-[3.8rem]">
-        <div className="grid h-32 grid-cols-7">
-          <div className="col-span-6 ">
-            <form
-              className="py-2 px-4 pr-8"
-              onSubmit={(e) => handleUpdateCompanyDetails(e)}
-            >
-              <div className="flex flex-col">
-                <TextField
+
+      <div className="my-8 mx-auto w-95.5 max-w-5xl">
+        <div className=" flex w-full  justify-end">
+          <button
+            onClick={handleCompanyDetailsEdit}
+            className=" hover rounded-md bg-primary-btn px-3 py-2 text-white md:mr-8 "
+          >
+            <EditIcon />
+            Edit Details
+          </button>
+        </div>
+        <form
+          className="py-2 px-4 pr-8 text-[#737275]"
+          // onSubmit={(e) => handleUpdateCompanyDetails(e)}
+        >
+          <div className="grid grid-cols-12 gap-4">
+            <div className="col-span-4">
+              <div className=" flex w-full flex-col rounded-md">
+                <label htmlFor="company_name">Company Name</label>
+                <input
                   type="text"
-                  label="Company Name"
+                  // label="Company Name"
                   name="company_name"
+                  id="company_name"
                   value={CompanyInfo.company_name}
                   onChange={handleCompanyInfo}
                   className="rounded-md border border-gray-600 px-2 py-1 outline-none"
-                  inputProps={{
-                    readOnly: isCompanyDetailsEdit ? false : true,
-                  }}
                   ref={focusRef}
-                  sx={{ mb: 2, backgroundColor: "white" }}
-                  size="small"
+                  readOnly={isCompanyDetailsEdit ? false : true}
+                  className="rounded-md px-4 py-3 focus:outline-none"
                 />
-                <TextField
+              </div>
+            </div>
+            <div className="col-span-4">
+              <div className=" flex w-full flex-col rounded-md">
+                <label htmlFor="location">Location</label>
+                <input
                   type="text"
-                  label="Location"
+                  // label="Location"
                   name="location"
+                  id="location"
                   value={CompanyInfo.location}
                   onChange={handleCompanyInfo}
                   className="rounded-md border border-gray-600 px-2 py-1 outline-none"
-                  inputProps={{
-                    readOnly: isCompanyDetailsEdit ? false : true,
-                  }}
-                  sx={{ mb: 2, backgroundColor: "white" }}
-                  size="small"
+                  readOnly={isCompanyDetailsEdit ? false : true}
+                  className="rounded-md px-4 py-3 focus:outline-none"
                 />
-                <TextField
+              </div>
+            </div>
+            <div className="col-span-4">
+              <div className=" flex w-full flex-col ">
+                <label htmlFor="website">Website</label>
+                <input
                   type="text"
                   label="Website"
                   name="website"
+                  id="website"
                   value={CompanyInfo.website}
                   onChange={handleCompanyInfo}
                   className="rounded-md border border-gray-600 px-2 py-1 outline-none"
-                  inputProps={{
-                    readOnly: isCompanyDetailsEdit ? false : true,
-                  }}
-                  sx={{ mb: 2, backgroundColor: "white" }}
-                  size="small"
-                />
-                <TextField
-                  type="text"
-                  label="Main POC"
-                  name="main_poc"
-                  value={CompanyInfo.main_poc}
-                  onChange={handleCompanyInfo}
-                  className="rounded-md border border-gray-600 px-2 py-1 outline-none"
-                  inputProps={{
-                    readOnly: isCompanyDetailsEdit ? false : true,
-                  }}
-                  sx={{ mb: 2, backgroundColor: "white" }}
-                  size="small"
-                />
-                <TextField
-                  type="email"
-                  label="Main POC Email"
-                  name="main_poc_email"
-                  value={CompanyInfo.main_poc_email}
-                  onChange={handleCompanyInfo}
-                  className="rounded-md border border-gray-600 px-2 py-1 outline-none"
-                  inputProps={{
-                    readOnly: isCompanyDetailsEdit ? false : true,
-                  }}
-                  sx={{ mb: 2, backgroundColor: "white" }}
-                  size="small"
-                />
-                <TextField
-                  type="tel"
-                  label="Main POC Phone"
-                  name="main_poc_phone"
-                  value={CompanyInfo.main_poc_phone}
-                  onChange={handleCompanyInfo}
-                  className="rounded-md border border-gray-600 px-2 py-1 outline-none"
-                  inputProps={{
-                    readOnly: isCompanyDetailsEdit ? false : true,
-                  }}
-                  sx={{ mb: 2, backgroundColor: "white" }}
-                  size="small"
+                  readOnly={isCompanyDetailsEdit ? false : true}
+                  className="rounded-md px-4 py-3 focus:outline-none"
                 />
               </div>
-              {isCompanyDetailsEdit && (
-                <div className="mt-3">
-                  <button
-                    className="mr-3 rounded-md bg-slate-400 px-4 py-2 text-gray-700"
-                    type="submit"
-                  >
-                    save
-                  </button>
-                  <button
-                    className="rounded-md bg-slate-400 px-4 py-2 text-gray-700  "
-                    onClick={cancelCompanyDetailsEdit}
-                  >
-                    cancel
-                  </button>
+            </div>
+          </div>
+
+          <div>
+            <div className="grid grid-cols-12 gap-4">
+              <div className=" col-span-4">
+                <div className=" flex w-full flex-col rounded-md">
+                  <label htmlFor="main_poc">Main POC</label>
+                  <input
+                    type="text"
+                    // label="Main POC"
+                    id="main_poc"
+                    name="main_poc"
+                    value={CompanyInfo.main_poc}
+                    onChange={handleCompanyInfo}
+                    readOnly={isCompanyDetailsEdit ? false : true}
+                    className="rounded-md px-4 py-3 focus:outline-none"
+                  />
                 </div>
-              )}
-            </form>
+              </div>
+              <div className="col-span-4">
+                <div className=" flex w-full flex-col rounded-md">
+                  <label htmlFor="main_poc_email">Main POC Email</label>
+                  <input
+                    type="email"
+                    // label="Main POC Email"
+                    name="main_poc_email"
+                    id="main_poc_email"
+                    value={CompanyInfo.main_poc_email}
+                    onChange={handleCompanyInfo}
+                    readOnly={isCompanyDetailsEdit ? false : true}
+                    className="rounded-md px-4 py-3 focus:outline-none"
+                  />
+                </div>
+              </div>
+              <div className="col-span-4">
+                <div className=" flex w-full flex-col rounded-md">
+                  <label htmlFor="main_poc_email">Main POC Email</label>
+                  <input
+                    type="tel"
+                    label="Main POC Phone"
+                    name="main_poc_phone"
+                    value={CompanyInfo.main_poc_phone}
+                    onChange={handleCompanyInfo}
+                    readOnly={isCompanyDetailsEdit ? false : true}
+                    className="rounded-md px-4 py-3 focus:outline-none"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="col-span-1  py-2">
-            <button onClick={handleCompanyDetailsEdit}>
-              <EditIcon />
-            </button>
+        </form>
+        {isCompanyDetailsEdit && (
+          <div className="my-4 flex w-full justify-end ">
+            <div className="md:mr-8">
+              <button
+                className="mr-3 rounded-md bg-slate-400 px-4 py-2 text-gray-700"
+                onClick={handleUpdateCompanyDetails}
+              >
+                save
+              </button>
+              <button
+                className="rounded-md bg-slate-400 px-4 py-2 text-gray-700  "
+                onClick={cancelCompanyDetailsEdit}
+              >
+                cancel
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
-      {/* Company Info End */}
-      <div className="  col-span-10 lg:col-span-6">
+
+      <div className="mx-auto w-95.5 max-w-5xl">
         <div className="mt-3 flex items-center justify-between">
           <header>
-            <h2 className="text-lg font-bold text-gray-700">Company Group</h2>
+            <h2 className="text-xl font-bold  tracking-wider text-orange-cus-1">
+              Company Group
+            </h2>
           </header>
           <div className="flex items-center">
-            <div className="flex h-11 w-52 items-center  justify-start rounded-3xl  border border-gray-600 bg-white px-1">
+            <div className="flex h-11 w-52 items-center  justify-start rounded-3xl    bg-white px-1">
               <SearchIcon />
               <input
                 type="text"
@@ -419,37 +444,39 @@ const CompanyGroup = () => {
             </div>
           </div>
         </div>
-        <div className=" mt-3  h-[317px] overflow-y-auto border border-gray-700 px-1 py-2">
-          <div className="flex min-h-[100%] flex-col py-2 ">
-            {groupData.length === 0 ? (
-              <div> No Group </div>
-            ) : (
-              groupData.map((item, index) => {
-                return (
-                  <div key={item._id} onClick={() => setGroupId(item._id)}>
-                    <GroupAccordion
-                      handleChange={handleChange}
-                      expanded={expanded}
-                      index={index}
-                      users={item}
-                      // anchorEl={anchorEl}
-                      // handleMenuOpen={handleMenuOpen}
-                      openDeleteModal={openDeleteModal}
-                      // handleMenuClose={handleMenuClose}
-                      groupIdRef={item._id}
-                      group_name={item.group_name}
-                      handleOpenAddMoreUserToGroup={
-                        handleOpenAddMoreUserToGroup
-                      }
-                      handleDeleteGroup={handleDeleteGroup}
-                    />
-                  </div>
-                );
-              })
-            )}
-          </div>
-        </div>
       </div>
+      {/* Group */}
+      <div>
+        {groupData.length === 0 ? (
+          <div> No Group </div>
+        ) : (
+          groupData.map((item, index) => {
+            return (
+              <div
+                key={item._id}
+                onClick={() => setGroupId(item._id)}
+                className="mx-auto w-95.5 max-w-5xl"
+              >
+                <GroupAccordion
+                  handleChange={handleChange}
+                  expanded={expanded}
+                  index={index}
+                  users={item}
+                  // anchorEl={anchorEl}
+                  // handleMenuOpen={handleMenuOpen}
+                  openDeleteModal={openDeleteModal}
+                  // handleMenuClose={handleMenuClose}
+                  groupIdRef={item._id}
+                  group_name={item.group_name}
+                  handleOpenAddMoreUserToGroup={handleOpenAddMoreUserToGroup}
+                  handleDeleteGroup={handleDeleteGroup}
+                />
+              </div>
+            );
+          })
+        )}
+      </div>
+
       <AddUserToGroup
         isAddUserGroupOpen={isAddUserGroupOpen}
         closeAddUserToGroup={closeAddUserToGroup}

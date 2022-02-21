@@ -13,20 +13,21 @@ const SingleGroupCLient = ({
 }) => {
   // console.log(groupUser);
   return (
-    <div className="mb-3 flex w-full  flex-col">
-      <div className="flex w-full items-center ">
-        <div className="h-[5rem] w-[5rem] border border-gray-700">
+    <div className="mb-3 w-full">
+      <div className="flex items-center  ">
+        <div className=" z-10 -mr-11 mt-1 h-[5rem] w-[5rem] rounded-full">
           <img
             src={dummyProfile}
             alt="profile"
-            className="h-full w-full object-cover"
+            className=" w-full rounded-full object-cover"
           />
         </div>
-        <div className="ml-3 flex h-20 w-full items-start justify-between rounded-md border border-gray-600 px-3 py-1">
-          <div>
+        <div className="flex h-20 w-full items-center justify-between rounded-md bg-primary-clr px-3 py-0.5  pl-10 text-[#575758]">
+          <div className="ml-4">
             <h4>{groupUser.user_name}</h4>
-            <h4>{groupUser.email}</h4>
-            <h4>{groupUser.phone}</h4>
+            <h4>
+              {groupUser.email}, {groupUser.phone}
+            </h4>
           </div>
           <div>
             {/* <button className="mt-5">
