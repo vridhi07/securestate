@@ -129,7 +129,7 @@ const Subscription = () => {
           <div className="mr-2 ml-[3%] md:mr-8">
             <button
               onClick={openSubscription}
-              className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300  ease-in hover:shadow-xl"
+              className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300 ease-in  hover:bg-orange-600 hover:shadow-xl"
             >
               <AddIcon sx={{ color: "white" }} />
             </button>

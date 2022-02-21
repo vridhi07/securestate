@@ -436,7 +436,7 @@ const CompanyGroup = () => {
             </div>
             <div className="mr-2 ml-[3%] md:mr-8">
               <button
-                className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300  ease-in hover:shadow-xl"
+                className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300 ease-in  hover:bg-orange-600 hover:shadow-xl"
                 onClick={openAddUserToGroup}
               >
                 <AddIcon sx={{ color: "white" }} />
