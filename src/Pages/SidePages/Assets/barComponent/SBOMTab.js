@@ -285,7 +285,7 @@ export default function SBOMTab() {
                 <Stack spacing={2}>
                   <Pagination
                     count={sbomDetails?.totalPage}
-                    variant="outlined"
+                    // variant="outlined"
                     onChange={handleSboMPageNumber}
                     // color="primary"
                     page={SboMPageNumber}
@@ -298,6 +298,9 @@ export default function SBOMTab() {
                       "& .MuiPaginationItem-page ": {
                         bgcolor: "#B4AFAF",
                         color: "white",
+                        border: "none",
+                      },
+                      "& .MuiPaginationItem-previousNext": {
                         border: "none",
                       },
                     }}

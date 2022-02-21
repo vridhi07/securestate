@@ -318,7 +318,7 @@ const AssetsIndex = () => {
               <Stack spacing={2}>
                 <Pagination
                   count={Asset?.totalPage}
-                  variant="outlined"
+                  // variant="outlined"
                   onChange={handleAssetPageNumber}
                   sx={{
                     "& .Mui-selected": {
@@ -329,6 +329,9 @@ const AssetsIndex = () => {
                     "& .MuiPaginationItem-page ": {
                       bgcolor: "#B4AFAF",
                       color: "white",
+                      border: "none",
+                    },
+                    "& .MuiPaginationItem-previousNext": {
                       border: "none",
                     },
                   }}

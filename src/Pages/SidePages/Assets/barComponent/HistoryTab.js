@@ -154,6 +154,9 @@ const HistoryTab = () => {
                         color: "white",
                         border: "none",
                       },
+                      "& .MuiPaginationItem-previousNext": {
+                        border: "none",
+                      },
                     }}
                   />
                 </Stack>
