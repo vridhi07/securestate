@@ -23,7 +23,7 @@ export default function AssetModal({
   } = assetForm;
 
   return (
-    <form onSubmit={handleSubmitAsset}>
+    <form onSubmit={handleSubmitAsset} className="bg-primary-clr">
       <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
         <h2 className="text-center text-2xl font-bold tracking-wider">
           {isEdit ? "Edit Asset" : "New Asset"}
@@ -38,7 +38,6 @@ export default function AssetModal({
             <TextField
               name="asset_name"
               id="AssetName"
-              className="h-11 w-full resize-none border-2 border-gray-400 py-2 px-2 focus:outline-none"
               label="Asset Name"
               variant="outlined"
               size="small"
@@ -46,6 +45,7 @@ export default function AssetModal({
               value={asset_name}
               onChange={handleAssetForm}
               required
+              sx={{ bgcolor: "white" }}
             />
           </div>
           <div className="col-span-4 md:col-span-2">
@@ -60,6 +60,7 @@ export default function AssetModal({
                 value={asset_type}
                 onChange={handleAssetForm}
                 required
+                sx={{ bgcolor: "white" }}
               >
                 {AssetType.map((item) => {
                   return (
@@ -87,6 +88,7 @@ export default function AssetModal({
                 value={status}
                 onChange={handleAssetForm}
                 required
+                sx={{ bgcolor: "white" }}
               >
                 <MenuItem value={"active"}>ACTIVE</MenuItem>
                 <MenuItem value={"inactive"}>INACTIVE</MenuItem>
@@ -103,6 +105,7 @@ export default function AssetModal({
               value={tech_stack}
               onChange={handleAssetForm}
               required
+              sx={{ bgcolor: "white" }}
             />
           </div>
         </section>
@@ -118,6 +121,7 @@ export default function AssetModal({
               value={third_party_components}
               onChange={handleAssetForm}
               required
+              sx={{ bgcolor: "white" }}
             />
           </div>
           <div className="col-span-4 gap-8 md:col-span-2">
@@ -132,6 +136,12 @@ export default function AssetModal({
                 value={internal_external}
                 onChange={handleAssetForm}
                 required
+                sx={{
+                  bgcolor: "white",
+                  "& .MuiOutlinedInput-root": {
+                    border: "none",
+                  },
+                }}
               >
                 <MenuItem value={"Internal"}>Internal</MenuItem>
                 <MenuItem value={"External"}>External</MenuItem>
@@ -147,7 +157,7 @@ export default function AssetModal({
             multiline
             inputProps={{ maxLength: 600 }}
             rows={4}
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", bgcolor: "white" }}
             label="Additional Details"
             value={additional_details}
             onChange={handleAssetForm}
