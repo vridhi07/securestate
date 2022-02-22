@@ -11,6 +11,7 @@ export default function FormDialog({
   handleEventChange,
   handleDate,
   handleSubmit,
+  isEdit,
 }) {
   const { date, event, description } = historyEvent;
 
@@ -19,7 +20,10 @@ export default function FormDialog({
       <Dialog open={isHistoryOpen}>
         <form className="bg-primary-clr" onSubmit={handleSubmit}>
           <header className="py-3text-white flex h-12 w-full items-center justify-between bg-orange-cus-1 px-5 text-white ">
-            <h2 className=" text-center text-lg font-bold  ">Add Event</h2>
+            <h2 className=" text-center text-lg font-bold  ">
+              {isEdit ? "Edit" : " Add"}
+              Event
+            </h2>
             <button
               type="button"
               onClick={closeHistoryModal}
@@ -78,7 +82,7 @@ export default function FormDialog({
                 type="submit"
                 className="hover rounded-md bg-primary-btn px-7 py-2 tracking-wider "
               >
-                Add
+                {isEdit ? "Save" : " Add"}
               </button>
               <button
                 type="button"

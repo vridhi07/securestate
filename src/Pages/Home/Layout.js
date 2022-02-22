@@ -184,12 +184,17 @@ export default function MiniDrawer() {
   const sideBarData = sidebarData(userDetails?.role);
   const loading = false;
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", bgcolor: "#F3F2FA" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} elevation={0}>
+      <AppBar
+        position="fixed"
+        open={open}
+        elevation={0}
+        sx={{ bgcolor: "#F3F2FA" }}
+      >
         <Toolbar
           sx={{
-            background: "#F3F2FA",
+            // background: "#F3F2FA",
             color: "black",
             paddingLeft: "0 !important",
           }}
