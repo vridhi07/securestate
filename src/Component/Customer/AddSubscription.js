@@ -78,7 +78,18 @@ export default function AddSubscription({
                     value={subscribeForm.asset}
                     onChange={handleSubscribeForm}
                     required
-                    sx={{ bgcolor: "white" }}
+                    sx={{
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                        outline: "none !important",
+                      },
+                      "&:hover": {
+                        "&& fieldset": {
+                          border: "none",
+                          outline: "none",
+                        },
+                      },
+                    }}
                     // size="small"
                   >
                     {allAsset &&
@@ -138,7 +149,19 @@ export default function AddSubscription({
                     }
                     label=" Monthly Price"
                     required
-                    sx={{ backgroundColor: "white" }}
+                    sx={{
+                      backgroundColor: "white",
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                        outline: "none !important",
+                      },
+                      "&:hover": {
+                        "&& fieldset": {
+                          border: "none",
+                          outline: "none",
+                        },
+                      },
+                    }}
                   />
                 </FormControl>
               </div>
@@ -161,12 +184,19 @@ export default function AddSubscription({
               />
             </section>
 
-            <div className="mt-4 pt-3 pb-5 text-center">
+            <div className="mt-4 flex items-center justify-start gap-4 pt-3 pb-5 text-center">
               <button
                 type="submit"
-                className="hover rounded-md bg-primary-btn py-2 px-7 text-white"
+                className="hover rounded-md bg-primary-btn py-2 px-3 text-white"
               >
                 Add Subscription
+              </button>
+              <button
+                type="button"
+                onClick={closeSubscription}
+                className="rounded-md border border-primary-btn bg-white py-2 px-6 text-primary-btn "
+              >
+                cancel
               </button>
             </div>
           </div>

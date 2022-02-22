@@ -174,17 +174,17 @@ export default function SBOMTab() {
                 <TableHead>
                   <TableRow>
                     <TableCell colSpan={2}>SUPPLER</TableCell>
-                    <TableCell colSpan={3}>COMPONENT</TableCell>
-                    <TableCell colSpan={2}>LICENSE</TableCell>
-                    <TableCell>CVE</TableCell>
-                    <TableCell>UNIQUE IDENTIFIER</TableCell>
                     <TableCell>VERSION</TableCell>
+                    <TableCell colSpan={3}>SECURITY</TableCell>
+                    <TableCell colSpan={2}>PATH</TableCell>
                     <TableCell
                     //  align="right"
                     >
                       SBOM AUTHOR
                     </TableCell>
-                    {assetAccess && <TableCell align="right">Remove</TableCell>}
+                    <TableCell># OF CVES</TableCell>
+                    {/* <TableCell>UNIQUE IDENTIFIER</TableCell> */}
+                    {assetAccess && <TableCell align="right"></TableCell>}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -207,6 +207,15 @@ export default function SBOMTab() {
                           {item.supplier}
                         </TableCell>
                         <TableCell
+                          style={{
+                            maxWidth: "100px",
+                            // border: "2px solid red",
+                            overflow: "hidden",
+                          }}
+                        >
+                          {item.version}
+                        </TableCell>
+                        <TableCell
                           colSpan={3}
                           style={{
                             maxWidth: "200px",
@@ -214,7 +223,7 @@ export default function SBOMTab() {
                             overflow: "hidden",
                           }}
                         >
-                          {item.component}
+                          SECURITY
                         </TableCell>
                         <TableCell
                           align="left"
@@ -225,35 +234,7 @@ export default function SBOMTab() {
                             overflow: "hidden",
                           }}
                         >
-                          {item.license}
-                        </TableCell>
-                        <TableCell
-                          style={{
-                            maxWidth: "150px",
-                            // border: "2px solid red",
-                            overflow: "hidden",
-                          }}
-                        >
-                          {item.cve}
-                        </TableCell>
-                        <TableCell
-                          // align="center"
-                          style={{
-                            maxWidth: "200px",
-                            // border: "2px solid red",
-                            overflow: "hidden",
-                          }}
-                        >
-                          {item.uniqueIdentifier}
-                        </TableCell>
-                        <TableCell
-                          style={{
-                            maxWidth: "100px",
-                            // border: "2px solid red",
-                            overflow: "hidden",
-                          }}
-                        >
-                          {item.version}
+                          PATH
                         </TableCell>
                         <TableCell
                           // align="right"
@@ -265,6 +246,26 @@ export default function SBOMTab() {
                         >
                           {item.sbom_author}
                         </TableCell>
+                        <TableCell
+                          style={{
+                            maxWidth: "150px",
+                            // border: "2px solid red",
+                            overflow: "hidden",
+                          }}
+                        >
+                          {item.cve}
+                        </TableCell>
+                        {/* <TableCell
+                          // align="center"
+                          style={{
+                            maxWidth: "200px",
+                            // border: "2px solid red",
+                            overflow: "hidden",
+                          }}
+                        >
+                          {item.uniqueIdentifier}
+                        </TableCell> */}
+
                         {assetAccess && (
                           <TableCell align="right">
                             <IconButton
