@@ -15,7 +15,8 @@ import DeleteModal from "../Common/DeleteModal";
 import * as action from "../../Redux/action";
 import { useDispatch } from "react-redux";
 import { IoTrashOutline } from "react-icons/io5";
-import Fab from "@mui/material/Fab";
+// import Fab from "@mui/material/Fab";
+import IconButton from "@mui/material/IconButton";
 const columns = [
   { id: "Invoice", label: "Invoice", minWidth: 170, align: "left" },
 
@@ -139,12 +140,12 @@ export default function InvoiceTable({
                     </a>
                   </TableCell>
                   <TableCell align="center">
-                    <Fab
-                      size="small"
+                    <IconButton
+                      // size="small"
                       onClick={() => openDeleteModal(item?._id)}
                     >
                       <IoTrashOutline className="text-lg text-red-500" />
-                    </Fab>
+                    </IconButton>
                     {/* <Menu
                       anchorEl={anchorEl}
                       handleMenuClose={handleMenuClose}

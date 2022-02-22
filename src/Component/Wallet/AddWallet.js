@@ -53,7 +53,18 @@ export default function AddTotal({
                     label="Pentest"
                     name="pentest"
                     onChange={handleWalletChange}
-                    sx={{ bgcolor: "white" }}
+                    sx={{
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                        outline: "none !important",
+                      },
+                      "&:hover": {
+                        "&& fieldset": {
+                          border: "none",
+                          outline: "none",
+                        },
+                      },
+                    }}
                   >
                     {AllPentest &&
                       AllPentest.map((item) => {
@@ -108,7 +119,18 @@ export default function AddTotal({
                     id="status"
                     variant="outlined"
                     size="medium"
-                    sx={{ bgcolor: "white" }}
+                    sx={{
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                        outline: "none !important",
+                      },
+                      "&:hover": {
+                        "&& fieldset": {
+                          border: "none",
+                          outline: "none",
+                        },
+                      },
+                    }}
                   >
                     <MenuItem value={"paid"}>paid</MenuItem>
                     <MenuItem value={"pending"}>pending</MenuItem>

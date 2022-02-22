@@ -23,7 +23,7 @@ export default function DeleteModal({
               Yes
             </button>
             <button
-              className="rounded-md border px-5 py-2 text-lg tracking-widest text-primary-btn transition-all hover:border-0 hover:bg-primary-btn hover:text-white "
+              className="rounded-md border border-primary-btn px-5 py-2 text-lg tracking-widest text-primary-btn  "
               onClick={closeDeleteModal}
             >
               NO
