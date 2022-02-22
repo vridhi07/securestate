@@ -50,7 +50,7 @@ export default function FormDialog({
                     <DesktopDatePicker
                       label="Date"
                       value={date}
-                      minDate={new Date()}
+                      // minDate={new Date()}
                       onChange={handleDate}
                       renderInput={(params) => <TextField {...params} />}
                     />
