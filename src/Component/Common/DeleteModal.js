@@ -15,15 +15,15 @@ export default function DeleteModal({
           Are you sure you want to delete ?
         </DialogTitle>
         <DialogContent>
-          <div className="flex justify-between items-center py-3 px-5">
+          <div className="flex items-center justify-start gap-4 py-3 px-5">
             <button
-              className="transition-all text-lg text-white bg-yes-btn hover:bg-red-400 tracking-widest rounded-md px-4 py-2"
+              className="hover rounded-md bg-primary-btn px-4 py-2 text-lg tracking-widest text-white transition-all "
               onClick={handleDelete}
             >
               Yes
             </button>
             <button
-              className="transition-all text-lg text-white bg-no-btn hover:bg-green-400 tracking-widest rounded-md px-5 py-2 "
+              className="rounded-md border px-5 py-2 text-lg tracking-widest text-primary-btn transition-all hover:border-0 hover:bg-primary-btn hover:text-white "
               onClick={closeDeleteModal}
             >
               NO

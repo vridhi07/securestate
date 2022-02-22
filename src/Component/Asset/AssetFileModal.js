@@ -137,7 +137,7 @@ export default function FormDialog({
                   })}
               </div>
             </div>
-            <div className="mt-5 flex items-center justify-between">
+            <div className="mt-5 flex items-center justify-start gap-4">
               <button
                 type="submit"
                 className="hover rounded-md bg-primary-btn px-5 py-2 text-white"
@@ -146,7 +146,7 @@ export default function FormDialog({
               </button>
               <button
                 type="button"
-                className="hover rounded-md bg-primary-btn px-5 py-2 text-white"
+                className="rounded-md border border-primary-btn bg-white   px-6 py-2 text-primary-btn"
                 onClick={closeFileModal}
               >
                 Cancel

@@ -154,7 +154,7 @@ export default function SBOMModalForm({
               <div className="col-span-4 md:col-span-2"></div>
             </section>
 
-            <div className="mt-5 flex items-center justify-between pb-4">
+            <div className="mt-5 flex items-center justify-start gap-4 pb-4">
               <button
                 type="submit"
                 className="hover rounded-md bg-primary-btn px-6 py-2 tracking-wider text-white"
@@ -163,7 +163,7 @@ export default function SBOMModalForm({
               </button>
               <button
                 type="button"
-                className="hover rounded-md bg-primary-btn px-6 py-2 tracking-wider text-white"
+                className="rounded-md border border-primary-btn bg-white   px-6 py-2 text-primary-btn"
                 onClick={closeModal}
               >
                 cancel

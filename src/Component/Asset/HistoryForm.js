@@ -73,7 +73,7 @@ export default function FormDialog({
               onChange={handleEventChange}
               sx={{ mb: 3, bgcolor: "white" }}
             />
-            <div className="my-4 flex items-center justify-between text-white">
+            <div className="my-4 flex items-center justify-start gap-4 text-white">
               <button
                 type="submit"
                 className="hover rounded-md bg-primary-btn px-7 py-2 tracking-wider "
@@ -82,7 +82,7 @@ export default function FormDialog({
               </button>
               <button
                 type="button"
-                className="hover rounded-md bg-primary-btn px-4 py-2 tracking-wider "
+                className="rounded-md border border-primary-btn bg-white   px-6 py-2 text-primary-btn"
                 onClick={closeHistoryModal}
               >
                 Cancel

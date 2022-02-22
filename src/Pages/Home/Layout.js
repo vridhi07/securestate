@@ -242,7 +242,7 @@ export default function MiniDrawer() {
                   className="flex max-h-12 cursor-pointer items-center overflow-hidden"
                   onClick={handleUserMenu}
                 >
-                  <h4 className="text-left text-xl uppercase tracking-widest  text-orange-cus-1">
+                  <h4 className="text-left text-xl capitalize tracking-widest  text-orange-cus-1">
                     {userDetails?.name}
                   </h4>
                   <span>

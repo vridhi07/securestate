@@ -60,7 +60,18 @@ export default function AssetModal({
                 value={asset_type}
                 onChange={handleAssetForm}
                 required
-                sx={{ bgcolor: "white" }}
+                sx={{
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                    outline: "none !important",
+                  },
+                  "&:hover": {
+                    "&& fieldset": {
+                      border: "none",
+                      outline: "none",
+                    },
+                  },
+                }}
               >
                 {AssetType.map((item) => {
                   return (
@@ -88,7 +99,18 @@ export default function AssetModal({
                 value={status}
                 onChange={handleAssetForm}
                 required
-                sx={{ bgcolor: "white" }}
+                sx={{
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                    outline: "none !important",
+                  },
+                  "&:hover": {
+                    "&& fieldset": {
+                      border: "none",
+                      outline: "none",
+                    },
+                  },
+                }}
               >
                 <MenuItem value={"active"}>ACTIVE</MenuItem>
                 <MenuItem value={"inactive"}>INACTIVE</MenuItem>
@@ -137,10 +159,15 @@ export default function AssetModal({
                 onChange={handleAssetForm}
                 required
                 sx={{
-                  bgcolor: "white",
-                  "& .MuiOutlinedInput-root": {
-                    border: "none",
-                    outline: "none",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                    outline: "none !important",
+                  },
+                  "&:hover": {
+                    "&& fieldset": {
+                      border: "none",
+                      outline: "none",
+                    },
                   },
                 }}
               >
@@ -165,16 +192,16 @@ export default function AssetModal({
             required
           />
         </section>
-        <div className="mt-3 flex items-center justify-between">
+        <div className="mt-3 flex items-center justify-start gap-4">
           <button
             type="submit"
-            className="hover rounded-md bg-primary-btn px-14 py-2 tracking-wide text-white"
+            className="hover rounded-md bg-primary-btn px-8 py-2 tracking-wide text-white"
           >
             {isEdit ? "Save" : "Add"}
           </button>
           <button
             type="button"
-            className="hover rounded-md bg-primary-btn px-4 py-2 text-white"
+            className=" rounded-md border border-primary-btn bg-white   px-6 py-2 text-primary-btn "
             onClick={handleClose}
           >
             Cancel
