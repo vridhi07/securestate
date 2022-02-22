@@ -6,6 +6,8 @@ export const InputTheme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
+          borderRadius: "0.25rem",
+          backgroundColor: "white",
           "& label": {
             color: "#424242",
           },
@@ -34,10 +36,12 @@ export const InputTheme = createTheme({
         },
       },
     },
-    // MuiSelect: {
-    //   styleOverrides: {
-    //     select: {},
-    //   },
-    // },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          backgroundColor: "white",
+        },
+      },
+    },
   },
 });

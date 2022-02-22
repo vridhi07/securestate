@@ -53,3 +53,6 @@ body {
 /* .teste {
   border: none
 } */
+.hover {
+  @apply transition-all hover:bg-zinc-500;
+}

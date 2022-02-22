@@ -50,7 +50,7 @@ export default function FormDialog({
                     <DesktopDatePicker
                       label="Date"
                       value={date}
-                      minDate={new Date()}
+                      // minDate={new Date()}
                       onChange={handleDate}
                       renderInput={(params) => <TextField {...params} />}
                     />
@@ -73,16 +73,16 @@ export default function FormDialog({
               onChange={handleEventChange}
               sx={{ mb: 3, bgcolor: "white" }}
             />
-            <div className="my-4 flex items-center justify-between">
+            <div className="my-4 flex items-center justify-start gap-4 text-white">
               <button
                 type="submit"
-                className="rounded-md bg-[#606060] px-7 py-2 tracking-wider text-gray-300"
+                className="hover rounded-md bg-primary-btn px-7 py-2 tracking-wider "
               >
                 Add
               </button>
               <button
                 type="button"
-                className="rounded-md bg-[#606060] px-4 py-2 tracking-wider text-gray-300"
+                className="rounded-md border border-primary-btn bg-white   px-6 py-2 text-primary-btn"
                 onClick={closeHistoryModal}
               >
                 Cancel

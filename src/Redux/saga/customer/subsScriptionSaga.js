@@ -37,3 +37,25 @@ export function* AddSubscriptionSaga(action) {
     yield put(actions.addSubscriptionError(error?.response?.data?.message));
   }
 }
+
+export function* DeleteSubscriptionSaga(action) {
+  try {
+    const { subscriptionId, company_id } = action.payload;
+
+    console.log(company_id);
+    let response = yield call(axios.delete, CONFIG.deleteSubscription, {
+      data: {
+        subscriptionId,
+      },
+    });
+    console.log(response?.data);
+    if (response && response.data?.status === 1) {
+      // console.log("Yea successfull");
+      yield put(actions.deleteSubscriptionSuccess("successfully deleted"));
+      yield put(actions.getSubscriptionListRequest(company_id));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.deleteSubscriptionError(error?.response?.data?.message));
+  }
+}

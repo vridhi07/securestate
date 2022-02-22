@@ -54,6 +54,7 @@ export default function MultipleSelectCheckmarks({
           }
           MenuProps={MenuProps}
           required
+          sx={{ bgcolor: "white" }}
         >
           {newUser &&
             newUser.map((item) => (

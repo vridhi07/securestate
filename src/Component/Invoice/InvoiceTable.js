@@ -15,7 +15,8 @@ import DeleteModal from "../Common/DeleteModal";
 import * as action from "../../Redux/action";
 import { useDispatch } from "react-redux";
 import { IoTrashOutline } from "react-icons/io5";
-import Fab from "@mui/material/Fab";
+// import Fab from "@mui/material/Fab";
+import IconButton from "@mui/material/IconButton";
 const columns = [
   { id: "Invoice", label: "Invoice", minWidth: 170, align: "left" },
 
@@ -57,7 +58,9 @@ export default function InvoiceTable({
   handleChangePage,
   handleChangeRowsPerPage,
   company_id,
+  totalPage,
 }) {
+  // console.log(totalPage);
   const dispatch = useDispatch();
   //! State ALl the Delete And Edit
   const [selectedId, setSelectedId] = useState(null);
@@ -137,12 +140,12 @@ export default function InvoiceTable({
                     </a>
                   </TableCell>
                   <TableCell align="center">
-                    <Fab
-                      size="small"
+                    <IconButton
+                      // size="small"
                       onClick={() => openDeleteModal(item?._id)}
                     >
                       <IoTrashOutline className="text-lg text-red-500" />
-                    </Fab>
+                    </IconButton>
                     {/* <Menu
                       anchorEl={anchorEl}
                       handleMenuClose={handleMenuClose}
@@ -157,15 +160,18 @@ export default function InvoiceTable({
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        // rowsPerPageOptions={[5, 10, 15]}
-        component="div"
-        count={100}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      {totalPage && (
+        <TablePagination
+          // rowsPerPageOptions={[5, 10, 15]}
+          component="div"
+          count={totalPage}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      )}
+
       <DeleteModal
         isDeleteModalOpen={isDeleteModalOpen}
         closeDeleteModal={closeDeleteModal}

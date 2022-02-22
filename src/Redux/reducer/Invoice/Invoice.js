@@ -5,6 +5,7 @@ const initialState = {
   invoiceData: [],
   Message: "",
   ErrorMessage: "",
+  totalPage: null,
 };
 
 const InvoiceReducer = (state = initialState, action) => {
@@ -23,7 +24,8 @@ const InvoiceReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        invoiceData: action.payload,
+        invoiceData: action.payload.data,
+        totalPage: action.payload.total,
         Message: "",
         ErrorMessage: "",
       };

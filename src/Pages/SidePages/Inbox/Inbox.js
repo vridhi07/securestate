@@ -187,7 +187,7 @@ const Inbox = () => {
   return (
     <div className="flex flex-col">
       <div className="mt-3 flex justify-between">
-        <div className="flex h-11 w-52 items-center  justify-start rounded-3xl  border border-gray-600 bg-white px-1">
+        <div className="flex h-11 w-60 items-center  justify-start rounded-lg bg-white pr-1 pl-4">
           <SearchIcon />
           <input
             type="text"
@@ -208,7 +208,7 @@ const Inbox = () => {
           />
         </div>
         <div className="mr-2 md:mr-8">
-          <button className="bg-orange-cus-1 grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none shadow-lg duration-300  ease-in hover:shadow-xl">
+          <button className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300  ease-in hover:shadow-xl">
             <div className="duration-300 ease-in hover:rotate-90 ">
               <AddIcon onClick={handleModalClickOpen} sx={{ color: "white" }} />
             </div>
@@ -234,7 +234,7 @@ const Inbox = () => {
           </div>
         </div>
         {openMail.length !== 0 && (
-          <div className="bg-blue-cus-1 relative col-span-3 h-screen w-full rounded-md border shadow-xl">
+          <div className="relative col-span-3 h-screen w-full rounded-md border bg-blue-cus-1 shadow-xl">
             <MessageContainer openMail={openMail} />
             <MessageForm
               emailReply={emailReply}

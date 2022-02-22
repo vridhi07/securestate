@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
-// import IconButton from "@mui/material/IconButton";
+import IconButton from "@mui/material/IconButton";
 // import Switch from "@mui/material/Switch";
 // import AssetMenuButton from "../Asset/AssetMenuButton";
 import { useNavigate } from "react-router-dom";
@@ -44,12 +44,12 @@ const AssetList = ({
         <div className="flex items-center justify-start gap-4">
           {assetAccess ? (
             <div className="flex  items-center gap-4 text-center">
-              <Fab size="small" onClick={() => handleEdit(id)}>
-                <ModeEditOutlineIcon sx={{ color: "green" }} />
-              </Fab>
-              <Fab size="small" onClick={() => openDeleteModal(id)}>
+              <IconButton onClick={() => handleEdit(id)}>
+                <ModeEditOutlineIcon sx={{ color: "#606060" }} />
+              </IconButton>
+              <IconButton onClick={() => openDeleteModal(id)}>
                 <IoTrashOutline className="text-lg text-red-500" />
-              </Fab>
+              </IconButton>
               {/* <AssetMenuButton
           anchorEl={anchorEl}
           handleMenuClose={handleMenuClose}

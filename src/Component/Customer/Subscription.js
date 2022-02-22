@@ -3,6 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import SingleSubscriber from "./SingleSubcriber";
 import AddSubscription from "./AddSubscription";
+import DeleteModal from "../Common/DeleteModal";
 import { useSelector, useDispatch } from "react-redux";
 import * as action from "../../Redux/action";
 const Subscription = () => {
@@ -12,7 +13,7 @@ const Subscription = () => {
   const { userDetails } = useSelector((state) => state?.user);
   const { allAsset } = useSelector((state) => state.Assets);
   const { SubscriptionData } = useSelector((state) => state?.subscriber);
-  console.log(SubscriptionData);
+  // console.log(SubscriptionData);
   const getCompanyId = (role) => {
     if (role === "superAdmin") {
       return selectedCompany;
@@ -22,7 +23,7 @@ const Subscription = () => {
   const company_id = getCompanyId(userDetails?.role);
 
   const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
-
+  // console.log(allAsset);
   const [subscribeForm, setSubscribeForm] = useState({
     subscription: "",
     asset: "",
@@ -32,6 +33,34 @@ const Subscription = () => {
     comments: "",
   });
 
+  const [selectedId, setSelectedId] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModal] = useState(false);
+  // console.log(company_id);
+  //  isDeleteModalOpen,
+  //   closeDeleteModal,
+  //   handleDelete,
+  const closeDeleteModal = () => {
+    setSelectedId(null);
+    setIsDeleteModal(false);
+  };
+
+  const handleDelete = () => {
+    // console.log("deleted");
+    // console.log(selectedId);
+    dispatch(
+      action.deleteSubscriptionRequest({
+        company_id,
+        subscriptionId: selectedId,
+      })
+    );
+    closeDeleteModal();
+  };
+
+  const openDeleteModal = (id) => {
+    // console.log(id);
+    setSelectedId(id);
+    setIsDeleteModal(true);
+  };
   const handleSubscribeForm = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -77,15 +106,19 @@ const Subscription = () => {
       dispatch(action.getSubscriptionListRequest(company_id));
     }
   }, [company_id]);
-
+  useEffect(() => {
+    dispatch(action.getAllAssetListRequest(company_id));
+  }, [company_id]);
   return (
     <div className="mt-[5rem] mb-5">
-      <header className="flex min-w-[400px] items-center justify-between  pl-[2.5%] ">
+      <header className="mx-auto mb-2 flex w-95.5 max-w-5xl items-center justify-between  pl-[2.5%] ">
         <section>
-          <h2 className="text-lg font-bold text-gray-700">Subscriptions</h2>
+          <h2 className="text-xl font-bold  tracking-wider text-orange-cus-1">
+            Subscriptions
+          </h2>
         </section>
         <section className="flex items-center">
-          <div className="flex h-11 w-52 items-center  justify-start rounded-3xl  border border-gray-600 bg-white px-1">
+          <div className="flex h-11 w-60 items-center  justify-start rounded-lg bg-white pr-1 pl-4">
             <SearchIcon />
             <input
               type="text"
@@ -96,18 +129,42 @@ const Subscription = () => {
           <div className="mr-2 ml-[3%] md:mr-8">
             <button
               onClick={openSubscription}
-              className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300  ease-in hover:shadow-xl"
+              className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300 ease-in  hover:bg-orange-600 hover:shadow-xl"
             >
               <AddIcon sx={{ color: "white" }} />
             </button>
           </div>
         </section>
       </header>
-      <div className="mt-3 h-[250px]  overflow-y-auto border border-gray-700">
-        <div className="flex min-h-[100%] flex-col px-3 py-2">
+      <div
+        //  className="mt-3 h-[250px]  overflow-y-auto border border-gray-700"
+        className="mx-auto w-95.5 max-w-5xl"
+      >
+        <div className=" grid w-full min-w-[600px] grid-cols-10 rounded-md py-2 px-6 text-[#737275]">
+          <div className=" col-span-5 min-w-[500px]  ">
+            <div className="flex items-center justify-between">
+              <h4>Subscription ID</h4>
+              <h4 className={`${SubscriptionData.length > 0 && "md:pl-28"}`}>
+                Asset
+              </h4>
+              <h4>Status</h4>
+            </div>
+          </div>
+          <div className="col-span-3 min-w-[200px]"></div>
+          <div className=" col-span-2 text-right">
+            <h4>Remove</h4>
+          </div>
+        </div>
+        <div className="min-h-[100%] px-3 py-2 text-[#737275]">
           {SubscriptionData &&
             SubscriptionData.map((item) => {
-              return <SingleSubscriber key={item._id} subscriber={item} />;
+              return (
+                <SingleSubscriber
+                  key={item._id}
+                  subscriber={item}
+                  openDeleteModal={openDeleteModal}
+                />
+              );
             })}
         </div>
       </div>
@@ -119,6 +176,11 @@ const Subscription = () => {
         handleDate={handleDate}
         submitSubscription={submitSubscription}
         allAsset={allAsset}
+      />
+      <DeleteModal
+        handleDelete={handleDelete}
+        closeDeleteModal={closeDeleteModal}
+        isDeleteModalOpen={isDeleteModalOpen}
       />
     </div>
   );

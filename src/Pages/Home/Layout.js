@@ -242,7 +242,7 @@ export default function MiniDrawer() {
                   className="flex max-h-12 cursor-pointer items-center overflow-hidden"
                   onClick={handleUserMenu}
                 >
-                  <h4 className="text-left text-xl uppercase tracking-widest  text-orange-cus-1">
+                  <h4 className="text-left text-xl capitalize tracking-widest  text-orange-cus-1">
                     {userDetails?.name}
                   </h4>
                   <span>
@@ -311,13 +311,18 @@ export default function MiniDrawer() {
               <NavLink
                 className={`flex items-center  justify-center ${
                   item.path === newPathname && "rounded-md bg-[#FCE4D7] "
-                } ${open && "mx-3"}`}
+                } ${open && "mx-3"} `}
                 key={item.path}
                 to={item.path}
                 // onClick={()=>index}
               >
                 <ListItem button>
-                  <ListItemIcon>
+                  <ListItemIcon
+                    sx={{
+                      ...(item.path === newPathname && { pl: 0 }),
+                      ...(item.path !== newPathname && { pl: 1 }),
+                    }}
+                  >
                     {item.path === newPathname ? item.icon2 : item.icon}
                   </ListItemIcon>
                   <ListItemText
@@ -328,6 +333,11 @@ export default function MiniDrawer() {
                     }}
                   />
                 </ListItem>
+                {item.path === newPathname ? (
+                  <span className="-mr-5 h-12 w-2 bg-[#FCE4D7]"></span>
+                ) : (
+                  <span></span>
+                )}
               </NavLink>
             ))}
         </List>

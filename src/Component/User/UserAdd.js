@@ -39,7 +39,11 @@ export default function UserAdd({
           </DialogTitle>
           <DialogContent sx={{ width: 400 }}> */}
 
-          <form onSubmit={handleSubmit} className="bg-primary-clr">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-primary-clr"
+            autoComplete="off"
+          >
             <section className="flex items-center justify-between bg-orange-cus-1 py-3 px-3 text-white">
               <h4 className="text-xl font-bold tracking-wider ">Add user</h4>
               <button onClick={handleClose} className="absolute top-3 right-3">
@@ -61,7 +65,18 @@ export default function UserAdd({
                         name="company"
                         onChange={handleUserFormInput}
                         required
-                        sx={{ backgroundColor: "white" }}
+                        sx={{
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "white",
+                            outline: "none !important",
+                          },
+                          "&:hover": {
+                            "&& fieldset": {
+                              border: "none",
+                              outline: "none",
+                            },
+                          },
+                        }}
                       >
                         {companyDetails &&
                           companyDetails.map((item) => (
@@ -87,7 +102,18 @@ export default function UserAdd({
                         name="company"
                         onChange={handleUserFormInput}
                         required
-                        sx={{ backgroundColor: "white" }}
+                        sx={{
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "white",
+                            outline: "none !important",
+                          },
+                          "&:hover": {
+                            "&& fieldset": {
+                              border: "none",
+                              outline: "none",
+                            },
+                          },
+                        }}
                       >
                         {userDetails?.company_id.company_name && (
                           <MenuItem
@@ -119,7 +145,18 @@ export default function UserAdd({
                       onChange={handleUserFormInput}
                       inputProps={{ maxLength: 15 }}
                       required
-                      sx={{ backgroundColor: "white" }}
+                      sx={{
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "white",
+                          outline: "none !important",
+                        },
+                        "&:hover": {
+                          "&& fieldset": {
+                            border: "none",
+                            outline: "none",
+                          },
+                        },
+                      }}
                     />
                   </FormControl>
                 </div>
@@ -157,7 +194,18 @@ export default function UserAdd({
                       name="role"
                       onChange={handleUserFormInput}
                       required
-                      sx={{ backgroundColor: "white" }}
+                      sx={{
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "white",
+                          outline: "none !important",
+                        },
+                        "&:hover": {
+                          "&& fieldset": {
+                            border: "none",
+                            outline: "none",
+                          },
+                        },
+                      }}
                     >
                       <MenuItem value={"admin"}>Admin</MenuItem>
                       <MenuItem value={"client"}>Client</MenuItem>
@@ -233,24 +281,10 @@ export default function UserAdd({
               <div className="mt-3 mb-4 flex flex-col items-center justify-center">
                 <button
                   type="submit"
-                  className=" rounded-md bg-orange-cus-1 px-[4.5rem] py-2 tracking-wider text-white  "
+                  className=" rounded-md bg-orange-cus-1 px-[4.5rem] py-2 tracking-wider text-white hover:bg-orange-600  "
                 >
                   Save
                 </button>
-                {/* <button
-                  onClick={handleClose}
-                  type="button"
-                  className=" px-7 py-2 text-white tracking-wider bg-orange-cus-1 rounded-md   my-4"
-                >
-                  Reset Password
-                </button>
-                <button
-                  onClick={handleClose}
-                  type="button"
-                  className=" px-[2.9rem] py-2 text-white tracking-wider bg-[#E74021] rounded-md "
-                >
-                  Delete User
-                </button> */}
               </div>
             </div>
           </form>

@@ -271,7 +271,7 @@ const AssetsIndex = () => {
             {assetAccess && (
               <button
                 onClick={handleClickOpen}
-                className={`rounded-md bg-gray-cus  py-2 px-6 capitalize tracking-wide text-gray-300`}
+                className={`hover rounded-md  bg-gray-cus py-2 px-6 capitalize tracking-wide text-white`}
                 disabled={isLoading}
               >
                 <span>
@@ -318,12 +318,20 @@ const AssetsIndex = () => {
               <Stack spacing={2}>
                 <Pagination
                   count={Asset?.totalPage}
-                  variant="outlined"
+                  // variant="outlined"
                   onChange={handleAssetPageNumber}
                   sx={{
                     "& .Mui-selected": {
                       backgroundColor: "#F27931 !important",
                       color: "white",
+                      border: "none",
+                    },
+                    "& .MuiPaginationItem-page ": {
+                      bgcolor: "#B4AFAF",
+                      color: "white",
+                      border: "none",
+                    },
+                    "& .MuiPaginationItem-previousNext": {
                       border: "none",
                     },
                   }}

@@ -78,12 +78,12 @@ export const adminSidebar = [
     icon: <PersonIcon sx={color} />,
     icon2: <PersonIcon sx={color2} />,
   },
-  {
-    path: "settings",
-    linkName: "SETTINGS",
-    icon: <SettingsIcon sx={color} />,
-    icon2: <SettingsIcon sx={color2} />,
-  },
+  // {
+  //   path: "settings",
+  //   linkName: "SETTINGS",
+  //   icon: <SettingsIcon sx={color} />,
+  //   icon2: <SettingsIcon sx={color2} />,
+  // },
 ];
 
 export const clientSidebar = [
@@ -123,12 +123,12 @@ export const clientSidebar = [
     icon: <PeopleIcon sx={color} />,
     icon2: <PeopleIcon sx={color2} />,
   },
-  {
-    path: "settings",
-    linkName: "SETTINGS",
-    icon: <AccountBalanceWalletIcon sx={color} />,
-    icon2: <AccountBalanceWalletIcon sx={color2} />,
-  },
+  // {
+  //   path: "settings",
+  //   linkName: "SETTINGS",
+  //   icon: <AccountBalanceWalletIcon sx={color} />,
+  //   icon2: <AccountBalanceWalletIcon sx={color2} />,
+  // },
 ];
 
 export const hacker = [
@@ -169,12 +169,12 @@ export const hacker = [
     icon: <GroupIcon sx={color} />,
     icon2: <GroupIcon sx={color2} />,
   },
-  {
-    path: "settings",
-    linkName: "SETTINGS",
-    icon: <SettingsIcon sx={color} />,
-    icon2: <SettingsIcon sx={color2} />,
-  },
+  // {
+  //   path: "settings",
+  //   linkName: "SETTINGS",
+  //   icon: <SettingsIcon sx={color} />,
+  //   icon2: <SettingsIcon sx={color2} />,
+  // },
 ];
 export const sidebarData = (role) => {
   if (role === roles.admin) {

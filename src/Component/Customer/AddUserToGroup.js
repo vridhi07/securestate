@@ -17,18 +17,18 @@ export default function AddUserToGroup({
   return (
     <div>
       <Dialog open={isAddUserGroupOpen}>
-        <form className="relative py-8 px-5" onSubmit={addUserToCompany}>
-          <button
-            className="absolute top-3 right-3"
-            type="button"
-            onClick={closeAddUserToGroup}
-          >
-            <CloseIcon />
-          </button>
-          <div className="flex flex-col items-center justify-center">
-            <header className="px-20">
-              <h4>Add User to Company Group</h4>
-            </header>
+        <form className="bg-primary-clr" onSubmit={addUserToCompany}>
+          <header className="flex items-center justify-between  bg-orange-cus-1 px-4 py-3  text-white">
+            <h4>Add User to Company Group</h4>
+            <button
+              // className="absolute top-3 right-3"
+              type="button"
+              onClick={closeAddUserToGroup}
+            >
+              <CloseIcon />
+            </button>
+          </header>
+          <div className="px-8 py-4 ">
             <div>
               <div className="mb-5 px-[0.5rem]">
                 <TextField
@@ -39,8 +39,10 @@ export default function AddUserToGroup({
                   value={groupName}
                   onChange={(e) => setGroupName(e.target.value)}
                   required
+                  sx={{ backgroundColor: "white" }}
                 />
               </div>
+
               <MulitSelect
                 company_id={company_id}
                 personName={personName}
@@ -49,21 +51,22 @@ export default function AddUserToGroup({
                 selectedNames={selectedNames}
               />
             </div>
-          </div>
-          <section className="mx-6 flex items-center justify-center">
-            {/* <div>
+
+            <section className="mx-6 flex items-center justify-center">
+              {/* <div>
               <button>Add New User</button>
             </div>
             <div> */}
-            <button
-              type="submit"
-              className="mt-4 w-full bg-orange-cus-1  py-3 text-center text-white "
-              // onClick={addUserToCompany}
-            >
-              Add user
-            </button>
-            {/* </div> */}
-          </section>
+              <button
+                type="submit"
+                className="mt-4 w-full bg-orange-cus-1  py-3 text-center text-white "
+                // onClick={addUserToCompany}
+              >
+                Add user
+              </button>
+              {/* </div> */}
+            </section>
+          </div>
         </form>
       </Dialog>
     </div>

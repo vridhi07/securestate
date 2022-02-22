@@ -132,7 +132,7 @@ const FilesTab = () => {
       {assetAccess && (
         <section className="mb-3 flex items-center justify-end md:absolute md:top-4 md:right-0">
           <button
-            className="flex items-center gap-1 rounded-md  bg-gray-cus py-2 px-5 capitalize tracking-wide text-gray-300 
+            className="hover flex items-center gap-1  rounded-md bg-gray-cus py-2 px-5 capitalize tracking-wide text-white
          "
             onClick={openFileModal}
           >

@@ -207,12 +207,12 @@ const Wallet = () => {
   return (
     <div>
       <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
-        <div className="flex max-w-lg gap-3">
+        <div className="flex max-w-lg items-center gap-3">
           <div className="w-full">
             <FilterOption />
           </div>
           {selectOption && hackerId && (
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{ mt: 5 }}>
               <InputLabel id="demo-simple-select-label">
                 Security Research Role
               </InputLabel>
@@ -243,14 +243,14 @@ const Wallet = () => {
             <div className="mb-3 flex w-full items-center justify-end gap-3">
               <button
                 onClick={handleEdit}
-                className="rounded-md bg-primary-btn px-10 py-2 tracking-wider text-white "
+                className="hover rounded-md bg-primary-btn px-10 py-2 tracking-wider text-white "
                 disabled={isLoading}
               >
                 Edit
               </button>
               <button
                 onClick={openTotalModal}
-                className="rounded-md bg-primary-btn px-10 py-2 tracking-wider text-white "
+                className="hover rounded-md bg-primary-btn px-10 py-2 tracking-wider text-white "
                 disabled={isLoading}
               >
                 Add
@@ -287,7 +287,7 @@ const Wallet = () => {
           <div className="pr-3">
             <button
               type="button"
-              className=" rounded-md bg-primary-btn px-10 py-2 tracking-wider  text-white"
+              className=" hover rounded-md bg-primary-btn px-10 py-2 tracking-wider  text-white"
               onClick={openIsWalletOpen}
               disabled={isLoading}
             >

@@ -84,7 +84,18 @@ export default function AlertDialog({
                     label="Select client"
                     onChange={handleFormInput}
                     required
-                    sx={{ backgroundColor: "white" }}
+                    sx={{
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                        outline: "none !important",
+                      },
+                      "&:hover": {
+                        "&& fieldset": {
+                          border: "none",
+                          outline: "none",
+                        },
+                      },
+                    }}
                   >
                     {newUser &&
                       newUser.map((item) => (
@@ -96,7 +107,7 @@ export default function AlertDialog({
                 </FormControl>
               </div>
             </section>
-            <section className="my-2 grid grid-cols-4 gap-8">
+            <section className="my-3 grid grid-cols-4 gap-8 ">
               <div className="col-span-4 md:col-span-2">
                 <FormControl fullWidth>
                   <TextField
@@ -132,7 +143,7 @@ export default function AlertDialog({
             </section>
             {/* <div className="w-full mb-3  "></div>
           <div className="w-full mb-3  "></div> */}
-            <section className="my-2 grid grid-cols-4 gap-8">
+            <section className="my-3 grid grid-cols-4 gap-8">
               <div className="col-span-4 md:col-span-2">
                 <FormControl fullWidth>
                   <InputLabel htmlFor="Total-amount">Total</InputLabel>
@@ -162,7 +173,18 @@ export default function AlertDialog({
                     label="Status"
                     onChange={handleFormInput}
                     required
-                    sx={{ backgroundColor: "white" }}
+                    sx={{
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                        outline: "none !important",
+                      },
+                      "&:hover": {
+                        "&& fieldset": {
+                          border: "none",
+                          outline: "none",
+                        },
+                      },
+                    }}
                   >
                     <MenuItem value={"Paid"}>Paid</MenuItem>
                     <MenuItem value={"Due Soon"}>Due Soon</MenuItem>

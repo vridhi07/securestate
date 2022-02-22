@@ -20,60 +20,81 @@ export default function AddTotal({
     <div>
       <Dialog open={isWalletOpen}>
         <form
-          className="relative px-16 py-8"
+          className="bg-primary-clr"
           onSubmit={onSubmitWallet}
           autoComplete="off"
         >
-          <button
-            type="button"
-            onClick={closeIsWalletOpen}
-            className="absolute top-4 right-4"
-          >
-            <CloseIcon />
-          </button>
+          <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
+            <h4 className="text-center text-2xl font-bold capitalize tracking-wider">
+              Add new Wallet
+            </h4>
+            <button
+              type="button"
+              onClick={closeIsWalletOpen}
+              className="absolute top-4 right-4"
+            >
+              <CloseIcon />
+            </button>
+          </header>
+
           {/* {isError.formStatus && (
             <p className="text-center text-red-500">{isError.msg}</p>
           )} */}
-          <section className="my-2 grid grid-cols-4 gap-8">
-            <div className=" col-span-4">
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Pentest</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={pentest}
-                  label="Pentest"
-                  name="pentest"
+
+          <div className="px-8 py-4">
+            <section className="my-2 grid grid-cols-4 gap-8">
+              <div className=" col-span-4">
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Pentest</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={pentest}
+                    label="Pentest"
+                    name="pentest"
+                    onChange={handleWalletChange}
+                    sx={{
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                        outline: "none !important",
+                      },
+                      "&:hover": {
+                        "&& fieldset": {
+                          border: "none",
+                          outline: "none",
+                        },
+                      },
+                    }}
+                  >
+                    {AllPentest &&
+                      AllPentest.map((item) => {
+                        return (
+                          <MenuItem key={item._id} value={item._id}>
+                            {item.title}
+                          </MenuItem>
+                        );
+                      })}
+                  </Select>
+                </FormControl>
+              </div>
+            </section>
+            <section className="my-4 grid grid-cols-4 gap-8">
+              <div className="col-span-4 md:col-span-2">
+                <TextField
+                  name="award"
+                  id="award"
+                  label="Award"
+                  variant="outlined"
+                  size="medium"
+                  inputProps={{ maxLength: 80 }}
+                  value={award}
                   onChange={handleWalletChange}
-                >
-                  {AllPentest &&
-                    AllPentest.map((item) => {
-                      return (
-                        <MenuItem key={item._id} value={item._id}>
-                          {item.title}
-                        </MenuItem>
-                      );
-                    })}
-                </Select>
-              </FormControl>
-            </div>
-          </section>
-          <section className="my-4 grid grid-cols-4 gap-8">
-            <div className="col-span-4 md:col-span-2">
-              <TextField
-                name="award"
-                id="award"
-                label="Award"
-                variant="outlined"
-                size="medium"
-                inputProps={{ maxLength: 80 }}
-                value={award}
-                onChange={handleWalletChange}
-                required
-              />
-            </div>
-            <div className="col-span-4 md:col-span-2">
-              {/* <TextField
+                  required
+                  sx={{ bgcolor: "white" }}
+                />
+              </div>
+              <div className="col-span-4 md:col-span-2">
+                {/* <TextField
                 name="status"
                 id="status"
                 label="Status"
@@ -84,34 +105,47 @@ export default function AddTotal({
                 onChange={handleWalletChange}
                 required
               /> */}
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-autowidth-label">
-                  Status
-                </InputLabel>
-                <Select
-                  labelId="status"
-                  value={status}
-                  onChange={handleWalletChange}
-                  autoWidth
-                  label="Status"
-                  name="status"
-                  id="status"
-                  variant="outlined"
-                  size="medium"
-                >
-                  <MenuItem value={"paid"}>paid</MenuItem>
-                  <MenuItem value={"pending"}>pending</MenuItem>
-                </Select>
-              </FormControl>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-autowidth-label">
+                    Status
+                  </InputLabel>
+                  <Select
+                    labelId="status"
+                    value={status}
+                    onChange={handleWalletChange}
+                    autoWidth
+                    label="Status"
+                    name="status"
+                    id="status"
+                    variant="outlined"
+                    size="medium"
+                    sx={{
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                        outline: "none !important",
+                      },
+                      "&:hover": {
+                        "&& fieldset": {
+                          border: "none",
+                          outline: "none",
+                        },
+                      },
+                    }}
+                  >
+                    <MenuItem value={"paid"}>paid</MenuItem>
+                    <MenuItem value={"pending"}>pending</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            </section>
+            <div className="w-full ">
+              <button
+                type="submit"
+                className="hover rounded-md bg-primary-btn px-14 py-3 tracking-wide text-white"
+              >
+                Submit
+              </button>
             </div>
-          </section>
-          <div className="w-full ">
-            <button
-              type="submit"
-              className="rounded-md bg-primary-btn px-14 py-3 tracking-wide"
-            >
-              Submit
-            </button>
           </div>
         </form>
       </Dialog>

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as action from "../../Redux/action/index";
 import getFilterOPtion from "../../constantData/FilterOption";
 import { useEffect } from "react";
-
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const FilterOption = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -30,13 +30,18 @@ const FilterOption = () => {
   return (
     <div className="flex w-full justify-center">
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Select Company</InputLabel>
+        {/* <InputLabel id="demo-simple-select-label">Select Company</InputLabel> */}
+        <label htmlFor="filterOptions" className="pb-3 text-lg text-[#6E6E6E] ">
+          Select Company
+        </label>
         <Select
           aria-label="search select "
           value={selectedName}
           onChange={handleChange}
-          label="Select Company"
+          // label="Select Company"
+          id="filterOptions"
           disabled={Role}
+          IconComponent={() => <KeyboardArrowDownIcon />}
         >
           {userDetails?.role === Roles.superAdmin ? (
             companyDetails &&

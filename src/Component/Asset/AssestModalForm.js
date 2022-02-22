@@ -23,9 +23,9 @@ export default function AssetModal({
   } = assetForm;
 
   return (
-    <form onSubmit={handleSubmitAsset}>
+    <form onSubmit={handleSubmitAsset} className="bg-primary-clr">
       <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
-        <h2 className="rounded-md text-center text-2xl font-bold tracking-wider">
+        <h2 className="text-center text-2xl font-bold tracking-wider">
           {isEdit ? "Edit Asset" : "New Asset"}
         </h2>
         <button type="button" onClick={handleClose}>
@@ -38,7 +38,6 @@ export default function AssetModal({
             <TextField
               name="asset_name"
               id="AssetName"
-              className="h-11 w-full resize-none border-2 border-gray-400 py-2 px-2 focus:outline-none"
               label="Asset Name"
               variant="outlined"
               size="small"
@@ -46,6 +45,7 @@ export default function AssetModal({
               value={asset_name}
               onChange={handleAssetForm}
               required
+              sx={{ bgcolor: "white" }}
             />
           </div>
           <div className="col-span-4 md:col-span-2">
@@ -60,6 +60,18 @@ export default function AssetModal({
                 value={asset_type}
                 onChange={handleAssetForm}
                 required
+                sx={{
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                    outline: "none !important",
+                  },
+                  "&:hover": {
+                    "&& fieldset": {
+                      border: "none",
+                      outline: "none",
+                    },
+                  },
+                }}
               >
                 {AssetType.map((item) => {
                   return (
@@ -87,6 +99,18 @@ export default function AssetModal({
                 value={status}
                 onChange={handleAssetForm}
                 required
+                sx={{
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                    outline: "none !important",
+                  },
+                  "&:hover": {
+                    "&& fieldset": {
+                      border: "none",
+                      outline: "none",
+                    },
+                  },
+                }}
               >
                 <MenuItem value={"active"}>ACTIVE</MenuItem>
                 <MenuItem value={"inactive"}>INACTIVE</MenuItem>
@@ -103,6 +127,7 @@ export default function AssetModal({
               value={tech_stack}
               onChange={handleAssetForm}
               required
+              sx={{ bgcolor: "white" }}
             />
           </div>
         </section>
@@ -118,6 +143,7 @@ export default function AssetModal({
               value={third_party_components}
               onChange={handleAssetForm}
               required
+              sx={{ bgcolor: "white" }}
             />
           </div>
           <div className="col-span-4 gap-8 md:col-span-2">
@@ -132,6 +158,18 @@ export default function AssetModal({
                 value={internal_external}
                 onChange={handleAssetForm}
                 required
+                sx={{
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                    outline: "none !important",
+                  },
+                  "&:hover": {
+                    "&& fieldset": {
+                      border: "none",
+                      outline: "none",
+                    },
+                  },
+                }}
               >
                 <MenuItem value={"Internal"}>Internal</MenuItem>
                 <MenuItem value={"External"}>External</MenuItem>
@@ -147,23 +185,23 @@ export default function AssetModal({
             multiline
             inputProps={{ maxLength: 600 }}
             rows={4}
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", bgcolor: "white" }}
             label="Additional Details"
             value={additional_details}
             onChange={handleAssetForm}
             required
           />
         </section>
-        <div className="mt-3 flex items-center justify-between">
+        <div className="mt-3 flex items-center justify-start gap-4">
           <button
             type="submit"
-            className="rounded-md bg-gray-cus-5 px-14 py-2 tracking-wide text-white"
+            className="hover rounded-md bg-primary-btn px-8 py-2 tracking-wide text-white"
           >
             {isEdit ? "Save" : "Add"}
           </button>
           <button
             type="button"
-            className="rounded-md bg-slate-200 px-4 py-2 text-gray-500"
+            className=" rounded-md border border-primary-btn bg-white   px-6 py-2 text-primary-btn "
             onClick={handleClose}
           >
             Cancel
