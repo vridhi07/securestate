@@ -168,7 +168,7 @@ export default function SBOMTab() {
                   <TableRow>
                     <TableCell colSpan={2}>SUPPLER</TableCell>
                     <TableCell>VERSION</TableCell>
-                    <TableCell colSpan={3}>SECURITY</TableCell>
+                    <TableCell colSpan={3}>SECURITY SCORE</TableCell>
                     <TableCell colSpan={2}>PATH</TableCell>
                     <TableCell
                     //  align="right"
