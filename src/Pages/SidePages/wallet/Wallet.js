@@ -216,7 +216,7 @@ const Wallet = () => {
     <div>
       {superAdminAccess && (
         <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
-          <div className="flex max-w-lg items-center justify-start">
+          <div className="flex max-w-lg items-center justify-start gap-4">
             {filterAccess && (
               <div className="w-full">
                 <FilterOption />
@@ -318,6 +318,7 @@ const Wallet = () => {
           page={page}
           handleChangePage={handleChangePage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
+          superAdminAccess={superAdminAccess}
         />
       </div>
       <AddTotal
