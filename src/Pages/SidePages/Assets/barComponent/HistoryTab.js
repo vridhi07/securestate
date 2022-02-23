@@ -49,7 +49,10 @@ const HistoryTab = () => {
     setSelectedId(null);
   };
   const handleDelete = () => {
-    console.log(selectedId, "deleted");
+    // console.log(selectedId, "deleted");
+    dispatch(
+      action.deleteHistoryRequest({ pageId, historyPageNumber, selectedId })
+    );
     closeDeleteModal();
   };
 
@@ -79,6 +82,9 @@ const HistoryTab = () => {
       event: "",
       description: "",
     });
+    if (isEdit) {
+      setIsEdit(false);
+    }
   };
 
   const openEdit = (id) => {
@@ -108,17 +114,26 @@ const HistoryTab = () => {
         description,
       };
       console.log(data);
-      dispatch(action.AddHistoryRequest({ data, pageId }));
+      dispatch(action.AddHistoryRequest({ data, pageId, historyPageNumber }));
     }
     if (isEdit) {
       console.log("edit");
+      const data = {
+        date,
+        event,
+        description,
+        eventId: selectedId,
+      };
+      dispatch(
+        action.updateHistoryRequest({ data, pageId, historyPageNumber })
+      );
     }
     closeHistoryModal();
   };
 
   useEffect(() => {
     dispatch(action.GetHistoryRequest({ pageId, historyPageNumber }));
-  }, [historyPageNumber, addMessage]);
+  }, [historyPageNumber]);
   let assetAccess;
   if (userRole) {
     assetAccess = roles.AssetAccess(userRole);
@@ -188,11 +203,10 @@ const HistoryTab = () => {
                             >
                               <ModeEditOutlineIcon />
                             </IconButton>
-                            <IconButton>
-                              <IoTrashOutline
-                                className="text-lg text-red-500"
-                                onClick={() => openDeleteModal(item._id)}
-                              />
+                            <IconButton
+                              onClick={() => openDeleteModal(item._id)}
+                            >
+                              <IoTrashOutline className="text-lg text-red-500" />
                             </IconButton>
                           </div>
                         )}

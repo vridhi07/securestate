@@ -20,7 +20,7 @@ export function* GetHistorySaga(action) {
 }
 export function* AddHistoryAction(action) {
   try {
-    const { data, pageId } = action.payload;
+    const { data, pageId, historyPageNumber } = action.payload;
     let response = yield call(
       axios.post,
       `${CONFIG.assetTabs}/${pageId}/addEvent`,
@@ -29,9 +29,52 @@ export function* AddHistoryAction(action) {
     if (response && response?.data?.status === 1) {
       // console.log(response, "addhistory");
       yield put(actions.AddHistorySuccess("Successfully Added"));
+      yield put(actions.GetHistoryRequest({ pageId, historyPageNumber }));
     }
   } catch (error) {
     // console.log(error.response.data.message);
     yield put(actions.GetHistoryError(error.response.data.message));
+  }
+}
+
+export function* deleteHistorySaga(action) {
+  try {
+    const { pageId, historyPageNumber, selectedId } = action.payload;
+    let response = yield call(
+      axios.delete,
+      `assets/deleteAssetHistory/${pageId}`,
+      {
+        data: {
+          eventId: selectedId,
+        },
+      }
+    );
+    if (response && response?.data?.status === 1) {
+      // console.log(response, "addhistory");
+      yield put(actions.deleteHistorySuccess("Successfully deleted"));
+      yield put(actions.GetHistoryRequest({ pageId, historyPageNumber }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.deleteHistoryError(error.response.data.message));
+  }
+}
+
+export function* updateHistorySaga(action) {
+  try {
+    const { data, pageId, historyPageNumber } = action.payload;
+    let response = yield call(
+      axios.put,
+      `/assets/updateAssetHistory/${pageId}`,
+      data
+    );
+    if (response && response?.data?.status === 1) {
+      // console.log(response, "addhistory");
+      yield put(actions.updateHistorySuccess("Successfully deleted"));
+      yield put(actions.GetHistoryRequest({ pageId, historyPageNumber }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.updateHistoryError(error.response.data.message));
   }
 }
