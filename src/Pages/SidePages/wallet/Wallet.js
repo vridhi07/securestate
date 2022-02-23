@@ -204,13 +204,22 @@ const Wallet = () => {
   if (userRole) {
     selectOption = getSelectOption(userRole);
   }
+
+  let filterAccess;
+  if (userRole) {
+    filterAccess = roles.walletAdminFilter(userRole);
+  }
+
   return (
     <div>
       <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
-        <div className="flex max-w-lg items-center gap-3">
-          <div className="w-full">
-            <FilterOption />
-          </div>
+        <div className="flex max-w-lg items-center justify-start">
+          {filterAccess && (
+            <div className="w-full">
+              <FilterOption />
+            </div>
+          )}
+
           {selectOption && hackerId && (
             <FormControl fullWidth sx={{ mt: 5 }}>
               <InputLabel id="demo-simple-select-label">

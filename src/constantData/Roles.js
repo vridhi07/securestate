@@ -17,3 +17,10 @@ export const handleClientAccess = (role) => {
   }
   return true;
 };
+
+export const walletAdminFilter = (role) => {
+  if (role === superAdmin) {
+    return true;
+  }
+  return false;
+};

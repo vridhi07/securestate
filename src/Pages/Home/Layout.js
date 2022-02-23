@@ -190,7 +190,7 @@ export default function MiniDrawer() {
         position="fixed"
         open={open}
         elevation={0}
-        sx={{ bgcolor: "#F3F2FA" }}
+        sx={{ bgcolor: "#F3F2FA", pr: 0 }}
       >
         <Toolbar
           sx={{
@@ -352,7 +352,7 @@ export default function MiniDrawer() {
         sx={{
           flexGrow: 1,
           p: 3,
-          backgroundColor: "#F3F2FA",
+          // backgroundColor: "#F3F2FA",
           minHeight: "100vh",
         }}
       >
