@@ -121,7 +121,7 @@ const HistoryTab = () => {
       const data = {
         date,
         event,
-        description,
+        activity_description: description,
         eventId: selectedId,
       };
       dispatch(

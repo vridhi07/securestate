@@ -417,7 +417,7 @@ const CompanyGroup = () => {
       </div>
 
       <div className="mx-auto w-95.5 max-w-5xl">
-        <div className="mt-3 flex items-center justify-between">
+        <div className="mt-3 flex items-center justify-between px-3">
           <header>
             <h2 className="text-xl font-bold  tracking-wider text-orange-cus-1">
               Company Group
@@ -455,7 +455,7 @@ const CompanyGroup = () => {
               <div
                 key={item._id}
                 onClick={() => setGroupId(item._id)}
-                className="mx-auto w-95.5 max-w-5xl"
+                className="mx-auto w-95.5 max-w-5xl px-3"
               >
                 <GroupAccordion
                   handleChange={handleChange}
