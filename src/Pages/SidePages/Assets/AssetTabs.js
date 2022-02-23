@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
+import * as roles from "../../../constantData/Roles";
 const AssetTabs = () => {
   const navigate = useNavigate();
   const {
@@ -13,7 +14,11 @@ const AssetTabs = () => {
   } = useLocation();
 
   const [path, setPath] = useState(pathname);
-
+  const { userRole } = useSelector((state) => state?.user);
+  let filterAccess;
+  if (userRole) {
+    filterAccess = roles.showFilter(userRole);
+  }
   useEffect(() => {
     const tabValue = pathname.substring(pathname.lastIndexOf("/") + 1);
     setPath(tabValue);
@@ -36,11 +41,14 @@ const AssetTabs = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
-        <div className="max-w-lg">
-          <FilterOption />
+      {filterAccess && (
+        <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
+          <div className="max-w-lg">
+            <FilterOption />
+          </div>
         </div>
-      </div>
+      )}
+
       <section className=" relative mx-auto mt-8 mb-4  flex w-full flex-col">
         <div className="mx-auto mt-4  flex w-full flex-col ">
           <div className="mx-auto flex">
