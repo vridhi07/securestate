@@ -180,20 +180,22 @@ const HistoryTab = () => {
                         {item.activity_description}
                       </div>
                       <div className=" col-span-2 ">
-                        <div className="flex items-center gap-4">
-                          <IconButton
-                            sx={{ color: "#606060" }}
-                            onClick={() => openEdit(item?._id)}
-                          >
-                            <ModeEditOutlineIcon />
-                          </IconButton>
-                          <IconButton>
-                            <IoTrashOutline
-                              className="text-lg text-red-500"
-                              onClick={() => openDeleteModal(item._id)}
-                            />
-                          </IconButton>
-                        </div>
+                        {assetAccess && (
+                          <div className="flex items-center gap-4">
+                            <IconButton
+                              sx={{ color: "#606060" }}
+                              onClick={() => openEdit(item?._id)}
+                            >
+                              <ModeEditOutlineIcon />
+                            </IconButton>
+                            <IconButton>
+                              <IoTrashOutline
+                                className="text-lg text-red-500"
+                                onClick={() => openDeleteModal(item._id)}
+                              />
+                            </IconButton>
+                          </div>
+                        )}
                       </div>
                     </article>
                   );

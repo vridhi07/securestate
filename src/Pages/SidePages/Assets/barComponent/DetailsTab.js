@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Priority, Status } from "../../../../constantData/AssestTabInfo";
 // import ModeEditIcon from "@mui/icons-material/ModeEdit";
 // import { AssetType } from "../../../constantData/addAssetInfo";
@@ -18,6 +18,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import Loader from "../../../../Component/Common/PentestLoader";
 const Details = () => {
+  const inputs = useRef(null);
   const {
     state: { id },
   } = useLocation();
@@ -33,7 +34,7 @@ const Details = () => {
   const handleEdit = () => {
     setIsEdit(!isEdit);
   };
-
+  console.log(assetForm?.status);
   const submit = () => {
     // console.log("submit");
     const data = {
@@ -53,7 +54,7 @@ const Details = () => {
   }, []);
 
   useEffect(() => {
-    if (details?.asset_name) {
+    if (details?.status && details?.priority) {
       setAssetForm({
         assetName: details.asset_name,
         assetType: details.asset_type,
@@ -73,6 +74,15 @@ const Details = () => {
   useEffect(() => {
     setDetails(assetDetails);
   }, [assetDetails]);
+
+  useEffect(() => {
+    if (isEdit) {
+      let inputTag = inputs.current.children[1].children[0];
+      // console.log();
+      inputTag.focus();
+    }
+  }, [isEdit]);
+
   // console.log("=====11", assetForm);
   // console.log(assetForm?.assetType);
   // console.log(AssetType);
@@ -138,8 +148,10 @@ const Details = () => {
                 // defaultValue={assetForm?.assetName}
                 value={assetForm?.assetName}
                 onChange={handleChange}
-                disabled={isEdit ? false : true}
+                // disabled={isEdit ? false : true}
+                inputProps={{ readOnly: !isEdit }}
                 className="bg-white"
+                ref={inputs}
               />
             </div>
             <div className="w-full">
@@ -153,8 +165,20 @@ const Details = () => {
                   size="small"
                   value={assetForm?.priority}
                   onChange={handleChange}
-                  disabled={isEdit ? false : true}
+                  inputProps={{ readOnly: !isEdit }}
                   className="bg-white"
+                  sx={{
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "white",
+                      outline: "none !important",
+                    },
+                    "&:hover": {
+                      "&& fieldset": {
+                        border: "none",
+                        outline: "none",
+                      },
+                    },
+                  }}
                 >
                   {Priority.map((item) => {
                     return (
@@ -183,8 +207,20 @@ const Details = () => {
                     // defaultValue={assetForm?.assetType}
                     value={assetForm?.assetType}
                     onChange={handleChange}
-                    disabled={isEdit ? false : true}
+                    inputProps={{ readOnly: !isEdit }}
                     className="bg-white"
+                    sx={{
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                        outline: "none !important",
+                      },
+                      "&:hover": {
+                        "&& fieldset": {
+                          border: "none",
+                          outline: "none",
+                        },
+                      },
+                    }}
                   >
                     {AssetType.map((item) => {
                       // console.log(item);
@@ -208,11 +244,27 @@ const Details = () => {
                   name="assetStatus"
                   size="small"
                   name="status"
-                  disabled={isEdit ? false : true}
+                  inputProps={{ readOnly: !isEdit }}
                   onChange={handleChange}
                   // defaultValue={assetForm?.assetStatus}
                   value={assetForm?.status}
                   className="bg-white"
+                  sx={{
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "white",
+                      outline: "none !important",
+                    },
+                    "&:hover": {
+                      "&& fieldset": {
+                        border: "none",
+                        outline: "none",
+                      },
+                    },
+                    "& .Mui-disabled ": {
+                      borderColor: "white",
+                      outline: "none !important",
+                    },
+                  }}
                 >
                   <MenuItem value={"active"}>ACTIVE</MenuItem>
 
@@ -238,7 +290,7 @@ const Details = () => {
               // defaultValue={assetForm?.additionalINfo}
               value={assetForm?.additionalINfo}
               onChange={handleChange}
-              disabled={isEdit ? false : true}
+              inputProps={{ readOnly: !isEdit }}
             />
           </section>
 
@@ -256,7 +308,7 @@ const Details = () => {
               id="termsAndCondition"
               onChange={handleChange}
               value={assetForm?.termsAndConditions}
-              disabled={isEdit ? false : true}
+              inputProps={{ readOnly: !isEdit }}
               className="bg-white"
             />
           </section>

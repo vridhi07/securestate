@@ -10,7 +10,7 @@ export function* AssetDetailsSaga(action) {
       `${CONFIG.assetTabs}/getasstById/${action.payload}`
     );
     if (response && response.data?.status === 1) {
-      console.log(response, "files");
+      // console.log(response, "files");
       yield put(actions.getAssetDetailsSuccess(response?.data?.data));
     }
   } catch (error) {
