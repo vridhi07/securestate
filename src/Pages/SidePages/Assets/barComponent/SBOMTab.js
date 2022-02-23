@@ -25,29 +25,26 @@ export default function SBOMTab() {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [componentForm, setComponentForm] = useState({
     supplier: "",
-    component: "",
-    license: "",
     cve: "",
-    uniqueIdentifier: "",
+    security_score: "",
+    path: "",
     version: "",
-    sbom_author: "",
   });
   const [SboMPageNumber, setSboMPageNumber] = useState(1);
 
+  //   {
+  //     "supplier": "supplier",
+  //     "cve": "cve",
+  //     "security_score":"req.body.security_score",
+  //     "path":"req.body.path",
+  //     "version":"req.body.version"
+  // }
   // * router location
   const location = useLocation();
   const assetId = location.state.id;
 
   // form destructure
-  const {
-    supplier,
-    component,
-    license,
-    cve,
-    uniqueIdentifier,
-    version,
-    sbom_author,
-  } = componentForm;
+  const { supplier, cve, security_score, path, version } = componentForm;
 
   // * Redux states
   const dispatch = useDispatch();
@@ -78,12 +75,10 @@ export default function SBOMTab() {
 
     const data = {
       supplier,
-      component,
-      license,
       cve,
-      uniqueIdentifier,
+      security_score,
+      path,
       version,
-      sbom_author,
     };
     console.log(assetId);
     dispatch(action.addSbomRequest({ assetId, data }));
@@ -91,12 +86,10 @@ export default function SBOMTab() {
     setComponentForm({
       ...componentForm,
       supplier: "",
-      component: "",
-      license: "",
       cve: "",
-      uniqueIdentifier: "",
+      security_score: "",
+      path: "",
       version: "",
-      sbom_author: "",
     });
   };
 
@@ -204,7 +197,7 @@ export default function SBOMTab() {
                             overflow: "hidden",
                           }}
                         >
-                          {item.supplier}
+                          {item?.supplier}
                         </TableCell>
                         <TableCell
                           style={{
@@ -223,7 +216,7 @@ export default function SBOMTab() {
                             overflow: "hidden",
                           }}
                         >
-                          SECURITY
+                          {item?.security_score}
                         </TableCell>
                         <TableCell
                           align="left"
@@ -234,7 +227,7 @@ export default function SBOMTab() {
                             overflow: "hidden",
                           }}
                         >
-                          PATH
+                          {item?.path}
                         </TableCell>
                         <TableCell
                           // align="right"
@@ -244,7 +237,7 @@ export default function SBOMTab() {
                             overflow: "hidden",
                           }}
                         >
-                          {item.sbom_author}
+                          {item?.sbom_author?.user_name}
                         </TableCell>
                         <TableCell
                           style={{

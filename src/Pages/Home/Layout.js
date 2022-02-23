@@ -184,7 +184,7 @@ export default function MiniDrawer() {
   const sideBarData = sidebarData(userDetails?.role);
   const loading = false;
   return (
-    <Box sx={{ display: "flex", bgcolor: "#F3F2FA" }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         position="fixed"
