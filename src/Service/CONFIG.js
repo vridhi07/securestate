@@ -17,10 +17,17 @@ export const CONFIG = {
   //! User
   getUserDetails: "user/userDetails",
   // !Pentest
-  pentestDetails: "pentest",
+  pentestData: "pentest/pentestData",
+  pentestDetails: "pentest/pentestDetails",
   addPentest: "pentest/addPentest",
   deletePentest: "pentest/deletePentest",
-  pentestTabs: "pentest",
+  // pentestTabs: "pentest",
+  addScope: "pentest/scope/pentestActiveScope/addNewScope",
+  editScope: "pentest/scope/pentestActiveScope/editScope",
+  deleteScope: "pentest/deleteScope",
+  addFindings: "pentest/findings/pentestActiveFindings/newFinding",
+  editFindings: "/pentest/findings/pentestActiveFindings/editFinding",
+  deleteFinding: "pentest/findings/deleteFinding",
   // !users
   getUsers: "user/userList",
   addUsers: "user/addUser",

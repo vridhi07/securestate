@@ -24,3 +24,10 @@ export const walletAdminFilter = (role) => {
   }
   return false;
 };
+
+export const showFilter = (role) => {
+  if (role === superAdmin) {
+    return true;
+  }
+  return false;
+};

@@ -206,46 +206,51 @@ const Wallet = () => {
   }
 
   let filterAccess;
+  let superAdminAccess;
   if (userRole) {
     filterAccess = roles.walletAdminFilter(userRole);
+    superAdminAccess = roles.showFilter(userRole);
   }
 
   return (
     <div>
-      <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
-        <div className="flex max-w-lg items-center justify-start">
-          {filterAccess && (
-            <div className="w-full">
-              <FilterOption />
-            </div>
-          )}
+      {superAdminAccess && (
+        <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
+          <div className="flex max-w-lg items-center justify-start">
+            {filterAccess && (
+              <div className="w-full">
+                <FilterOption />
+              </div>
+            )}
 
-          {selectOption && hackerId && (
-            <FormControl fullWidth sx={{ mt: 5 }}>
-              <InputLabel id="demo-simple-select-label">
-                Security Research Role
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={hackerId}
-                label="Security Research Role"
-                onChange={(e) => setHackerId(e.target.value)}
-                required
-                disabled={isLoading}
-              >
-                {allHacker.map((item) => {
-                  return (
-                    <MenuItem key={item._id} value={item._id}>
-                      {item.user_name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          )}
+            {selectOption && hackerId && (
+              <FormControl fullWidth sx={{ mt: 5 }}>
+                <InputLabel id="demo-simple-select-label">
+                  Security Research Role
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={hackerId}
+                  label="Security Research Role"
+                  onChange={(e) => setHackerId(e.target.value)}
+                  required
+                  disabled={isLoading}
+                >
+                  {allHacker.map((item) => {
+                    return (
+                      <MenuItem key={item._id} value={item._id}>
+                        {item.user_name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            )}
+          </div>
         </div>
-      </div>
+      )}
+
       <div className="mt-4  px-[5%]">
         <div className="min-w-[500px] overflow-x-auto">
           {selectOption && (

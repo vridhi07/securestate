@@ -23,7 +23,7 @@ const color2 = {
   fontSize: "1.5rem",
   color: "#F27931",
 };
-export const adminSidebar = [
+export const SuperAdminSidebar = [
   {
     path: "dashboard",
     linkName: "DASHBOARD",
@@ -49,8 +49,8 @@ export const adminSidebar = [
     icon2: <InboxRoundedIcon sx={color2} />,
   },
   {
-    path: "customer",
-    linkName: "CUSTOMER",
+    path: "company",
+    linkName: "COMPANY",
     icon: <PersonIcon sx={color} />,
     icon2: <PersonIcon sx={color2} />,
   },
@@ -66,6 +66,69 @@ export const adminSidebar = [
     icon: <AccountBalanceWalletIcon sx={color} />,
     icon2: <AccountBalanceWalletIcon sx={color2} />,
   },
+  {
+    path: "invoices",
+    linkName: "INVOICES",
+    icon: <DescriptionIcon sx={color} />,
+    icon2: <DescriptionIcon sx={color2} />,
+  },
+  {
+    path: "profile",
+    linkName: "PROFILE",
+    icon: <PersonIcon sx={color} />,
+    icon2: <PersonIcon sx={color2} />,
+  },
+  // {
+  //   path: "settings",
+  //   linkName: "SETTINGS",
+  //   icon: <SettingsIcon sx={color} />,
+  //   icon2: <SettingsIcon sx={color2} />,
+  // },
+];
+
+export const adminSideBar = [
+  {
+    path: "dashboard",
+    linkName: "DASHBOARD",
+    icon: <HomeIcon sx={color} />,
+    icon2: <HomeIcon sx={color2} />,
+  },
+  {
+    path: "assets",
+    linkName: "ASSETS",
+    icon: <CurrencyExchangeIcon sx={color} />,
+    icon2: <CurrencyExchangeIcon sx={color2} />,
+  },
+  {
+    path: "pentests",
+    linkName: "PENTEST",
+    icon: <FactCheckIcon sx={color} />,
+    icon2: <FactCheckIcon sx={color2} />,
+  },
+  {
+    path: "inbox",
+    linkName: "INBOX",
+    icon: <InboxRoundedIcon sx={color} />,
+    icon2: <InboxRoundedIcon sx={color2} />,
+  },
+  {
+    path: "company",
+    linkName: "COMPANY",
+    icon: <PersonIcon sx={color} />,
+    icon2: <PersonIcon sx={color2} />,
+  },
+  {
+    path: "users",
+    linkName: "USERS",
+    icon: <PeopleIcon sx={color} />,
+    icon2: <PeopleIcon sx={color2} />,
+  },
+  // {
+  //   path: "wallet",
+  //   linkName: "WALLET",
+  //   icon: <AccountBalanceWalletIcon sx={color} />,
+  //   icon2: <AccountBalanceWalletIcon sx={color2} />,
+  // },
   {
     path: "invoices",
     linkName: "INVOICES",
@@ -178,10 +241,10 @@ export const hacker = [
 ];
 export const sidebarData = (role) => {
   if (role === roles.admin) {
-    return adminSidebar;
+    return adminSideBar;
   }
   if (role === roles.superAdmin) {
-    return adminSidebar;
+    return SuperAdminSidebar;
   }
   if (role === roles.client) {
     return clientSidebar;

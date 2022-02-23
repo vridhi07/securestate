@@ -65,8 +65,10 @@ const Customer = () => {
     return false;
   };
   let access;
+  let filterAccess;
   if (userRole) {
     access = getAccess(userRole);
+    filterAccess = roles.showFilter(userRole);
   }
   useEffect(() => {
     dispatch(action.getUsersRequest());
@@ -74,21 +76,23 @@ const Customer = () => {
 
   return (
     <div className="min-h-screen">
-      <div className=" relative   mt-4  w-full rounded-lg bg-white py-10 ">
-        <div className=" max-w-3xl pl-7">
-          <FilterOption />
-        </div>
-        {access && (
-          <div className="pl-7 md:absolute md:top-8 md:right-6  md:pl-0 ">
-            <button
-              className="mt-3 rounded-lg border bg-[#EBEBEB] py-2 px-4   "
-              onClick={openCustomerForm}
-            >
-              New Company
-            </button>
+      {filterAccess && (
+        <div className=" relative   mt-4  w-full rounded-lg bg-white py-10 ">
+          <div className=" max-w-3xl pl-7">
+            <FilterOption />
           </div>
-        )}
-      </div>
+          {access && (
+            <div className="pl-7 md:absolute md:top-8 md:right-6  md:pl-0 ">
+              <button
+                className="mt-3 rounded-lg border bg-[#EBEBEB] py-2 px-4   "
+                onClick={openCustomerForm}
+              >
+                New Company
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* <MultipleSelectChip /> */}
       <div>

@@ -118,7 +118,7 @@ function App() {
           }
         />
         <Route
-          path="/customer"
+          path="/company"
           element={
             <AdminPrivateRoute>
               <Suspense fallback={<>...</>}>
