@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import DeleteIcon from "@mui/icons-material/Delete";
+// import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import ModalForm from "../../../../Component/Asset/SBOMModalForm";
 import Stack from "@mui/material/Stack";
@@ -168,7 +168,7 @@ export default function SBOMTab() {
                   <TableRow>
                     <TableCell colSpan={2}>SUPPLER</TableCell>
                     <TableCell>VERSION</TableCell>
-                    <TableCell colSpan={3}>SECURITY</TableCell>
+                    <TableCell colSpan={3}>SECURITY SCORE</TableCell>
                     <TableCell colSpan={2}>PATH</TableCell>
                     <TableCell
                     //  align="right"

@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./reducer/rootReducer";
 import rootSaga from "./saga/rootSaga";
 const Prod = process.env.REACT_APP_PROD;
-console.log(Prod);
+// console.log(Prod);
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers =
   (Prod !== "production" &&

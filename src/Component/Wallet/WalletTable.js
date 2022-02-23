@@ -7,8 +7,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+// import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { IoTrashOutline } from "react-icons/io5";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import * as action from "../../Redux/action";
+import IconButton from "@mui/material/IconButton";
 import { useSelector, useDispatch } from "react-redux";
 const columns = [
   { id: "Pentest", label: "Pentest", minWidth: 170, align: "left" },
@@ -17,20 +20,25 @@ const columns = [
     label: "Award",
     minWidth: 170,
     align: "left",
-    format: (value) => value.toLocaleString("en-US"),
+    // format: (value) => value.toLocaleString("en-US"),
   },
   {
     id: "Status",
     label: "Status",
     minWidth: 170,
     align: "left",
-    format: (value) => value.toLocaleString("en-US"),
+    // format: (value) => value.toLocaleString("en-US"),
   },
-  // {
-  //   id: "editOrDelete",
-  //   minWidth: 50,
-  //   align: "center",
-  // },
+  {
+    id: "edit",
+    minWidth: 50,
+    align: "center",
+  },
+  {
+    id: "editOrDelete",
+    minWidth: 50,
+    align: "center",
+  },
 ];
 
 export default function StickyHeadTable({
@@ -39,6 +47,7 @@ export default function StickyHeadTable({
   rowsPerPage,
   handleChangePage,
   handleChangeRowsPerPage,
+  superAdminAccess,
 }) {
   // const [page, setPage] = useState(0);
   // const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -65,15 +74,25 @@ export default function StickyHeadTable({
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
+              {superAdminAccess
+                ? columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))
+                : columns.slice(0, 3).map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -84,6 +103,13 @@ export default function StickyHeadTable({
                     <TableCell align="left">{item?.pentestId?.title}</TableCell>
                     <TableCell align="left">{item?.award}</TableCell>
                     <TableCell align="left">{item?.status}</TableCell>
+                    {superAdminAccess && (
+                      <TableCell align="left">edit</TableCell>
+                    )}
+                    {superAdminAccess && (
+                      <TableCell align="left">delete</TableCell>
+                    )}
+
                     {/* <TableCell align="center">
                       <button>
                         <MoreVertIcon />
