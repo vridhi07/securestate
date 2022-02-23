@@ -1,7 +1,11 @@
 import React from "react";
 import { IoTrashOutline } from "react-icons/io5";
 import IconButton from "@mui/material/IconButton";
-const SingleSubscriber = ({ subscriber = [], openDeleteModal }) => {
+const SingleSubscriber = ({
+  subscriber = [],
+  openDeleteModal,
+  SubscriptionAccess,
+}) => {
   return (
     <div className="mb-3 grid w-full min-w-[600px] grid-cols-10 items-center rounded-md bg-white py-5 px-4 ">
       <div className="col-span-5 min-w-[500px]">
@@ -21,15 +25,19 @@ const SingleSubscriber = ({ subscriber = [], openDeleteModal }) => {
       </div>
       <div className="col-span-3 min-w-[200px]"></div>
       <div className=" col-span-2 text-right">
-        <div className="flex w-full justify-end">
-          <IconButton
-            color="error"
-            sx={{ mr: 2 }}
-            onClick={() => openDeleteModal(subscriber?._id)}
-          >
-            <IoTrashOutline />
-          </IconButton>
-        </div>
+        {SubscriptionAccess ? (
+          <div className="flex w-full justify-end">
+            <IconButton
+              color="error"
+              sx={{ mr: 2 }}
+              onClick={() => openDeleteModal(subscriber?._id)}
+            >
+              <IoTrashOutline />
+            </IconButton>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
       {/* <div className="flex flex-col">
         <section className="flex ">

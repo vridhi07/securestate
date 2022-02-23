@@ -6,11 +6,12 @@ import AddSubscription from "./AddSubscription";
 import DeleteModal from "../Common/DeleteModal";
 import { useSelector, useDispatch } from "react-redux";
 import * as action from "../../Redux/action";
+import * as roles from "../../constantData/Roles";
 const Subscription = () => {
   const dispatch = useDispatch();
 
   const { selectedCompany } = useSelector((state) => state?.company);
-  const { userDetails } = useSelector((state) => state?.user);
+  const { userDetails, userRole } = useSelector((state) => state?.user);
   const { allAsset } = useSelector((state) => state.Assets);
   const { SubscriptionData } = useSelector((state) => state?.subscriber);
   // console.log(SubscriptionData);
@@ -20,7 +21,7 @@ const Subscription = () => {
     }
     return userDetails?.company_id._id;
   };
-  const company_id = getCompanyId(userDetails?.role);
+  const company_id = getCompanyId(userRole);
 
   const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
   // console.log(allAsset);
@@ -109,16 +110,24 @@ const Subscription = () => {
   useEffect(() => {
     dispatch(action.getAllAssetListRequest(company_id));
   }, [company_id]);
+
+  let SubscriptionAccess;
+  if (userRole) {
+    SubscriptionAccess = roles.showFilter(userRole);
+  }
+  console.log(SubscriptionAccess);
   return (
     <div className="mt-[5rem] mb-5">
-      <header className="mx-auto mb-2 flex w-95.5 max-w-5xl items-center justify-between  pl-[2.5%] ">
+      <header className="mx-auto mb-2 flex w-95.5 max-w-5xl items-center justify-between px-3">
         <section>
           <h2 className="text-xl font-bold  tracking-wider text-orange-cus-1">
             Subscriptions
           </h2>
         </section>
-        <section className="flex items-center">
-          <div className="flex h-11 w-60 items-center  justify-start rounded-lg bg-white pr-1 pl-4">
+        <section className={`  flex items-center`}>
+          <div
+            className={`flex h-11 w-60 items-center  justify-start rounded-lg bg-white pr-1 pl-4`}
+          >
             <SearchIcon />
             <input
               type="text"
@@ -126,14 +135,16 @@ const Subscription = () => {
               className="w-full rounded-3xl border-0  py-1 pl-2 focus:bg-none focus:outline-none focus:ring-0"
             />
           </div>
-          <div className="mr-2 ml-[3%] md:mr-8">
-            <button
-              onClick={openSubscription}
-              className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300 ease-in  hover:bg-orange-600 hover:shadow-xl"
-            >
-              <AddIcon sx={{ color: "white" }} />
-            </button>
-          </div>
+          {SubscriptionAccess && (
+            <div className="mr-2 ml-[3%] md:mr-8">
+              <button
+                onClick={openSubscription}
+                className={`grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300 ease-in  hover:bg-orange-600 hover:shadow-xl`}
+              >
+                <AddIcon sx={{ color: "white" }} />
+              </button>
+            </div>
+          )}
         </section>
       </header>
       <div
@@ -152,7 +163,7 @@ const Subscription = () => {
           </div>
           <div className="col-span-3 min-w-[200px]"></div>
           <div className=" col-span-2 text-right">
-            <h4>Remove</h4>
+            {SubscriptionAccess ? <h4>Remove</h4> : <h4></h4>}
           </div>
         </div>
         <div className="min-h-[100%] px-3 py-2 text-[#737275]">
@@ -163,6 +174,7 @@ const Subscription = () => {
                   key={item._id}
                   subscriber={item}
                   openDeleteModal={openDeleteModal}
+                  SubscriptionAccess={SubscriptionAccess}
                 />
               );
             })}

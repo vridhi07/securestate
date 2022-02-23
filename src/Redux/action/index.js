@@ -45,6 +45,21 @@ export const AddHistoryRequest = createAction(actions.ADD_HISTORY_REQUEST);
 export const AddHistorySuccess = createAction(actions.ADD_HISTORY_SUCCESS);
 export const AddHistoryError = createAction(actions.ADD_HISTORY_ERROR);
 
+export const updateHistoryRequest = createAction(
+  actions.UPDATE_HISTORY_REQUEST
+);
+export const updateHistorySuccess = createAction(
+  actions.UPDATE_HISTORY_SUCCESS
+);
+export const updateHistoryError = createAction(actions.UPDATE_HISTORY_ERROR);
+
+export const deleteHistoryRequest = createAction(
+  actions.DELETE_HISTORY_REQUEST
+);
+export const deleteHistorySuccess = createAction(
+  actions.DELETE_HISTORY_SUCCESS
+);
+export const deleteHistoryError = createAction(actions.DELETE_HISTORY_ERROR);
 // * SBOM
 export const GetSBOMRequest = createAction(actions.GET_SBOM_REQUEST);
 export const GetSBOMSuccess = createAction(actions.GET_SBOM_SUCCESS);

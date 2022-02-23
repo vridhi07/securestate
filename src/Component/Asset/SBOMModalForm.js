@@ -10,15 +10,7 @@ export default function SBOMModalForm({
   handleComponentForm,
   handleSubmit,
 }) {
-  const {
-    supplier,
-    component,
-    license,
-    cve,
-    uniqueIdentifier,
-    version,
-    sbom_author,
-  } = componentForm;
+  const { supplier, cve, security_score, path, version } = componentForm;
 
   return (
     <div>
@@ -51,22 +43,22 @@ export default function SBOMModalForm({
                     onChange={handleComponentForm}
                     fullWidth
                     required
-                    sx={{ bgcolor: "white" }}
+                    // sx={{ bgcolor: "white" }}
                   />
                 </div>
               </div>
               <div className="col-span-4 md:col-span-2">
                 <div className="mb-4 w-full">
                   <TextField
-                    id="component"
-                    label="Component"
+                    id="security_score"
+                    label="Security Score"
                     variant="outlined"
-                    value={component}
-                    name="component"
+                    value={security_score}
+                    name="security_score"
                     onChange={handleComponentForm}
                     fullWidth
                     required
-                    sx={{ bgcolor: "white" }}
+                    // sx={{ bgcolor: "white" }}
                   />
                 </div>
               </div>
@@ -75,15 +67,15 @@ export default function SBOMModalForm({
               <div className="col-span-4 md:col-span-2">
                 <div className="mb-4 w-full">
                   <TextField
-                    id="license"
-                    label="License"
+                    id="path"
+                    label="Path"
                     variant="outlined"
-                    value={license}
-                    name="license"
+                    value={path}
+                    name="path"
                     onChange={handleComponentForm}
                     fullWidth
                     required
-                    sx={{ bgcolor: "white" }}
+                    // sx={{ bgcolor: "white" }}
                   />
                 </div>
               </div>
@@ -91,7 +83,7 @@ export default function SBOMModalForm({
                 <div className="mb-4 w-full">
                   <TextField
                     id="cve"
-                    label="CVE"
+                    label="# OF CVE"
                     variant="outlined"
                     value={cve}
                     name="cve"
@@ -107,21 +99,6 @@ export default function SBOMModalForm({
               <div className="col-span-4 md:col-span-2">
                 <div className="mb-4 w-full">
                   <TextField
-                    id="uniqueIdentifier"
-                    label="Unique Identifier"
-                    variant="outlined"
-                    value={uniqueIdentifier}
-                    name="uniqueIdentifier"
-                    onChange={handleComponentForm}
-                    fullWidth
-                    required
-                    sx={{ bgcolor: "white" }}
-                  />
-                </div>
-              </div>
-              <div className="col-span-4 md:col-span-2">
-                <div className="mb-4 w-full">
-                  <TextField
                     id="version"
                     label="Version"
                     variant="outlined"
@@ -134,8 +111,9 @@ export default function SBOMModalForm({
                   />
                 </div>
               </div>
+              <div className="col-span-4 md:col-span-2"></div>
             </section>
-            <section className="my-2 grid grid-cols-4 gap-8">
+            {/* <section className="my-2 grid grid-cols-4 gap-8">
               <div className="col-span-4 md:col-span-2">
                 <div className="mb-4 w-full">
                   <TextField
@@ -152,7 +130,7 @@ export default function SBOMModalForm({
                 </div>
               </div>
               <div className="col-span-4 md:col-span-2"></div>
-            </section>
+            </section> */}
 
             <div className="mt-5 flex items-center justify-start gap-4 pb-4">
               <button

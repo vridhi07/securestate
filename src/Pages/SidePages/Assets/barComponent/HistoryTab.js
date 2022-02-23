@@ -9,7 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import * as roles from "../../../../constantData/Roles";
 import AddIcon from "@mui/icons-material/Add";
+import IconButton from "@mui/material/IconButton";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { IoTrashOutline } from "react-icons/io5";
+import DeleteModal from "../../../../Component/Common/DeleteModal";
 const HistoryTab = () => {
+  const location = useLocation();
+  let pageId = location.state.id;
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [historyEvent, setHistoryEvent] = useState({
     date: new Date(),
@@ -17,6 +23,12 @@ const HistoryTab = () => {
     description: "",
   });
   const [historyPageNumber, setHistoryPageNumber] = useState(1);
+
+  const [isEdit, setIsEdit] = useState(false);
+
+  const [selectedId, setSelectedId] = useState(null);
+  // console.log(selectedId);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const dispatch = useDispatch();
 
   const { isLoading, historyDetails, addMessage, addLoading } = useSelector(
@@ -24,8 +36,26 @@ const HistoryTab = () => {
   );
   const userRole = useSelector((state) => state?.user?.userRole);
   // console.log(historyDetails);
-  const location = useLocation();
-  let pageId = location.state.id;
+  //   isDeleteModalOpen,
+  // closeDeleteModal,
+  // handleDelete,
+  const openDeleteModal = (id) => {
+    setIsDeleteModalOpen(true);
+    setSelectedId(id);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelectedId(null);
+  };
+  const handleDelete = () => {
+    // console.log(selectedId, "deleted");
+    dispatch(
+      action.deleteHistoryRequest({ pageId, historyPageNumber, selectedId })
+    );
+    closeDeleteModal();
+  };
+
   const handleEventChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -45,32 +75,65 @@ const HistoryTab = () => {
 
   const closeHistoryModal = () => {
     setIsHistoryOpen(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("submit");
-    const { date, event, description } = historyEvent;
-    const data = {
-      date,
-      event,
-      description,
-    };
-    console.log(data);
-    dispatch(action.AddHistoryRequest({ data, pageId }));
-
-    closeHistoryModal();
+    setSelectedId(null);
     setHistoryEvent({
       ...historyEvent,
       date: new Date(),
       event: "",
       description: "",
     });
+    if (isEdit) {
+      setIsEdit(false);
+    }
+  };
+
+  const openEdit = (id) => {
+    // console.log(id);
+    const singleData = historyDetails?.data?.find((item) => item._id === id);
+    // console.log(singleData);
+    setHistoryEvent({
+      ...historyEvent,
+      date: new Date(singleData.date),
+      event: singleData.event,
+      description: singleData.activity_description,
+    });
+    setIsHistoryOpen(true);
+    setIsEdit(true);
+    setSelectedId(id);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { date, event, description } = historyEvent;
+    if (!isEdit) {
+      console.log("submit");
+      const data = {
+        date,
+        event,
+        description,
+      };
+      console.log(data);
+      dispatch(action.AddHistoryRequest({ data, pageId, historyPageNumber }));
+    }
+    if (isEdit) {
+      console.log("edit");
+      const data = {
+        date,
+        event,
+        activity_description: description,
+        eventId: selectedId,
+      };
+      dispatch(
+        action.updateHistoryRequest({ data, pageId, historyPageNumber })
+      );
+    }
+    closeHistoryModal();
   };
 
   useEffect(() => {
     dispatch(action.GetHistoryRequest({ pageId, historyPageNumber }));
-  }, [historyPageNumber, addMessage]);
+  }, [historyPageNumber]);
   let assetAccess;
   if (userRole) {
     assetAccess = roles.AssetAccess(userRole);
@@ -94,7 +157,7 @@ const HistoryTab = () => {
         <h4 className="text-4xl tracking-wide  text-orange-cus-1">Asset</h4>
       </div>
 
-      <section className=" grid grid-cols-10 items-center justify-center border-b-2 border-orange-cus-1 text-center font-bold  uppercase  text-gray-text-3 md:mx-16">
+      <section className=" grid grid-cols-12 items-center justify-center border-b-2 border-orange-cus-1 text-center font-bold  uppercase  text-gray-text-3 md:mx-16">
         <div className="col-span-3 ">
           <h4>Date</h4>
         </div>
@@ -104,6 +167,7 @@ const HistoryTab = () => {
         <div className="col-span-4 text-left">
           <h4>Activity Description</h4>
         </div>
+        <div className=" col-span-2"></div>
       </section>
 
       <div className="mb-10 ">
@@ -117,7 +181,7 @@ const HistoryTab = () => {
                   return (
                     <article
                       key={item._id}
-                      className={`grid grid-cols-10 items-center justify-center rounded-sm py-2 px-2 text-center md:mx-16 ${
+                      className={`grid grid-cols-12  rounded-sm py-2 px-2 text-center md:mx-16 ${
                         index % 2 == 0 && "bg-white"
                       }`}
                     >
@@ -127,8 +191,25 @@ const HistoryTab = () => {
                       <div className="col-span-3 max-w-[290px] overflow-hidden ">
                         {item.event}
                       </div>
-                      <div className=" col-span-4 max-w-[373px]  overflow-x-hidden pr-2  text-left ">
+                      <div className=" col-span-4 max-w-[373px]  overflow-x-hidden pr-2  text-center ">
                         {item.activity_description}
+                      </div>
+                      <div className=" col-span-2 ">
+                        {assetAccess && (
+                          <div className="flex items-center gap-4">
+                            <IconButton
+                              sx={{ color: "#606060" }}
+                              onClick={() => openEdit(item?._id)}
+                            >
+                              <ModeEditOutlineIcon />
+                            </IconButton>
+                            <IconButton
+                              onClick={() => openDeleteModal(item._id)}
+                            >
+                              <IoTrashOutline className="text-lg text-red-500" />
+                            </IconButton>
+                          </div>
+                        )}
                       </div>
                     </article>
                   );
@@ -173,6 +254,12 @@ const HistoryTab = () => {
         handleEventChange={handleEventChange}
         handleDate={handleDate}
         handleSubmit={handleSubmit}
+        isEdit={isEdit}
+      />
+      <DeleteModal
+        isDeleteModalOpen={isDeleteModalOpen}
+        closeDeleteModal={closeDeleteModal}
+        handleDelete={handleDelete}
       />
     </div>
   );

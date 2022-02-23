@@ -297,6 +297,13 @@ const Profile = () => {
               )}
             </div>
           </div>
+          <div className="mt-3 flex items-center ">
+            <label className="mr-[3rem]">Role:</label>
+
+            <div className="border-b border-gray-500 capitalize">
+              <div className="px w-[300px] px-3 pt-2 ">{userDetails?.role}</div>
+            </div>
+          </div>
         </form>
         <Box sx={{ display: "flex", padding: 1 }}>
           <div>

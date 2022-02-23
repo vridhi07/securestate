@@ -9,6 +9,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { useSelector, useDispatch } from "react-redux";
 import * as action from "../../Redux/action";
 import { useEffect } from "react";
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -19,6 +20,18 @@ const MenuProps = {
     },
   },
 };
+// const names = [
+//   "Oliver Hansen",
+//   "Van Henry",
+//   "April Tucker",
+//   "Ralph Hubbard",
+//   "Omar Alexander",
+//   "Carlos Abbott",
+//   "Miriam Wagner",
+//   "Bradley Wilkerson",
+//   "Virginia Andrews",
+//   "Kelly Snyder",
+// ];
 
 export default function MultipleSelectCheckmarks({
   selectedEmails,
@@ -30,12 +43,25 @@ export default function MultipleSelectCheckmarks({
   useEffect(() => {
     dispatch(action.getUsersRequest());
   }, []);
+
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
     setSelectedEmails(typeof value === "string" ? value.split(",") : value);
   };
+
+  // const [personName, setPersonName] = React.useState([]);
+
+  // const handleChange = (event) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   setPersonName(
+  //     // On autofill we get a stringified value.
+  //     typeof value === "string" ? value.split(",") : value
+  //   );
+  // };
 
   const getUsersNames = (selectedList) => {
     return userList?.users
@@ -48,7 +74,7 @@ export default function MultipleSelectCheckmarks({
   };
   return (
     <div>
-      <FormControl variant="standard" fullWidth>
+      <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-checkbox-label">To</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
@@ -70,4 +96,27 @@ export default function MultipleSelectCheckmarks({
       </FormControl>
     </div>
   );
+}
+
+{
+  /* <FormControl variant="standard" fullWidth>
+        <InputLabel id="email">Tag</InputLabel>
+        <Select
+          labelId="email"
+          id="email"
+          multiple
+          value={selectedEmails}
+          onChange={handleChange}
+          input={<OutlinedInput label="Tag" />}
+          renderValue={(selected) => getUsersNames(selected).join(", ")}
+          MenuProps={MenuProps}
+        >
+          {userList?.users.map(({ _id, email }) => (
+            <MenuItem key={_id} value={_id}>
+              <Checkbox checked={selectedEmails.indexOf(_id) > -1} />
+              <ListItemText primary={email} />
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl> */
 }

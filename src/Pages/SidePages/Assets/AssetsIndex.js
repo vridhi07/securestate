@@ -252,18 +252,24 @@ const AssetsIndex = () => {
   // };
   // console.log(assetsList, "===8888");
   let assetAccess;
+  let filterAccess;
   if (userRole) {
     assetAccess = roles.AssetAccess(userRole);
+    filterAccess = roles.showFilter(userRole);
   }
+
   // console.log(assetAccess);
   // console.log(assetsList);
   return (
     <div className="mt-8 ">
-      <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
-        <div className="max-w-lg">
-          <FilterOption />
+      {filterAccess && (
+        <div className="w-full rounded-lg bg-white py-10 pl-7 shadow-sm ">
+          <div className="max-w-lg">
+            <FilterOption />
+          </div>
         </div>
-      </div>
+      )}
+
       <section className="  mt-8 mb-4  w-full ">
         <div className="flex w-full items-center justify-between ">
           <h4 className="text-4xl tracking-wide  text-orange-cus-1">Assets</h4>

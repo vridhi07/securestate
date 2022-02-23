@@ -141,13 +141,21 @@ const Invoices = () => {
     }
   }, [page, rowsPerPage, userDetails?._id]);
 
+  let filterAccess;
+
+  if (userRole) {
+    filterAccess = roles.showFilter(userRole);
+  }
   return (
     <div>
-      <div className="mx-auto w-[95%] max-w-6xl rounded-lg bg-white py-10 pl-7 shadow-sm ">
-        <div className="max-w-lg">
-          <FilterOption />
+      {filterAccess && (
+        <div className="mx-auto w-[95%] max-w-6xl rounded-lg bg-white py-10 pl-7 shadow-sm ">
+          <div className="max-w-lg">
+            <FilterOption />
+          </div>
         </div>
-      </div>
+      )}
+
       <div className="my-3 flex w-full justify-between px-[5%] ">
         <h2 className="text-[1.5rem]">Invoices</h2>
         {userRole === roles.admin || userRole === roles.superAdmin ? (

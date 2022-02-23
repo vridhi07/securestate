@@ -7,7 +7,7 @@ export function* GetSBOMSaga(action) {
     const { assetId, SboMPageNumber } = action.payload;
     let response = yield call(
       axios.get,
-      `${CONFIG.assetTabs}/${assetId}/sbom/${SboMPageNumber}`
+      `${CONFIG.assetTabs}/sbom/${assetId}/${SboMPageNumber}`
     );
     if (response && response.data?.status === 1) {
       // console.log(response, "history");
@@ -24,7 +24,7 @@ export function* AddSBOMSaga(action) {
     const { assetId, data } = action.payload;
     let response = yield call(
       axios.post,
-      `${CONFIG.assetTabs}/${assetId}/addComponent`,
+      `${CONFIG.assetTabs}/addComponent/${assetId}`,
       data
     );
     if (response && response.data?.status === 1) {

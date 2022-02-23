@@ -43,6 +43,7 @@ const Inbox = () => {
   const [openNewEmail, setOpenNewEmail] = useState(false);
   const [emailReply, sendEmailReply] = useState("");
   // console.log(emailReply);
+  // console.log(emailData);
   useEffect(() => {
     if (emailStatus?.sendEmailStatus) {
       setOpenNewEmail(false);
@@ -100,21 +101,26 @@ const Inbox = () => {
     }
   }, [email]);
 
-  const getFilter = (data, search) => {
+  const getFilter = (data, searchOption) => {
     let tempData = [...data];
-    if (search) {
-      tempData = tempData.filter((item) =>
-        item.from.toLowerCase().startsWith(search)
-      );
+    try {
+      if (searchOption) {
+        tempData = tempData.filter((item) =>
+          item?.from?.startsWith(searchOption)
+        );
+        // console.log(tempData);
+      }
+      return tempData;
+    } catch (error) {
+      console.log(error);
     }
-    return tempData;
   };
 
   let filterData;
   if (emailData) {
     filterData = getFilter(emailData, search);
   }
-
+  // console.log(filterData, "=====123");
   const handleEmailSubjectChange = (event) => {
     const {
       target: { value },
@@ -219,7 +225,7 @@ const Inbox = () => {
         <div className="col-span-3 bg-white ">
           <div className=" h-screen overflow-y-auto">
             <div className="messageWrapper flex flex-col  px-3">
-              {filterData.length > 0 &&
+              {filterData &&
                 filterData.map((item) => {
                   return (
                     <EmailContainer

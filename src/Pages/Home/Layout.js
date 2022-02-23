@@ -186,10 +186,15 @@ export default function MiniDrawer() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} elevation={0}>
+      <AppBar
+        position="fixed"
+        open={open}
+        elevation={0}
+        sx={{ bgcolor: "#F3F2FA", pr: 0 }}
+      >
         <Toolbar
           sx={{
-            background: "#F3F2FA",
+            // background: "#F3F2FA",
             color: "black",
             paddingLeft: "0 !important",
           }}
@@ -347,7 +352,7 @@ export default function MiniDrawer() {
         sx={{
           flexGrow: 1,
           p: 3,
-          backgroundColor: "#F3F2FA",
+          // backgroundColor: "#F3F2FA",
           minHeight: "100vh",
         }}
       >

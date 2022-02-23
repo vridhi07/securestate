@@ -138,12 +138,19 @@ export default function AddTotal({
                 </FormControl>
               </div>
             </section>
-            <div className="w-full ">
+            <div className="flex items-center justify-start gap-4  ">
               <button
                 type="submit"
-                className="hover rounded-md bg-primary-btn px-14 py-3 tracking-wide text-white"
+                className="hover rounded-md bg-primary-btn px-8 py-2 tracking-wide text-white"
               >
                 Submit
+              </button>
+              <button
+                type="button"
+                onClick={closeIsWalletOpen}
+                className="rounded-md border border-primary-btn  bg-white px-6 py-2 text-primary-btn"
+              >
+                Cancel
               </button>
             </div>
           </div>

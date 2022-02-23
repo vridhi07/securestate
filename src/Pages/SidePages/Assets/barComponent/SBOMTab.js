@@ -25,29 +25,26 @@ export default function SBOMTab() {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [componentForm, setComponentForm] = useState({
     supplier: "",
-    component: "",
-    license: "",
     cve: "",
-    uniqueIdentifier: "",
+    security_score: "",
+    path: "",
     version: "",
-    sbom_author: "",
   });
   const [SboMPageNumber, setSboMPageNumber] = useState(1);
 
+  //   {
+  //     "supplier": "supplier",
+  //     "cve": "cve",
+  //     "security_score":"req.body.security_score",
+  //     "path":"req.body.path",
+  //     "version":"req.body.version"
+  // }
   // * router location
   const location = useLocation();
   const assetId = location.state.id;
 
   // form destructure
-  const {
-    supplier,
-    component,
-    license,
-    cve,
-    uniqueIdentifier,
-    version,
-    sbom_author,
-  } = componentForm;
+  const { supplier, cve, security_score, path, version } = componentForm;
 
   // * Redux states
   const dispatch = useDispatch();
@@ -78,12 +75,10 @@ export default function SBOMTab() {
 
     const data = {
       supplier,
-      component,
-      license,
       cve,
-      uniqueIdentifier,
+      security_score,
+      path,
       version,
-      sbom_author,
     };
     console.log(assetId);
     dispatch(action.addSbomRequest({ assetId, data }));
@@ -91,12 +86,10 @@ export default function SBOMTab() {
     setComponentForm({
       ...componentForm,
       supplier: "",
-      component: "",
-      license: "",
       cve: "",
-      uniqueIdentifier: "",
+      security_score: "",
+      path: "",
       version: "",
-      sbom_author: "",
     });
   };
 
@@ -174,17 +167,17 @@ export default function SBOMTab() {
                 <TableHead>
                   <TableRow>
                     <TableCell colSpan={2}>SUPPLER</TableCell>
-                    <TableCell colSpan={3}>COMPONENT</TableCell>
-                    <TableCell colSpan={2}>LICENSE</TableCell>
-                    <TableCell>CVE</TableCell>
-                    <TableCell>UNIQUE IDENTIFIER</TableCell>
                     <TableCell>VERSION</TableCell>
+                    <TableCell colSpan={3}>SECURITY</TableCell>
+                    <TableCell colSpan={2}>PATH</TableCell>
                     <TableCell
                     //  align="right"
                     >
                       SBOM AUTHOR
                     </TableCell>
-                    {assetAccess && <TableCell align="right">Remove</TableCell>}
+                    <TableCell># OF CVES</TableCell>
+                    {/* <TableCell>UNIQUE IDENTIFIER</TableCell> */}
+                    {assetAccess && <TableCell align="right"></TableCell>}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -204,47 +197,7 @@ export default function SBOMTab() {
                             overflow: "hidden",
                           }}
                         >
-                          {item.supplier}
-                        </TableCell>
-                        <TableCell
-                          colSpan={3}
-                          style={{
-                            maxWidth: "200px",
-                            // border: "2px solid red",
-                            overflow: "hidden",
-                          }}
-                        >
-                          {item.component}
-                        </TableCell>
-                        <TableCell
-                          align="left"
-                          colSpan={2}
-                          style={{
-                            maxWidth: "150px",
-                            // border: "2px solid red",
-                            overflow: "hidden",
-                          }}
-                        >
-                          {item.license}
-                        </TableCell>
-                        <TableCell
-                          style={{
-                            maxWidth: "150px",
-                            // border: "2px solid red",
-                            overflow: "hidden",
-                          }}
-                        >
-                          {item.cve}
-                        </TableCell>
-                        <TableCell
-                          // align="center"
-                          style={{
-                            maxWidth: "200px",
-                            // border: "2px solid red",
-                            overflow: "hidden",
-                          }}
-                        >
-                          {item.uniqueIdentifier}
+                          {item?.supplier}
                         </TableCell>
                         <TableCell
                           style={{
@@ -256,6 +209,27 @@ export default function SBOMTab() {
                           {item.version}
                         </TableCell>
                         <TableCell
+                          colSpan={3}
+                          style={{
+                            maxWidth: "200px",
+                            // border: "2px solid red",
+                            overflow: "hidden",
+                          }}
+                        >
+                          {item?.security_score}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          colSpan={2}
+                          style={{
+                            maxWidth: "150px",
+                            // border: "2px solid red",
+                            overflow: "hidden",
+                          }}
+                        >
+                          {item?.path}
+                        </TableCell>
+                        <TableCell
                           // align="right"
                           style={{
                             maxWidth: "150px",
@@ -263,8 +237,28 @@ export default function SBOMTab() {
                             overflow: "hidden",
                           }}
                         >
-                          {item.sbom_author}
+                          {item?.sbom_author?.user_name}
                         </TableCell>
+                        <TableCell
+                          style={{
+                            maxWidth: "150px",
+                            // border: "2px solid red",
+                            overflow: "hidden",
+                          }}
+                        >
+                          {item.cve}
+                        </TableCell>
+                        {/* <TableCell
+                          // align="center"
+                          style={{
+                            maxWidth: "200px",
+                            // border: "2px solid red",
+                            overflow: "hidden",
+                          }}
+                        >
+                          {item.uniqueIdentifier}
+                        </TableCell> */}
+
                         {assetAccess && (
                           <TableCell align="right">
                             <IconButton

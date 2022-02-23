@@ -10,7 +10,13 @@ import {
   GetAllAssetList,
 } from "./Asset/AssetSaga";
 
-import { GetHistorySaga, AddHistoryAction } from "./Asset/HistorySaga";
+import {
+  GetHistorySaga,
+  AddHistoryAction,
+  deleteHistorySaga,
+  updateHistorySaga,
+} from "./Asset/HistorySaga";
+
 import { GetSBOMSaga, AddSBOMSaga, deleteSbomSaga } from "./Asset/SbomSaga";
 
 import {
@@ -107,6 +113,9 @@ function* watchAllSaga() {
   yield takeLatest(actions.UpdateAssetRequest, UpdateAssetSaga);
   yield takeLatest(actions.GetHistoryRequest, GetHistorySaga);
   yield takeLatest(actions.AddHistoryRequest, AddHistoryAction);
+  yield takeLatest(actions.deleteHistoryRequest, deleteHistorySaga);
+  yield takeLatest(actions.updateHistoryRequest, updateHistorySaga);
+
   yield takeLatest(actions.GetSBOMRequest, GetSBOMSaga);
   yield takeLatest(actions.addSbomRequest, AddSBOMSaga);
   yield takeLatest(actions.deleteSbomRequest, deleteSbomSaga);

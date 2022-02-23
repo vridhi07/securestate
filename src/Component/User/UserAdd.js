@@ -278,12 +278,19 @@ export default function UserAdd({
                 <div className="col-span-4 md:col-span-2"></div>
               </section>
 
-              <div className="mt-3 mb-4 flex flex-col items-center justify-center">
+              <div className="mt-3 mb-4 flex  items-center justify-start gap-4">
                 <button
                   type="submit"
-                  className=" rounded-md bg-orange-cus-1 px-[4.5rem] py-2 tracking-wider text-white hover:bg-orange-600  "
+                  className=" hover rounded-md bg-primary-btn px-6 py-2 tracking-wider text-white   "
                 >
-                  Save
+                  Add
+                </button>
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  className=" rounded-md border border-primary-btn bg-white px-6 py-2 text-primary-btn "
+                >
+                  Cancel
                 </button>
               </div>
             </div>
