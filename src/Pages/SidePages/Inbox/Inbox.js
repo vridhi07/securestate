@@ -29,7 +29,7 @@ const Inbox = () => {
     message: "",
     file: "",
   });
-  const { email, isLoading } = useSelector((state) => state?.emails);
+  const { email, isLoading, pageCount } = useSelector((state) => state?.emails);
   const emailStatus = useSelector((state) => state.emails);
   const usersList = useSelector((state) => state.users);
   const [emailData, setEmailData] = useState([]);
@@ -94,6 +94,9 @@ const Inbox = () => {
 
   useEffect(() => {
     dispatch(action.getUsersRequest());
+  }, []);
+
+  useEffect(() => {
     dispatch(action.getEmailRequest({ page }));
     sendEmailReply();
   }, [page]);
@@ -241,33 +244,36 @@ const Inbox = () => {
           </div>
           <div className=" mt-4 w-full">
             <div className="mr-auto">
-              <Stack spacing={2}>
-                <Pagination
-                  count={10}
-                  onChange={handleChangePage}
-                  sx={{
-                    "& .Mui-selected": {
-                      backgroundColor: "#F27931 !important",
-                      color: "white",
-                      border: "none",
-                    },
-                    "& .MuiPaginationItem-page ": {
-                      bgcolor: "#B4AFAF",
-                      color: "white",
-                      border: "none",
-                    },
-                    "& .MuiPaginationItem-previousNext": {
-                      border: "none",
-                    },
-                    "& .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root": {
-                      "&:hover": {
-                        backgroundColor: "none",
+              {pageCount && (
+                <Stack spacing={2}>
+                  <Pagination
+                    count={pageCount}
+                    onChange={handleChangePage}
+                    sx={{
+                      "& .Mui-selected": {
+                        backgroundColor: "#F27931 !important",
+                        color: "white",
+                        border: "none",
                       },
-                    },
-                  }}
-                  page={page}
-                />
-              </Stack>
+                      "& .MuiPaginationItem-page ": {
+                        bgcolor: "#B4AFAF",
+                        color: "white",
+                        border: "none",
+                      },
+                      "& .MuiPaginationItem-previousNext": {
+                        border: "none",
+                      },
+                      "& .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root":
+                        {
+                          "&:hover": {
+                            backgroundColor: "none",
+                          },
+                        },
+                    }}
+                    page={page}
+                  />
+                </Stack>
+              )}
             </div>
           </div>
         </div>

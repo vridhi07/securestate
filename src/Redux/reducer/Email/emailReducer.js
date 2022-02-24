@@ -9,6 +9,7 @@ const initialState = {
   Message: "",
   ErrorMessage: "",
   sendEmailLoader: false,
+  pageCount: "",
 };
 
 const EmailReducer = (state = initialState, action) => {
@@ -26,7 +27,8 @@ const EmailReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        email: action.payload,
+        email: action.payload.mailData,
+        pageCount: action.payload.pageCount,
         Message: "",
         ErrorMessage: "",
       };

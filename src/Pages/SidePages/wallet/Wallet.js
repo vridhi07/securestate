@@ -32,8 +32,8 @@ const Wallet = () => {
   const [isTotalEdit, setIsTotalEdit] = useState(false);
   const [hackerId, setHackerId] = useState("");
   // console.log(hackerId);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page, setPage] = useState(1);
+  // const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedId, setSelectedId] = useState(null);
   // const [inputValue, setInputValue] = useState("");
   // console.log(isTotalEdit);
@@ -58,13 +58,8 @@ const Wallet = () => {
   const company_id = getCompanyId(userRole);
   // console.log(company_id);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const handleChangePage = (event, value) => {
+    setPage(value);
   };
 
   const handleTotalChange = (e) => {
@@ -182,7 +177,7 @@ const Wallet = () => {
         userId: hackerId,
       };
       console.log(data);
-      dispatch(action.addWalletRequest({ data, hackerId, page, rowsPerPage }));
+      dispatch(action.addWalletRequest({ data, hackerId, page }));
     }
     if (isEdit) {
       console.log("edit");
@@ -193,7 +188,7 @@ const Wallet = () => {
         walletId: selectedId,
       };
       console.log(data);
-      dispatch(action.editWalletRequest({ data }));
+      dispatch(action.editWalletRequest({ data, page, hackerId }));
     }
     closeIsWalletOpen();
   };
@@ -345,10 +340,11 @@ const Wallet = () => {
       <div className="mt-3 mb-4 px-[5%]">
         <WalletTable
           hackerId={hackerId}
-          rowsPerPage={rowsPerPage}
+          // rowsPerPage={rowsPerPage}
           page={page}
           handleChangePage={handleChangePage}
-          handleChangeRowsPerPage={handleChangeRowsPerPage}
+          // handleChange={}
+          // handleChangeRowsPerPage={handleChangeRowsPerPage}
           superAdminAccess={superAdminAccess}
           openEdit={openEdit}
         />
