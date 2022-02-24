@@ -37,7 +37,7 @@ const Inbox = () => {
     sendEmail: "",
     id: "",
   });
-  // console.log(selectData);
+  // console.log(email);
   const currentUser = useSelector((state) => state.user?.userDetails);
   const [selectedEmails, setSelectedEmails] = useState([]);
   const [page, setPage] = useState(1);
@@ -85,6 +85,7 @@ const Inbox = () => {
   // };
 
   const HandleOpenMail = (item) => {
+    console.log(item, "------");
     setOpenMail(item);
     setSelectData({ sendEMail: item.to, id: item._id });
     dispatch(action.readEmailRequest({ id: item._id }));
@@ -93,7 +94,7 @@ const Inbox = () => {
 
   useEffect(() => {
     dispatch(action.getUsersRequest());
-    dispatch(action.getEmailRequest());
+    dispatch(action.getEmailRequest({ page }));
     sendEmailReply();
   }, [page]);
 
@@ -108,7 +109,7 @@ const Inbox = () => {
     try {
       if (searchOption) {
         tempData = tempData.filter((item) =>
-          item?.from?.startsWith(searchOption)
+          item?.name?.startsWith(searchOption)
         );
         // console.log(tempData);
       }
@@ -117,7 +118,7 @@ const Inbox = () => {
       console.log(error);
     }
   };
-
+  // console.log(emailData);
   let filterData;
   if (emailData) {
     filterData = getFilter(emailData, search);
@@ -188,10 +189,11 @@ const Inbox = () => {
     );
     sendEmailReply("");
   };
-  // console.log(emailStatus.emailreplyLoader,'=========')
+  // console.log(filterData, "=========");
   if (isLoading) {
     return <Loader />;
   }
+  // console.log(filterData);
   return (
     <div>
       <div className="mt-3 flex items-end justify-between">
@@ -223,7 +225,7 @@ const Inbox = () => {
       <div className="mt-3 grid grid-cols-6 gap-4 ">
         <div className="col-span-3 ">
           <div className=" h-[calc(100vh-5rem)] overflow-y-auto rounded-md bg-white ">
-            <div className="messageWrapper flex flex-col   px-3">
+            <div className="messageWrapper flex flex-col    px-3">
               {filterData &&
                 filterData.map((item) => {
                   return (
@@ -270,8 +272,11 @@ const Inbox = () => {
           </div>
         </div>
         {openMail.length !== 0 && (
-          <div className="relative col-span-3 h-[calc(100vh-5rem)]  w-full rounded-md border bg-blue-cus-1 shadow-xl">
-            <MessageContainer openMail={openMail} />
+          <div className=" relative col-span-3 h-[calc(100vh-5rem)] w-full   rounded-md border bg-white  shadow-xl">
+            <div className="overflow-y-auto ">
+              <MessageContainer openMail={openMail} />
+            </div>
+
             <MessageForm
               emailReply={emailReply}
               sendEmailReply={sendEmailReply}

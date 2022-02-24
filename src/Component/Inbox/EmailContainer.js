@@ -1,7 +1,8 @@
 // import StarIcon from "@mui/icons-material/Star";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
-import CircleIcon from "@mui/icons-material/Circle";
-import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
+import { useSelector } from "react-redux";
+// import CircleIcon from "@mui/icons-material/Circle";
+// import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 // import ChevronRightOutlinedIcon from "@mui/icons-material/ChevronRightOutlined";
 
 // const DoubleCircle = ({ isSelected }) => {
@@ -18,7 +19,10 @@ import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 // };
 
 const EmailContainer = ({ email = [], HandleOpenMail, selectedEmail }) => {
-  const { _id, from, to, subject, text, read, attachments } = email;
+  const { _id, from, to, subject, text, read, attachments, name } = email;
+
+  // console.log(email);
+  const { userDetails } = useSelector((state) => state?.user);
   const getDateAndTime = (emailDetail) => {
     let data = {
       date: "",
@@ -37,24 +41,30 @@ const EmailContainer = ({ email = [], HandleOpenMail, selectedEmail }) => {
     return data;
   };
 
+  // console.log(email);
   return (
     <article
-      className={` cursor-pointer items-center border-b border-gray-400 py-2 pt-2 last:border-b-0 ${
-        !read && "bg-blue-cus-1"
+      className={`cursor-pointer items-center border-b border-gray-400 py-2 pt-2 first:mt-3 last:border-b-0  ${
+        !email?.read && "bg-primary-clr"
       }`}
       onClick={() => HandleOpenMail(email)}
     >
+      {/* {email} */}
       <section className="grid grid-cols-10 items-center">
         <div className=" col-span-2">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-400 uppercase text-white">
-            <p>{from.charAt(0)}</p>
+          <div
+            className={`flex h-14 w-14 items-center justify-center rounded-full ${
+              userDetails?.email === from ? "bg-blue-500 " : "bg-green-400"
+            } uppercase text-white`}
+          >
+            <p className="text-xl">{name?.charAt(0)}</p>
           </div>
         </div>
-        <div className=" col-span-6">
+        <div className="col-span-6">
           <section className="md:ml-04 mt-1  pb-3 md:mr-14 ">
             <span className="flex">
               {attachments?.length > 0 && <AttachFileIcon />}
-              <h3 className="text-xs-cus font-bold ">Shubham</h3>
+              <h3 className="text-xs-cus font-bold ">{name}</h3>
             </span>
             <p className="max-w-md text-justify text-xs-cus font-normal text-gray-cus-6">
               {text.substring(0, 105)}
