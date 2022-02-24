@@ -5,11 +5,8 @@ import axios from "axios";
 
 export function* GetMailSaga(action) {
   try {
-    const { perPage, pageNumber } = action.payload;
-    let response = yield call(
-      axios.get,
-      `${CONFIG.getMail}/${perPage}/${pageNumber}`
-    );
+    // const { perPage, pageNumber } = action.payload;
+    let response = yield call(axios.get, `${CONFIG.getMail}/5/1`);
     if (response && response.data?.status === 1) {
       yield put(actions.getEmailSuccess(response?.data?.data));
     }
@@ -31,11 +28,21 @@ export function* SendMailSaga(action) {
 
 export function* MailReplySaga(action) {
   try {
-    let response = yield call(axios.post, `${CONFIG.sendReply}/${action.payload.id}`, {...action?.payload.data});
+    let response = yield call(
+      axios.post,
+      `${CONFIG.sendReply}/${action.payload.id}`,
+      { ...action?.payload.data }
+    );
     if (response && response.data?.status === 1) {
-
       yield put(actions.sendEmailReplySuccess(response?.data));
-      yield put(actions.updateReplyRequest({id:action.payload.id,text:{...action?.payload.data},from:action?.payload.email,repliedAt:new Date()}))
+      yield put(
+        actions.updateReplyRequest({
+          id: action.payload.id,
+          text: { ...action?.payload.data },
+          from: action?.payload.email,
+          repliedAt: new Date(),
+        })
+      );
       yield put(actions.sendEmailReplySuccess(response?.data?.data));
     }
   } catch (error) {
@@ -45,12 +52,19 @@ export function* MailReplySaga(action) {
 
 export function* ReadmMailSaga(action) {
   try {
-    let response = yield call(axios.get, `${CONFIG.readMail}/${action.payload.id}`);
+    let response = yield call(
+      axios.get,
+      `${CONFIG.readMail}/${action.payload.id}`
+    );
     if (response && response.data?.status === 1) {
-      yield put(actions.readEmailSuccess({response:response?.data,id:action.payload.id}));
+      yield put(
+        actions.readEmailSuccess({
+          response: response?.data,
+          id: action.payload.id,
+        })
+      );
     }
   } catch (error) {
     yield put(actions.readEmailError(error?.response?.data?.message));
   }
 }
-

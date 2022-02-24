@@ -12,6 +12,7 @@ import { IoTrashOutline } from "react-icons/io5";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import * as action from "../../Redux/action";
 import IconButton from "@mui/material/IconButton";
+// import EditIcon from "@mui/icons-material/Edit";
 import { useSelector, useDispatch } from "react-redux";
 const columns = [
   { id: "Pentest", label: "Pentest", minWidth: 170, align: "left" },
@@ -34,11 +35,11 @@ const columns = [
     minWidth: 50,
     align: "center",
   },
-  {
-    id: "editOrDelete",
-    minWidth: 50,
-    align: "center",
-  },
+  // {
+  //   id: "editOrDelete",
+  //   minWidth: 50,
+  //   align: "center",
+  // },
 ];
 
 export default function StickyHeadTable({
@@ -48,6 +49,7 @@ export default function StickyHeadTable({
   handleChangePage,
   handleChangeRowsPerPage,
   superAdminAccess,
+  openEdit,
 }) {
   // const [page, setPage] = useState(0);
   // const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -100,15 +102,25 @@ export default function StickyHeadTable({
               walletDetails.map((item) => {
                 return (
                   <TableRow hover key={item._id}>
-                    <TableCell align="left">{item?.pentestId?.title}</TableCell>
+                    <TableCell align="left">
+                      {item?.pentestId?.title || (
+                        <span className="text-sm font-light text-red-500">
+                          !Pentest deleted
+                        </span>
+                      )}
+                    </TableCell>
                     <TableCell align="left">{item?.award}</TableCell>
                     <TableCell align="left">{item?.status}</TableCell>
                     {superAdminAccess && (
-                      <TableCell align="left">edit</TableCell>
+                      <TableCell align="left">
+                        <IconButton onClick={() => openEdit(item._id)}>
+                          <ModeEditOutlineIcon />
+                        </IconButton>
+                      </TableCell>
                     )}
-                    {superAdminAccess && (
+                    {/* {superAdminAccess && (
                       <TableCell align="left">delete</TableCell>
-                    )}
+                    )} */}
 
                     {/* <TableCell align="center">
                       <button>

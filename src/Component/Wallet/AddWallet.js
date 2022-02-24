@@ -13,6 +13,7 @@ export default function AddTotal({
   handleWalletChange,
   onSubmitWallet,
   AllPentest = [],
+  isEdit,
   // isError,
 }) {
   const { pentest, award, status } = walletDetail;
@@ -26,7 +27,7 @@ export default function AddTotal({
         >
           <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
             <h4 className="text-center text-2xl font-bold capitalize tracking-wider">
-              Add new Wallet
+              {isEdit ? "Edit Wallet" : "   Add new Wallet"}
             </h4>
             <button
               type="button"
@@ -143,7 +144,7 @@ export default function AddTotal({
                 type="submit"
                 className="hover rounded-md bg-primary-btn px-8 py-2 tracking-wide text-white"
               >
-                Submit
+                {isEdit ? "Save" : "Submit"}
               </button>
               <button
                 type="button"

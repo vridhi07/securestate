@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import AddIcon from "@mui/icons-material/Add";
+// import AddIcon from "@mui/icons-material/Add";
 import MessageForm from "../../../Component/Inbox/MessageForm";
 import MessageContainer from "../../../Component/Inbox/MessageContainer";
 import EmailContainer from "../../../Component/Inbox/EmailContainer";
-import TablePagination from "@mui/material/TablePagination";
-import CircularProgress from "@mui/material/CircularProgress";
+// import TablePagination from "@mui/material/TablePagination";
+// import CircularProgress from "@mui/material/CircularProgress";
+import EditIcon from "@mui/icons-material/Edit";
 import * as action from "../../../Redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
@@ -13,11 +14,12 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
+// import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Loader from "../../../Component/Common/Loader";
 import MultipleSelectCheckmarks from "../../../Component/Inbox/ToInfo";
-
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 const Inbox = () => {
   const dispatch = useDispatch();
   const [openMail, setOpenMail] = useState([]);
@@ -38,12 +40,14 @@ const Inbox = () => {
   // console.log(selectData);
   const currentUser = useSelector((state) => state.user?.userDetails);
   const [selectedEmails, setSelectedEmails] = useState([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(1);
+  // const [rowsPerPage, setRowsPerPage] = useState(10);
   const [openNewEmail, setOpenNewEmail] = useState(false);
   const [emailReply, sendEmailReply] = useState("");
+  // const [assetPageNumber, setAssetPageNumber] = useState(1);
   // console.log(emailReply);
   // console.log(emailData);
+
   useEffect(() => {
     if (emailStatus?.sendEmailStatus) {
       setOpenNewEmail(false);
@@ -75,10 +79,10 @@ const Inbox = () => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(parseInt(event.target.value, 10));
+  //   setPage(0);
+  // };
 
   const HandleOpenMail = (item) => {
     setOpenMail(item);
@@ -89,11 +93,9 @@ const Inbox = () => {
 
   useEffect(() => {
     dispatch(action.getUsersRequest());
-    dispatch(
-      action.getEmailRequest({ perPage: page, pageNumber: rowsPerPage })
-    );
+    dispatch(action.getEmailRequest());
     sendEmailReply();
-  }, [rowsPerPage, page]);
+  }, [page]);
 
   useEffect(() => {
     if (email) {
@@ -191,40 +193,37 @@ const Inbox = () => {
     return <Loader />;
   }
   return (
-    <div className="flex flex-col">
-      <div className="mt-3 flex justify-between">
-        <div className="flex h-11 w-60 items-center  justify-start rounded-lg bg-white pr-1 pl-4">
-          <SearchIcon />
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full rounded-3xl border-0  py-1 pl-2 focus:bg-none focus:outline-none focus:ring-0"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <div>
-          <TablePagination
-            component="div"
-            count={100}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </div>
-        <div className="mr-2 md:mr-8">
-          <button className="grid h-12 w-12 cursor-pointer place-content-center rounded-full border-none bg-orange-cus-1 shadow-lg duration-300  ease-in hover:shadow-xl">
-            <div className="duration-300 ease-in hover:rotate-90 ">
-              <AddIcon onClick={handleModalClickOpen} sx={{ color: "white" }} />
-            </div>
+    <div>
+      <div className="mt-3 flex items-end justify-between">
+        <h4 className="text-2xl font-bold tracking-wider text-orange-cus-1">
+          Inbox
+        </h4>
+        <section className="flex gap-3">
+          <div className="flex h-11 w-60 items-center  justify-start rounded-lg bg-white pr-1 pl-4">
+            <SearchIcon />
+            <input
+              type="text"
+              placeholder="Search"
+              className="w-full rounded-3xl border-0  py-1 pl-2 focus:bg-none focus:outline-none focus:ring-0"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+
+          <button
+            onClick={handleModalClickOpen}
+            className="rounded-md bg-orange-cus-1 px-4 py-2 text-white"
+          >
+            <EditIcon sx={{ color: "white", mr: 1 }} />
+            Compose
           </button>
-        </div>
+        </section>
       </div>
-      <div className="mt-3 grid grid-cols-6 ">
-        <div className="col-span-3 bg-white ">
-          <div className=" h-screen overflow-y-auto">
-            <div className="messageWrapper flex flex-col  px-3">
+      {/* Parent */}
+      <div className="mt-3 grid grid-cols-6 gap-4 ">
+        <div className="col-span-3 ">
+          <div className=" h-[calc(100vh-5rem)] overflow-y-auto rounded-md bg-white ">
+            <div className="messageWrapper flex flex-col   px-3">
               {filterData &&
                 filterData.map((item) => {
                   return (
@@ -238,9 +237,40 @@ const Inbox = () => {
                 })}
             </div>
           </div>
+          <div className=" mt-4 w-full">
+            <div className="mr-auto">
+              <Stack spacing={2}>
+                <Pagination
+                  count={10}
+                  onChange={handleChangePage}
+                  sx={{
+                    "& .Mui-selected": {
+                      backgroundColor: "#F27931 !important",
+                      color: "white",
+                      border: "none",
+                    },
+                    "& .MuiPaginationItem-page ": {
+                      bgcolor: "#B4AFAF",
+                      color: "white",
+                      border: "none",
+                    },
+                    "& .MuiPaginationItem-previousNext": {
+                      border: "none",
+                    },
+                    "& .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root": {
+                      "&:hover": {
+                        backgroundColor: "none",
+                      },
+                    },
+                  }}
+                  page={page}
+                />
+              </Stack>
+            </div>
+          </div>
         </div>
         {openMail.length !== 0 && (
-          <div className="relative col-span-3 h-screen w-full rounded-md border bg-blue-cus-1 shadow-xl">
+          <div className="relative col-span-3 h-[calc(100vh-5rem)]  w-full rounded-md border bg-blue-cus-1 shadow-xl">
             <MessageContainer openMail={openMail} />
             <MessageForm
               emailReply={emailReply}
