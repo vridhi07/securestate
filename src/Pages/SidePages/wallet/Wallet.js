@@ -190,9 +190,10 @@ const Wallet = () => {
         pentestId: walletDetail.pentest,
         award: walletDetail.award,
         status: walletDetail.status,
-        userId: hackerId,
+        walletId: selectedId,
       };
       console.log(data);
+      dispatch(action.editWalletRequest({ data }));
     }
     closeIsWalletOpen();
   };
