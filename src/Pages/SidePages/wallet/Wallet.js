@@ -16,7 +16,7 @@ const Wallet = () => {
   const [isTotalOpen, setIsTotalOpen] = useState(false);
 
   const [isWalletOpen, setIsWalletOpen] = useState(false);
-
+  const [isEdit, setIsEdit] = useState(false);
   const [totalData, setTotalData] = useState({
     totalEarned: "",
     reputationScore: "",
@@ -32,17 +32,17 @@ const Wallet = () => {
   const [isTotalEdit, setIsTotalEdit] = useState(false);
   const [hackerId, setHackerId] = useState("");
   // console.log(hackerId);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page, setPage] = useState(1);
+  // const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [selectedId, setSelectedId] = useState(null);
   // const [inputValue, setInputValue] = useState("");
-  console.log(isTotalEdit);
+  // console.log(isTotalEdit);
   // !Redux
   const dispatch = useDispatch();
   // const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails, userRole } = useSelector((state) => state?.user);
-  const { AllPentest, allHacker, walletTotals, isLoading } = useSelector(
-    (state) => state.wallet
-  );
+  const { AllPentest, allHacker, walletTotals, isLoading, walletDetails } =
+    useSelector((state) => state.wallet);
   const { selectedCompany } = useSelector((state) => state?.company);
   // * Functions
 
@@ -58,13 +58,8 @@ const Wallet = () => {
   const company_id = getCompanyId(userRole);
   // console.log(company_id);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const handleChangePage = (event, value) => {
+    setPage(value);
   };
 
   const handleTotalChange = (e) => {
@@ -87,6 +82,7 @@ const Wallet = () => {
   const openIsWalletOpen = () => {
     setIsWalletOpen(true);
   };
+
   const closeIsWalletOpen = () => {
     setIsWalletOpen(false);
     setWalletDetail({
@@ -96,6 +92,25 @@ const Wallet = () => {
       status: "",
       hackerId: "",
     });
+    if (isEdit) {
+      setIsEdit(false);
+    }
+    setSelectedId(null);
+  };
+
+  const openEdit = (id) => {
+    const SingleData = walletDetails.find((item) => item._id === id);
+    console.log(SingleData);
+    setWalletDetail({
+      ...walletDetail,
+      pentest: SingleData?.pentestId?._id || "",
+      award: SingleData.award,
+      status: SingleData.status,
+    });
+    openIsWalletOpen();
+    // console.log(id);
+    setIsEdit(true);
+    setSelectedId(id);
   };
 
   const openTotalModal = () => {
@@ -154,7 +169,7 @@ const Wallet = () => {
   const onSubmitWallet = (e) => {
     e.preventDefault();
 
-    if (hackerId) {
+    if (!isEdit) {
       const data = {
         pentestId: walletDetail.pentest,
         award: walletDetail.award,
@@ -162,9 +177,20 @@ const Wallet = () => {
         userId: hackerId,
       };
       console.log(data);
-      dispatch(action.addWalletRequest({ data, hackerId, page, rowsPerPage }));
-      closeIsWalletOpen();
+      dispatch(action.addWalletRequest({ data, hackerId, page }));
     }
+    if (isEdit) {
+      console.log("edit");
+      const data = {
+        pentestId: walletDetail.pentest,
+        award: walletDetail.award,
+        status: walletDetail.status,
+        walletId: selectedId,
+      };
+      console.log(data);
+      dispatch(action.editWalletRequest({ data, page, hackerId }));
+    }
+    closeIsWalletOpen();
   };
 
   // call pentest for admin
@@ -314,11 +340,13 @@ const Wallet = () => {
       <div className="mt-3 mb-4 px-[5%]">
         <WalletTable
           hackerId={hackerId}
-          rowsPerPage={rowsPerPage}
+          // rowsPerPage={rowsPerPage}
           page={page}
           handleChangePage={handleChangePage}
-          handleChangeRowsPerPage={handleChangeRowsPerPage}
+          // handleChange={}
+          // handleChangeRowsPerPage={handleChangeRowsPerPage}
           superAdminAccess={superAdminAccess}
+          openEdit={openEdit}
         />
       </div>
       <AddTotal
@@ -338,6 +366,7 @@ const Wallet = () => {
         onSubmitWallet={onSubmitWallet}
         AllPentest={AllPentest}
         // isError={isError}
+        isEdit={isEdit}
       />
     </div>
   );

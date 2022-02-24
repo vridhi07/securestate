@@ -7,6 +7,7 @@ const initialState = {
   allHacker: [],
   walletDetails: [],
   walletTotals: [],
+  totalPage: "",
   Message: "",
 };
 
@@ -73,7 +74,8 @@ const WalletReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        walletDetails: action.payload,
+        walletDetails: action.payload.details,
+        totalPage: action.payload.pageCount,
         Message: "",
       };
 

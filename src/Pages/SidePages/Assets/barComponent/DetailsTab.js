@@ -134,78 +134,37 @@ const Details = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <form className="flex flex-col">
-          <section className="flex  items-center  sm:mx-auto sm:w-2/3 lg:mx-auto lg:w-2/4">
-            <div className="mr-4 w-full">
-              <TextField
-                label="Name"
-                variant="outlined"
-                required
-                name="assetName"
-                id="assestName"
-                size="small"
-                fullWidth
-                // defaultValue={assetForm?.assetName}
-                value={assetForm?.assetName}
-                onChange={handleChange}
-                // disabled={isEdit ? false : true}
-                inputProps={{ readOnly: !isEdit }}
-                className="bg-white"
-                ref={inputs}
-              />
-            </div>
-            <div className="w-full">
-              <FormControl fullWidth>
-                <InputLabel id="assetPriority">Priority</InputLabel>
-                <Select
-                  labelId="assetPriority"
-                  label="Priority"
-                  id="assetPriority"
-                  name="priority"
+        assetForm?.assetName && (
+          <form className="flex flex-col">
+            <section className="flex  items-center  sm:mx-auto sm:w-2/3 lg:mx-auto lg:w-2/4">
+              <div className="mr-4 w-full">
+                <TextField
+                  label="Name"
+                  variant="outlined"
+                  required
+                  name="assetName"
+                  id="assestName"
                   size="small"
-                  value={assetForm?.priority}
+                  fullWidth
+                  // defaultValue={assetForm?.assetName}
+                  value={assetForm?.assetName}
                   onChange={handleChange}
+                  // disabled={isEdit ? false : true}
                   inputProps={{ readOnly: !isEdit }}
                   className="bg-white"
-                  sx={{
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "white",
-                      outline: "none !important",
-                    },
-                    "&:hover": {
-                      "&& fieldset": {
-                        border: "none",
-                        outline: "none",
-                      },
-                    },
-                  }}
-                >
-                  {Priority.map((item) => {
-                    return (
-                      <MenuItem value={item} key={item}>
-                        {item}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-            </div>
-          </section>
-          <section className="mt-4 flex  items-center sm:mx-auto sm:w-2/3  lg:mx-auto lg:w-2/4 ">
-            <div className=" mr-4 w-[50%]">
-              <FormControl fullWidth>
-                <InputLabel id="assetType">Asset Type</InputLabel>
-                {/* {console.log(assetForm?.assetType, "9009090909")} */}
-                {assetForm?.assetType && (
+                  ref={inputs}
+                />
+              </div>
+              <div className="w-full">
+                <FormControl fullWidth>
+                  <InputLabel id="assetPriority">Priority</InputLabel>
                   <Select
-                    labelId="assetType"
-                    // value={age}
-                    label="Asset Type"
-                    name="assetType"
-                    id="assetType"
+                    labelId="assetPriority"
+                    label="Priority"
+                    id="assetPriority"
+                    name="priority"
                     size="small"
-                    // defaultValue={assetForm?.assetType}
-                    value={assetForm?.assetType}
+                    value={assetForm?.priority}
                     onChange={handleChange}
                     inputProps={{ readOnly: !isEdit }}
                     className="bg-white"
@@ -222,8 +181,7 @@ const Details = () => {
                       },
                     }}
                   >
-                    {AssetType.map((item) => {
-                      // console.log(item);
+                    {Priority.map((item) => {
                       return (
                         <MenuItem value={item} key={item}>
                           {item}
@@ -231,88 +189,132 @@ const Details = () => {
                       );
                     })}
                   </Select>
-                )}
-              </FormControl>
-            </div>
-            <div className=" w-[50%]">
-              <FormControl fullWidth>
-                <InputLabel id="assetStatus">Status</InputLabel>
-                <Select
-                  labelId="assetStatus"
-                  label="Status"
-                  id="assetStatus"
-                  name="assetStatus"
-                  size="small"
-                  name="status"
-                  inputProps={{ readOnly: !isEdit }}
-                  onChange={handleChange}
-                  // defaultValue={assetForm?.assetStatus}
-                  value={assetForm?.status}
-                  className="bg-white"
-                  sx={{
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "white",
-                      outline: "none !important",
-                    },
-                    "&:hover": {
-                      "&& fieldset": {
-                        border: "none",
-                        outline: "none",
+                </FormControl>
+              </div>
+            </section>
+            <section className="mt-4 flex  items-center sm:mx-auto sm:w-2/3  lg:mx-auto lg:w-2/4 ">
+              <div className=" mr-4 w-[50%]">
+                <FormControl fullWidth>
+                  <InputLabel id="assetType">Asset Type</InputLabel>
+                  {/* {console.log(assetForm?.assetType, "9009090909")} */}
+                  {assetForm?.assetType && (
+                    <Select
+                      labelId="assetType"
+                      // value={age}
+                      label="Asset Type"
+                      name="assetType"
+                      id="assetType"
+                      size="small"
+                      // defaultValue={assetForm?.assetType}
+                      value={assetForm?.assetType}
+                      onChange={handleChange}
+                      inputProps={{ readOnly: !isEdit }}
+                      className="bg-white"
+                      sx={{
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "white",
+                          outline: "none !important",
+                        },
+                        "&:hover": {
+                          "&& fieldset": {
+                            border: "none",
+                            outline: "none",
+                          },
+                        },
+                      }}
+                    >
+                      {AssetType.map((item) => {
+                        // console.log(item);
+                        return (
+                          <MenuItem value={item} key={item}>
+                            {item}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  )}
+                </FormControl>
+              </div>
+              <div className=" w-[50%]">
+                <FormControl fullWidth>
+                  <InputLabel id="assetStatus">Status</InputLabel>
+                  <Select
+                    labelId="assetStatus"
+                    label="Status"
+                    id="assetStatus"
+                    name="assetStatus"
+                    size="small"
+                    name="status"
+                    inputProps={{ readOnly: !isEdit }}
+                    onChange={handleChange}
+                    // defaultValue={assetForm?.assetStatus}
+                    value={assetForm?.status}
+                    className="bg-white"
+                    sx={{
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                        outline: "none !important",
                       },
-                    },
-                    "& .Mui-disabled ": {
-                      borderColor: "white",
-                      outline: "none !important",
-                    },
-                  }}
-                >
-                  <MenuItem value={"active"}>ACTIVE</MenuItem>
+                      "&:hover": {
+                        "&& fieldset": {
+                          border: "none",
+                          outline: "none",
+                        },
+                      },
+                      "& .Mui-disabled ": {
+                        borderColor: "white",
+                        outline: "none !important",
+                      },
+                    }}
+                  >
+                    <MenuItem value={"active"}>ACTIVE</MenuItem>
 
-                  <MenuItem value={"inactive"}>INACTIVE</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-          </section>
+                    <MenuItem value={"inactive"}>INACTIVE</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            </section>
 
-          <section className="mt-8 flex flex-col items-center sm:mx-auto sm:w-2/3 lg:mx-auto lg:w-2/4 ">
-            <TextField
-              label="Additional Details (Frameworks,Backend,Frontend,DB,APIs etc.)"
-              variant="outlined"
-              required
-              size="small"
-              fullWidth
-              multiline
-              rows={5}
-              name="additionalINfo"
-              id="additionalINfo"
-              className="bg-white"
-              // value={""}
-              // defaultValue={assetForm?.additionalINfo}
-              value={assetForm?.additionalINfo}
-              onChange={handleChange}
-              inputProps={{ readOnly: !isEdit }}
-            />
-          </section>
+            <section className="mt-8 flex flex-col items-center sm:mx-auto sm:w-2/3 lg:mx-auto lg:w-2/4 ">
+              <TextField
+                label="Additional Details (Frameworks,Backend,Frontend,DB,APIs etc.)"
+                variant="outlined"
+                required
+                size="small"
+                fullWidth
+                multiline
+                rows={5}
+                name="additionalINfo"
+                id="additionalINfo"
+                className="bg-white"
+                // value={""}
+                // defaultValue={assetForm?.additionalINfo}
+                value={assetForm?.additionalINfo}
+                onChange={handleChange}
+                inputProps={{ readOnly: !isEdit }}
+              />
+            </section>
 
-          <section className="mt-4 flex flex-col items-center  sm:mx-auto sm:w-2/3 lg:mx-auto  lg:w-2/4 ">
-            <TextField
-              id="outlined-basic"
-              label="Terms & Condition"
-              variant="outlined"
-              required
-              size="small"
-              fullWidth
-              multiline
-              rows={5}
-              name="termsAndConditions"
-              id="termsAndCondition"
-              onChange={handleChange}
-              value={assetForm?.termsAndConditions}
-              inputProps={{ readOnly: !isEdit }}
-              className="bg-white"
-            />
-          </section>
-        </form>
+            <section className="mt-4 flex flex-col items-center  sm:mx-auto sm:w-2/3 lg:mx-auto  lg:w-2/4 ">
+              <TextField
+                id="outlined-basic"
+                label="Terms & Condition"
+                variant="outlined"
+                required
+                size="small"
+                fullWidth
+                multiline
+                rows={5}
+                name="termsAndConditions"
+                id="termsAndCondition"
+                onChange={handleChange}
+                value={assetForm?.termsAndConditions}
+                inputProps={{ readOnly: !isEdit }}
+                className="bg-white"
+              />
+            </section>
+          </form>
+        )
       )}
 
       {/* <section className="ml-auto mt-10">

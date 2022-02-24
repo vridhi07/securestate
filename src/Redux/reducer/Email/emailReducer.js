@@ -1,5 +1,5 @@
 import * as constant from "../../constant";
-import {updatedReply} from './replyUtil'
+import { updatedReply } from "./replyUtil";
 import { getUpdatedEmails, getUpdatedReadStatus } from "./emailUtil";
 
 const initialState = {
@@ -9,8 +9,8 @@ const initialState = {
   Message: "",
   ErrorMessage: "",
   sendEmailLoader: false,
+  pageCount: "",
 };
-
 
 const EmailReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -27,7 +27,8 @@ const EmailReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        email: action.payload,
+        email: action.payload.mailData,
+        pageCount: action.payload.pageCount,
         Message: "",
         ErrorMessage: "",
       };
@@ -84,15 +85,15 @@ const EmailReducer = (state = initialState, action) => {
         messageReadStatus: action.payload.response,
       };
 
-      // case constant.UPDATE_REPLY_REQUEST:
-      //   console.log(action.payload,'action reply')
-      //   return{
-      //     ...state,
-      //     emails:{
-      //       ...state.emails,
-      //       emailsss:updatedReply(state?.emails.email)
-      //     }
-      //   }
+    // case constant.UPDATE_REPLY_REQUEST:
+    //   console.log(action.payload,'action reply')
+    //   return{
+    //     ...state,
+    //     emails:{
+    //       ...state.emails,
+    //       emailsss:updatedReply(state?.emails.email)
+    //     }
+    //   }
     default:
       return state;
   }

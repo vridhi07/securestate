@@ -97,6 +97,7 @@ import {
   allHackerWithCompany,
   addWalletSaga,
   getWalletSaga,
+  editWalletSaga,
   getWalletTotalSaga,
   addWalletTotalSaga,
   editWalletTotalSaga,
@@ -193,6 +194,7 @@ function* watchAllSaga() {
   yield takeLatest(actions.getWalletRequest, getWalletSaga);
   yield takeLatest(actions.getWalletTotalRequest, getWalletTotalSaga);
   yield takeLatest(actions.addWalletTotalRequest, addWalletTotalSaga);
+  yield takeLatest(actions.editWalletRequest, editWalletSaga);
 }
 
 export default function* rootSaga() {

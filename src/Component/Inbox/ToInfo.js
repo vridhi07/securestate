@@ -39,10 +39,11 @@ export default function MultipleSelectCheckmarks({
 }) {
   const userList = useSelector((state) => state.users);
   const dispatch = useDispatch();
-
+  // console.log(userList);
   useEffect(() => {
     dispatch(action.getUsersRequest());
   }, []);
+  const { userDetails } = useSelector((state) => state?.user);
 
   const handleChange = (event) => {
     const {
@@ -51,6 +52,14 @@ export default function MultipleSelectCheckmarks({
     setSelectedEmails(typeof value === "string" ? value.split(",") : value);
   };
 
+  const filterEmails = (data) => {
+    return data.filter((item) => item._id !== userDetails?._id);
+  };
+  let userData;
+  if (userList?.users) {
+    userData = filterEmails(userList?.users);
+  }
+  // } console.log(filterEmails(userList?.users));
   // const [personName, setPersonName] = React.useState([]);
 
   // const handleChange = (event) => {
@@ -86,7 +95,7 @@ export default function MultipleSelectCheckmarks({
           renderValue={(selected) => getUsersNames(selected).join(", ")}
           MenuProps={MenuProps}
         >
-          {userList?.users.map(({ _id, email }) => (
+          {userData.map(({ _id, email }) => (
             <MenuItem key={_id} value={_id}>
               <Checkbox checked={selectedEmails.indexOf(_id) > -1} />
               <ListItemText primary={email} />
@@ -98,8 +107,8 @@ export default function MultipleSelectCheckmarks({
   );
 }
 
-{
-  /* <FormControl variant="standard" fullWidth>
+// {
+/* <FormControl variant="standard" fullWidth>
         <InputLabel id="email">Tag</InputLabel>
         <Select
           labelId="email"
@@ -119,4 +128,4 @@ export default function MultipleSelectCheckmarks({
           ))}
         </Select>
       </FormControl> */
-}
+// }

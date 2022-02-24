@@ -404,6 +404,10 @@ export const getWalletRequest = createAction(actions.GET_WALLET_REQUEST);
 export const getWalletSuccess = createAction(actions.GET_WALLET_SUCCESS);
 export const getWalletError = createAction(actions.GET_WALLET_ERROR);
 
+export const editWalletRequest = createAction(actions.EDIT_WALLET_REQUEST);
+export const editWalletSuccess = createAction(actions.EDIT_WALLET_SUCCESS);
+export const editWalletError = createAction(actions.EDIT_WALLET_ERROR);
+
 export const getWalletTotalRequest = createAction(
   actions.GET_WALLET_TOTAL_REQUEST
 );
