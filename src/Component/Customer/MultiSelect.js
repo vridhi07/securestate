@@ -27,10 +27,10 @@ export default function MultipleSelectCheckmarks({
 }) {
   // const [personName, setPersonName] = React.useState([]);
   const { users } = useSelector((state) => state?.users);
-
+  const { userDetails } = useSelector((state) => state?.user);
   let newUser;
   if (users) {
-    newUser = users.filter((item) => item.company_id._id === company_id);
+    newUser = users.filter((item) => item?._id !== userDetails?._id);
   }
 
   // console.log(newUser);
