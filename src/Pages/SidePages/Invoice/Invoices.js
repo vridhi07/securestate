@@ -5,6 +5,7 @@ import InvoiceModal from "../../../Component/Invoice/InvoiceForm";
 import * as action from "../../../Redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import * as roles from "../../../constantData/Roles";
+
 const Invoices = () => {
   const dispatch = useDispatch();
 
@@ -33,7 +34,7 @@ const Invoices = () => {
     attachData: "",
     client: "",
   });
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [alert, setAlert] = useState({
     msg: "",
@@ -45,16 +46,16 @@ const Invoices = () => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(1);
-  };
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(1);
+  // };
 
   const getDate = (newValue) => {
     setFormInput({ ...formInput, dueDate: newValue });
   };
 
-  console.log(formInput.attachData);
+  // console.log(formInput.attachData);
   const handleFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -101,9 +102,7 @@ const Invoices = () => {
       data.append("company_id", company_id);
       data.append("user_id", client);
       data.append("due_date", dueDate);
-      dispatch(
-        action.addInvoiceRequest({ data, company_id, page, rowsPerPage })
-      );
+      dispatch(action.addInvoiceRequest({ data, company_id, page }));
       setFormInput({
         ...formInput,
         invoice: "",
@@ -118,8 +117,11 @@ const Invoices = () => {
     // console.log(data);
   };
   useEffect(() => {
-    if (userRole === roles.admin || userRole === roles.superAdmin) {
-      dispatch(action.getInvoiceRequest({ company_id, page, rowsPerPage }));
+    if (
+      userRole === roles.admin ||
+      (userRole === roles.superAdmin && company_id)
+    ) {
+      dispatch(action.getInvoiceRequest({ company_id, page }));
     }
   }, [company_id, page, rowsPerPage, userRole]);
 
@@ -130,16 +132,15 @@ const Invoices = () => {
   }, [userRole]);
 
   useEffect(() => {
-    if (userRole === roles.client && userDetails?._id) {
+    if (userRole === roles.client && userDetails?._id && company_id) {
       dispatch(
         action.getInvoiceUserIdRequest({
           userId: userDetails?._id,
           page,
-          rowsPerPage,
         })
       );
     }
-  }, [page, rowsPerPage, userDetails?._id]);
+  }, [page, userDetails?._id]);
 
   let filterAccess;
 
@@ -172,9 +173,9 @@ const Invoices = () => {
         <InvoiceTable
           invoiceData={invoiceData}
           page={page}
-          rowsPerPage={rowsPerPage}
+          // rowsPerPage={rowsPerPage}
           handleChangePage={handleChangePage}
-          handleChangeRowsPerPage={handleChangeRowsPerPage}
+          // handleChangeRowsPerPage={handleChangeRowsPerPage}
           company_id={company_id}
           totalPage={totalPage}
         />

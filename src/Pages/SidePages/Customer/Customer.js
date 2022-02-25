@@ -20,7 +20,7 @@ const Customer = () => {
   });
   const addCompanyState = useSelector((state) => state.company);
   const { userRole } = useSelector((state) => state?.user);
-  console.log(userRole);
+  // console.log(userRole);
   useEffect(() => {
     if (addCompanyState?.isCompanySuccess) {
       setIsCustomerFormOpen(false);
@@ -58,16 +58,16 @@ const Customer = () => {
     dispatch(actions.addCompanyRequest({ ...customerForm }));
   };
 
-  const getAccess = (role) => {
-    if (role === roles.superAdmin) {
-      return true;
-    }
-    return false;
-  };
-  let access;
+  // const getAccess = (role) => {
+  //   if (role === roles.superAdmin) {
+  //     return true;
+  //   }
+  //   return false;
+  // };
+  // let access;
   let filterAccess;
   if (userRole) {
-    access = getAccess(userRole);
+    // access = getAccess(userRole);
     filterAccess = roles.showFilter(userRole);
   }
   useEffect(() => {
@@ -77,26 +77,25 @@ const Customer = () => {
   return (
     <div className="min-h-screen">
       {filterAccess && (
-        <div className=" relative   mt-4  w-full rounded-lg bg-white py-10 ">
-          <div className=" max-w-3xl pl-7">
+        <div className=" relative  mt-4 flex  w-full  items-end justify-between rounded-lg bg-white py-10 ">
+          <div className=" w-[50%] pl-7">
             <FilterOption />
           </div>
-          {access && (
-            <div className="pl-7 md:absolute md:top-8 md:right-6  md:pl-0 ">
-              <button
-                className="mt-3 rounded-lg border bg-[#EBEBEB] py-2 px-4   "
-                onClick={openCustomerForm}
-              >
-                New Company
-              </button>
-            </div>
-          )}
+
+          <div className="mr-5   pl-7  ">
+            <button
+              className="rounded-lg border bg-[#EBEBEB] py-2 px-4   "
+              onClick={openCustomerForm}
+            >
+              New Company
+            </button>
+          </div>
         </div>
       )}
 
       {/* <MultipleSelectChip /> */}
       <div>
-        <CompanyGroup />
+        <CompanyGroup filterAccess={filterAccess} />
       </div>
 
       <Subscription />

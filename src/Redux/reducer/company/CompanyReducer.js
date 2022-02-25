@@ -9,6 +9,7 @@ const initialState = {
   selectedCompany: "",
   isCompanyLoading: false,
   isCompanySuccess: false,
+  deleteLoading: false,
 };
 
 const CompanyReducer = (state = initialState, action) => {
@@ -86,6 +87,21 @@ const CompanyReducer = (state = initialState, action) => {
       return {
         ...state,
         companyUpdateStatus: action.payload,
+      };
+    case actions.DELETE_COMPANY_REQUEST:
+      return {
+        ...state,
+        deleteLoading: true,
+      };
+    case actions.DELETE_COMPANY_SUCCESS:
+      return {
+        ...state,
+        deleteLoading: false,
+      };
+    case actions.DELETE_COMPANY_REQUEST:
+      return {
+        ...state,
+        deleteLoading: false,
       };
     default:
       return state;

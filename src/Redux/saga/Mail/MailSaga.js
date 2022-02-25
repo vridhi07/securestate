@@ -35,11 +35,10 @@ export function* MailReplySaga(action) {
       { ...action?.payload.data }
     );
     if (response && response.data?.status === 1) {
-      console.log(response?.data);
+      // console.log(response?.data);
       yield put(actions.sendEmailReplySuccess(response?.data));
       yield put(
         actions.updateReplyRequest({
-          name: "helllo",
           id: action.payload.id,
           text: { ...action?.payload.data },
           from: action?.payload.email,

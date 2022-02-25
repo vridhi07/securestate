@@ -104,7 +104,10 @@ const Users = () => {
     let temData = [...data];
     if (search) {
       temData = temData.filter((item) => {
-        return item.role.toLowerCase().startsWith(search);
+        return (
+          item?.role?.toLowerCase()?.startsWith(search) ||
+          item?.name?.startsWith(search)
+        );
       });
     }
     // if (temData.length === 0) {

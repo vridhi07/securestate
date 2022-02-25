@@ -340,6 +340,11 @@ const AssetsIndex = () => {
                     "& .MuiPaginationItem-previousNext": {
                       border: "none",
                     },
+                    "& .MuiPaginationItem-root": {
+                      "&:hover": {
+                        backgroundColor: "#B4AFAF !important",
+                      },
+                    },
                   }}
                   page={assetPageNumber}
                 />

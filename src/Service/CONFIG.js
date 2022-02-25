@@ -14,6 +14,7 @@ export const CONFIG = {
   addCompany: "company/addCompany",
   getCompanyById: "company/getcompanyById",
   updateCompanyDetails: "company/updateCompany",
+  deleteCompany: "company/deleteCompany",
   //! User
   getUserDetails: "user/userDetails",
   // !Pentest

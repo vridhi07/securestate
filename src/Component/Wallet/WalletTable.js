@@ -10,7 +10,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import TableRow from "@mui/material/TableRow";
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { IoTrashOutline } from "react-icons/io5";
+// import { IoTrashOutline } from "react-icons/io5";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import * as action from "../../Redux/action";
 import IconButton from "@mui/material/IconButton";
@@ -58,7 +58,7 @@ export default function StickyHeadTable({
 
   useEffect(() => {
     if (hackerId) {
-      console.log("I was called");
+      // console.log("I was called");
       dispatch(action.getWalletRequest({ hackerId, page }));
     }
   }, [hackerId, page]);
@@ -127,7 +127,7 @@ export default function StickyHeadTable({
         </Table>
       </TableContainer>
       <div className="my-3">
-        {totalPage && (
+        {totalPage !== "" && (
           <Stack spacing={2}>
             <Pagination
               count={totalPage}
@@ -146,6 +146,11 @@ export default function StickyHeadTable({
                 },
                 "& .MuiPaginationItem-previousNext": {
                   border: "none",
+                },
+                "& .MuiButtonBase-root": {
+                  "&:hover": {
+                    bgcolor: "none",
+                  },
                 },
               }}
               page={page}

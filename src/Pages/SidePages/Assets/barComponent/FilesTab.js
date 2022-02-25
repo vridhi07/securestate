@@ -80,8 +80,8 @@ const FilesTab = () => {
     formdata.append("file", file[0][0], `${file[0][0].name}`);
     formdata.append("name", `${fileForm.fileName}`);
     formdata.append("description", `${fileForm.description}`);
-    console.log(formdata);
-    dispatch(action.addFilesRequest({ assetId, formdata }));
+    // console.log(formdata);
+    dispatch(action.addFilesRequest({ assetId, formdata, filesPageNumber }));
     closeFileModal();
     setFileForm({
       fileName: "",
@@ -101,28 +101,34 @@ const FilesTab = () => {
   };
 
   const handleDelete = () => {
-    dispatch(action.deleteFilesRequest({ assetId, fileId: selectedId }));
+    dispatch(
+      action.deleteFilesRequest({
+        assetId,
+        fileId: selectedId,
+        filesPageNumber,
+      })
+    );
 
     // console.log("deleted");
-    if (assetFiles?.data?.length === 1) {
-      setFilesPageNumber((current) => {
-        let newNumber;
-        if (current === 1) {
-          newNumber = 1;
-        }
-        if (current > 1) {
-          newNumber = current - 1;
-        }
-        return newNumber;
-      });
-    }
+    // if (assetFiles?.data?.length === 1) {
+    //   setFilesPageNumber((current) => {
+    //     let newNumber;
+    //     if (current === 1) {
+    //       newNumber = 1;
+    //     }
+    //     if (current > 1) {
+    //       newNumber = current - 1;
+    //     }
+    //     return newNumber;
+    //   });
+    // }
 
     closeDeleteModal();
   };
 
   useEffect(() => {
     dispatch(action.getAssetFilesRequest({ assetId, filesPageNumber }));
-  }, [filesPageNumber, AddMessage]);
+  }, [filesPageNumber]);
   let assetAccess;
   if (userRole) {
     assetAccess = roles.AssetAccess(userRole);
@@ -166,45 +172,79 @@ const FilesTab = () => {
         {isLoading ? (
           <Loader />
         ) : (
-          assetFiles?.data &&
-          assetFiles?.data?.map((item, index) => {
-            return (
-              <article
-                key={item._id}
-                className={`grid grid-cols-9 items-center justify-center rounded-sm  py-2  text-center md:mx-16 ${
-                  index % 2 === 0 && "bg-white"
-                } `}
-              >
-                <div className="col-span-2 ml-7 max-w-[190px]  overflow-hidden ">
-                  <a
-                    href={item.file}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className=" text-center  md:mr-10"
-                    // download
+          <div>
+            {assetFiles?.data &&
+              assetFiles?.data?.map((item, index) => {
+                return (
+                  <article
+                    key={item._id}
+                    className={`grid grid-cols-9 items-center justify-center rounded-sm  py-2  text-center md:mx-16 ${
+                      index % 2 === 0 && "bg-white"
+                    } `}
                   >
-                    {item.file_name}
-                  </a>
-                </div>
-                <div className="col-span-2">
-                  <p> {moment(item.createdAt).format("l")}</p>
-                </div>
-                <div className=" col-span-4 max-w-[392px] overflow-hidden text-center">
-                  <p>{item.description}</p>
-                </div>
-                <div className="col-span-1">
-                  {assetAccess && (
-                    <IconButton
-                      color="error"
-                      onClick={() => openDeleteModal(item._id)}
-                    >
-                      <IoTrashOutline />
-                    </IconButton>
-                  )}
-                </div>
-              </article>
-            );
-          })
+                    <div className="col-span-2 ml-7 max-w-[190px]  overflow-hidden ">
+                      <a
+                        href={item.file}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className=" text-center  md:mr-10"
+                        // download
+                      >
+                        {item.file_name}
+                      </a>
+                    </div>
+                    <div className="col-span-2">
+                      <p> {moment(item.createdAt).format("l")}</p>
+                    </div>
+                    <div className=" col-span-4 max-w-[392px] overflow-hidden text-center">
+                      <p>{item.description}</p>
+                    </div>
+                    <div className="col-span-1">
+                      {assetAccess && (
+                        <IconButton
+                          color="error"
+                          onClick={() => openDeleteModal(item._id)}
+                        >
+                          <IoTrashOutline />
+                        </IconButton>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
+            {assetFiles?.total !== null && (
+              <div className="mt-4 ml-7">
+                <Stack spacing={2}>
+                  <Pagination
+                    count={assetFiles?.total}
+                    // variant="outlined"
+                    onChange={handleFilesPageNumber}
+                    sx={{
+                      "& .Mui-selected": {
+                        backgroundColor: "#F27931 !important",
+                        color: "white",
+                        border: "none",
+                      },
+                      "& .MuiPaginationItem-page ": {
+                        bgcolor: "#B4AFAF",
+                        color: "white",
+                        border: "none",
+                      },
+                      "& .MuiPaginationItem-previousNext": {
+                        border: "none",
+                      },
+                      "& .MuiPaginationItem-root": {
+                        "&:hover": {
+                          backgroundColor: "#B4AFAF !important",
+                        },
+                      },
+                    }}
+                    page={filesPageNumber}
+                  />
+                </Stack>
+              </div>
+            )}
+          </div>
         )}
       </div>
 

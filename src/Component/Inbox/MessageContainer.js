@@ -5,7 +5,7 @@ const MessageContainer = ({ openMail }) => {
   const {
     userDetails: { email },
   } = useSelector((state) => state?.user);
-  console.log(openMail);
+  // console.log(openMail);
   const getTime = (time) => {
     return new Date(time).toLocaleTimeString("en-US");
   };

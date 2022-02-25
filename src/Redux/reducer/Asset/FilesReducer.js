@@ -32,14 +32,14 @@ const assetFilesReducer = (state = initialState, action) => {
     case constant.ADD_FILES_REQUEST:
       return {
         ...state,
-        addLoading: true,
+        // addLoading: true,
         isError: { ...state.isError, status: true, msg: action.payload },
         AddMessage: "",
       };
     case constant.ADD_FILES_SUCCESS:
       return {
         ...state,
-        addLoading: false,
+        // addLoading: false,
         isError: { ...state.isError, status: true, msg: action.payload },
         AddMessage: action.payload,
       };
@@ -47,28 +47,28 @@ const assetFilesReducer = (state = initialState, action) => {
     case constant.ADD_FILES_ERROR:
       return {
         ...state,
-        addLoading: false,
+        // addLoading: false,
         isError: { ...state.isError, status: true, msg: action.payload },
         AddMessage: "",
       };
     case constant.DELETE_FILES_REQUEST:
       return {
         ...state,
-        addLoading: false,
+        // addLoading: false,
         isError: { ...state.isError, status: true, msg: "" },
         AddMessage: "",
       };
     case constant.DELETE_FILES_SUCCESS:
       return {
         ...state,
-        addLoading: false,
+        // addLoading: false,
         isError: { ...state.isError, status: true, msg: "" },
         AddMessage: action.payload,
       };
     case constant.DELETE_FILES_ERROR:
       return {
         ...state,
-        addLoading: false,
+        // addLoading: false,
         isError: { ...state.isError, status: true, msg: action.payload },
         AddMessage: "",
       };

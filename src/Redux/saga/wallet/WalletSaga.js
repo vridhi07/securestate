@@ -135,7 +135,7 @@ export function* editWalletSaga(action) {
     let response = yield call(axios.put, `${CONFIG.editWallet}`, data);
 
     if (response && response?.data?.status === 1) {
-      console.log(response.data);
+      // console.log(response.data);
       yield put(actions.editWalletSuccess("Success"));
       yield put(actions.getWalletRequest({ hackerId, page }));
     }
