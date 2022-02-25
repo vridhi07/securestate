@@ -20,7 +20,7 @@ const Customer = () => {
   });
   const addCompanyState = useSelector((state) => state.company);
   const { userRole } = useSelector((state) => state?.user);
-  console.log(userRole);
+  // console.log(userRole);
   useEffect(() => {
     if (addCompanyState?.isCompanySuccess) {
       setIsCustomerFormOpen(false);
@@ -58,13 +58,13 @@ const Customer = () => {
     dispatch(actions.addCompanyRequest({ ...customerForm }));
   };
 
-  const getAccess = (role) => {
-    if (role === roles.superAdmin) {
-      return true;
-    }
-    return false;
-  };
-  let access;
+  // const getAccess = (role) => {
+  //   if (role === roles.superAdmin) {
+  //     return true;
+  //   }
+  //   return false;
+  // };
+  // let access;
   let filterAccess;
   if (userRole) {
     // access = getAccess(userRole);

@@ -85,7 +85,7 @@ const Inbox = () => {
   // };
 
   const HandleOpenMail = (item) => {
-    console.log(item, "------");
+    // console.log(item, "------");
     setOpenMail(item);
     setSelectData({ sendEMail: item.to, id: item._id });
     dispatch(action.readEmailRequest({ id: item._id }));

@@ -108,14 +108,16 @@ const Subscription = () => {
     }
   }, [company_id]);
   useEffect(() => {
-    dispatch(action.getAllAssetListRequest(company_id));
+    if (company_id) {
+      dispatch(action.getAllAssetListRequest(company_id));
+    }
   }, [company_id]);
 
   let SubscriptionAccess;
   if (userRole) {
     SubscriptionAccess = roles.showFilter(userRole);
   }
-  console.log(SubscriptionAccess);
+  // console.log(SubscriptionAccess);
   return (
     <div className="mt-[5rem] mb-5">
       <header className="mx-auto mb-2 flex w-95.5 max-w-5xl items-center justify-between px-3">

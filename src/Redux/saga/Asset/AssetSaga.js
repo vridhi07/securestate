@@ -84,7 +84,7 @@ export function* UpdateAssetSaga(action) {
 
 export function* GetAllAssetList(action) {
   try {
-    console.log(action.payload);
+    // console.log(action.payload);
     let response = yield call(
       axios.get,
       `${CONFIG.getAllAsset}/${action.payload}`

@@ -100,7 +100,7 @@ const Wallet = () => {
 
   const openEdit = (id) => {
     const SingleData = walletDetails.find((item) => item._id === id);
-    console.log(SingleData);
+    // console.log(SingleData);
     setWalletDetail({
       ...walletDetail,
       pentest: SingleData?.pentestId?._id || "",
@@ -143,7 +143,7 @@ const Wallet = () => {
 
   const submitTotal = (e) => {
     e.preventDefault();
-    console.log(totalData);
+    // console.log(totalData);
     if (!isTotalEdit) {
       const data = {
         totalEarned: totalData.totalEarned,
@@ -176,7 +176,7 @@ const Wallet = () => {
         status: walletDetail.status,
         userId: hackerId,
       };
-      console.log(data);
+      // console.log(data);
       dispatch(action.addWalletRequest({ data, hackerId, page }));
     }
     if (isEdit) {
@@ -187,7 +187,7 @@ const Wallet = () => {
         status: walletDetail.status,
         walletId: selectedId,
       };
-      console.log(data);
+      // console.log(data);
       dispatch(action.editWalletRequest({ data, page, hackerId }));
     }
     closeIsWalletOpen();

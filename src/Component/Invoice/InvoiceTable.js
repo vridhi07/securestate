@@ -79,7 +79,7 @@ export default function InvoiceTable({
   // const handleMenuClose = () => {
   //   setAnchorEl(null);
   // };
-  console.log(page);
+  // console.log(page);
   const openDeleteModal = (id) => {
     setIsDeleteModal(true);
     setSelectedId(id);

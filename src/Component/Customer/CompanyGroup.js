@@ -19,7 +19,7 @@ const CompanyGroup = ({ filterAccess }) => {
   const { selectedCompany, deleteLoading } = useSelector(
     (state) => state?.company
   );
-  console.log(deleteLoading);
+  // console.losg(deleteLoading);
   const { userDetails } = useSelector((state) => state?.user);
   const { GroupUsers } = useSelector((state) => state?.GroupUserList);
   const getCompanyId = (role) => {
