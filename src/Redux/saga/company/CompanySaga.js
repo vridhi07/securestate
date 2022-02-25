@@ -63,3 +63,22 @@ export function* UpdateCompanyDetails(action) {
     );
   }
 }
+
+export function* deleteCompanySaga(action) {
+  try {
+    const { companyId } = action.payload;
+    console.log(companyId);
+    let response = yield call(axios.delete, CONFIG.deleteCompany, {
+      data: {
+        companyId,
+      },
+    });
+    if (response && response.data?.status === 1) {
+      yield put(actions.deleteCompanySuccess("Successfully"));
+      yield put(actions.CompanyRequest());
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.deleteCompanyError(error?.response?.data?.message));
+  }
+}

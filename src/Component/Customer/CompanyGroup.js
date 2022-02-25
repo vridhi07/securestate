@@ -10,12 +10,16 @@ import * as actions from "../../Redux/action";
 import GroupAccordion from "./GroupAccordion";
 import AddMoreUserToGroup from "./AddMoreUserToGroup";
 import GroupDeleteModal from "./GroupDeleteModal";
-const CompanyGroup = () => {
+import CompanyDeleteModal from "./CompanyDeleteModal";
+const CompanyGroup = ({ filterAccess }) => {
   const dispatch = useDispatch();
   const companyDetails = useSelector(
     (state) => state?.company?.companyListById
   );
-  const { selectedCompany } = useSelector((state) => state?.company);
+  const { selectedCompany, deleteLoading } = useSelector(
+    (state) => state?.company
+  );
+  console.log(deleteLoading);
   const { userDetails } = useSelector((state) => state?.user);
   const { GroupUsers } = useSelector((state) => state?.GroupUserList);
   const getCompanyId = (role) => {
@@ -29,6 +33,12 @@ const CompanyGroup = () => {
   // };
   const company_id = getCompanyId(userDetails?.role);
   // console.log(GroupUsers, "group user");
+
+  const [isCompanyDeleteOpen, setIsCompanyDeleteOpen] = useState(false);
+
+  //   isCompanyDeleteOpen,
+  // closeIsCompanyDeleteOpen,
+  // deleteCompany,
   const [isCompanyDetailsEdit, setIsCompanyDetailsEdit] = useState(false);
   const focusRef = useRef();
   const [CompanyInfo, setCompanyInfo] = useState({
@@ -55,6 +65,17 @@ const CompanyGroup = () => {
   const [addMoreUserToGroup, setAddMoreUserToGroup] = useState(false);
   const [isDeleteGroupOpen, setIsDeleteGroupOpen] = useState(false);
 
+  const openCompanyDeleteModal = () => {
+    setIsCompanyDeleteOpen(true);
+  };
+  const closeIsCompanyDeleteOpen = () => {
+    setIsCompanyDeleteOpen(false);
+  };
+  const deleteCompany = () => {
+    console.log(company_id);
+    dispatch(actions.deleteCompanyRequest({ companyId: company_id }));
+    closeIsCompanyDeleteOpen();
+  };
   const openIsDeleteGroupOpen = () => {
     setIsDeleteGroupOpen(true);
   };
@@ -65,13 +86,13 @@ const CompanyGroup = () => {
   };
 
   const handleDeleteGroup = (id) => {
-    console.log(id, "GroupId");
+    // console.log(id, "GroupId");
     setGroupId(id);
     openIsDeleteGroupOpen();
   };
 
   const DeleteGroup = () => {
-    console.log("deleted", groupId);
+    // console.log("deleted", groupId);
     dispatch(actions.deleteGroupRequest({ groupId: groupId, id: company_id }));
     closeIsDeleteGroupOpen();
   };
@@ -282,7 +303,17 @@ const CompanyGroup = () => {
       {/* Company Info */}
 
       <div className="my-8 mx-auto w-95.5 max-w-5xl">
-        <div className=" flex w-full  justify-end">
+        <div className=" my-3 flex  w-full justify-end">
+          {filterAccess && (
+            <button
+              onClick={openCompanyDeleteModal}
+              className="mr-3 rounded-md bg-error-btn px-3 py-2 text-white hover:bg-red-500"
+              disabled={deleteLoading}
+            >
+              Delete Company
+            </button>
+          )}
+
           <button
             onClick={handleCompanyDetailsEdit}
             className=" hover rounded-md bg-primary-btn px-3 py-2 text-white md:mr-8 "
@@ -509,6 +540,12 @@ const CompanyGroup = () => {
         isDeleteGroupOpen={isDeleteGroupOpen}
         closeIsDeleteGroupOpen={closeIsDeleteGroupOpen}
         DeleteGroup={DeleteGroup}
+      />
+      <CompanyDeleteModal
+        isCompanyDeleteOpen={isCompanyDeleteOpen}
+        // openCompanyDeleteModal={openCompanyDeleteModal}
+        closeIsCompanyDeleteOpen={closeIsCompanyDeleteOpen}
+        deleteCompany={deleteCompany}
       />
     </div>
   );

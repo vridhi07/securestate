@@ -35,6 +35,7 @@ import {
   AddCompanySaga,
   GetCompanyByIdSaga,
   UpdateCompanyDetails,
+  deleteCompanySaga,
 } from "./company/CompanySaga";
 
 import { GetUserDetails, updateUserSaga } from "./user/UserSaga";
@@ -128,6 +129,7 @@ function* watchAllSaga() {
 
   // !company
   yield takeLatest(actions.CompanyRequest, GetCompanySaga);
+  yield takeLatest(actions.deleteCompanyRequest, deleteCompanySaga);
   // !userDetails
   yield takeLatest(actions.getUsersRequest, GetUsersSaga);
   yield takeLatest(actions.addUsersRequest, AddUsersSaga);
