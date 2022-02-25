@@ -5,10 +5,10 @@ import * as actions from "../../action/index";
 
 export function* GetInvoiceSaga(action) {
   try {
-    const { company_id, page, rowsPerPage } = action.payload;
+    const { company_id, page } = action.payload;
     let response = yield call(
       axios.get,
-      `${CONFIG.getInvoice}/${company_id}/${rowsPerPage}/${page}`
+      `${CONFIG.getInvoice}/${company_id}/${page}`
     );
     if (response && response.data?.status === 1) {
       yield put(actions.getInvoiceSuccess(response?.data?.data));
@@ -19,13 +19,13 @@ export function* GetInvoiceSaga(action) {
   }
 }
 export function* addInvoiceSaga(action) {
-console.log('hello');
+  console.log("hello");
   try {
-    const { data, company_id, page, rowsPerPage } = action.payload;
+    const { data, company_id, page } = action.payload;
     let response = yield call(axios.post, CONFIG.addInvoice, data);
     if (response && response.data?.status === 1) {
       yield put(actions.addInvoiceSuccess("successfully added"));
-      yield put(actions.getInvoiceRequest({ company_id, page, rowsPerPage }));
+      yield put(actions.getInvoiceRequest({ company_id, page }));
     }
   } catch (error) {
     // console.log(error.response.data.message);
@@ -34,13 +34,13 @@ console.log('hello');
 }
 export function* deleteInvoicesSaga(action) {
   try {
-    const { data, company_id, page, rowsPerPage } = action.payload;
+    const { data, company_id, page } = action.payload;
     let response = yield call(axios.delete, CONFIG.deleteInvoice, {
       data: { invoiceId: data },
     });
     if (response && response.data?.status === 1) {
       yield put(actions.deleteInvoiceSuccess("successfully Deleted"));
-      yield put(actions.getInvoiceRequest({ company_id, page, rowsPerPage }));
+      yield put(actions.getInvoiceRequest({ company_id, page }));
     }
   } catch (error) {
     // console.log(error.response.data.message);
@@ -49,10 +49,10 @@ export function* deleteInvoicesSaga(action) {
 }
 export function* getInvoiceUserId(action) {
   try {
-    const { userId, page, rowsPerPage } = action.payload;
+    const { userId, page } = action.payload;
     let response = yield call(
       axios.get,
-      `${CONFIG.getInvoiceUserId}/${userId}/${rowsPerPage}/${page}`
+      `${CONFIG.getInvoiceUserId}/${userId}/${page}`
     );
     if (response && response.data?.status === 1) {
       yield put(actions.getInvoiceUserIdSuccess(response?.data?.data));

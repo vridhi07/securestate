@@ -5,9 +5,9 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
+// import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+// import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DownloadIcon from "@mui/icons-material/Download";
 import Menu from "../Common/Menu";
 import moment from "moment";
@@ -15,6 +15,8 @@ import DeleteModal from "../Common/DeleteModal";
 import * as action from "../../Redux/action";
 import { useDispatch } from "react-redux";
 import { IoTrashOutline } from "react-icons/io5";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 // import Fab from "@mui/material/Fab";
 import IconButton from "@mui/material/IconButton";
 const columns = [
@@ -54,9 +56,9 @@ const columns = [
 export default function InvoiceTable({
   invoiceData = [],
   page,
-  rowsPerPage,
+  // rowsPerPage,
   handleChangePage,
-  handleChangeRowsPerPage,
+  // handleChangeRowsPerPage,
   company_id,
   totalPage,
 }) {
@@ -77,7 +79,7 @@ export default function InvoiceTable({
   // const handleMenuClose = () => {
   //   setAnchorEl(null);
   // };
-
+  console.log(page);
   const openDeleteModal = (id) => {
     setIsDeleteModal(true);
     setSelectedId(id);
@@ -95,7 +97,6 @@ export default function InvoiceTable({
       action.deleteInvoiceRequest({
         company_id,
         data: selectedId,
-        rowsPerPage,
         page,
       })
     );
@@ -161,15 +162,37 @@ export default function InvoiceTable({
         </Table>
       </TableContainer>
       {totalPage && (
-        <TablePagination
-          // rowsPerPageOptions={[5, 10, 15]}
-          component="div"
-          count={totalPage}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        <div className="mt-4 pb-5">
+          <Stack spacing={2}>
+            <Pagination
+              count={totalPage}
+              // variant="outlined"
+              onChange={handleChangePage}
+              // color="primary"
+              page={page}
+              sx={{
+                "& .Mui-selected": {
+                  backgroundColor: "#F27931 !important",
+                  color: "white",
+                  border: "none",
+                },
+                "& .MuiPaginationItem-page ": {
+                  bgcolor: "#B4AFAF",
+                  color: "white",
+                  border: "none",
+                },
+                "& .MuiPaginationItem-previousNext": {
+                  border: "none",
+                },
+                "& .MuiPaginationItem-root": {
+                  "&:hover": {
+                    backgroundColor: "#B4AFAF !important",
+                  },
+                },
+              }}
+            />
+          </Stack>
+        </div>
       )}
 
       <DeleteModal
