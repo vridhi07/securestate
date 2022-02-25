@@ -274,7 +274,7 @@ export default function SBOMTab() {
                 </TableBody>
               </Table>
             </TableContainer>
-            {sbomDetails?.totalPage > 1 && (
+            {sbomDetails?.totalPage !== null && (
               <div className="mt-4 pb-5">
                 <Stack spacing={2}>
                   <Pagination
@@ -296,6 +296,11 @@ export default function SBOMTab() {
                       },
                       "& .MuiPaginationItem-previousNext": {
                         border: "none",
+                      },
+                      "& .MuiPaginationItem-root": {
+                        "&:hover": {
+                          backgroundColor: "#B4AFAF !important",
+                        },
                       },
                     }}
                   />

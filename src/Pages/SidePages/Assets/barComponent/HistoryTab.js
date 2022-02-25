@@ -236,6 +236,11 @@ const HistoryTab = () => {
                       "& .MuiPaginationItem-previousNext": {
                         border: "none",
                       },
+                      "& .MuiPaginationItem-root": {
+                        "&:hover": {
+                          backgroundColor: "#B4AFAF !important",
+                        },
+                      },
                     }}
                   />
                 </Stack>

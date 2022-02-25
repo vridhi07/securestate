@@ -233,9 +233,9 @@ const FilesTab = () => {
                       "& .MuiPaginationItem-previousNext": {
                         border: "none",
                       },
-                      "& .MuiButtonBase-root": {
+                      "& .MuiPaginationItem-root": {
                         "&:hover": {
-                          bgcolor: "none",
+                          backgroundColor: "#B4AFAF !important",
                         },
                       },
                     }}
