@@ -340,6 +340,11 @@ const AssetsIndex = () => {
                     "& .MuiPaginationItem-previousNext": {
                       border: "none",
                     },
+                    "& .MuiButtonBase-root": {
+                      "&:hover": {
+                        bgcolor: "none",
+                      },
+                    },
                   }}
                   page={assetPageNumber}
                 />

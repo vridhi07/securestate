@@ -34,7 +34,7 @@ const Details = () => {
   const handleEdit = () => {
     setIsEdit(!isEdit);
   };
-  console.log(assetForm?.status);
+  // console.log(assetForm?.status);
   const submit = () => {
     // console.log("submit");
     const data = {
@@ -308,7 +308,7 @@ const Details = () => {
                 name="termsAndConditions"
                 id="termsAndCondition"
                 onChange={handleChange}
-                value={assetForm?.termsAndConditions}
+                value={assetForm?.termsAndConditions || ""}
                 inputProps={{ readOnly: !isEdit }}
                 className="bg-white"
               />

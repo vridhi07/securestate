@@ -35,10 +35,7 @@ const HistoryTab = () => {
     (state) => state?.assetHistory
   );
   const userRole = useSelector((state) => state?.user?.userRole);
-  // console.log(historyDetails);
-  //   isDeleteModalOpen,
-  // closeDeleteModal,
-  // handleDelete,
+
   const openDeleteModal = (id) => {
     setIsDeleteModalOpen(true);
     setSelectedId(id);
@@ -49,17 +46,18 @@ const HistoryTab = () => {
     setSelectedId(null);
   };
   const handleDelete = () => {
-    // console.log(selectedId, "deleted");
-    dispatch(
-      action.deleteHistoryRequest({ pageId, historyPageNumber, selectedId })
-    );
-    closeDeleteModal();
+    if (historyPageNumber) {
+      dispatch(
+        action.deleteHistoryRequest({ pageId, historyPageNumber, selectedId })
+      );
+      closeDeleteModal();
+    }
   };
 
   const handleEventChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-    console.log(name);
+    // console.log(name);
     setHistoryEvent({ ...historyEvent, [name]: value });
   };
   const handleHistoryPageNumber = (e, i) => {
@@ -107,13 +105,13 @@ const HistoryTab = () => {
 
     const { date, event, description } = historyEvent;
     if (!isEdit) {
-      console.log("submit");
+      // console.log("submit");
       const data = {
         date,
         event,
         description,
       };
-      console.log(data);
+      // console.log(data);
       dispatch(action.AddHistoryRequest({ data, pageId, historyPageNumber }));
     }
     if (isEdit) {
@@ -216,7 +214,7 @@ const HistoryTab = () => {
                 })}
             </div>
             {historyDetails?.total > 1 && (
-              <div className="mt-4 pb-5">
+              <div className="mt-4 ml-7 pb-5">
                 <Stack spacing={2}>
                   <Pagination
                     count={historyDetails?.total}

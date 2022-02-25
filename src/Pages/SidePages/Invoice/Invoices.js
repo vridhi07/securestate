@@ -54,7 +54,7 @@ const Invoices = () => {
     setFormInput({ ...formInput, dueDate: newValue });
   };
 
-  console.log(formInput.attachData);
+  // console.log(formInput.attachData);
   const handleFormInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;

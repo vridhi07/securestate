@@ -4,7 +4,7 @@ import * as actions from "../../action/index";
 import axios from "axios";
 export function* AssetDetailsSaga(action) {
   try {
-    console.log("was called");
+    // console.log("was called");
     let response = yield call(
       axios.get,
       `${CONFIG.assetTabs}/getasstById/${action.payload}`
