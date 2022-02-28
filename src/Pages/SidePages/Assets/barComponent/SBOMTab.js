@@ -134,7 +134,7 @@ export default function SBOMTab() {
     setSelectedId(null);
   };
   const OpenDeleteSbomModal = (id) => {
-    console.log(id);
+    // console.log(id);
     openDeleteModal();
     setSelectedId(id);
   };

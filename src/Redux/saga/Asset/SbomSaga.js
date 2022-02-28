@@ -40,7 +40,7 @@ export function* AddSBOMSaga(action) {
 export function* deleteSbomSaga(action) {
   try {
     const { assetId, fileId } = action.payload;
-    console.log(assetId, fileId);
+    // console.log(assetId, fileId);
     let response = yield call(
       axios.delete,
       `${CONFIG.assetTabs}/${assetId}/deleteComponent`,
