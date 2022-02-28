@@ -73,6 +73,9 @@ export const deleteSbomRequest = createAction(actions.DELETE_SBOM_REQUEST);
 export const deleteSbomSuccess = createAction(actions.DELETE_SBOM_SUCCESS);
 export const deleteSbomError = createAction(actions.DELETE_SBOM_ERROR);
 
+export const updateSBOMRequest = createAction(actions.UPDATE_SBOM_REQUEST);
+export const updateSBOMSuccess = createAction(actions.UPDATE_SBOM_SUCCESS);
+export const updateSBOMError = createAction(actions.UPDATE_SBOM_ERROR);
 //* Files
 
 export const addFilesRequest = createAction(actions.ADD_FILES_REQUEST);
