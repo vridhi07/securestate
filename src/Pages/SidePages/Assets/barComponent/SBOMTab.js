@@ -19,6 +19,7 @@ import AddIcon from "@mui/icons-material/Add";
 import * as action from "../../../../Redux/action/index";
 import { IoTrashOutline } from "react-icons/io5";
 import * as roles from "../../../../constantData/Roles";
+import EditIcon from "@mui/icons-material/Edit";
 export default function SBOMTab() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
@@ -30,6 +31,7 @@ export default function SBOMTab() {
     path: "",
     version: "",
   });
+  const [isEdit, setIsEdit] = useState(false);
   const [SboMPageNumber, setSboMPageNumber] = useState(1);
 
   //   {
@@ -66,22 +68,52 @@ export default function SBOMTab() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setSelectedId(null);
+    if (isEdit) {
+      setIsEdit(false);
+    }
   };
   const handleSboMPageNumber = (e, i) => {
     setSboMPageNumber(i);
   };
+
+  const handleEdit = (id) => {
+    console.log(id);
+    const SingleData = sbomDetails.data.find((item) => item._id === id);
+    setComponentForm({
+      ...componentForm,
+      supplier: SingleData.supplier,
+      cve: SingleData.cve,
+      security_score: SingleData.security_score,
+      path: SingleData.path,
+      version: SingleData.version,
+    });
+    setSelectedId(id);
+    setIsEdit(true);
+    openModal();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const data = {
-      supplier,
-      cve,
-      security_score,
-      path,
-      version,
-    };
-    console.log(assetId);
-    dispatch(action.addSbomRequest({ assetId, data }));
+    if (!isEdit) {
+      const data = {
+        supplier,
+        cve,
+        security_score,
+        path,
+        version,
+      };
+      // console.log(assetId);
+      dispatch(action.addSbomRequest({ assetId, data }));
+    }
+    if (isEdit) {
+      console.log(componentForm);
+      const data = {
+        ...componentForm,
+        sbomId: selectedId,
+      };
+      dispatch(action.updateSBOMRequest({ assetId, data, SboMPageNumber }));
+    }
     closeModal();
     setComponentForm({
       ...componentForm,
@@ -178,6 +210,7 @@ export default function SBOMTab() {
                     <TableCell># OF CVES</TableCell>
                     {/* <TableCell>UNIQUE IDENTIFIER</TableCell> */}
                     {assetAccess && <TableCell align="right"></TableCell>}
+                    {assetAccess && <TableCell align="right"></TableCell>}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -261,6 +294,14 @@ export default function SBOMTab() {
 
                         {assetAccess && (
                           <TableCell align="right">
+                            <IconButton onClick={() => handleEdit(item._id)}>
+                              <EditIcon />
+                            </IconButton>
+                          </TableCell>
+                        )}
+
+                        {assetAccess && (
+                          <TableCell align="right">
                             <IconButton
                               color="error"
                               onClick={() => OpenDeleteSbomModal(item._id)}
@@ -316,6 +357,7 @@ export default function SBOMTab() {
         componentForm={componentForm}
         handleComponentForm={handleComponentForm}
         handleSubmit={handleSubmit}
+        isEdit={isEdit}
       />
       <DeleteModal
         isDeleteModalOpen={isDeleteModalOpen}

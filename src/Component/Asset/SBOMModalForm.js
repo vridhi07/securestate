@@ -9,6 +9,7 @@ export default function SBOMModalForm({
   componentForm,
   handleComponentForm,
   handleSubmit,
+  isEdit,
 }) {
   const { supplier, cve, security_score, path, version } = componentForm;
 
@@ -21,7 +22,9 @@ export default function SBOMModalForm({
           onSubmit={handleSubmit}
         >
           <header className="flex justify-between bg-orange-cus-1 py-3  px-4 text-white">
-            <h2 className="text-center text-lg font-bold ">Add Component</h2>
+            <h2 className="text-center text-lg font-bold ">
+              {isEdit ? "Edit Component" : "Add Component"}
+            </h2>
             <button
               type="button"
               // className="top3 absolute right-3"
@@ -137,7 +140,7 @@ export default function SBOMModalForm({
                 type="submit"
                 className="hover rounded-md bg-primary-btn px-8 py-2 tracking-wider text-white"
               >
-                Add
+                {isEdit ? "Save" : "  Add"}
               </button>
               <button
                 type="button"

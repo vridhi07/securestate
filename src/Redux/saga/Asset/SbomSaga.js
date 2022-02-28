@@ -51,11 +51,30 @@ export function* deleteSbomSaga(action) {
       }
     );
     if (response && response.data?.status === 1) {
-      console.log(response, "history");
+      // console.log(response, "history");
       yield put(actions.deleteSbomSuccess("Successfully added"));
     }
   } catch (error) {
     // console.log(error.response.data.message);
     yield put(actions.deleteSbomError(error.response.data.message));
+  }
+}
+export function* updateSbomSaga(action) {
+  try {
+    const { data, SboMPageNumber, assetId } = action.payload;
+
+    let response = yield call(
+      axios.put,
+      `${CONFIG.assetTabs}/updateSbom`,
+      data
+    );
+    if (response && response.data?.status === 1) {
+      // console.log(response, "update");
+      yield put(actions.updateSBOMSuccess("Successfully updated"));
+      yield put(actions.GetSBOMRequest({ assetId, SboMPageNumber }));
+    }
+  } catch (error) {
+    // console.log(error.response.data.message);
+    yield put(actions.updateSBOMSuccess(error.response.data.message));
   }
 }
