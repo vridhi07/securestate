@@ -412,7 +412,7 @@ const CompanyGroup = ({ filterAccess }) => {
               </div>
               <div className="col-span-4">
                 <div className=" flex w-full flex-col rounded-md">
-                  <label htmlFor="main_poc_email">Main POC Email</label>
+                  <label htmlFor="main_poc_phone">Main POC Phone</label>
                   <input
                     type="tel"
                     label="Main POC Phone"
