@@ -9,7 +9,7 @@ import * as action from "../../Redux/action";
 import * as roles from "../../constantData/Roles";
 const Subscription = () => {
   const dispatch = useDispatch();
-
+  const [search, setSearch] = useState("");
   const { selectedCompany } = useSelector((state) => state?.company);
   const { userDetails, userRole } = useSelector((state) => state?.user);
   const { allAsset } = useSelector((state) => state.Assets);
@@ -22,7 +22,7 @@ const Subscription = () => {
     return userDetails?.company_id._id;
   };
   const company_id = getCompanyId(userRole);
-
+  const [subscriptionData, setSubscriptionData] = useState([]);
   const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
   // console.log(allAsset);
   const [subscribeForm, setSubscribeForm] = useState({
@@ -101,7 +101,28 @@ const Subscription = () => {
     dispatch(action.addSubscriptionRequest({ data, company_id }));
     closeSubscription();
   };
+  // * functions for filter
+  const getFilterData = (data, searchOption) => {
+    let temData = [...data];
+    if (searchOption) {
+      temData = temData.filter(
+        (item) =>
+          item?.asset?.asset_name?.startsWith(searchOption) ||
+          item?.asset?.asset_name?.toLowerCase().startsWith(searchOption) ||
+          item?.asset?.status?.toLowerCase().startsWith(searchOption)
+      );
+    }
 
+    return temData;
+  };
+
+  // !Filter Data
+  let filterData;
+  if (subscriptionData) {
+    filterData = getFilterData(subscriptionData, search);
+  }
+
+  // console.log(filterData);
   useEffect(() => {
     if (company_id) {
       dispatch(action.getSubscriptionListRequest(company_id));
@@ -113,6 +134,9 @@ const Subscription = () => {
     }
   }, [company_id]);
 
+  useEffect(() => {
+    setSubscriptionData([...SubscriptionData]);
+  }, [SubscriptionData]);
   let SubscriptionAccess;
   if (userRole) {
     SubscriptionAccess = roles.showFilter(userRole);
@@ -135,6 +159,8 @@ const Subscription = () => {
               type="text"
               placeholder="Search"
               className="w-full rounded-3xl border-0  py-1 pl-2 focus:bg-none focus:outline-none focus:ring-0"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           {SubscriptionAccess && (
@@ -169,8 +195,8 @@ const Subscription = () => {
           </div>
         </div>
         <div className="min-h-[100%] px-3 py-2 text-[#737275]">
-          {SubscriptionData &&
-            SubscriptionData.map((item) => {
+          {filterData &&
+            filterData.map((item) => {
               return (
                 <SingleSubscriber
                   key={item._id}
