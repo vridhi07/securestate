@@ -17,7 +17,7 @@ const SingleSubscriber = ({
               subscriber?.asset?.status === "active"
                 ? "text-green-500"
                 : "text-red-500"
-            }`}
+            } text-left`}
           >
             {subscriber?.asset?.status}
           </h4>
