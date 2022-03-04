@@ -122,7 +122,7 @@ const Users = () => {
   if (newUsers) {
     filteredData = getFilteredUser(newUsers, profileSearch);
   }
-  console.log(filteredData);
+  // console.log(filteredData);
   useEffect(() => {
     dispatch(action.getUsersRequest());
   }, []);
