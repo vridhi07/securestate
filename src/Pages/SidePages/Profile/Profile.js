@@ -36,16 +36,24 @@ const Profile = () => {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
-    // let imageUrl = window.URL.createObjectURL(file);
-    setProfileForm({ ...profileForm, imageUrl: file });
+    if (
+      file.type == "image/png" ||
+      file.type == "image/jpeg" ||
+      file.type == "image/jpg"
+    ) {
+      // let imageUrl = window.URL.createObjectURL(file);
+      setProfileForm({ ...profileForm, imageUrl: file });
 
-    reader.onloadend = () => {
-      setProfileForm({
-        ...profileForm,
-        file: file,
-      });
-    };
-    reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setProfileForm({
+          ...profileForm,
+          file: file,
+        });
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert("please input valid image format");
+    }
   };
   const formData = new FormData();
   formData.append("file", profileForm.file);
@@ -68,8 +76,6 @@ const Profile = () => {
   };
 
   const saveEdit = () => {
-    console.log("abcd");
-
     if (isEdit) {
       dispatch(action.updateUserRequest(formData));
       setIsEdit(false);
@@ -144,6 +150,7 @@ const Profile = () => {
                     className="hidden"
                     type="file"
                     id="file"
+                    accept=".png, .jpg, .jpeg"
                     onChange={(e) => _handleImageChange(e)}
                   />
                 </form>
